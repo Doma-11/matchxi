@@ -1,0 +1,56 @@
+[
+  {
+    "name": "SportKlub Hrvatska",
+    "id": "UC9E5DkcSknr4eN5DISCB3Mg",
+    "league": "hr.media",
+    "url": "https://www.youtube.com/@sportklubhrvatska3019/videos"
+  },
+  {
+    "name": "FIFA",
+    "id": "UCpcTrCXblq78GZrTUTLWeBw",
+    "league": "fifa.world",
+    "url": "https://www.youtube.com/@fifa/videos"
+  },
+  {
+    "name": "UEFA",
+    "id": "UCyGa1YEx9ST66rYrJTGIKOw",
+    "league": "uefa.nations",
+    "url": "https://www.youtube.com/@UEFA/videos"
+  },
+  {
+    "name": "England",
+    "id": "UCNT2e7Og56vm5_V-yJWvglA",
+    "league": "uefa.nations",
+    "url": "https://www.youtube.com/@England/videos"
+  },
+  {
+    "name": "UEFA",
+    "id": "UCyGa1YEx9ST66rYrJTGIKOw",
+    "league": "uefa.euro",
+    "url": "https://www.youtube.com/@UEFA/videos"
+  },
+  {
+    "name": "Hrvatski nogometni savez",
+    "id": "UCsqWbe1Tp3ZkobTmcKqZmjg",
+    "league": "hr.media",
+    "url": "https://www.youtube.com/hnscff/videos"
+  },
+  {
+    "name": "beIN SPORTS France",
+    "id": "UCfj4kQ6_mYO5r4hzX5KloVw",
+    "league": "uefa.nations",
+    "url": "https://www.youtube.com/user/beinsportofficiel/videos"
+  },
+  {
+    "name": "HRT · Hrvatska radiotelevizija",
+    "id": "UCweBO4bfRZgu33OMPYlehlg",
+    "league": "fifa.world",
+    "url": "https://www.youtube.com/@Hrvatskaradiotelevizija_HRT/videos"
+  },
+  {
+    "name": "HRT · Hrvatska radiotelevizija",
+    "id": "UCweBO4bfRZgu33OMPYlehlg",
+    "league": "uefa.euro",
+    "url": "https://www.youtube.com/@Hrvatskaradiotelevizija_HRT/videos"
+  }
+]

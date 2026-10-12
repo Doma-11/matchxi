@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.netlify/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+__pycache__/
+*.pyc
+qa-temp/
+check-functions/
+match-research/
+.DS_Store
+netlify-refresh-secret
+netlify-owner-setup
+netlify-cli-config/
+netlify-sporttouchline-config/

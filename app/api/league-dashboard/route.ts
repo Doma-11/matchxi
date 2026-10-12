@@ -1,0 +1,6 @@
+import {NextRequest} from '../../netlify-request';
+import {fetchLeagueDashboard,LEAGUE_STATS_SOURCES} from '../../league-dashboard-data';
+import {readCatalogue,saveCatalogue} from '../../catalogue-store';
+import seed from '../../../public/data/league-dashboards.json';
+const cache=new Map<string,{at:number;data:any}>();
+export async function GET(req:NextRequest){const league=req.nextUrl.searchParams.get('league')||'eng.1';if(!LEAGUE_STATS_SOURCES[league])return Response.json({error:'Unknown league'},{status:400});const old=cache.get(league);if(old&&Date.now()-old.at<300000)return Response.json(old.data);try{const dashboard=await fetchLeagueDashboard(league);try{await saveCatalogue('dashboard',[dashboard]);}catch(e){console.error('Statistics persistence unavailable',e);}const data={dashboard,live:true};cache.set(league,{at:Date.now(),data});return Response.json(data,{headers:{'Cache-Control':'no-store'}});}catch{let dashboard=(seed as any)[league];try{dashboard=(await readCatalogue('dashboard')).find(d=>d.id===league)||dashboard;}catch{}return Response.json({dashboard,live:false,notice:'Live statistics are temporarily unavailable. Showing the last saved standings and statistics.'});}}

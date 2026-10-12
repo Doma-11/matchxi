@@ -1,0 +1,2 @@
+import {initializeDisplayMode} from './app/display-mode';
+import React from 'react';import {createRoot} from 'react-dom/client';import PrivateLogin from './app/private-login';import './app/globals.css';initializeDisplayMode();createRoot(document.getElementById('root')!).render(<PrivateLogin/>);

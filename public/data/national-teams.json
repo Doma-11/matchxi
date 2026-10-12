@@ -1,0 +1,890 @@
+{
+  "uefa.nations": [
+    {
+      "id": "585",
+      "name": "Albania",
+      "short": "ALB",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/alb.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "587",
+      "name": "Andorra",
+      "short": "AND",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/and.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "579",
+      "name": "Armenia",
+      "short": "ARM",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fifa.armenia.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "474",
+      "name": "Austria",
+      "short": "AUT",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "581",
+      "name": "Azerbaijan",
+      "short": "AZE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aze.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "583",
+      "name": "Belarus",
+      "short": "BLR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/blr.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "459",
+      "name": "Belgium",
+      "short": "BEL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bel.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "452",
+      "name": "Bosnia-Herzegovina",
+      "short": "BIH",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bih.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "462",
+      "name": "Bulgaria",
+      "short": "BUL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bul.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "477",
+      "name": "Croatia",
+      "short": "CRO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cro.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "445",
+      "name": "Cyprus",
+      "short": "CYP",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cyp.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "450",
+      "name": "Czechia",
+      "short": "CZE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cze.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "479",
+      "name": "Denmark",
+      "short": "DEN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/den.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "448",
+      "name": "England",
+      "short": "ENG",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/eng.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "444",
+      "name": "Estonia",
+      "short": "EST",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/est.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "447",
+      "name": "Faroe Islands",
+      "short": "FRO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fro.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "458",
+      "name": "Finland",
+      "short": "FIN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fin.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "478",
+      "name": "France",
+      "short": "FRA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "584",
+      "name": "Georgia",
+      "short": "GEO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/geo.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "481",
+      "name": "Germany",
+      "short": "GER",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ger.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "16721",
+      "name": "Gibraltar",
+      "short": "GIB",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/gib.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "455",
+      "name": "Greece",
+      "short": "GRE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/gre.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "480",
+      "name": "Hungary",
+      "short": "HUN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/hun.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "470",
+      "name": "Iceland",
+      "short": "ISL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/isl.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "461",
+      "name": "Israel",
+      "short": "ISR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/isr.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "162",
+      "name": "Italy",
+      "short": "ITA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ita.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "2619",
+      "name": "Kazakhstan",
+      "short": "KAZ",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/kaz.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "18272",
+      "name": "Kosovo",
+      "short": "KOS",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/kosovo.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "456",
+      "name": "Latvia",
+      "short": "LVA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/lva.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "589",
+      "name": "Liechtenstein",
+      "short": "LIE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/lie.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "460",
+      "name": "Lithuania",
+      "short": "LTU",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ltu.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "582",
+      "name": "Luxembourg",
+      "short": "LUX",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/lux.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "453",
+      "name": "Malta",
+      "short": "MLT",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mlt.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "483",
+      "name": "Moldova",
+      "short": "MDA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mda.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "6775",
+      "name": "Montenegro",
+      "short": "MNE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mtg.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "449",
+      "name": "Netherlands",
+      "short": "NED",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ned.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "463",
+      "name": "North Macedonia",
+      "short": "MKD",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mkd.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "586",
+      "name": "Northern Ireland",
+      "short": "NIR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/nir.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "464",
+      "name": "Norway",
+      "short": "NOR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/nor.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "471",
+      "name": "Poland",
+      "short": "POL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/pol.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "482",
+      "name": "Portugal",
+      "short": "POR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/por.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "476",
+      "name": "Republic of Ireland",
+      "short": "IRL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/irl.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "473",
+      "name": "Romania",
+      "short": "ROU",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/rom.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "588",
+      "name": "San Marino",
+      "short": "SMR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/smr.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "580",
+      "name": "Scotland",
+      "short": "SCO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sco.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "6757",
+      "name": "Serbia",
+      "short": "SRB",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sba.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "468",
+      "name": "Slovakia",
+      "short": "SVK",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/svk.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "472",
+      "name": "Slovenia",
+      "short": "SVN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/svn.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "164",
+      "name": "Spain",
+      "short": "ESP",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "466",
+      "name": "Sweden",
+      "short": "SWE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/swe.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "475",
+      "name": "Switzerland",
+      "short": "SUI",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sui.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "465",
+      "name": "Türkiye",
+      "short": "TUR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "457",
+      "name": "Ukraine",
+      "short": "UKR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ukr.png",
+      "league": "uefa.nations"
+    },
+    {
+      "id": "578",
+      "name": "Wales",
+      "short": "WAL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/wal.png",
+      "league": "uefa.nations"
+    }
+  ],
+  "fifa.world": [
+    {
+      "id": "624",
+      "name": "Algeria",
+      "short": "ALG",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/alg.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "202",
+      "name": "Argentina",
+      "short": "ARG",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/arg.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "628",
+      "name": "Australia",
+      "short": "AUS",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aus.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "474",
+      "name": "Austria",
+      "short": "AUT",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "459",
+      "name": "Belgium",
+      "short": "BEL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bel.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "452",
+      "name": "Bosnia-Herzegovina",
+      "short": "BIH",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bih.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "205",
+      "name": "Brazil",
+      "short": "BRA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bra.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "206",
+      "name": "Canada",
+      "short": "CAN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/can.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2597",
+      "name": "Cape Verde",
+      "short": "CPV",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cpv.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "208",
+      "name": "Colombia",
+      "short": "COL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/col.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2850",
+      "name": "Congo DR",
+      "short": "COD",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/rdc.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "477",
+      "name": "Croatia",
+      "short": "CRO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cro.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "11678",
+      "name": "Curaçao",
+      "short": "CUW",
+      "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11678.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "450",
+      "name": "Czechia",
+      "short": "CZE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cze.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "209",
+      "name": "Ecuador",
+      "short": "ECU",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ecu.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2620",
+      "name": "Egypt",
+      "short": "EGY",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/egy.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "448",
+      "name": "England",
+      "short": "ENG",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/eng.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "478",
+      "name": "France",
+      "short": "FRA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "481",
+      "name": "Germany",
+      "short": "GER",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ger.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "4469",
+      "name": "Ghana",
+      "short": "GHA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/gha.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2654",
+      "name": "Haiti",
+      "short": "HAI",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/hai.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "469",
+      "name": "Iran",
+      "short": "IRN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/irn.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "4375",
+      "name": "Iraq",
+      "short": "IRQ",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/irq.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "4789",
+      "name": "Ivory Coast",
+      "short": "CIV",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/civ.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "627",
+      "name": "Japan",
+      "short": "JPN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/jpn.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2917",
+      "name": "Jordan",
+      "short": "JOR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/jor.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "203",
+      "name": "Mexico",
+      "short": "MEX",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mex.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2869",
+      "name": "Morocco",
+      "short": "MAR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mar.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "449",
+      "name": "Netherlands",
+      "short": "NED",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ned.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2666",
+      "name": "New Zealand",
+      "short": "NZL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/nzl.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "464",
+      "name": "Norway",
+      "short": "NOR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/nor.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2659",
+      "name": "Panama",
+      "short": "PAN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/pan.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "210",
+      "name": "Paraguay",
+      "short": "PAR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/par.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "482",
+      "name": "Portugal",
+      "short": "POR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/por.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "4398",
+      "name": "Qatar",
+      "short": "QAT",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/qat.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "655",
+      "name": "Saudi Arabia",
+      "short": "KSA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ksa.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "580",
+      "name": "Scotland",
+      "short": "SCO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sco.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "654",
+      "name": "Senegal",
+      "short": "SEN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sen.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "467",
+      "name": "South Africa",
+      "short": "RSA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/rsa.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "451",
+      "name": "South Korea",
+      "short": "KOR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/kors.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "164",
+      "name": "Spain",
+      "short": "ESP",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "466",
+      "name": "Sweden",
+      "short": "SWE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/swe.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "475",
+      "name": "Switzerland",
+      "short": "SUI",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sui.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "659",
+      "name": "Tunisia",
+      "short": "TUN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/tun.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "465",
+      "name": "Türkiye",
+      "short": "TUR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "660",
+      "name": "United States",
+      "short": "USA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "212",
+      "name": "Uruguay",
+      "short": "URU",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/uru.png",
+      "league": "fifa.world"
+    },
+    {
+      "id": "2570",
+      "name": "Uzbekistan",
+      "short": "UZB",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/uzb.png",
+      "league": "fifa.world"
+    }
+  ],
+  "uefa.euro": [
+    {
+      "id": "585",
+      "name": "Albania",
+      "short": "ALB",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/alb.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "474",
+      "name": "Austria",
+      "short": "AUT",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "459",
+      "name": "Belgium",
+      "short": "BEL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bel.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "477",
+      "name": "Croatia",
+      "short": "CRO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cro.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "450",
+      "name": "Czechia",
+      "short": "CZE",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cze.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "479",
+      "name": "Denmark",
+      "short": "DEN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/den.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "448",
+      "name": "England",
+      "short": "ENG",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/eng.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "478",
+      "name": "France",
+      "short": "FRA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "584",
+      "name": "Georgia",
+      "short": "GEO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/geo.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "481",
+      "name": "Germany",
+      "short": "GER",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ger.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "480",
+      "name": "Hungary",
+      "short": "HUN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/hun.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "162",
+      "name": "Italy",
+      "short": "ITA",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ita.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "449",
+      "name": "Netherlands",
+      "short": "NED",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ned.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "471",
+      "name": "Poland",
+      "short": "POL",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/pol.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "482",
+      "name": "Portugal",
+      "short": "POR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/por.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "473",
+      "name": "Romania",
+      "short": "ROU",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/rom.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "580",
+      "name": "Scotland",
+      "short": "SCO",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sco.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "6757",
+      "name": "Serbia",
+      "short": "SRB",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sba.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "468",
+      "name": "Slovakia",
+      "short": "SVK",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/svk.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "472",
+      "name": "Slovenia",
+      "short": "SVN",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/svn.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "164",
+      "name": "Spain",
+      "short": "ESP",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "475",
+      "name": "Switzerland",
+      "short": "SUI",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sui.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "465",
+      "name": "Türkiye",
+      "short": "TUR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png",
+      "league": "uefa.euro"
+    },
+    {
+      "id": "457",
+      "name": "Ukraine",
+      "short": "UKR",
+      "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ukr.png",
+      "league": "uefa.euro"
+    }
+  ]
+}

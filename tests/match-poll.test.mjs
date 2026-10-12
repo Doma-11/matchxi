@@ -1,0 +1,4 @@
+import {build} from 'esbuild';import {test} from 'node:test';import assert from 'node:assert/strict';
+const c=await build({entryPoints:['app/match-poll.ts'],bundle:true,platform:'node',format:'esm',write:false});const {normalizeMatchPoll}=await import('data:text/javascript;base64,'+Buffer.from(c.outputFiles[0].text).toString('base64'));
+test('official 1x2 counts produce verified vote shares and total',()=>{const p=normalizeMatchPoll({Votes:[{Name:'1x2',Votes:[17883,34111,126576]},{Name:'bts',Votes:[38,13]}]});assert.equal(p.totalVotes,178570);assert.equal(p.home,10.01);assert.equal(p.draw,19.1);assert.equal(p.away,70.88)});
+test('missing invalid or zero vote totals are not fabricated',()=>{for(const raw of [{},{Votes:[]},{home:0,draw:0,away:0},{home:-1,draw:10,away:20},{Votes:[{Name:'1x2',Votes:[5,10]}]}])assert.equal(normalizeMatchPoll(raw),null)});

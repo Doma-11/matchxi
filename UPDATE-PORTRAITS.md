@@ -1,0 +1,11 @@
+# Team-specific player portrait cache
+
+Player image processing and storage run in separate Netlify functions. The ordinary scores/catalogue API never loads the portrait index or image processor. The full current-squad index is server-only; the browser fetches just the two teams in an opened match. Scores, timelines and statistics render first. Existing provider images stay visible until a new portrait loads.
+
+The 2026/27 index covers available ESPN squads across the five domestic leagues and official UEFA squads for all 36 Champions League league-phase teams, plus the existing verified Croatia and club portraits. Existing official club portraits take precedence. Missing roster sources are listed in `public/data/portrait-coverage.json`; the Croatian league currently has no accessible ESPN roster feed. All teams, including Croatian teams, can still save the validated ESPN/FotMob images provided by the match lineup as provider fallbacks. Provider pictures do not guarantee the current home kit.
+
+Images are fetched only from the fixed supported official/provider hosts, validated by the image decoder, limited to 6 MB and 16 million input pixels, resized to 256 × 256, and compressed as WebP. Successful images live in Netlify Blobs (`touchline-player-portraits`) and are cached by browsers/CDN. Concurrent requests share one fetch within a function instance. Missing images have a 24-hour retry cooldown. The original small static pilot collection is retained.
+
+Club photographs match player, team and season and are not used as national-team-specific portraits. A generic provider fallback can appear in either context when a suitable official team photo is unavailable. Source links remain available on player panels.
+
+To rebuild the 2026/27 source index, run `python scripts/expand-player-portraits.py --catalogue-only`. Omitting `--catalogue-only` additionally tries a bulk image import; this is unnecessary for routine operation. `node scripts/upload-player-portraits.mjs` securely uploads images already validated locally, reading the existing connected Netlify CLI configuration. Set `NETLIFY_CLI_CONFIG_PATH` if its path differs. Never print or include that configuration in the repository/archive. Deploy normally after the upload succeeds. Football catalogue refreshes remain independent of portrait caching.

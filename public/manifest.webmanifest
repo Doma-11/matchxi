@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "Touchline Football",
+  "short_name": "Touchline",
+  "description": "Live football scores, match details, standings and official highlights.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#090c0d",
+  "theme_color": "#252b30",
+  "prefer_related_applications": false,
+  "icons": [
+    {"src":"/icons/touchline-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"/icons/touchline-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"/icons/touchline-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+  ]
+}

@@ -1,0 +1,31 @@
+import {formatStatValue,roundStatNumber} from './stat-number';
+export const statKey=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]/g,'');
+export function playerStatistics(player:any){
+ const stats=(player.stats||[]).filter((s:any)=>s.displayValue!=null&&s.type!=='boolean'&&!/shotmap|rating/.test(statKey(s.name||'')));
+ const find=(...names:string[])=>stats.find((s:any)=>names.map(statKey).some(n=>n===statKey(s.name||'')||n===statKey(s.displayName||s.label||'')));
+ const number=(s:any)=>{const raw=s?.value??s?.displayValue;if(raw==null||raw===''||!/^-?\d+(?:\.\d+)?(?:\s*%)?$/.test(String(raw)))return null;const n=parseFloat(raw);return Number.isFinite(n)?n:null};
+ const value=(...names:string[])=>number(find(...names));
+ const fraction=(s:any)=>{if(!s)return null;const text=String(s.displayValue),m=text.match(/(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)/);const good=m?Number(m[1]):number(s),total=m?Number(m[2]):s.total!=null?Number(s.total):null;return good!=null&&total!=null&&Number.isFinite(total)&&good>=0&&good<=total?{good,total}:null};
+ const ratio=(good:number|null,total:number|null)=>good!=null&&total!=null&&good>=0&&total>0&&good<=total?{percent:roundStatNumber(good/total*100),detail:`${formatStatValue(good)}/${formatStatValue(total)}`,formula:'Successful / attempted'}:null;
+ const accuracy=(names:string[],numerator:string[],denominator:string[])=>{const s=find(...names),f=fraction(s);if(f)return ratio(f.good,f.total);const percent=s&&(String(s.displayValue).includes('%')||/accuracy|pct|percentage/.test(statKey(s.name||s.displayName||'')))?number(s):null;if(percent!=null&&percent>=0&&percent<=100)return {percent:roundStatNumber(percent),detail:'Published percentage',formula:'Source percentage'};return ratio(value(...numerator),value(...denominator))};
+ const goalkeeper=player.position==='G'||player.position==='GK'||/goalkeeper/i.test(player.positionName||'');
+ const pass=accuracy(['accurate_passes','pass_accuracy','passPct','passingPercentage'],['successfulPasses','passesCompleted','accuratePasses'],['totalPasses','passesAttempted']);
+ const shot=accuracy(['shot_accuracy','shotPct'],['ShotsOnTarget','shotsOnTarget','shotsOnGoal'],['total_shots','totalShots','shots']);
+ const dribbles=accuracy(['dribbles_succeeded','successfulDribbles','dribble_accuracy','dribblePct','dribbleSuccessPercentage'],['dribbles_succeeded','successfulDribbles','dribblesCompleted'],['dribblesAttempted','totalDribbles','dribbleAttempts']);
+ const won=value('duel_won','duelsWon'),lost=value('duel_lost','duelsLost');
+ const duels=accuracy(['duel_accuracy','duels_accuracy','duelsWonPercentage'],['duelsWon'],['totalDuels'])||ratio(won,won!=null&&lost!=null?won+lost:null);
+ const saves=value('saves','totalSaves'),conceded=value('goals_conceded','goalsConceded');
+ const save=accuracy(['save_accuracy','savePct','savePercentage'],['saves','totalSaves'],['shots_faced','shotsFaced','shotsOnTargetFaced'])||ratio(saves,saves!=null&&conceded!=null?saves+conceded:null);
+ if(save&&save.detail!=='Published percentage')save.formula='Saves / shots faced (or saves + goals conceded)';
+ const interceptions=accuracy(['interception_accuracy','interceptions_accuracy','interceptions'],['successfulInterceptions'],['interceptionsAttempted']);
+ const display=(s:any)=>{const f=fraction(s);return f?`${formatStatValue(f.good)}/${formatStatValue(f.total)}${f.total>0?' · '+roundStatNumber(f.good/f.total*100)+'%':''}`:formatStatValue(s.displayValue)};
+ const metric=(label:string,names:string[])=>({label,value:find(...names)?display(find(...names)):'—'});
+ const completedPasses=find('accurate_passes','successfulPasses','passesCompleted','accuratePasses');
+ const successfulPasses=fraction(completedPasses)?.good??(completedPasses&&!String(completedPasses.displayValue).includes('%')?number(completedPasses):null);
+ const overview=goalkeeper?[metric('Minutes played',['minutes_played','minutesPlayed','minutes']),metric('Saves',['saves','totalSaves'])]:[metric('Minutes played',['minutes_played','minutesPlayed','minutes']),metric('Goals',['goals','totalGoals']),metric('Assists',['assists','goalAssists']),{label:'Successful passes',value:successfulPasses!=null?formatStatValue(successfulPasses):'—'}];
+ const attackNames=['goals','assists','totalshots','shotsontarget','shotsofftarget','expectedgoals','expectedgoalsnonpenalty','expectedgoalsontargetvariant','expectedassists','xgandxa','chancescreated','keypasses','touches','touchesoppbox','dribblessucceeded','accuratepasses','accuratecrosses','longballsaccurate','passesintofinalthird','corners','dispossessed','offsides'];
+ const defenceNames=['defensiveactions','tackles','matchstatsheaderstackles','shotblocks','blockedshots','clearances','headedclearance','interceptions','recoveries','dribbledpast','groundduelswon','aerialswon','duelwon','duellost','duelswon','duelslost','fouls','foulscommitted','wasfouled','yellowcards','redcards','saves','goalsconceded','expectedgoalsontargetfaced','goalsprevented','keeperdivingsave','savesinsidebox','keepersweeper','punches','playerthrows','keeperhighclaim'];
+ const counts=(s:any)=>{const f=fraction(s);if(f)return `${formatStatValue(f.good)}/${formatStatValue(f.total)}`;if(/%|accuracy|pct|percentage/i.test(String(s.displayValue)+' '+(s.name||'')))return null;return formatStatValue(s.displayValue)};
+ const category=(names:string[],groups:RegExp)=>stats.filter((s:any)=>names.includes(statKey(s.name||''))||groups.test(s.group||'')).map((s:any)=>({label:s.displayName||s.label||s.name,value:counts(s)})).filter((s:any)=>s.value!==null);
+ return {goalkeeper,overview,attacking:category(attackNames,/^attack/i),defending:category(defenceNames,/defen|duels|goalkeep/i),accuracy:[{label:'Pass accuracy',data:pass},{label:'Shot accuracy',data:shot},...(dribbles?[{label:'Dribble accuracy',data:dribbles}]:[]),...(duels?[{label:'Duels accuracy',data:duels}]:[]),...(goalkeeper?[{label:'Save accuracy',data:save}]:[]),...(interceptions?[{label:'Interception accuracy',data:interceptions}]:[])]};
+}

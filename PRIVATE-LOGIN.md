@@ -1,0 +1,18 @@
+# Private owner access
+
+The only account is Dome11. No public registration or paid identity provider.
+Owner sets a password using the one-time setup link (fragment token, removed from address bar immediately). The server requires a 256-bit setup token, checks its SHA-256 digest and expiry, and creates the owner record atomically in a strong-consistency Blob store. The token cannot replace an existing account. Passwords use salted scrypt; no password or session is stored in client localStorage.
+
+An HttpOnly, Secure, SameSite=Strict, host-only session cookie remembers login for 30 days. Unchecked remember-me creates a browser-session cookie with a 24-hour server expiry. Settings allows logout and password changes; changing the password invalidates other sessions within the 30-second owner-record cache interval. POST authentication actions require same-origin requests. Native Netlify per-IP/domain limits restrict login and API traffic. Limits mitigate abuse; they do not provide an absolute account-wide traffic cap.
+
+The frontend gates app mounting and data polling until authenticated. APIs and image functions check authorization before reading football sources, including direct function routes. CDN caching is disabled for protected responses; server-side saved-response caching remains. Images can use private browser caching. The public app shell, logos and bundled public football seed assets remain public; this is owner-only interactive app/API access, not encryption of public football facts or retroactive protection of old deployments.
+
+Scheduled jobs use the existing x-touchline-refresh credential independently of owner sessions. scripts/private-request.py loads it from the runtime environment or the existing protected credential file; never place credentials in job prompts, URLs, source archives or output. If that runtime credential file is lost, restore authorized server access before running the jobs. Changing the owner's password or signing out does not rotate the service credential.
+
+Deploy secrets: TOUCHLINE_REFRESH_SECRET (also derives the session signing key), TOUCHLINE_SETUP_HASH and TOUCHLINE_SETUP_EXPIRES. The deployment helper keeps the actual setup token outside the source archive. Preserve the refresh secret across deployments. No payment method, paid plan, or billing setting is changed.
+
+## Durable scheduled access (5 October repair)
+
+Scheduled checks no longer read a credential from an authoring workspace. The existing owner-only Touchline Sites project `appgprj_6abf8c4280d08191ad6121153a1ab188` holds `TOUCHLINE_NETLIFY_SERVICE_TOKEN` as a server-side secret. Its `/api/touchline-netlify` bridge accepts only catalogue, match-day, match-highlights, match-detail and usage-reports GET operations to the fixed Netlify host; it rejects arbitrary destinations and authentication/admin routes. The private platform dispatch protects the bridge. It forwards the service credential server-to-server, never returning it to the runner.
+
+Each scheduled run obtains fresh Sites service authorization using `get_site`, verifies active status, owner role and owner-only access, and POSTs JSON `{path: "/api/..."}` to that project's fresh current_live_url + `/api/touchline-netlify`, sending the short-lived token only in `OAI-Sites-Authorization`. Never save the token or place it in prompts or URLs. An echo-disabled stdin runner can be recreated in any workspace; source/credential files from a prior run are unnecessary. The Python helper illustrates the protocol. The website stays on Netlify and keeps its independent owner login. No Netlify scheduled functions, paid provider or additional background cadence is enabled.
