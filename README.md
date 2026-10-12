@@ -86,4 +86,3 @@ Runtime credentials and owner authentication data are deliberately excluded from
 
 The snapshots under `public/data` are seed data, **not a complete backup of the live database**. Uploading the source to GitHub does not automatically connect Netlify deployments or migrate the existing site.
 
-See [GITHUB-SETUP.md](GITHUB-SETUP.md) for deployment prerequisites and secret handling, and [UPDATE-CATALOGUE.md](UPDATE-CATALOGUE.md) for refresh implementation details.
