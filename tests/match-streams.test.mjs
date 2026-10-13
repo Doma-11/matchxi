@@ -14,4 +14,9 @@ test('published Champions League aliases match both fixture teams exactly',()=>{
  assert.deepEqual(listedMatchStreams(html,'RB Leipzig','Jong PSV'),[]);
 });
 
+test('matching one team does not accept another opponent or a reversed fixture',()=>{
+ const html='<tr><td>21:00</td><td>PSV vs RB Leipzig</td><td><a href="/watch/hd-1.htm">Watch</a></td></tr><tr><td>21:00</td><td>RB Leipzig vs Jong PSV</td><td><a href="/watch/hd-2.htm">Watch</a></td></tr>';
+ assert.deepEqual(listedMatchStreams(html,'RB Leipzig','PSV Eindhoven','uefa.champions'),[]);
+});
+
 test('Deportivo Alavés listing matches the app fixture without confusing other Atlético clubs',()=>{const html='<tr><td>15:15</td><td>Deportivo Alavés vs Atlético Madrid</td><td><a href="/hd-6">Watch</a><a href="/eleven3">Watch</a></td></tr><tr><td>02:15</td><td>Atlético Nacional vs Deportivo Pasto</td><td><a href="/hd-10">Watch</a></td></tr>';const links=listedMatchStreams(html,'Alavés','Atletico Madrid');assert.equal(links.length,2);assert.equal(links[0].url,'https://www.soccerstreams.zone/hd-6');assert.deepEqual(listedMatchStreams(html,'Alavés','Atlético Nacional'),[])});

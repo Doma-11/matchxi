@@ -1,0 +1,3278 @@
+[
+  {
+    "id": "club:1-fc-union-berlin",
+    "name": "1. FC Union Berlin",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "1. FC Union Berlin",
+      "FCU",
+      "Union Berlin"
+    ]
+  },
+  {
+    "id": "club:ac-milan",
+    "name": "AC Milan",
+    "kind": "club",
+    "leagues": [
+      "ita.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "AC Milan",
+      "MIL",
+      "Milan"
+    ]
+  },
+  {
+    "id": "club:aek-athens",
+    "name": "AEK Athens",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "AEK",
+      "AEK Athens",
+      "AEK Athina"
+    ]
+  },
+  {
+    "id": "club:afc-bournemouth",
+    "name": "AFC Bournemouth",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "AFC Bournemouth",
+      "BOU",
+      "Bournemouth"
+    ]
+  },
+  {
+    "id": "club:agf",
+    "name": "AGF",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "AGF",
+      "AGF Aarhus",
+      "Aarhus"
+    ]
+  },
+  {
+    "id": "club:ajax",
+    "name": "Ajax",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "AFC Ajax",
+      "Ajax",
+      "Ajax Amsterdam"
+    ]
+  },
+  {
+    "id": "club:alaves",
+    "name": "Alavés",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "ALA",
+      "Alaves",
+      "Alavés",
+      "Deportivo Alavés"
+    ]
+  },
+  {
+    "id": "club:anderlecht",
+    "name": "Anderlecht",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Anderlecht",
+      "RSC Anderlecht"
+    ]
+  },
+  {
+    "id": "club:ararat-armenia",
+    "name": "Ararat–Armenia",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Ararat Armenia",
+      "Ararat-Armenia",
+      "Ararat–Armenia"
+    ]
+  },
+  {
+    "id": "club:arsenal",
+    "name": "Arsenal",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "ARS",
+      "Arsenal",
+      "Arsenal FC"
+    ]
+  },
+  {
+    "id": "club:as-monaco",
+    "name": "AS Monaco",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "AS Monaco",
+      "Monaco"
+    ]
+  },
+  {
+    "id": "club:as-roma",
+    "name": "AS Roma",
+    "kind": "club",
+    "leagues": [
+      "ita.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "AS Roma",
+      "ROMA",
+      "Roma"
+    ]
+  },
+  {
+    "id": "club:aston-villa",
+    "name": "Aston Villa",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "AVL",
+      "Aston Villa",
+      "Aston Villa FC"
+    ]
+  },
+  {
+    "id": "club:atalanta",
+    "name": "Atalanta",
+    "kind": "club",
+    "leagues": [
+      "ita.1",
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "ATA",
+      "Atalanta"
+    ]
+  },
+  {
+    "id": "club:athletic-club",
+    "name": "Athletic Club",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "ATH",
+      "Athletic",
+      "Athletic Bilbao",
+      "Athletic Club",
+      "Bilbao"
+    ]
+  },
+  {
+    "id": "club:atletico-madrid",
+    "name": "Atlético Madrid",
+    "kind": "club",
+    "leagues": [
+      "esp.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "ATM",
+      "Atletico",
+      "Atletico Madrid",
+      "Atletico de Madrid",
+      "Atlético Madrid",
+      "Atlético de Madrid"
+    ]
+  },
+  {
+    "id": "club:az-alkmaar",
+    "name": "AZ Alkmaar",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "AZ",
+      "AZ Alkmaar"
+    ]
+  },
+  {
+    "id": "club:barcelona",
+    "name": "Barcelona",
+    "kind": "club",
+    "leagues": [
+      "esp.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "BAR",
+      "Barca",
+      "Barcelona",
+      "Barça",
+      "FC Barcelona"
+    ]
+  },
+  {
+    "id": "club:bayer-leverkusen",
+    "name": "Bayer Leverkusen",
+    "kind": "club",
+    "leagues": [
+      "ger.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "B04",
+      "Bayer 04",
+      "Bayer Leverkusen",
+      "Leverkusen"
+    ]
+  },
+  {
+    "id": "club:bayern-munich",
+    "name": "Bayern Munich",
+    "kind": "club",
+    "leagues": [
+      "ger.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Bayern",
+      "Bayern Munchen",
+      "Bayern Munich",
+      "Bayern München",
+      "FC Bayern",
+      "FC Bayern München",
+      "MUN"
+    ]
+  },
+  {
+    "id": "club:benfica",
+    "name": "Benfica",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Benfica",
+      "SL Benfica"
+    ]
+  },
+  {
+    "id": "club:besiktas",
+    "name": "Beşiktaş",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Besiktas",
+      "Besiktas JK",
+      "Beşiktaş"
+    ]
+  },
+  {
+    "id": "club:bod-glimt",
+    "name": "Bodø/Glimt",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Bodo Glimt",
+      "Bodo/Glimt",
+      "Bodoe Glimt",
+      "Bodø/Glimt"
+    ]
+  },
+  {
+    "id": "club:bologna",
+    "name": "Bologna",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "BOL",
+      "Bologna"
+    ]
+  },
+  {
+    "id": "club:borac-banja-luka",
+    "name": "Borac Banja Luka",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Borac Banja Luka"
+    ]
+  },
+  {
+    "id": "club:borussia-dortmund",
+    "name": "Borussia Dortmund",
+    "kind": "club",
+    "leagues": [
+      "ger.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "BVB",
+      "Borussia Dortmund",
+      "DOR",
+      "Dortmund"
+    ]
+  },
+  {
+    "id": "club:borussia-monchengladbach",
+    "name": "Borussia Mönchengladbach",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "BMG",
+      "Borussia Mönchengladbach",
+      "Gladbach",
+      "M Gladbach",
+      "Monchengladbach"
+    ]
+  },
+  {
+    "id": "club:braga",
+    "name": "Braga",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Braga",
+      "SC Braga",
+      "Sporting Braga"
+    ]
+  },
+  {
+    "id": "club:brann",
+    "name": "Brann",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Brann",
+      "SK Brann"
+    ]
+  },
+  {
+    "id": "club:brentford",
+    "name": "Brentford",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "BRE",
+      "Brentford",
+      "Brentford FC"
+    ]
+  },
+  {
+    "id": "club:brighton-hove-albion",
+    "name": "Brighton & Hove Albion",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "BHA",
+      "Brighton",
+      "Brighton & Hove Albion",
+      "Brighton Hove Albion",
+      "Brighton and Hove Albion"
+    ]
+  },
+  {
+    "id": "club:cagliari",
+    "name": "Cagliari",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "CAG",
+      "Cagliari"
+    ]
+  },
+  {
+    "id": "club:celta-vigo",
+    "name": "Celta Vigo",
+    "kind": "club",
+    "leagues": [
+      "esp.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "CEL",
+      "Celta",
+      "Celta Vigo"
+    ]
+  },
+  {
+    "id": "club:celtic",
+    "name": "Celtic",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Celtic"
+    ]
+  },
+  {
+    "id": "club:chelsea",
+    "name": "Chelsea",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "CHE",
+      "Chelsea"
+    ]
+  },
+  {
+    "id": "club:club-brugge",
+    "name": "Club Brugge",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Brugge",
+      "Club Brugge",
+      "Club Brugge K.V.",
+      "Club Brugge KV"
+    ]
+  },
+  {
+    "id": "club:como",
+    "name": "Como",
+    "kind": "club",
+    "leagues": [
+      "ita.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "COMO",
+      "Como"
+    ]
+  },
+  {
+    "id": "club:coventry-city",
+    "name": "Coventry City",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "COV",
+      "Coventry",
+      "Coventry City"
+    ]
+  },
+  {
+    "id": "club:crystal-palace",
+    "name": "Crystal Palace",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "CRY",
+      "Crystal Palace",
+      "Crystal Palace FC"
+    ]
+  },
+  {
+    "id": "club:cska-sofia",
+    "name": "CSKA Sofia",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "CSKA Sofia"
+    ]
+  },
+  {
+    "id": "club:deportivo",
+    "name": "Deportivo",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "DEP",
+      "Deportivo",
+      "Deportivo A Coruna",
+      "Deportivo A Coruña",
+      "Deportivo La Coruna",
+      "RC Deportivo"
+    ]
+  },
+  {
+    "id": "club:dinamo",
+    "name": "Dinamo",
+    "kind": "club",
+    "leagues": [
+      "cro.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "DIN",
+      "Dinamo",
+      "Dinamo Zagreb",
+      "GNK Dinamo"
+    ]
+  },
+  {
+    "id": "club:egnatia",
+    "name": "Egnatia",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Egnatia"
+    ]
+  },
+  {
+    "id": "club:eintracht-frankfurt",
+    "name": "Eintracht Frankfurt",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "Eintracht Frankfurt",
+      "Frankfurt",
+      "SGE"
+    ]
+  },
+  {
+    "id": "club:elche",
+    "name": "Elche",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "ELC",
+      "Elche"
+    ]
+  },
+  {
+    "id": "club:espanyol",
+    "name": "Espanyol",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "ESP",
+      "Espanyol",
+      "RCD Espanyol"
+    ]
+  },
+  {
+    "id": "club:everton",
+    "name": "Everton",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "EVE",
+      "Everton"
+    ]
+  },
+  {
+    "id": "club:fc-augsburg",
+    "name": "FC Augsburg",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "Augsburg",
+      "FC Augsburg",
+      "FCA"
+    ]
+  },
+  {
+    "id": "club:fc-cologne",
+    "name": "FC Cologne",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "1. FC Koln",
+      "1. FC Köln",
+      "Cologne",
+      "FC Cologne",
+      "FC Köln",
+      "KOE",
+      "Koln",
+      "Köln"
+    ]
+  },
+  {
+    "id": "club:fc-k-benhavn",
+    "name": "FC København",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Copenhagen",
+      "FC Copenhagen",
+      "FC København",
+      "Kobenhavn",
+      "København"
+    ]
+  },
+  {
+    "id": "club:fc-midtjylland",
+    "name": "FC Midtjylland",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "FC Midtjylland",
+      "Midtjylland"
+    ]
+  },
+  {
+    "id": "club:fc-porto",
+    "name": "FC Porto",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "FC Porto",
+      "Porto"
+    ]
+  },
+  {
+    "id": "club:fc-twente",
+    "name": "FC Twente",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "FC Twente",
+      "Twente"
+    ]
+  },
+  {
+    "id": "club:fenerbahce",
+    "name": "Fenerbahçe",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Fenerbahce",
+      "Fenerbahce SK",
+      "Fenerbahçe"
+    ]
+  },
+  {
+    "id": "club:ferencvaros",
+    "name": "Ferencváros",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Ferencvaros",
+      "Ferencvarosi TC",
+      "Ferencváros"
+    ]
+  },
+  {
+    "id": "club:feyenoord",
+    "name": "Feyenoord",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Feyenoord"
+    ]
+  },
+  {
+    "id": "club:fiorentina",
+    "name": "Fiorentina",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "FIO",
+      "Fiorentina"
+    ]
+  },
+  {
+    "id": "club:fk-crvena-zvezda",
+    "name": "FK Crvena Zvezda",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Crvena Zvezda",
+      "FK Crvena Zvezda",
+      "Red Star Belgrade"
+    ]
+  },
+  {
+    "id": "club:fk-kauno-zalgiris",
+    "name": "FK Kauno Žalgiris",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "FK Kauno Žalgiris",
+      "Kauno Zalgiris",
+      "Kauno Žalgiris"
+    ]
+  },
+  {
+    "id": "club:frosinone",
+    "name": "Frosinone",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "FRO",
+      "Frosinone"
+    ]
+  },
+  {
+    "id": "club:fulham",
+    "name": "Fulham",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "FUL",
+      "Fulham"
+    ]
+  },
+  {
+    "id": "club:galatasaray",
+    "name": "Galatasaray",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Galatasaray",
+      "Galatasaray SK"
+    ]
+  },
+  {
+    "id": "club:genoa",
+    "name": "Genoa",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "GEN",
+      "Genoa"
+    ]
+  },
+  {
+    "id": "club:gent",
+    "name": "Gent",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Gent",
+      "KAA Gent"
+    ]
+  },
+  {
+    "id": "club:getafe",
+    "name": "Getafe",
+    "kind": "club",
+    "leagues": [
+      "esp.1",
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "GET",
+      "Getafe"
+    ]
+  },
+  {
+    "id": "club:gorica",
+    "name": "Gorica",
+    "kind": "club",
+    "leagues": [
+      "cro.1"
+    ],
+    "aliases": [
+      "GOR",
+      "Gorica",
+      "HNK Gorica"
+    ]
+  },
+  {
+    "id": "club:hajduk",
+    "name": "Hajduk",
+    "kind": "club",
+    "leagues": [
+      "cro.1",
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "HAJ",
+      "HNK Hajduk",
+      "Hajduk",
+      "Hajduk Split"
+    ]
+  },
+  {
+    "id": "club:hamburg-sv",
+    "name": "Hamburg SV",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "HSV",
+      "Hamburg",
+      "Hamburg SV",
+      "Hamburger SV"
+    ]
+  },
+  {
+    "id": "club:hapoel-beer-sheva",
+    "name": "Hapoel Beer Sheva",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Hapoel Be er Sheva",
+      "Hapoel Beer Sheva",
+      "Hapoel Beersheba"
+    ]
+  },
+  {
+    "id": "club:heart-of-midlothian",
+    "name": "Heart of Midlothian",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Heart of Midlothian",
+      "Hearts"
+    ]
+  },
+  {
+    "id": "club:hull-city",
+    "name": "Hull City",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "HUL",
+      "Hull",
+      "Hull City"
+    ]
+  },
+  {
+    "id": "club:iberia-1999",
+    "name": "Iberia 1999",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Iberia 1999"
+    ]
+  },
+  {
+    "id": "club:inter-club-d-escaldes",
+    "name": "Inter Club d'Escaldes",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "INT",
+      "Inter Club d Escaldes",
+      "Inter Club d'Escaldes",
+      "Inter Escaldes"
+    ]
+  },
+  {
+    "id": "club:internazionale",
+    "name": "Internazionale",
+    "kind": "club",
+    "leagues": [
+      "ita.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "FC Internazionale",
+      "FC Internazionale Milano",
+      "INT",
+      "Inter",
+      "Inter Milan",
+      "Internazionale"
+    ]
+  },
+  {
+    "id": "club:ipswich-town",
+    "name": "Ipswich Town",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "IPS",
+      "Ipswich",
+      "Ipswich Town"
+    ]
+  },
+  {
+    "id": "club:istra-1961",
+    "name": "Istra 1961",
+    "kind": "club",
+    "leagues": [
+      "cro.1"
+    ],
+    "aliases": [
+      "IST",
+      "Istra",
+      "Istra 1961",
+      "NK Istra 1961"
+    ]
+  },
+  {
+    "id": "club:jablonec",
+    "name": "Jablonec",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Jablonec"
+    ]
+  },
+  {
+    "id": "club:jagiellonia-bia-ystok",
+    "name": "Jagiellonia Białystok",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Jagiellonia",
+      "Jagiellonia Bialystok",
+      "Jagiellonia Białystok"
+    ]
+  },
+  {
+    "id": "club:juventus",
+    "name": "Juventus",
+    "kind": "club",
+    "leagues": [
+      "ita.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "JUV",
+      "Juventus"
+    ]
+  },
+  {
+    "id": "club:kairat-almaty",
+    "name": "Kairat Almaty",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Kairat Almaty"
+    ]
+  },
+  {
+    "id": "club:kups",
+    "name": "KuPS",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "KuPS",
+      "KuPS Kuopio"
+    ]
+  },
+  {
+    "id": "club:lask",
+    "name": "LASK",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "LASK",
+      "LASK Linz"
+    ]
+  },
+  {
+    "id": "club:lazio",
+    "name": "Lazio",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "LAZ",
+      "Lazio"
+    ]
+  },
+  {
+    "id": "club:lecce",
+    "name": "Lecce",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "LEC",
+      "Lecce"
+    ]
+  },
+  {
+    "id": "club:lech-poznan",
+    "name": "Lech Poznań",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Lech Poznań"
+    ]
+  },
+  {
+    "id": "club:leeds-united",
+    "name": "Leeds United",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "LEE",
+      "Leeds",
+      "Leeds United"
+    ]
+  },
+  {
+    "id": "club:lens",
+    "name": "Lens",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Lens",
+      "RC Lens"
+    ]
+  },
+  {
+    "id": "club:levante",
+    "name": "Levante",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "LEV",
+      "Levante"
+    ]
+  },
+  {
+    "id": "club:levski-sofia",
+    "name": "Levski Sofia",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Levski",
+      "Levski Sofia",
+      "PFC Levski Sofia"
+    ]
+  },
+  {
+    "id": "club:lille",
+    "name": "Lille",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "LOSC",
+      "Lille"
+    ]
+  },
+  {
+    "id": "club:lillestr-m",
+    "name": "Lillestrøm",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Lillestrom",
+      "Lillestrom SK",
+      "Lillestrøm"
+    ]
+  },
+  {
+    "id": "club:lincoln-red-imps-fc",
+    "name": "Lincoln Red Imps FC",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Lincoln Red Imps",
+      "Lincoln Red Imps FC"
+    ]
+  },
+  {
+    "id": "club:liverpool",
+    "name": "Liverpool",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "LIV",
+      "Liverpool"
+    ]
+  },
+  {
+    "id": "club:lokomotiva",
+    "name": "Lokomotiva",
+    "kind": "club",
+    "leagues": [
+      "cro.1"
+    ],
+    "aliases": [
+      "LOK",
+      "Lokomotiva",
+      "Lokomotiva Zagreb",
+      "NK Lokomotiva"
+    ]
+  },
+  {
+    "id": "club:lugano",
+    "name": "Lugano",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "FC Lugano",
+      "Lugano"
+    ]
+  },
+  {
+    "id": "club:lyon",
+    "name": "Lyon",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Lyon",
+      "Olympique Lyonnais"
+    ]
+  },
+  {
+    "id": "club:mainz",
+    "name": "Mainz",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "M05",
+      "Mainz",
+      "Mainz 05"
+    ]
+  },
+  {
+    "id": "club:malaga",
+    "name": "Málaga",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "MCF",
+      "Málaga"
+    ]
+  },
+  {
+    "id": "club:manchester-city",
+    "name": "Manchester City",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "MNC",
+      "Man City",
+      "Manchester City"
+    ]
+  },
+  {
+    "id": "club:manchester-united",
+    "name": "Manchester United",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "MAN",
+      "Man United",
+      "Man Utd",
+      "Manchester United"
+    ]
+  },
+  {
+    "id": "club:marseille",
+    "name": "Marseille",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Marseille",
+      "OM",
+      "Olympique de Marseille"
+    ]
+  },
+  {
+    "id": "club:mjallby",
+    "name": "Mjällby",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Mjallby",
+      "Mjallby AIF",
+      "Mjällby"
+    ]
+  },
+  {
+    "id": "club:monza",
+    "name": "Monza",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "MON",
+      "Monza"
+    ]
+  },
+  {
+    "id": "club:napoli",
+    "name": "Napoli",
+    "kind": "club",
+    "leagues": [
+      "ita.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "NAP",
+      "Napoli"
+    ]
+  },
+  {
+    "id": "club:nec-nijmegen",
+    "name": "NEC Nijmegen",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "N.E.C. Nijmegen",
+      "NEC",
+      "NEC Nijmegen"
+    ]
+  },
+  {
+    "id": "club:newcastle-united",
+    "name": "Newcastle United",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "NEW",
+      "Newcastle",
+      "Newcastle United"
+    ]
+  },
+  {
+    "id": "club:nk-celje",
+    "name": "NK Celje",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Celje",
+      "NK Celje"
+    ]
+  },
+  {
+    "id": "club:nordsj-lland",
+    "name": "Nordsjælland",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "FC Nordsjaelland",
+      "Nordsjaelland",
+      "Nordsjælland"
+    ]
+  },
+  {
+    "id": "club:nottingham-forest",
+    "name": "Nottingham Forest",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "Forest",
+      "NFO",
+      "Nottingham Forest",
+      "Nottm Forest"
+    ]
+  },
+  {
+    "id": "club:ofi-crete",
+    "name": "OFI Crete",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "OFI",
+      "OFI Crete",
+      "OFI Kriti"
+    ]
+  },
+  {
+    "id": "club:olympiacos",
+    "name": "Olympiacos",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Olympiacos",
+      "Olympiacos Piraeus",
+      "Olympiakos"
+    ]
+  },
+  {
+    "id": "club:omonia-nicosia",
+    "name": "Omonia Nicosia",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "AC Omonia",
+      "Omonia",
+      "Omonia Nicosia"
+    ]
+  },
+  {
+    "id": "club:osasuna",
+    "name": "Osasuna",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "CA Osasuna",
+      "OSA",
+      "Osasuna"
+    ]
+  },
+  {
+    "id": "club:osijek",
+    "name": "Osijek",
+    "kind": "club",
+    "leagues": [
+      "cro.1"
+    ],
+    "aliases": [
+      "NK Osijek",
+      "OSI",
+      "Osijek"
+    ]
+  },
+  {
+    "id": "club:pafos-fc",
+    "name": "Pafos FC",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Pafos",
+      "Pafos FC"
+    ]
+  },
+  {
+    "id": "club:panathinaikos",
+    "name": "Panathinaikos",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Panathinaikos"
+    ]
+  },
+  {
+    "id": "club:paris-saint-germain",
+    "name": "Paris Saint-Germain",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "PSG",
+      "Paris Saint Germain",
+      "Paris Saint-Germain"
+    ]
+  },
+  {
+    "id": "club:parma",
+    "name": "Parma",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "PAR",
+      "Parma"
+    ]
+  },
+  {
+    "id": "club:psv-eindhoven",
+    "name": "PSV Eindhoven",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "PSV",
+      "PSV Eindhoven"
+    ]
+  },
+  {
+    "id": "club:racing-santander",
+    "name": "Racing Santander",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "R Racing Club",
+      "RAC",
+      "Racing",
+      "Racing Santander"
+    ]
+  },
+  {
+    "id": "club:rayo-vallecano",
+    "name": "Rayo Vallecano",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "RAY",
+      "Rayo Vallecano"
+    ]
+  },
+  {
+    "id": "club:rb-leipzig",
+    "name": "RB Leipzig",
+    "kind": "club",
+    "leagues": [
+      "ger.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "RB Leipzig",
+      "RBL"
+    ]
+  },
+  {
+    "id": "club:rb-salzburg",
+    "name": "RB Salzburg",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "FC Salzburg",
+      "RB Salzburg",
+      "Red Bull Salzburg",
+      "Salzburg"
+    ]
+  },
+  {
+    "id": "club:real-betis",
+    "name": "Real Betis",
+    "kind": "club",
+    "leagues": [
+      "esp.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "BET",
+      "Betis",
+      "Real Betis",
+      "Real Betis Balompie"
+    ]
+  },
+  {
+    "id": "club:real-madrid",
+    "name": "Real Madrid",
+    "kind": "club",
+    "leagues": [
+      "esp.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "RMA",
+      "Real Madrid"
+    ]
+  },
+  {
+    "id": "club:real-sociedad",
+    "name": "Real Sociedad",
+    "kind": "club",
+    "leagues": [
+      "esp.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "RSO",
+      "Real Sociedad",
+      "Sociedad"
+    ]
+  },
+  {
+    "id": "club:riga-fc",
+    "name": "Riga FC",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Riga",
+      "Riga FC"
+    ]
+  },
+  {
+    "id": "club:rijeka",
+    "name": "Rijeka",
+    "kind": "club",
+    "leagues": [
+      "cro.1"
+    ],
+    "aliases": [
+      "HNK Rijeka",
+      "RIJ",
+      "Rijeka"
+    ]
+  },
+  {
+    "id": "club:rudes",
+    "name": "Rudeš",
+    "kind": "club",
+    "leagues": [
+      "cro.1"
+    ],
+    "aliases": [
+      "RUD",
+      "Rudes",
+      "Rudeš"
+    ]
+  },
+  {
+    "id": "club:sabah-fk",
+    "name": "Sabah FK",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Sabah",
+      "Sabah FK"
+    ]
+  },
+  {
+    "id": "club:sassuolo",
+    "name": "Sassuolo",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "SAS",
+      "Sassuolo"
+    ]
+  },
+  {
+    "id": "club:sc-freiburg",
+    "name": "SC Freiburg",
+    "kind": "club",
+    "leagues": [
+      "ger.1",
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Freiburg",
+      "SC Freiburg",
+      "SCF"
+    ]
+  },
+  {
+    "id": "club:sc-paderborn-07",
+    "name": "SC Paderborn 07",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "Paderborn",
+      "Paderborn 07",
+      "SC Paderborn 07",
+      "SCP"
+    ]
+  },
+  {
+    "id": "club:schalke-04",
+    "name": "Schalke 04",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "S04",
+      "Schalke",
+      "Schalke 04"
+    ]
+  },
+  {
+    "id": "club:sevilla",
+    "name": "Sevilla",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "SEV",
+      "Sevilla"
+    ]
+  },
+  {
+    "id": "club:shakhtar-donetsk",
+    "name": "Shakhtar Donetsk",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Shakhtar",
+      "Shakhtar Donetsk"
+    ]
+  },
+  {
+    "id": "club:sk-sturm-graz",
+    "name": "SK Sturm Graz",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "SK Sturm Graz",
+      "Sturm Graz"
+    ]
+  },
+  {
+    "id": "club:slaven-belupo",
+    "name": "Slaven Belupo",
+    "kind": "club",
+    "leagues": [
+      "cro.1"
+    ],
+    "aliases": [
+      "SLA",
+      "Slaven",
+      "Slaven Belupo"
+    ]
+  },
+  {
+    "id": "club:slavia-prague",
+    "name": "Slavia Prague",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "SK Slavia Praha",
+      "Slavia Prague",
+      "Slavia Praha"
+    ]
+  },
+  {
+    "id": "club:slovan-bratislava",
+    "name": "Slovan Bratislava",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "SK Slovan Bratislava",
+      "Slovan Bratislava"
+    ]
+  },
+  {
+    "id": "club:sparta-prague",
+    "name": "Sparta Prague",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "AC Sparta Praha",
+      "Sparta Prague",
+      "Sparta Praha"
+    ]
+  },
+  {
+    "id": "club:sporting-cp",
+    "name": "Sporting CP",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Sporting",
+      "Sporting CP",
+      "Sporting Clube de Portugal",
+      "Sporting Lisbon"
+    ]
+  },
+  {
+    "id": "club:st-truiden",
+    "name": "St.Truiden",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "STVV",
+      "Sint Truiden",
+      "Sint-Truiden",
+      "St Truiden",
+      "St.Truiden"
+    ]
+  },
+  {
+    "id": "club:stade-rennais",
+    "name": "Stade Rennais",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Rennais",
+      "Rennes",
+      "Stade Rennais"
+    ]
+  },
+  {
+    "id": "club:sunderland",
+    "name": "Sunderland",
+    "kind": "club",
+    "leagues": [
+      "eng.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "SUN",
+      "Sunderland"
+    ]
+  },
+  {
+    "id": "club:sv-elversberg",
+    "name": "SV Elversberg",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "ELV",
+      "Elversberg",
+      "SV Elversberg"
+    ]
+  },
+  {
+    "id": "club:thun",
+    "name": "Thun",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "FC Thun",
+      "Thun"
+    ]
+  },
+  {
+    "id": "club:torino",
+    "name": "Torino",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "TOR",
+      "Torino"
+    ]
+  },
+  {
+    "id": "club:torreense",
+    "name": "Torreense",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Torreense"
+    ]
+  },
+  {
+    "id": "club:tottenham-hotspur",
+    "name": "Tottenham Hotspur",
+    "kind": "club",
+    "leagues": [
+      "eng.1"
+    ],
+    "aliases": [
+      "Spurs",
+      "TOT",
+      "Tottenham",
+      "Tottenham Hotspur"
+    ]
+  },
+  {
+    "id": "club:trabzonspor",
+    "name": "Trabzonspor",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Trabzonspor"
+    ]
+  },
+  {
+    "id": "club:tsg-hoffenheim",
+    "name": "TSG Hoffenheim",
+    "kind": "club",
+    "leagues": [
+      "ger.1",
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Hoffenheim",
+      "TSG",
+      "TSG Hoffenheim"
+    ]
+  },
+  {
+    "id": "club:udinese",
+    "name": "Udinese",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "UDI",
+      "Udinese"
+    ]
+  },
+  {
+    "id": "club:union-st-gilloise",
+    "name": "Union St.Gilloise",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Royale Union Saint-Gilloise",
+      "Union SG",
+      "Union Saint-Gilloise",
+      "Union St Gilloise",
+      "Union St.Gilloise"
+    ]
+  },
+  {
+    "id": "club:universitatea-craiova",
+    "name": "Universitatea Craiova",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa.conf"
+    ],
+    "aliases": [
+      "Universitatea Craiova"
+    ]
+  },
+  {
+    "id": "club:valencia",
+    "name": "Valencia",
+    "kind": "club",
+    "leagues": [
+      "esp.1"
+    ],
+    "aliases": [
+      "VAL",
+      "Valencia"
+    ]
+  },
+  {
+    "id": "club:varazdin",
+    "name": "Varaždin",
+    "kind": "club",
+    "leagues": [
+      "cro.1"
+    ],
+    "aliases": [
+      "NK Varazdin",
+      "VAR",
+      "Varaždin"
+    ]
+  },
+  {
+    "id": "club:venezia",
+    "name": "Venezia",
+    "kind": "club",
+    "leagues": [
+      "ita.1"
+    ],
+    "aliases": [
+      "VEN",
+      "Venezia"
+    ]
+  },
+  {
+    "id": "club:vfb-stuttgart",
+    "name": "VfB Stuttgart",
+    "kind": "club",
+    "leagues": [
+      "ger.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Stuttgart",
+      "VFB",
+      "VfB Stuttgart"
+    ]
+  },
+  {
+    "id": "club:viking-fk",
+    "name": "Viking FK",
+    "kind": "club",
+    "leagues": [
+      "uefa.champions"
+    ],
+    "aliases": [
+      "Viking",
+      "Viking FK"
+    ]
+  },
+  {
+    "id": "club:viktoria-plzen",
+    "name": "Viktoria Plzeň",
+    "kind": "club",
+    "leagues": [
+      "uefa.europa"
+    ],
+    "aliases": [
+      "Plzen",
+      "Viktoria Plzen",
+      "Viktoria Plzeň"
+    ]
+  },
+  {
+    "id": "club:villarreal",
+    "name": "Villarreal",
+    "kind": "club",
+    "leagues": [
+      "esp.1",
+      "uefa.champions"
+    ],
+    "aliases": [
+      "VIL",
+      "Villarreal"
+    ]
+  },
+  {
+    "id": "club:werder-bremen",
+    "name": "Werder Bremen",
+    "kind": "club",
+    "leagues": [
+      "ger.1"
+    ],
+    "aliases": [
+      "Bremen",
+      "SVW",
+      "Werder",
+      "Werder Bremen"
+    ]
+  },
+  {
+    "id": "national:albania",
+    "name": "Albania",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "ALB",
+      "Albania",
+      "Albanija"
+    ]
+  },
+  {
+    "id": "national:algeria",
+    "name": "Algeria",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "ALG",
+      "Algeria"
+    ]
+  },
+  {
+    "id": "national:andorra",
+    "name": "Andorra",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "AND",
+      "Andora",
+      "Andorra"
+    ]
+  },
+  {
+    "id": "national:argentina",
+    "name": "Argentina",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "ARG",
+      "Argentina",
+      "Argentine"
+    ]
+  },
+  {
+    "id": "national:armenia",
+    "name": "Armenia",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "ARM",
+      "Armenia",
+      "Armenija"
+    ]
+  },
+  {
+    "id": "national:australia",
+    "name": "Australia",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "AUS",
+      "Australia"
+    ]
+  },
+  {
+    "id": "national:austria",
+    "name": "Austria",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "AUT",
+      "Austria"
+    ]
+  },
+  {
+    "id": "national:azerbaijan",
+    "name": "Azerbaijan",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "AZE",
+      "Azerbaijan",
+      "Azerbajdzan"
+    ]
+  },
+  {
+    "id": "national:belarus",
+    "name": "Belarus",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "BLR",
+      "Belarus",
+      "Belorusija",
+      "Bjelorusija"
+    ]
+  },
+  {
+    "id": "national:belgium",
+    "name": "Belgium",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "BEL",
+      "Belgija",
+      "Belgique",
+      "Belgium"
+    ]
+  },
+  {
+    "id": "national:bosnia-herzegovina",
+    "name": "Bosnia-Herzegovina",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "BIH",
+      "Bosnia-Herzegovina"
+    ]
+  },
+  {
+    "id": "national:brazil",
+    "name": "Brazil",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "BRA",
+      "Brasil",
+      "Brazil",
+      "Bresil"
+    ]
+  },
+  {
+    "id": "national:bulgaria",
+    "name": "Bulgaria",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "BUL",
+      "Bugarska",
+      "Bulgaria"
+    ]
+  },
+  {
+    "id": "national:canada",
+    "name": "Canada",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "CAN",
+      "Canada"
+    ]
+  },
+  {
+    "id": "national:cape-verde",
+    "name": "Cape Verde",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "CPV",
+      "Cape Verde"
+    ]
+  },
+  {
+    "id": "national:colombia",
+    "name": "Colombia",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "COL",
+      "Colombia"
+    ]
+  },
+  {
+    "id": "national:congo-dr",
+    "name": "Congo DR",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "COD",
+      "Congo DR"
+    ]
+  },
+  {
+    "id": "national:croatia",
+    "name": "Croatia",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "CRO",
+      "Croacia",
+      "Croatia",
+      "Croatie",
+      "Croazia",
+      "Hrvatska",
+      "Hrvatske",
+      "Kroatien"
+    ]
+  },
+  {
+    "id": "national:curacao",
+    "name": "Curaçao",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "CUW",
+      "Curaçao"
+    ]
+  },
+  {
+    "id": "national:cyprus",
+    "name": "Cyprus",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "CYP",
+      "Cipar",
+      "Cyprus"
+    ]
+  },
+  {
+    "id": "national:czechia",
+    "name": "Czechia",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "CZE",
+      "Ceska",
+      "Czech Republic",
+      "Czechia",
+      "Tchequie"
+    ]
+  },
+  {
+    "id": "national:denmark",
+    "name": "Denmark",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "DEN",
+      "Danska",
+      "Denmark"
+    ]
+  },
+  {
+    "id": "national:ecuador",
+    "name": "Ecuador",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "ECU",
+      "Ecuador"
+    ]
+  },
+  {
+    "id": "national:egypt",
+    "name": "Egypt",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "EGY",
+      "Egypt"
+    ]
+  },
+  {
+    "id": "national:england",
+    "name": "England",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "Angleterre",
+      "ENG",
+      "Engeska",
+      "England",
+      "Engleska",
+      "Inglaterra"
+    ]
+  },
+  {
+    "id": "national:estonia",
+    "name": "Estonia",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "EST",
+      "Estonia",
+      "Estonija"
+    ]
+  },
+  {
+    "id": "national:faroe-islands",
+    "name": "Faroe Islands",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "FRO",
+      "Faroe Islands",
+      "Farski Otoci"
+    ]
+  },
+  {
+    "id": "national:finland",
+    "name": "Finland",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "FIN",
+      "Finland",
+      "Finska"
+    ]
+  },
+  {
+    "id": "national:france",
+    "name": "France",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "FRA",
+      "France",
+      "Francia",
+      "Francuska"
+    ]
+  },
+  {
+    "id": "national:georgia",
+    "name": "Georgia",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "GEO",
+      "Georgia",
+      "Gruzija"
+    ]
+  },
+  {
+    "id": "national:germany",
+    "name": "Germany",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "Allemagne",
+      "Deutschland",
+      "GER",
+      "Germany",
+      "Njemacka"
+    ]
+  },
+  {
+    "id": "national:ghana",
+    "name": "Ghana",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "GHA",
+      "Ghana"
+    ]
+  },
+  {
+    "id": "national:gibraltar",
+    "name": "Gibraltar",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "GIB",
+      "Gibraltar"
+    ]
+  },
+  {
+    "id": "national:greece",
+    "name": "Greece",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "GRE",
+      "Grcka",
+      "Greece"
+    ]
+  },
+  {
+    "id": "national:haiti",
+    "name": "Haiti",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "HAI",
+      "Haiti"
+    ]
+  },
+  {
+    "id": "national:hungary",
+    "name": "Hungary",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "HUN",
+      "Hungary",
+      "Madarska"
+    ]
+  },
+  {
+    "id": "national:iceland",
+    "name": "Iceland",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "ISL",
+      "Iceland",
+      "Island"
+    ]
+  },
+  {
+    "id": "national:iran",
+    "name": "Iran",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "IRN",
+      "Iran"
+    ]
+  },
+  {
+    "id": "national:iraq",
+    "name": "Iraq",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "IRQ",
+      "Iraq"
+    ]
+  },
+  {
+    "id": "national:israel",
+    "name": "Israel",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "ISR",
+      "Israel",
+      "Izrael"
+    ]
+  },
+  {
+    "id": "national:italy",
+    "name": "Italy",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "ITA",
+      "Italia",
+      "Italie",
+      "Italija",
+      "Italy"
+    ]
+  },
+  {
+    "id": "national:ivory-coast",
+    "name": "Ivory Coast",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "CIV",
+      "Cote d Ivoire",
+      "Ivory Coast"
+    ]
+  },
+  {
+    "id": "national:japan",
+    "name": "Japan",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "JPN",
+      "Japan"
+    ]
+  },
+  {
+    "id": "national:jordan",
+    "name": "Jordan",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "JOR",
+      "Jordan"
+    ]
+  },
+  {
+    "id": "national:kazakhstan",
+    "name": "Kazakhstan",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "KAZ",
+      "Kazahstan",
+      "Kazakhstan"
+    ]
+  },
+  {
+    "id": "national:kosovo",
+    "name": "Kosovo",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "KOS",
+      "Kosovo"
+    ]
+  },
+  {
+    "id": "national:latvia",
+    "name": "Latvia",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "LVA",
+      "Latvia",
+      "Latvija"
+    ]
+  },
+  {
+    "id": "national:liechtenstein",
+    "name": "Liechtenstein",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "LIE",
+      "Liechtenstein",
+      "Lihtenstajn"
+    ]
+  },
+  {
+    "id": "national:lithuania",
+    "name": "Lithuania",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "LTU",
+      "Lithuania",
+      "Litva"
+    ]
+  },
+  {
+    "id": "national:luxembourg",
+    "name": "Luxembourg",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "LUX",
+      "Luksemburg",
+      "Luxembourg"
+    ]
+  },
+  {
+    "id": "national:malta",
+    "name": "Malta",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "MLT",
+      "Malta"
+    ]
+  },
+  {
+    "id": "national:mexico",
+    "name": "Mexico",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "MEX",
+      "Mexico"
+    ]
+  },
+  {
+    "id": "national:moldova",
+    "name": "Moldova",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "MDA",
+      "Moldavija",
+      "Moldova"
+    ]
+  },
+  {
+    "id": "national:montenegro",
+    "name": "Montenegro",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "Crna Gora",
+      "MNE",
+      "Montenegro"
+    ]
+  },
+  {
+    "id": "national:morocco",
+    "name": "Morocco",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "MAR",
+      "Morocco"
+    ]
+  },
+  {
+    "id": "national:netherlands",
+    "name": "Netherlands",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "Holland",
+      "NED",
+      "Netherlands",
+      "Nizozemska",
+      "Pays Bas"
+    ]
+  },
+  {
+    "id": "national:new-zealand",
+    "name": "New Zealand",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "NZL",
+      "New Zealand"
+    ]
+  },
+  {
+    "id": "national:north-macedonia",
+    "name": "North Macedonia",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "MKD",
+      "Makedonija",
+      "North Macedonia",
+      "Severna Makedonija",
+      "Sjeverna Makedonija"
+    ]
+  },
+  {
+    "id": "national:northern-ireland",
+    "name": "Northern Ireland",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "NIR",
+      "Northern Ireland",
+      "Severna Irska",
+      "Sjeverna Irska"
+    ]
+  },
+  {
+    "id": "national:norway",
+    "name": "Norway",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "NOR",
+      "Norveska",
+      "Norway"
+    ]
+  },
+  {
+    "id": "national:panama",
+    "name": "Panama",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "PAN",
+      "Panama"
+    ]
+  },
+  {
+    "id": "national:paraguay",
+    "name": "Paraguay",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "PAR",
+      "Paraguay"
+    ]
+  },
+  {
+    "id": "national:poland",
+    "name": "Poland",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "POL",
+      "Poland",
+      "Poljska"
+    ]
+  },
+  {
+    "id": "national:portugal",
+    "name": "Portugal",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "POR",
+      "Portugal",
+      "Portugala"
+    ]
+  },
+  {
+    "id": "national:qatar",
+    "name": "Qatar",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "QAT",
+      "Qatar"
+    ]
+  },
+  {
+    "id": "national:republic-of-ireland",
+    "name": "Republic of Ireland",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "IRL",
+      "Irska",
+      "Republic of Ireland"
+    ]
+  },
+  {
+    "id": "national:romania",
+    "name": "Romania",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "ROU",
+      "Romania",
+      "Rumunija",
+      "Rumunjska"
+    ]
+  },
+  {
+    "id": "national:san-marino",
+    "name": "San Marino",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "SMR",
+      "San Marino"
+    ]
+  },
+  {
+    "id": "national:saudi-arabia",
+    "name": "Saudi Arabia",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "KSA",
+      "Saudi Arabia"
+    ]
+  },
+  {
+    "id": "national:scotland",
+    "name": "Scotland",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "SCO",
+      "Scotland",
+      "Skotska"
+    ]
+  },
+  {
+    "id": "national:senegal",
+    "name": "Senegal",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "SEN",
+      "Senegal"
+    ]
+  },
+  {
+    "id": "national:serbia",
+    "name": "Serbia",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "SRB",
+      "Serbia",
+      "Srbija"
+    ]
+  },
+  {
+    "id": "national:slovakia",
+    "name": "Slovakia",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "SVK",
+      "Slovacka",
+      "Slovakia"
+    ]
+  },
+  {
+    "id": "national:slovenia",
+    "name": "Slovenia",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "SVN",
+      "Slovenaca",
+      "Slovenia",
+      "Slovenija"
+    ]
+  },
+  {
+    "id": "national:south-africa",
+    "name": "South Africa",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "RSA",
+      "South Africa"
+    ]
+  },
+  {
+    "id": "national:south-korea",
+    "name": "South Korea",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "KOR",
+      "Korea",
+      "Korea Republic",
+      "South Korea"
+    ]
+  },
+  {
+    "id": "national:spain",
+    "name": "Spain",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "ESP",
+      "Espagne",
+      "Espana",
+      "Spagna",
+      "Spain",
+      "Spanjolska"
+    ]
+  },
+  {
+    "id": "national:sweden",
+    "name": "Sweden",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "SWE",
+      "Svedska",
+      "Sweden"
+    ]
+  },
+  {
+    "id": "national:switzerland",
+    "name": "Switzerland",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "SUI",
+      "Svajcarska",
+      "Svicarci",
+      "Svicarska",
+      "Switzerland"
+    ]
+  },
+  {
+    "id": "national:tunisia",
+    "name": "Tunisia",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "TUN",
+      "Tunisia"
+    ]
+  },
+  {
+    "id": "national:turkiye",
+    "name": "Türkiye",
+    "kind": "national",
+    "leagues": [
+      "fifa.world",
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "TUR",
+      "Turkey",
+      "Turkiye",
+      "Turska",
+      "Türkiye"
+    ]
+  },
+  {
+    "id": "national:ukraine",
+    "name": "Ukraine",
+    "kind": "national",
+    "leagues": [
+      "uefa.euro",
+      "uefa.nations"
+    ],
+    "aliases": [
+      "UKR",
+      "Ukraine",
+      "Ukrajina"
+    ]
+  },
+  {
+    "id": "national:united-states",
+    "name": "United States",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "USA",
+      "United States",
+      "United States of America"
+    ]
+  },
+  {
+    "id": "national:uruguay",
+    "name": "Uruguay",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "URU",
+      "Uruguay"
+    ]
+  },
+  {
+    "id": "national:uzbekistan",
+    "name": "Uzbekistan",
+    "kind": "national",
+    "leagues": [
+      "fifa.world"
+    ],
+    "aliases": [
+      "UZB",
+      "Uzbekistan"
+    ]
+  },
+  {
+    "id": "national:wales",
+    "name": "Wales",
+    "kind": "national",
+    "leagues": [
+      "uefa.nations"
+    ],
+    "aliases": [
+      "Vels",
+      "WAL",
+      "Wales"
+    ]
+  }
+]
