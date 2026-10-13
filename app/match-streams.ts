@@ -1,8 +1,16 @@
 import {clubTerms,normalize} from './football-model';
 const source='https://www.soccerstreams.zone/';
+// Explicit source aliases; avoid substring/fuzzy matching that can select another club.
+const listingAliases:Record<string,string[]>={
+ 'sabah fk':['sabah'],
+ 'slavia prague':['slavia praha'],
+ 'viking fk':['viking'],
+ 'psv eindhoven':['psv'],
+};
+function streamTerms(name:string){return [...clubTerms({name}),...(listingAliases[normalize(name)]||[])];}
 function text(html:string){return html.replace(/<[^>]*>/g,' ').replace(/&amp;/g,'&').replace(/&#39;|&apos;/g,"'").replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();}
 export function listedMatchStreams(html:string,home:string,away:string){
- const same=(listed:string,team:string)=>clubTerms({name:listed}).some(term=>clubTerms({name:team}).includes(term))||normalize(listed)===normalize(team);
+ const same=(listed:string,team:string)=>streamTerms(listed).some(term=>streamTerms(team).includes(term));
  const links:any[]=[];
  for(const row of html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)){
   const cells=[...row[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map(m=>m[1]);
