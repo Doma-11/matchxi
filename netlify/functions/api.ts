@@ -25,7 +25,7 @@ import {createHash} from 'node:crypto';
 const pending=new Map<string,Promise<Response>>();
 function lifetime(name:string,data:any,url:URL){
  if(name==='daily-report')return 60;
- if(name==='stream-player')return data.embedAllowed?31536000:3600;
+ if(name==='stream-player')return data.embedAllowed?31536000:900;
  if(name==='match-streams')return data.streams?.length?31536000:0;
  if(name==='match-highlights'&&data.matches?.length===0){const age=Date.now()-Date.parse(url.searchParams.get('date')||'');if(age>=0&&age<26*3600000)return 900;}
  if(name==='match-live')return liveResponseLifetime(data.game,url);

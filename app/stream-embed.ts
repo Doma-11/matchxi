@@ -1,6 +1,19 @@
+export function supportedStreamPlayer(raw:string){
+ try{const url=new URL(raw.replace(/&amp;/gi,'&'),'https://www.soccerstreams.zone/');
+  if(url.protocol!=='https:'||url.username||url.password||url.port)return null;
+  const supported=/^(?:w\d+\.)?sportsonliine\.click$/.test(url.hostname)||/^(?:ww?\d+\.)?sportsonnline\.click$/.test(url.hostname)||url.hostname==='dlive.sx';
+  return supported?url.href:null;
+ }catch{return null;}
+}
 export function publishedStreamPlayer(html:string){
- const src=html.match(/<iframe\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/i)?.[1];if(!src)return null;
- try{const url=new URL(src.replace(/&amp;/g,'&'),'https://www.soccerstreams.zone/');return url.protocol==='https:'&&/^(?:w\d+\.)?sportsonliine\.click$/.test(url.hostname)?url.href:null;}catch{return null;}
+ // Ignore unrelated/ad frames and inspect all published iframe URLs.
+ for(const iframe of html.matchAll(/<iframe\b[^>]*>/gi)){
+  for(const name of ['src','data-src']){
+   const attribute=iframe[0].match(new RegExp('(?:\\s)'+name+'\\s*=\\s*["\']([^"\']+)["\']','i'));
+   if(attribute){const url=supportedStreamPlayer(attribute[1]);if(url)return url;}
+  }
+ }
+ return null;
 }
 export function allowsStreamEmbedding(headers:Headers,appOrigin:string){
  if(headers.get('x-frame-options'))return false;

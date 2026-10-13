@@ -23,3 +23,9 @@ Home and the match use one per-fixture, session-persisted timestamp clock. A vis
 Home now offers All / Live / Upcoming. Upcoming excludes completed/live/cancelled/postponed/abandoned fixtures; completed results remain under All. Existing saved Finished selections migrate to Upcoming. Empty timeline/lineup/statistic cards inherit the match competition palette, with readable dark and light theme colours.
 
 Match routes are identified by league and fixture ID, independently of changing background team/club data. A match entry retains its source screen and scroll position. Opening a match resets the viewport instantly after rendering, before paint, with a short opacity-only transition; global smooth scrolling is temporarily overridden. Back restores the source screen and saved scroll, ignores duplicate match entries, debounces repeated taps and falls back to an in-app destination if usable browser history is missing or does not respond. These changes introduce no polling or scheduled requests.
+
+## Published stream-player compatibility (13 October 2026)
+
+The listing parser recognizes the original sportsonliine.click player, the reviewed sportsonnline.click hostname used by current Arsenal/Inter listings, and dlive.sx. It inspects all iframe src/data-src attributes rather than stopping at an unrelated first frame. HTTPS, credential/port validation, fixed provider allowlists, same-host redirects, iframe sandboxing and publisher frame restrictions remain enforced. No video footage is proxied and no X-Frame-Options/CSP restrictions are removed.
+
+Player lookup cache version 2 avoids old unsupported-provider results. Negative provider-policy metadata and API responses expire after 15 minutes; successful player lookups remain reusable. There is no new automatic stream polling; verification happens only on the existing explicit Play in app action. An HTTP error is not labelled as verified playable.
