@@ -566,3 +566,14 @@ html[data-theme=light] .site-shell .match-workspace .stream-player-shell :is(spa
 .site-shell .score-winner{filter:brightness(1.3)}.site-shell .score-loser{filter:brightness(.7)}
 .site-shell .match-workspace .match-central-score>strong>span{font:inherit;color:inherit!important;display:inline}
 .site-shell .score-board .desktop-match-score>span{font:inherit;color:inherit!important;display:inline}
+
+/* Empty match sections use the competition palette, including inside the pitch. */
+.site-shell .match-workspace .match-unavailable{background:linear-gradient(135deg,color-mix(in srgb,var(--match-brand) 70%,var(--match-surface)),var(--match-surface))!important;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);color:#fff!important}
+.site-shell .match-workspace .match-unavailable h3{color:#fff!important}
+.site-shell .match-workspace .match-unavailable p{color:#ffffffcf!important}
+.site-shell .match-workspace .match-unavailable svg{color:var(--accent)!important}
+html[data-theme=light] .site-shell .match-workspace .match-unavailable{background:linear-gradient(135deg,color-mix(in srgb,var(--match-brand) 14%,white),color-mix(in srgb,var(--match-brand) 7%,white))!important;border-color:var(--match-light-border)!important;color:var(--match-ink)!important}
+html[data-theme=light] .site-shell .match-workspace .match-unavailable :is(h3,p){color:var(--match-ink)!important}
+html[data-theme=light] .site-shell .match-workspace .match-unavailable svg{color:var(--match-brand)!important}
+@keyframes match-page-fade{from{opacity:0}to{opacity:1}}
+main.match-page{animation:match-page-fade 160ms ease-out both}

@@ -1,4 +1,5 @@
 'use client';
+import {screenKey,navigationEntry,startMatchBack,instantScroll,resolvedHistoryState} from './navigation-history';
 import ClubTransition from './club-transition';
 import {useEffect,useLayoutEffect,useMemo,useRef,useState,type CSSProperties} from 'react';
 import {Play,Search,ChevronLeft,ChevronRight,ExternalLink,RefreshCw,Trophy,CalendarDays,MapPin,Check,ArrowLeft,LoaderCircle,X} from 'lucide-react';
@@ -42,30 +43,36 @@ export default function Home(){
  // Keep app screens in browser history so Android Back and browser Back return within Touchline.
  const navigationState={page,league,club,pickerLeague,clubQuery,videoQuery,selected,competition,nation,selectedGame,showAll,leagueTab};
  const navigationRef=useRef(navigationState);navigationRef.current=navigationState;
- const historyReady=useRef(false),restoringHistory=useRef<string|null>(null);
+ const historyReady=useRef(false),restoringHistory=useRef<string|null>(null),backTarget=useRef<any>(null),backTimer=useRef<ReturnType<typeof setTimeout>|null>(null),restoreScreen=useRef<(event:PopStateEvent)=>void>(()=>{});
  useLayoutEffect(()=>{
-   const saveScroll=()=>{if(history.state?.touchline)history.replaceState({...history.state,scrollY:window.scrollY},'')};
-   const restore=(event:PopStateEvent)=>{const state=event.state;if(!state?.touchline||!state.screen)return;setClubTransition(null);clubTransitionBusy.current=false;const n=state.screen;const target=JSON.stringify(n);restoringHistory.current=target===JSON.stringify(navigationRef.current)?null:target;setPage(n.page);setLeague(n.league);setClub(n.club);setPickerLeague(n.pickerLeague);setClubQuery(n.clubQuery);setVideoQuery(n.videoQuery);setSelected(n.selected);setCompetition(n.competition);setNation(n.nation);setSelectedGame(n.selectedGame);setShowAll(n.showAll);setLeagueTab(n.leagueTab);};
+   const saveScroll=()=>{if(!restoringHistory.current&&history.state?.touchline)history.replaceState({...history.state,scrollY:window.scrollY},'')};
+   const restore=(event:PopStateEvent)=>{const state=resolvedHistoryState(event.state,backTarget.current);if(state!==event.state)history.replaceState(state,'');backTarget.current=null;if(backTimer.current)clearTimeout(backTimer.current);backTimer.current=null;if(!state?.touchline||!state.screen)return;setClubTransition(null);clubTransitionBusy.current=false;const n=state.screen;const target=screenKey(n);restoringHistory.current=target===screenKey(navigationRef.current)?null:target;if(!restoringHistory.current)instantScroll(state.scrollY||0);setPage(n.page);setLeague(n.league);setClub(n.club);setPickerLeague(n.pickerLeague);setClubQuery(n.clubQuery);setVideoQuery(n.videoQuery);setSelected(n.selected);setCompetition(n.competition);setNation(n.nation);setSelectedGame(n.selectedGame);setShowAll(n.showAll);setLeagueTab(n.leagueTab);};
+   restoreScreen.current=restore;
    const current=history.state;
    history.scrollRestoration='manual';
    if(current?.touchline)restore({state:current} as PopStateEvent);
    else history.replaceState({touchline:true,screen:navigationRef.current,scrollY:window.scrollY,depth:0},'');
    historyReady.current=true;
    window.addEventListener('popstate',restore);window.addEventListener('scroll',saveScroll,{passive:true});document.addEventListener('click',saveScroll,true);
-   return()=>{window.removeEventListener('popstate',restore);window.removeEventListener('scroll',saveScroll);document.removeEventListener('click',saveScroll,true);history.scrollRestoration='auto'};
+   return()=>{window.removeEventListener('popstate',restore);window.removeEventListener('scroll',saveScroll);document.removeEventListener('click',saveScroll,true);history.scrollRestoration='auto';if(backTimer.current)clearTimeout(backTimer.current);backTarget.current=null};
  },[]);
  useLayoutEffect(()=>{
    if(!historyReady.current)return;
-   if(restoringHistory.current){if(JSON.stringify(navigationState)!==restoringHistory.current)return;restoringHistory.current=null;const y=history.state?.scrollY||0;requestAnimationFrame(()=>window.scrollTo({top:y,behavior:'instant'}));return;}
+   if(restoringHistory.current){if(screenKey(navigationState)!==restoringHistory.current)return;restoringHistory.current=null;instantScroll(history.state?.scrollY||0);return;}
    const current=history.state;
    if(JSON.stringify(current?.screen)===JSON.stringify(navigationState))return;
    // Text searches and display limits update the current screen rather than creating a Back step for every keystroke.
-   const route=(n:any)=>JSON.stringify([n?.page,n?.league,n?.club?.id,n?.pickerLeague,n?.selected?.id,n?.competition,n?.nation?.id,n?.selectedGame?.id,n?.leagueTab]);
-   const entry={touchline:true,screen:navigationState,scrollY:window.scrollY,depth:current?.depth||0};
-   if(route(current?.screen)===route(navigationState))history.replaceState(entry,'');
-   else history.pushState({...entry,depth:entry.depth+1},'');
+   const {entry,push}=navigationEntry(current,navigationState,window.scrollY);
+   if(push)history.pushState(entry,'');else history.replaceState(entry,'');
+   if(push&&navigationState.selectedGame)instantScroll(0);
  },[page,league,club,pickerLeague,clubQuery,videoQuery,selected,competition,nation,selectedGame,showAll,leagueTab]);
- function backScreen(){if(history.state?.touchline&&history.state.depth>0)history.back();else setSelectedGame(null);}
+ function backScreen(){
+  const screen=navigationRef.current,current=history.state;
+  if(screen.selectedGame){
+   startMatchBack(history,screen,backTarget,backTimer,state=>restoreScreen.current({state} as PopStateEvent));
+  }else if(current?.touchline&&current.depth>0&&history.length>1)history.back();
+ }
+
  const picker=useRef<HTMLElement>(null),playerArea=useRef<HTMLDivElement>(null),nationalRail=useRef<HTMLDivElement>(null);
  const leagueInfo=([...LEAGUES,...CLUB_CUPS].find(l=>l.id===league)||LEAGUES[0])!;const comp=COMPETITIONS.find(c=>c.id===competition)!;const isNational=page==='national';const theme=isNational?comp:page==='league'||page==='club'||page==='cup'?leagueInfo:null;
  const style={'--brand':theme?.brand||'#1b2c43','--accent':theme?.accent||'#b8f45c','--secondary':theme?.secondary||'#709cff','--surface':theme?.surface||'#152031','--page-tint':theme?.soft||'#0b101b'} as CSSProperties;
@@ -76,7 +83,7 @@ export default function Home(){
  useEffect(()=>{if(!isNational||selectedGame)return;let disposed=false;const controller=new AbortController();setVideoNotice('');setRefreshing(true);fetch(`/api/national-highlights?competition=${competition}&q=${encodeURIComponent(nation?.name||'Croatia')}`,{signal:controller.signal}).then(r=>r.json()).then((d:any)=>{if(disposed)return;if(d.matches)setNationalVideos(v=>merge(v,d.matches));if(!d.live)setVideoNotice('Showing saved highlights and Croatian clips.');}).catch(()=>{if(!disposed)setVideoNotice('Live national-team videos could not be refreshed. Saved videos are available.');}).finally(()=>{if(!disposed)setRefreshing(false)});fetch(`/api/national-teams?competition=${competition}`,{signal:controller.signal}).then(r=>r.json()).then((d:any)=>{if(!disposed&&d.teams)setNationalTeams((t:any)=>({...t,[competition]:d.teams}));}).catch(()=>{});return()=>{disposed=true;controller.abort()};},[page,competition,nation?.id,Boolean(selectedGame),highlightRefresh]);
  const activeClub=isNational?nation:club;
  useEffect(()=>{if(!activeClub||selectedGame||!['club','national'].includes(page))return;let disposed=false;setGameNotice('');const controller=new AbortController();const id=isNational?competition:league;fetch(`/api/matches?league=${id}&club=${activeClub.id}`,{signal:controller.signal}).then(r=>r.json()).then((d:any)=>{if(disposed)return;if(d.games)setGames(v=>{const map=new Map(v.map(g=>[g.league+g.id,g]));d.games.forEach((g:any)=>map.set(g.league+g.id,g));return Array.from(map.values());});if(d.error)setGameNotice(d.error);}).catch(()=>{if(!disposed)setGameNotice('Live match information is unavailable. Saved results are shown where available.');});return()=>{disposed=true;controller.abort()};},[activeClub?.id,league,competition,page,refresh,Boolean(selectedGame)]);
- function openMatch(game:any){setSelectedGame(game);setSelected(null);window.scrollTo({top:0,behavior:'smooth'});}
+ function openMatch(game:any){if(history.state?.touchline)history.replaceState({...history.state,scrollY:window.scrollY},'');setSelectedGame(game);setSelected(null);}
  function goHome(){setSelectedGame(null);setPage('home');setClub(null);setSelected(null);setVideoQuery('');setPickerLeague('all');setClubQuery('');window.scrollTo({top:0,behavior:'smooth'});}
  function goClubs(){setSelectedGame(null);setPage('clubs');setClub(null);setSelected(null);setPickerLeague('all');setClubQuery('');setShowAll(false);window.scrollTo({top:0,behavior:'smooth'});}
  function goLeague(id:string){setSelectedGame(null);setLeagueTab('table');setLeague(id);setPage('league');setClub(null);setSelected(null);setVideoQuery('');setPickerLeague(id);setClubQuery('');setShowAll(false);window.scrollTo({top:0,behavior:'smooth'});}
@@ -99,7 +106,7 @@ export default function Home(){
  function clubPicker(){return <section className="club-picker" ref={picker}><div className="section-heading"><div><span className="kicker">YOUR CLUB. YOUR FOOTBALL.</span><h2>Pick your club</h2></div><span className="count">{pickerClubs.length} clubs</span></div><div className="picker-tools"><label className="search-field"><Search size={18}/><input value={clubQuery} onChange={e=>setClubQuery(e.target.value)} placeholder="Find your club" aria-label="Find a club"/></label></div><div className="club-grid">{shownClubs.map(t=><button className="club-pick" key={t.league+t.id} style={{'--club-color':t.color?`#${t.color.replace(/^#/,'')}`:LEAGUES.find(l=>l.id===t.league)?.accent} as CSSProperties} onClick={e=>{const r=e.currentTarget.querySelector('.crest')?.getBoundingClientRect();chooseClub(t,r?{x:r.left,y:r.top,size:r.width}:undefined)}}><span className="club-emblem"><Crest club={t} size={51}/></span><strong>{t.name}</strong><span className="club-league-label">{LEAGUES.find(l=>l.id===t.league)?.name}</span><ChevronRight className="club-enter" size={14} aria-hidden="true"/></button>)}</div>{!shownClubs.length&&<div className="empty-state">No clubs match “{clubQuery}”.</div>}{shownClubs.length<pickerClubs.length&&<button className="more-button" onClick={()=>setShowAll(true)}>Show all {pickerClubs.length} clubs<ChevronRight size={16}/></button>}</section>}
  return <div data-competition={theme?.id} className={'site-shell'+(page==='club'?' club-surface':'')+(isNational?' national-surface tournament-'+comp.motif:page==='cup'?' cup-surface '+league.replaceAll('.','-'):'')} style={style}>{clubTransition&&<ClubTransition club={clubTransition.club} origin={clubTransition.origin} onNavigate={()=>navigateClub(clubTransition.club)} onDone={()=>{setClubTransition(null);clubTransitionBusy.current=false}}/>}<header className="site-header"><button className="wordmark" onClick={goHome} aria-label="Touchline home"><span className="brand-icon"><Play fill="currentColor" size={17}/></span>touchline<span className="wordmark-period">.</span></button><span className="navbar-hidden-label" aria-hidden="true">Logitech-112</span><nav aria-label="Main navigation"><button className={page==='home'?'current':''} onClick={goHome}>Home</button><button className={['clubs','league','club','cup'].includes(page)?'current':''} onClick={goClubs}>Clubs</button><button className={isNational?'current':''} onClick={goNational}>National teams</button><button className={page==='settings'?'current':''} onClick={()=>{setPage('settings');setSelectedGame(null);setClub(null);setNation(null);setSelected(null)}}>Settings</button></nav><span className="season-label">{season}/{String(season+1).slice(2)}</span></header>
  {['clubs','league','club','cup'].includes(page)&&!selectedGame&&<div className="league-navigation" aria-label="Leagues">{page==='clubs'&&<button className={pickerLeague==='all'?'league-current':''} onClick={()=>{setPickerLeague('all');setShowAll(false)}}><span>All leagues</span></button>}{[...LEAGUES,...CLUB_CUPS].map(l=><button aria-label={l.name} title={l.name} aria-pressed={page==='clubs'?pickerLeague===l.id:league===l.id} className={'league-emblem-card '+(CLUB_CUPS.some(c=>c.id===l.id)?'cup-nav '+l.id.replaceAll('.','-')+' ':'')+((page==='clubs'?pickerLeague===l.id:league===l.id)?'league-current':'')} style={{'--league-color':l.brand,'--league-accent':l.accent} as CSSProperties} key={l.id} onClick={()=>{if(CLUB_CUPS.some(c=>c.id===l.id)){setPage('cup');setLeagueTab('table');setLeague(l.id);setClub(null);setSelected(null);setVideoQuery('');setSelectedGame(null)}else goLeague(l.id)}}><span className="league-logo"><img src={l.logo} alt=""/></span></button>)}</div>}
- <main key={page+league+(club?.id||'')+competition+(nation?.id||'')+(selectedGame?.id||'')}>
+ <main className={selectedGame?'match-page':undefined} key={page+league+(club?.id||'')+competition+(nation?.id||'')+(selectedGame?.id||'')}>
  {selectedGame?<MatchScreenBoundary key={selectedGame.league+':'+selectedGame.id} onBack={backScreen}><MatchWorkspace fixtures={games} onTeam={openTeam} game={selectedGame} videos={[...videos,...nationalVideos]} onBack={backScreen}/></MatchScreenBoundary>:<>
  {page==='settings'&&<AppSettings/>}
  {page==='home'&&<MatchHome onMatch={openMatch}/>}

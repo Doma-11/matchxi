@@ -2,7 +2,7 @@
 
 A private football companion for live scores, match details, lineups, player ratings, standings and official highlights. Built for personal use, with a responsive interface, competition-inspired themes and support for installing the app on a phone’s home screen.
 
-**Website:** [touchline-football-hub.netlify.app](https://touchline-football-hub.netlify.app) · Owner login required
+**Website:** [touchline-football-hub.netlify.app](https://touchline-football-hub.netlify.app) · Private login required
 
 ## Features
 
