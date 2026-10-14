@@ -38,3 +38,14 @@ test('future unknown clubs match only identical normalized names',()=>{
  assert.equal(sameTeamIdentity('Future','Future FC'),false);
  assert.equal(sameTeamIdentity('',''),false);
 });
+
+test('audited official fixture-provider names retain their expected shared IDs',()=>{
+ const audit=read('tests/fixtures/team-provider-names.json');
+ for(const team of audit.teams){
+  const kind=['uefa.nations','fifa.world','uefa.euro'].includes(team.league)?'national':'club';
+  for(const name of team.names)assert.equal(resolveTeamIdentity(name,{league:team.league,kind})?.id,team.identityId,`${team.league}: ${name}`);
+ }
+ assert.equal(sameTeamIdentity('Feyenoord Rotterdam','Feyenoord',{league:'uefa.champions',kind:'club'}),true);
+ assert.equal(sameTeamIdentity('CSU Craiova','FC U Craiova 1948',{kind:'club'}),false);
+ assert.equal(sameTeamIdentity("Inter D'Escaldes",'Internazionale',{kind:'club'}),false);
+});

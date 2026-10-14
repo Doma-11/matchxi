@@ -19,4 +19,10 @@ test('matching one team does not accept another opponent or a reversed fixture',
  assert.deepEqual(listedMatchStreams(html,'RB Leipzig','PSV Eindhoven','uefa.champions'),[]);
 });
 
+test('Feyenoord Rotterdam fixture receives the source’s Feyenoord links',()=>{
+ const html='<tr><td>18:45</td><td>Feyenoord vs Como</td><td><a href="/hd-11">Watch</a><a href="/hd-8">Watch</a><a href="/hd-7">Watch</a><a href="/eleven2">Watch</a></td></tr>';
+ assert.equal(listedMatchStreams(html,'Feyenoord Rotterdam','Como','uefa.champions').length,4);
+ assert.deepEqual(listedMatchStreams(html,'Feyenoord Rotterdam','Roma','uefa.champions'),[]);
+});
+
 test('Deportivo Alavés listing matches the app fixture without confusing other Atlético clubs',()=>{const html='<tr><td>15:15</td><td>Deportivo Alavés vs Atlético Madrid</td><td><a href="/hd-6">Watch</a><a href="/eleven3">Watch</a></td></tr><tr><td>02:15</td><td>Atlético Nacional vs Deportivo Pasto</td><td><a href="/hd-10">Watch</a></td></tr>';const links=listedMatchStreams(html,'Alavés','Atletico Madrid');assert.equal(links.length,2);assert.equal(links[0].url,'https://www.soccerstreams.zone/hd-6');assert.deepEqual(listedMatchStreams(html,'Alavés','Atlético Nacional'),[])});

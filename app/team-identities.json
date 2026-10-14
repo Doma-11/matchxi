@@ -213,6 +213,7 @@
       "Atletico",
       "Atletico Madrid",
       "Atletico de Madrid",
+      "Atlético",
       "Atlético Madrid",
       "Atlético de Madrid"
     ]
@@ -337,6 +338,7 @@
       "uefa.europa.conf"
     ],
     "aliases": [
+      "Borac",
       "Borac Banja Luka"
     ]
   },
@@ -522,6 +524,7 @@
       "uefa.europa"
     ],
     "aliases": [
+      "C Palace",
       "CRY",
       "Crystal Palace",
       "Crystal Palace FC"
@@ -670,6 +673,7 @@
     ],
     "aliases": [
       "Copenhagen",
+      "F.C. København",
       "FC Copenhagen",
       "FC København",
       "Kobenhavn",
@@ -746,7 +750,8 @@
       "uefa.champions"
     ],
     "aliases": [
-      "Feyenoord"
+      "Feyenoord",
+      "Feyenoord Rotterdam"
     ]
   },
   {
@@ -771,6 +776,7 @@
     "aliases": [
       "Crvena Zvezda",
       "FK Crvena Zvezda",
+      "Red Star",
       "Red Star Belgrade"
     ]
   },
@@ -911,6 +917,7 @@
     ],
     "aliases": [
       "Hapoel Be er Sheva",
+      "Hapoel Be'er",
       "Hapoel Beer Sheva",
       "Hapoel Beersheba"
     ]
@@ -962,6 +969,7 @@
       "INT",
       "Inter Club d Escaldes",
       "Inter Club d'Escaldes",
+      "Inter D'Escaldes",
       "Inter Escaldes"
     ]
   },
@@ -1029,6 +1037,7 @@
     ],
     "aliases": [
       "Jagiellonia",
+      "Jagiellonia ",
       "Jagiellonia Bialystok",
       "Jagiellonia Białystok"
     ]
@@ -1113,6 +1122,7 @@
       "uefa.europa"
     ],
     "aliases": [
+      "Lech Poznan",
       "Lech Poznań"
     ]
   },
@@ -1200,7 +1210,8 @@
     ],
     "aliases": [
       "Lincoln Red Imps",
-      "Lincoln Red Imps FC"
+      "Lincoln Red Imps FC",
+      "Red Imps"
     ]
   },
   {
@@ -1331,7 +1342,8 @@
     "aliases": [
       "Mjallby",
       "Mjallby AIF",
-      "Mjällby"
+      "Mjällby",
+      "Mjällby AIF"
     ]
   },
   {
@@ -1406,6 +1418,7 @@
     ],
     "aliases": [
       "FC Nordsjaelland",
+      "FC Nordsjælland",
       "Nordsjaelland",
       "Nordsjælland"
     ]
@@ -1572,6 +1585,7 @@
     ],
     "aliases": [
       "RAY",
+      "Rayo",
       "Rayo Vallecano"
     ]
   },
@@ -1817,6 +1831,7 @@
       "uefa.champions"
     ],
     "aliases": [
+      "S Bratislava",
       "SK Slovan Bratislava",
       "Slovan Bratislava"
     ]
@@ -1830,6 +1845,7 @@
     ],
     "aliases": [
       "AC Sparta Praha",
+      "Sparta",
       "Sparta Prague",
       "Sparta Praha"
     ]
@@ -1859,6 +1875,8 @@
       "STVV",
       "Sint Truiden",
       "Sint-Truiden",
+      "Sint-Truidense",
+      "Sint-Truidense VV",
       "St Truiden",
       "St.Truiden"
     ]
@@ -2000,6 +2018,7 @@
       "Union SG",
       "Union Saint-Gilloise",
       "Union St Gilloise",
+      "Union St.-Gilloise",
       "Union St.Gilloise"
     ]
   },
@@ -2011,6 +2030,8 @@
       "uefa.europa.conf"
     ],
     "aliases": [
+      "CS Universitatea Craiova",
+      "CSU Craiova",
       "Universitatea Craiova"
     ]
   },
@@ -2261,6 +2282,7 @@
     ],
     "aliases": [
       "BIH",
+      "Bosnia-Herz",
       "Bosnia-Herzegovina"
     ]
   },
@@ -2900,6 +2922,7 @@
       "uefa.nations"
     ],
     "aliases": [
+      "N Ireland",
       "NIR",
       "Northern Ireland",
       "Severna Irska",
@@ -2995,6 +3018,7 @@
     "aliases": [
       "IRL",
       "Irska",
+      "Rep Ireland",
       "Republic of Ireland"
     ]
   },

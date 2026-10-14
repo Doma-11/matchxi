@@ -85,7 +85,8 @@
     "Atletico",
     "Atletico de Madrid",
     "Atlético de Madrid",
-    "Atletico Madrid"
+    "Atletico Madrid",
+    "Atlético"
   ],
   "Barcelona": [
     "Barca",
@@ -380,10 +381,12 @@
   ],
   "Northern Ireland": [
     "Sjeverna Irska",
-    "Severna Irska"
+    "Severna Irska",
+    "N Ireland"
   ],
   "Republic of Ireland": [
-    "Irska"
+    "Irska",
+    "Rep Ireland"
   ],
   "Denmark": [
     "Danska"
@@ -434,7 +437,8 @@
     "Brentford FC"
   ],
   "Crystal Palace": [
-    "Crystal Palace FC"
+    "Crystal Palace FC",
+    "C Palace"
   ],
   "Real Betis": [
     "Betis",
@@ -490,7 +494,8 @@
     "Galatasaray SK"
   ],
   "Slovan Bratislava": [
-    "SK Slovan Bratislava"
+    "SK Slovan Bratislava",
+    "S Bratislava"
   ],
   "Bodø/Glimt": [
     "Bodo Glimt",
@@ -499,7 +504,8 @@
   ],
   "Sparta Prague": [
     "Sparta Praha",
-    "AC Sparta Praha"
+    "AC Sparta Praha",
+    "Sparta"
   ],
   "Beşiktaş": [
     "Besiktas",
@@ -509,7 +515,8 @@
     "Union Saint-Gilloise",
     "Union St Gilloise",
     "Union SG",
-    "Royale Union Saint-Gilloise"
+    "Royale Union Saint-Gilloise",
+    "Union St.-Gilloise"
   ],
   "Ferencváros": [
     "Ferencvaros",
@@ -537,14 +544,16 @@
   ],
   "Hapoel Beer Sheva": [
     "Hapoel Be er Sheva",
-    "Hapoel Beersheba"
+    "Hapoel Beersheba",
+    "Hapoel Be'er"
   ],
   "SK Sturm Graz": [
     "Sturm Graz"
   ],
   "Jagiellonia Białystok": [
     "Jagiellonia Bialystok",
-    "Jagiellonia"
+    "Jagiellonia",
+    "Jagiellonia "
   ],
   "Anderlecht": [
     "RSC Anderlecht"
@@ -593,21 +602,25 @@
   "FC København": [
     "FC Copenhagen",
     "Copenhagen",
-    "Kobenhavn"
+    "Kobenhavn",
+    "F.C. København",
+    "København"
   ],
   "FC Midtjylland": [
     "Midtjylland"
   ],
   "Nordsjælland": [
     "Nordsjaelland",
-    "FC Nordsjaelland"
+    "FC Nordsjaelland",
+    "FC Nordsjælland"
   ],
   "FC Twente": [
     "Twente"
   ],
   "FK Crvena Zvezda": [
     "Crvena Zvezda",
-    "Red Star Belgrade"
+    "Red Star Belgrade",
+    "Red Star"
   ],
   "FK Kauno Žalgiris": [
     "Kauno Zalgiris",
@@ -621,20 +634,23 @@
   ],
   "Inter Club d'Escaldes": [
     "Inter Escaldes",
-    "Inter Club d Escaldes"
+    "Inter Club d Escaldes",
+    "Inter D'Escaldes"
   ],
   "KuPS": [
     "KuPS Kuopio"
   ],
   "Lincoln Red Imps FC": [
-    "Lincoln Red Imps"
+    "Lincoln Red Imps",
+    "Red Imps"
   ],
   "Lugano": [
     "FC Lugano"
   ],
   "Mjällby": [
     "Mjallby",
-    "Mjallby AIF"
+    "Mjallby AIF",
+    "Mjällby AIF"
   ],
   "Pafos FC": [
     "Pafos"
@@ -646,9 +662,99 @@
     "St Truiden",
     "Sint-Truiden",
     "Sint Truiden",
-    "STVV"
+    "STVV",
+    "Sint-Truidense",
+    "Sint-Truidense VV"
   ],
   "Thun": [
     "FC Thun"
+  ],
+  "Feyenoord": [
+    "Feyenoord Rotterdam"
+  ],
+  "Chelsea": [],
+  "Everton": [],
+  "Fulham": [],
+  "Liverpool": [],
+  "Sunderland": [],
+  "Elche": [],
+  "Getafe": [],
+  "Levante": [],
+  "Málaga": [],
+  "Rayo Vallecano": [
+    "Rayo"
+  ],
+  "Real Madrid": [],
+  "Sevilla": [],
+  "Valencia": [],
+  "Villarreal": [],
+  "Atalanta": [],
+  "Bologna": [],
+  "Cagliari": [],
+  "Como": [],
+  "Fiorentina": [],
+  "Frosinone": [],
+  "Genoa": [],
+  "Juventus": [],
+  "Lazio": [],
+  "Lecce": [],
+  "Monza": [],
+  "Napoli": [],
+  "Parma": [],
+  "Sassuolo": [],
+  "Torino": [],
+  "Udinese": [],
+  "Venezia": [],
+  "RB Leipzig": [],
+  "Celtic": [],
+  "Lech Poznań": [
+    "Lech Poznan"
+  ],
+  "Torreense": [],
+  "Borac Banja Luka": [
+    "Borac"
+  ],
+  "CSKA Sofia": [],
+  "Egnatia": [],
+  "Iberia 1999": [],
+  "Jablonec": [],
+  "Kairat Almaty": [],
+  "Panathinaikos": [],
+  "Trabzonspor": [],
+  "Austria": [],
+  "Bosnia-Herzegovina": [
+    "Bosnia-Herz"
+  ],
+  "San Marino": [],
+  "Algeria": [],
+  "Australia": [],
+  "Canada": [],
+  "Cape Verde": [],
+  "Colombia": [],
+  "Congo DR": [],
+  "Curaçao": [],
+  "Ecuador": [],
+  "Egypt": [],
+  "Ghana": [],
+  "Haiti": [],
+  "Iran": [],
+  "Iraq": [],
+  "Japan": [],
+  "Jordan": [],
+  "Mexico": [],
+  "Morocco": [],
+  "New Zealand": [],
+  "Panama": [],
+  "Paraguay": [],
+  "Qatar": [],
+  "Saudi Arabia": [],
+  "Senegal": [],
+  "South Africa": [],
+  "Tunisia": [],
+  "Uruguay": [],
+  "Uzbekistan": [],
+  "Universitatea Craiova": [
+    "CSU Craiova",
+    "CS Universitatea Craiova"
   ]
 }
