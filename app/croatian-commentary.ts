@@ -9,9 +9,9 @@ export function croatianCommentaryDestination(game:any,records:Listing[]=listing
  const scope={league:game.league,kind:((game.league==='uefa.nations'||game.league?.startsWith('fifa.')||game.league==='uefa.euro')?'national':'club') as 'national'|'club'};
  const record=records.find(r=>r.country==='HR'&&r.league===game.league&&r.date===date&&sameTeamIdentity(r.home,game.home?.name||'',scope)&&sameTeamIdentity(r.away,game.away?.name||'',scope));
  if(record){try{
-  const url=new URL(record.url),source=new URL(record.sourceUrl);
+  const source=new URL(record.sourceUrl);
   const clean=(u:URL)=>u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&!u.search&&!u.hash;
-  if(clean(url)&&url.hostname==='sport-panel247.store'&&/^\/player\/HR\/\d+\/?$/.test(url.pathname)&&clean(source)&&source.hostname==='bhliga.com'&&/^\/match\/\d+$/.test(source.pathname))return {kind:'listed-player' as const,url:url.href,sourceUrl:source.href,channel:record.channel};
+  if(clean(source)&&source.hostname==='bhliga.com'&&/^\/match\/\d+$/.test(source.pathname))return {kind:'match-page' as const,url:source.href,sourceUrl:source.href,channel:record.channel};
  }catch{}}
  // The provider blocks automated discovery. Do not guess a channel or claim
  // an HR broadcast exists; open the public match listings for manual selection.
