@@ -26,9 +26,9 @@ export function allowsStreamEmbedding(headers:Headers,appOrigin:string){
 }
 
 export async function fetchStreamPage(raw:string){
- let url=new URL(raw);const host=url.hostname,signal=AbortSignal.timeout(15000);
+ let url=new URL(raw);const host=url.hostname,listing=!!streamListingUrl(raw),signal=AbortSignal.timeout(15000);
  for(let redirects=0;redirects<=4;redirects++){
-  if(url.protocol!=='https:'||url.hostname!==host||url.username||url.password||url.port)throw Error('Unexpected stream redirect');
+  if(url.protocol!=='https:'||(listing?!streamListingUrl(url.href):url.hostname!==host)||url.username||url.password||url.port)throw Error('Unexpected stream redirect');
   const response=await fetch(url,{signal,redirect:'manual'});
   if(![301,302,303,307,308].includes(response.status))return response;
   const next=response.headers.get('location');await response.body?.cancel().catch(()=>{});
@@ -36,3 +36,4 @@ export async function fetchStreamPage(raw:string){
  }
  throw Error('Too many stream redirects');
 }
+import {streamListingUrl} from './stream-listing-source';

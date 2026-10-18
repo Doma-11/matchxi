@@ -75,6 +75,11 @@ export function sharedClockText(game:any,now=Date.now()){
  const anchor=observeMatchClock(game,now),saved=sharedClocks.get(game.league+':'+game.id);
  return localClockText(anchor,saved?.game||game,now);
 }
+export function minuteClockText(clock:string){
+ const m=clock.match(/^(\d+)(?:\+(\d+))?(?::\d{2})?[′']?$/);
+ return m?`${Number(m[1])}${Number(m[2])>0?'+'+Number(m[2]):''}'`:clock;
+}
+export function sharedMinuteClockText(game:any,now=Date.now()){return minuteClockText(sharedClockText(game,now));}
 export function localClockText(anchor:ClockAnchor|null,g:any,now=Date.now()){
  if(clockPhase(g)==='halftime')return 'HT';
  if(!anchor||!anchor.running||clockPhase(g)!==anchor.phase)return matchClockText(g);

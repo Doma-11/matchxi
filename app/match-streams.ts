@@ -1,5 +1,6 @@
 import {resolveTeamIdentity,sameTeamIdentity} from './team-identity';
-const source='https://www.soccerstreams.zone/';
+import {STREAM_LISTING_SOURCE,streamListingUrl} from './stream-listing-source';
+const source=STREAM_LISTING_SOURCE;
 function text(html:string){return html.replace(/<[^>]*>/g,' ').replace(/&amp;/g,'&').replace(/&#39;|&apos;/g,"'").replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();}
 export function inspectMatchStreamListings(html:string,home:string,away:string,league?:string){
  const scope={league,kind:(league&&['uefa.nations','fifa.world','uefa.euro'].includes(league)?'national':'club') as 'national'|'club'};
@@ -15,7 +16,7 @@ export function inspectMatchStreamListings(html:string,home:string,away:string,l
    continue;
   }
   for(const a of cells[2].matchAll(/href\s*=\s*["']([^"']+)["']/gi)){
-   try{const url=new URL(a[1],source);if(url.protocol!=='https:'||url.hostname!=='www.soccerstreams.zone'||url.pathname==='/')continue;if(!links.some(l=>l.url===url.href))links.push({url:url.href,label:'Stream listing '+(links.length+1)});}catch{}
+   const url=streamListingUrl(a[1],source);if(!url||url.pathname==='/')continue;if(!links.some(l=>l.url===url.href))links.push({url:url.href,label:'Stream listing '+(links.length+1)});
   }
  }
  return {streams:links,unmatchedListings};
