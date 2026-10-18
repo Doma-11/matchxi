@@ -4,6 +4,7 @@ import {ExternalLink,Play,X} from 'lucide-react';
 import {Dialog} from 'radix-ui';
 import {LEAGUES,CLUB_CUPS,COMPETITIONS} from './football-model';
 import {streamBrowserLink,isAppleMobile} from './stream-browser-link';
+import {croatianCommentaryDestination} from './croatian-commentary';
 export default function MatchStreamPanel({game}:any){
  const [result,setResult]=useState<any>(null),[busy,setBusy]=useState(false),[player,setPlayer]=useState<any>(null),[opening,setOpening]=useState(false);
  const opener=useRef<HTMLButtonElement|null>(null),competition=[...LEAGUES,...CLUB_CUPS,...COMPETITIONS].find(c=>c.id===game.league);
@@ -30,8 +31,10 @@ export default function MatchStreamPanel({game}:any){
  const ua=typeof navigator!=='undefined'?navigator.userAgent:'',touch=typeof navigator!=='undefined'?navigator.maxTouchPoints:0;
  const apple=isAppleMobile(ua,touch),mobile=apple||/Android/i.test(ua);
  const href=(url:string)=>streamBrowserLink(url,ua,touch);
+ const croatian=croatianCommentaryDestination(game);
 
  return <section className="match-stream-panel"><header className="stream-section-heading"><h2>Livestream</h2><span className="stream-live-badge">LIVE</span></header>{live?<>
+ {croatian&&<aside className="croatian-commentary-option"><a className="croatian-commentary-action" href={href(croatian.url)} target={mobile?undefined:'_blank'} rel="noopener noreferrer"><span className="croatian-commentary-flag" role="img" aria-label="Croatia">🇭🇷</span><strong>Croatian commentary stream</strong><ExternalLink size={17}/></a><p>{croatian.kind==='listed-player'?`${croatian.channel} · HR listing on BHLiga; playback is not verified.`:'Opens BHLiga listings. Select this match → Broadcast → HR, if available.'}</p>{croatian.kind==='listed-player'&&<a className="croatian-commentary-source" href={croatian.sourceUrl} target="_blank" rel="noopener noreferrer">Open this match on BHLiga<ExternalLink size={12}/></a>}{apple&&<a className="croatian-commentary-source" href={croatian.url} target="_blank" rel="noopener noreferrer">Open normally<ExternalLink size={12}/></a>}</aside>}
  {busy&&<p role="status">Finding streams…</p>}
  {result?.error&&<p role="status">{result.error}</p>}
  {result?.streams?.length>0?<>
