@@ -586,11 +586,3 @@ main.match-page{animation:match-page-fade 160ms ease-out both}
 .media-live-indicator{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#ff566c;box-shadow:0 0 0 4px #ff566c16}
 html[data-theme=light] .site-shell .match-workspace .match-media-options [role=tab]{color:var(--match-ink)!important}
 html[data-theme=light] .site-shell .match-workspace .match-media-options [role=tab][data-state=active]{background:color-mix(in srgb,var(--match-brand) 13%,white)!important;border-color:var(--match-light-border)!important}
-.site-shell .match-stream-panel .stream-links{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
-.site-shell .match-stream-panel .stream-link-choice{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:14px;border-radius:16px}
-.site-shell .stream-link-choice .stream-card-label{grid-column:1/-1;margin:0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
-.site-shell .stream-link-choice .stream-play{display:flex;flex-direction:row;justify-content:flex-start;align-items:center;gap:10px;min-height:48px;width:100%;margin:0;padding:0;background:transparent;border:0;text-align:left}
-.site-shell .stream-link-choice .stream-play-icon{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;border-radius:14px;background:color-mix(in srgb,var(--accent) 20%,transparent);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent)}
-.site-shell .stream-link-choice .stream-play strong{font-size:13px}
-.site-shell .stream-link-choice .stream-card-footer{display:flex;flex-direction:column;gap:4px;margin:0;padding:0;border:0}
-.site-shell .stream-link-choice .stream-card-footer a{justify-content:center;min-height:42px;padding:8px 10px;border-radius:10px;font-size:12px;white-space:nowrap}
