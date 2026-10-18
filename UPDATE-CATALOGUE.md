@@ -65,3 +65,7 @@ For all matches without a verified direct HR listing, the option clearly opens B
 ### Croatian option opens the original match page (18 October 2026)
 
 For a verified fixture mapping, the main Croatian commentary button now opens the BHLiga `/match/<id>` page rather than the protected third-party player. The user selects Broadcast → HR there. Fixture matching still requires both teams, competition and Zagreb date, and rejects ambiguous or unsafe destinations. Unmatched fixtures retain the clearly labeled homepage fallback: automatic BHLiga discovery remains unavailable, so this is not universal automatic match-page coverage. No additional requests, polling or embedded-player access are introduced.
+
+### Device installation in Settings (18 October 2026)
+
+Appearance includes an Install Touchline card. A single app-wide listener captures beforeinstallprompt before login and navigation, reuses it once after a user click, and handles dismissal, errors, standalone mode and appinstalled. Unsupported browsers show honest installation/bookmark instructions; projector/TV installation cannot be forced. The small same-origin network-only navigation service worker provides an offline message and supports older Chrome install criteria. It does not cache private data, intercept API requests, add background checks or prefetch resources. Worker registration/update checks are static hosting requests, not additional API Function calls. No authentication or data refresh policies changed.
