@@ -4,6 +4,7 @@ import './netlify-usage-panel.css';
 const count=(n:number)=>new Intl.NumberFormat('en-GB',{maximumFractionDigits:0}).format(n);
 const bytes=(n:number)=>n>=1073741824?(n/1073741824).toFixed(2)+' GiB':n>=1048576?(n/1048576).toFixed(2)+' MiB':n>=1024?(n/1024).toFixed(1)+' KiB':count(n)+' B';
 const localToday=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Zagreb'}).format(new Date());
+const shortDay=(date:string,today:string)=>{if(date===today)return 'Today';const day=Number(date.slice(-2)),suffix=day%100>=11&&day%100<=13?'th':day%10===1?'st':day%10===2?'nd':day%10===3?'rd':'th';return new Date(date+'T12:00Z').toLocaleDateString('en-GB',{weekday:'short',timeZone:'UTC'})+' '+day+suffix;};
 const monthName=(month:string)=>new Date(month+'-01T12:00Z').toLocaleDateString('en-GB',{month:'long',year:'numeric'});
 type Candle={date:string;value:number|null;today:boolean;future:boolean};
 export function UsageCandles({rows,selected,onSelect,format,monthly=false,label}:{rows:Candle[];selected:string;onSelect:(date:string)=>void;format:(n:number)=>string;monthly?:boolean;label:string}){
@@ -16,12 +17,13 @@ export function UsageCandles({rows,selected,onSelect,format,monthly=false,label}
 function MetricCard({metric,data,month,today,mode,onMonth}:any){
  const format=metric==='functions'?count:bytes;
  const [day,setDay]=useState(today);
- const current=data.find((d:any)=>d.range.start.slice(0,7)===month),actual=data.find((d:any)=>d.range.start.slice(0,7)===today.slice(0,7));
- const points:UsagePoint[]=current?.[metric]?.points||[],todays:UsagePoint[]=actual?.[metric]?.points?.filter((p:UsagePoint)=>p.date===today)||[];
+ const current=data.find((d:any)=>d.range.start.slice(0,7)===month);
+ const points:UsagePoint[]=current?.[metric]?.points||[];
  const total=current?.[metric]?sumUsage(points,month+'-01',new Date(Date.UTC(Number(month.slice(0,4)),Number(month.slice(5,7)),1)).toISOString().slice(0,10)):null;
  const selected=day.startsWith(month)?day:month+'-01',year=today.slice(0,4);
+ const selectedRows=points.filter(p=>p.date===selected);
  const rows: Candle[]=mode==='daily'?calendarUsage(points,month,today):Array.from({length:12},(_,i)=>{const m=year+'-'+String(i+1).padStart(2,'0'),d=data.find((r:any)=>r.range.start.startsWith(m));return {date:m+'-01',value:d?.[metric]?sumUsage(d[metric].points,d.range.start,d.range.end):null,today:m===today.slice(0,7),future:m>today.slice(0,7)};});
- return <article className="netlify-metric"><h3>{metric==='functions'?'Serverless functions':'Bandwidth'}</h3><dl className="usage-totals"><div><dt>Today</dt><dd>{todays.length?format(todays.reduce((n,p)=>n+p.value,0)):'—'}</dd></div><div><dt>Month <small>{monthName(month).split(' ')[0]}</small></dt><dd>{total!==null?format(total):'—'}</dd></div></dl><UsageCandles rows={rows} monthly={mode==='monthly'} selected={mode==='daily'?selected:month+'-01'} onSelect={date=>{if(mode==='monthly'){onMonth(date.slice(0,7));setDay(date);}else setDay(date);}} format={format} label={(metric==='functions'?'Function invocations':'Bandwidth')+' by '+(mode==='daily'?'day':'month')}/></article>;
+ return <article className="netlify-metric"><h3>{metric==='functions'?'Serverless functions':'Bandwidth'}</h3><dl className="usage-totals"><div aria-live="polite"><dt>{shortDay(selected,today)}</dt><dd>{selectedRows.length?format(selectedRows.reduce((n,p)=>n+p.value,0)):'—'}</dd></div><div><dt>Month <small>{monthName(month).split(' ')[0]}</small></dt><dd>{total!==null?format(total):'—'}</dd></div></dl><UsageCandles rows={rows} monthly={mode==='monthly'} selected={mode==='daily'?selected:month+'-01'} onSelect={date=>{if(mode==='monthly'){onMonth(date.slice(0,7));setDay(date);}else setDay(date);}} format={format} label={(metric==='functions'?'Function invocations':'Bandwidth')+' by '+(mode==='daily'?'day':'month')}/></article>;
 }
 export default function NetlifyUsagePanel({usage}:any){
  const today=localToday(),[mode,setMode]=useState<'daily'|'monthly'>('daily'),[month,setMonth]=useState(today.slice(0,7));
