@@ -40,5 +40,7 @@ export async function netlifyUsage(date:string){
 export async function netlifyUsageForPeriod(start:string,end:string){
  const last=new Date(Date.parse(end+'T12:00Z')-86400000).toISOString().slice(0,10),months=[await netlifyUsage(start)];
  if(last.slice(0,7)!==start.slice(0,7))months.push(await netlifyUsage(last));
+ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Zagreb'}).format(new Date());
+ if(!months.some(m=>m.data?.range?.start?.startsWith(today.slice(0,7))))months.push(await netlifyUsage(today));
  return {start,end,months};
 }

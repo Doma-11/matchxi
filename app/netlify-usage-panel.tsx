@@ -1,37 +1,36 @@
 import {useState} from 'react';
-import {sumUsage,type UsagePoint} from './netlify-usage-model';
+import {calendarUsage,sumUsage,type UsagePoint} from './netlify-usage-model';
 import './netlify-usage-panel.css';
 const count=(n:number)=>new Intl.NumberFormat('en-GB',{maximumFractionDigits:0}).format(n);
-const bytes=(n:number)=>n>=1073741824?(n/1073741824).toFixed(2)+' GiB':n>=1048576?(n/1048576).toFixed(2)+' MiB':count(n)+' B';
-function Chart({points,label,format}:{points:UsagePoint[];label:string;format:(n:number)=>string}){
- if(!points.length)return <p>No published usage buckets for this range.</p>;
- const max=Math.max(1,...points.map(p=>p.value)),step=600/points.length,width=Math.max(2,step*.66);
- return <figure className="netlify-chart"><svg viewBox="0 0 640 170" role="img" aria-label={label}>
-  <line x1="20" x2="620" y1="135" y2="135" stroke="currentColor" opacity=".25"/>
-  {points.map((p,i)=>{const h=p.value/max*105,x=20+i*step+(step-width)/2;return <g key={p.at} tabIndex={0} aria-label={p.date+': '+format(p.value)}><title>{p.date+': '+format(p.value)}</title><rect x={x} y={135-Math.max(h,1)} width={width} height={Math.max(h,1)} rx={Math.min(3,width/2)}/>{(points.length<9||i===0||i===points.length-1||i%7===0)&&<text x={x+width/2} y="157" textAnchor="middle">{p.date.slice(5)}</text>}</g>})}
-  <text x="20" y="15">{format(max)}</text>
- </svg><details><summary>Show exact values</summary><div className="netlify-values"><table><caption>{label}</caption><thead><tr><th>Date / month</th><th>Usage</th></tr></thead><tbody>{points.map(p=><tr key={p.at}><th scope="row">{p.date}</th><td>{format(p.value)}</td></tr>)}</tbody></table></div></details></figure>;
+const bytes=(n:number)=>n>=1073741824?(n/1073741824).toFixed(2)+' GiB':n>=1048576?(n/1048576).toFixed(2)+' MiB':n>=1024?(n/1024).toFixed(1)+' KiB':count(n)+' B';
+const localToday=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Zagreb'}).format(new Date());
+const monthName=(month:string)=>new Date(month+'-01T12:00Z').toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+type Candle={date:string;value:number|null;today:boolean;future:boolean};
+export function UsageCandles({rows,selected,onSelect,format,monthly=false,label}:{rows:Candle[];selected:string;onSelect:(date:string)=>void;format:(n:number)=>string;monthly?:boolean;label:string}){
+ const max=Math.max(1,...rows.map(p=>p.value||0)),chosen=rows.find(p=>p.date===selected);
+ const describe=(p:Candle)=>p.future?'Upcoming':p.value===null?'No data':format(p.value);
+ return <figure className="usage-candles"><figcaption><span>{monthly?'Months':monthName(rows[0].date.slice(0,7))}</span><span className="candle-readout" aria-live="polite">{chosen?(monthly?monthName(chosen.date.slice(0,7)):new Date(chosen.date+'T12:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short'}))+' · '+describe(chosen):'Select a bar'}</span></figcaption>
+ <div className="candle-scale">{format(max)}</div><div className="candle-grid" role="group" aria-label={label} style={{gridTemplateColumns:`repeat(${rows.length},minmax(0,1fr))`}}>{rows.map((p,i)=><button key={p.date} type="button" aria-pressed={selected===p.date} aria-label={p.date+': '+describe(p)} aria-current={p.today?'date':undefined} tabIndex={selected===p.date?0:-1} data-today={p.today} data-empty={p.value===null} data-future={p.future} title={p.date+': '+describe(p)} onClick={()=>onSelect(p.date)} onKeyDown={e=>{const next=e.key==='ArrowRight'?Math.min(rows.length-1,i+1):e.key==='ArrowLeft'?Math.max(0,i-1):e.key==='Home'?0:e.key==='End'?rows.length-1:null;if(next!==null){e.preventDefault();onSelect(rows[next].date);(e.currentTarget.parentElement?.children[next] as HTMLButtonElement)?.focus();}}}><span className="candle-bar" style={{height:p.value===null?'2px':Math.max(1,p.value/max*100)+'%'}}/></button>)}</div>
+ <div className="candle-axis" aria-hidden="true" style={{gridTemplateColumns:`repeat(${rows.length},minmax(0,1fr))`}}>{rows.map((p,i)=><span key={p.date}>{monthly?new Date(p.date+'T12:00Z').toLocaleDateString('en-GB',{month:'short'}):i===0||i===rows.length-1||(i+1)%5===0?i+1:''}</span>)}</div></figure>;
+}
+function MetricCard({metric,data,month,today,mode,onMonth}:any){
+ const format=metric==='functions'?count:bytes;
+ const [day,setDay]=useState(today);
+ const current=data.find((d:any)=>d.range.start.slice(0,7)===month),actual=data.find((d:any)=>d.range.start.slice(0,7)===today.slice(0,7));
+ const points:UsagePoint[]=current?.[metric]?.points||[],todays:UsagePoint[]=actual?.[metric]?.points?.filter((p:UsagePoint)=>p.date===today)||[];
+ const total=current?.[metric]?sumUsage(points,month+'-01',new Date(Date.UTC(Number(month.slice(0,4)),Number(month.slice(5,7)),1)).toISOString().slice(0,10)):null;
+ const selected=day.startsWith(month)?day:month+'-01',year=today.slice(0,4);
+ const rows: Candle[]=mode==='daily'?calendarUsage(points,month,today):Array.from({length:12},(_,i)=>{const m=year+'-'+String(i+1).padStart(2,'0'),d=data.find((r:any)=>r.range.start.startsWith(m));return {date:m+'-01',value:d?.[metric]?sumUsage(d[metric].points,d.range.start,d.range.end):null,today:m===today.slice(0,7),future:m>today.slice(0,7)};});
+ return <article className="netlify-metric"><h3>{metric==='functions'?'Serverless functions':'Bandwidth'}</h3><dl className="usage-totals"><div><dt>Today</dt><dd>{todays.length?format(todays.reduce((n,p)=>n+p.value,0)):'—'}</dd></div><div><dt>Month <small>{monthName(month).split(' ')[0]}</small></dt><dd>{total!==null?format(total):'—'}</dd></div></dl><UsageCandles rows={rows} monthly={mode==='monthly'} selected={mode==='daily'?selected:month+'-01'} onSelect={date=>{if(mode==='monthly'){onMonth(date.slice(0,7));setDay(date);}else setDay(date);}} format={format} label={(metric==='functions'?'Function invocations':'Bandwidth')+' by '+(mode==='daily'?'day':'month')}/></article>;
 }
 export default function NetlifyUsagePanel({usage}:any){
- const [mode,setMode]=useState<'daily'|'monthly'>('daily');
+ const today=localToday(),[mode,setMode]=useState<'daily'|'monthly'>('daily'),[month,setMonth]=useState(today.slice(0,7));
  if(!usage)return null;
- const results=usage.months||[],data=results.map((r:any)=>r.data).filter(Boolean),latest=data[data.length-1],rangeEnd=usage.end;
- const failures=[...new Set(results.flatMap((r:any)=>[r.failure,...(r.data?.failures||[])].filter(Boolean)))];
- const selectedDay=new Date(Date.parse(rangeEnd+'T12:00Z')-86400000).toISOString().slice(0,10);
- return <section className="settings-card netlify-usage-panel" aria-labelledby="netlify-usage-title"><div className="settings-card-heading"><span className="kicker">OFFICIAL NETLIFY DATA</span><h2 id="netlify-usage-title">Hosting usage & spending</h2><p><strong>Entire hosting team</strong>{latest?' · '+latest.team:''}. Includes your other projects; not Touchline alone.</p></div>
-  <div className="netlify-chart-toggle" role="group" aria-label="Usage chart view">{(['daily','monthly'] as const).map(v=><button key={v} aria-pressed={mode===v} onClick={()=>setMode(v)}>{v==='daily'?'Daily usage':'Monthly usage'}</button>)}</div>
-  <div className="netlify-metrics-grid">{(['functions','bandwidth'] as const).map(metric=>{
-   const format=metric==='functions'?count:bytes;
-   const all:UsagePoint[]=data.flatMap((d:any)=>d[metric]?.points||[]),points=all.filter(p=>p.date>=usage.start&&p.date<rangeEnd);
-   const monthRows:UsagePoint[]=data.filter((d:any)=>d[metric]).map((d:any)=>({date:d.range.start.slice(0,7),at:d.range.start,value:sumUsage(d[metric].points,d.range.start,d.range.end)}));
-   const current=latest?.[metric],monthTotal=current?sumUsage(current.points,latest.range.start,latest.range.end):null;
-   const daily=all.find(p=>p.date===selectedDay);
-   return <article className="netlify-metric" key={metric}><h3>{metric==='functions'?'Serverless functions':'Bandwidth'}</h3><dl><div><dt>Selected period · {usage.start}–{selectedDay}</dt><dd>{all.length?format(sumUsage(all,usage.start,rangeEnd)):'Unavailable'}</dd></div><div><dt>{selectedDay} · published day</dt><dd>{daily?format(daily.value):'No bucket published'}</dd></div><div><dt>{latest?.range.start.slice(0,7)||'Month'} · published monthly total</dt><dd>{monthTotal!==null?format(monthTotal):'Unavailable'}</dd></div></dl><Chart points={mode==='daily'?points:monthRows} label={(metric==='functions'?'Function invocations':'Bandwidth')+' · '+mode+' published usage'} format={format}/>{current?.checkedAt&&<p className="report-timestamp">Metric checked {new Date(current.checkedAt).toLocaleString('en-GB',{hourCycle:'h23'})}</p>}</article>;
-  })}</div>
-  {latest?.functions?.limit&&<p className="netlify-allowance"><strong>Monthly function allowance:</strong> {count(latest.functions.limit)} invocations for the whole team. Charts show published calendar buckets, not a guaranteed remaining quota.</p>}
-  {latest?.billingBandwidth&&<p className="netlify-allowance"><strong>Current bandwidth allowance:</strong> {bytes(latest.billingBandwidth.used)} / {bytes(latest.billingBandwidth.included)} · billing period {latest.billingBandwidth.start?.slice(0,10)}–{latest.billingBandwidth.end?.slice(0,10)}. This billing counter can differ from the calendar-day chart.</p>}
-  {latest?.charges?<p className="netlify-spending"><strong>{latest.charges.total===0?'✓':'✕'} Current reported subscription charges: {new Intl.NumberFormat('en-US',{style:'currency',currency:latest.charges.currency}).format(latest.charges.total)}</strong> · {latest.charges.plan}<small>{latest.charges.scope} This is a current snapshot, not spending attributed to the selected report dates.</small></p>:<p className="netlify-source-warning">Subscription charges are unavailable; no cost estimate is shown.</p>}
-  {failures.length>0&&<p className="netlify-source-warning" role="status">✕ {failures.join(' · ')} Saved figures, if shown, retain their original timestamps.</p>}
-  <p className="report-timestamp">{latest?'Source checked '+new Date(latest.checkedAt).toLocaleString('en-GB',{hourCycle:'h23'}):'Official usage is not available yet.'}</p><details className="report-method"><summary>Measurement & reporting boundaries</summary><p>These charts use Netlify’s published daily buckets, which may differ from Zagreb calendar days. Missing buckets are not filled with invented zeros. Current-day figures and recent usage may be delayed. Monthly bars sum the published buckets for each calendar month shown. Data is cached for 12 hours; viewing reports does not poll continuously.</p></details>
+ const results=usage.months||[],data=results.map((r:any)=>r.data).filter(Boolean),latest=data.find((d:any)=>d.range.start.startsWith(today.slice(0,7)))||data[data.length-1];
+ const failures=results.some((r:any)=>r.failure||r.data?.failures?.length);
+ return <section className="settings-card netlify-usage-panel"><header className="usage-heading"><div><h2>Netlify usage</h2><small>Team total · all projects</small></div><div className="netlify-chart-toggle" role="group" aria-label="Usage chart view">{(['daily','monthly'] as const).map(v=><button key={v} aria-pressed={mode===v} onClick={()=>setMode(v)}>{v==='daily'?'Daily':'Monthly'}</button>)}</div></header>
+ <div className="netlify-metrics-grid">{['functions','bandwidth'].map(metric=><MetricCard key={metric} metric={metric} data={data} month={month} today={today} mode={mode} onMonth={setMonth}/>)}</div>
+ <footer className="usage-footer"><span>Reported charges <strong>{latest?.charges?new Intl.NumberFormat('en-US',{style:'currency',currency:latest.charges.currency}).format(latest.charges.total):'—'}</strong></span><span>{latest?'Updated '+new Date(latest.checkedAt).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}):'No data'}</span></footer>
+ {failures&&<p className="netlify-source-warning" role="status">Some source data is unavailable. Showing saved values.</p>}
  </section>;
 }

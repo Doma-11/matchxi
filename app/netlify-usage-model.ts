@@ -12,3 +12,7 @@ export function reportedCharges(subscription:any,costs:any){
  return {plan:subscription.title||'Netlify plan',planAmount:subscription.amount,usageAmount:0,total:subscription.amount,currency:'USD',scope:'Current subscription plan and reported usage charges; excludes domains, tax and finalized invoices.'};
 }
 export function monthRange(date:string){const start=date.slice(0,7)+'-01',d=new Date(start+'T12:00Z');d.setUTCMonth(d.getUTCMonth()+1);return {start,end:d.toISOString().slice(0,10)};}
+export function calendarUsage(points:UsagePoint[],month:string,today:string){
+ const days=new Date(Date.UTC(Number(month.slice(0,4)),Number(month.slice(5,7)),0)).getUTCDate();
+ return Array.from({length:days},(_,i)=>{const date=month+'-'+String(i+1).padStart(2,'0'),rows=points.filter(p=>p.date===date);return {date,value:rows.length?rows.reduce((n,p)=>n+p.value,0):null,today:date===today,future:date>today};});
+}
