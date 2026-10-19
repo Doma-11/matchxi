@@ -1,3 +1,4 @@
+import {reportAccessDenied} from '../lib/report-access';
 import {refreshMatchPoll} from '../../app/match-centre-data';
 import {needsScoreRefresh} from '../../app/score-refresh';
 import {GET as streamPlayer} from '../../app/api/stream-player/route';
@@ -39,6 +40,7 @@ async function handle(request:Request){
  if(request.method!=='GET')return Response.json({error:'Method not allowed'},{status:405});
  const routes:Record<string,any>={'stream-player':streamPlayer,'match-streams':matchStreams,'daily-report':dailyReport,'usage-reports':usageReports,'tournament-bracket':tournamentBracket,'match-highlights':matchHighlights,'match-day':matchDay,'match-detail':matchDetail,'match-live':matchLive,catalogue,highlights,'national-highlights':nationalHighlights,'national-teams':nationalTeams,'league-dashboard':dashboard,matches};
  if(!routes[name])return Response.json({error:'Not found'},{status:404});
+ if(['daily-report','usage-reports'].includes(name))return routes[name](new NextRequest(request));
  const params=new URLSearchParams(url.searchParams);params.sort();
  const key=createHash('sha256').update(name+'?'+params.toString()).digest('hex');
  const store=getStore({name:'touchline-response-cache'});
@@ -61,5 +63,12 @@ async function handle(request:Request){
  }catch(e){console.error('Public data read failed',e instanceof Error?e.message:'Unknown error');return Response.json({error:'Live source temporarily unavailable; saved data remains available'},{status:503});}
 }
 
-export default async function(request:Request){if(!await authorize(request))return unauthorized();return protectResponse(await meter(new URL(request.url).pathname.split('/').pop()||'api',()=>handle(request)));}
+export default async function(request:Request){
+ if(!await authorize(request))return unauthorized();
+ const route=new URL(request.url).pathname.split('/').pop()||'api',isReport=['daily-report','usage-reports'].includes(route);
+ if(isReport){const denied=await reportAccessDenied(request);if(denied)return denied;}
+ const response=protectResponse(await meter(route,()=>handle(request)));
+ if(isReport)response.headers.set('Cache-Control','private, no-store');
+ return response;
+}
 export const config:Config={path:['/api/*','/.netlify/functions/api','/.netlify/functions/api/*'],excludedPath:['/api/auth','/api/portrait-image','/api/player-portraits'],rateLimit:{windowLimit:120,windowSize:60,aggregateBy:['ip','domain']}};
