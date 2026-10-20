@@ -82,3 +82,6 @@ html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-sum
 .site-shell .match-workspace .match-header-unit .goal-summary :is(span,small),
 html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary :is(span,small){color:#fff!important}
 .site-shell :is(.league-logo,.score-league-logo,.competition-identity,.logo-bug):has(img:is([src*="premier-league"],[src*="laliga"],[src*="bundesliga"],[src*="hnl."],[src*="serie-a"])){border-radius:14px!important;overflow:hidden}
+/* Light-mode scorer labels use dark ink on a light backing. */
+html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary{background:#ffffffa6}
+html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary :is(span,small){color:#182235!important}
