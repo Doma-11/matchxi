@@ -91,3 +91,6 @@ html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-sum
 .site-shell .match-workspace .match-header-unit .goal-summary :is(span,small){font-weight:600}
 
 .match-workspace .lineup-source-link{display:inline-flex;align-items:center;gap:5px;vertical-align:middle}.match-workspace .lineup-source-link svg{flex:none}
+/* Keep overflow scorers scrollable without a visible scrollbar. */
+.site-shell .match-header-unit .goal-summary>div{scrollbar-width:none;-ms-overflow-style:none}
+.site-shell .match-header-unit .goal-summary>div::-webkit-scrollbar{display:none;width:0;height:0}
