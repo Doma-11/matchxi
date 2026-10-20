@@ -8,3 +8,17 @@ export function matchHeaderTime(date:string,now=Date.now(),timeZone=Intl.DateTim
  const part=(type:string)=>parts.find(p=>p.type===type)?.value||'';
  return {time,day:dayKey(kickoff)===dayKey(current)?'Today':`${part('weekday')} ${part('month')} ${part('day')}`};
 }
+
+/** Human-readable state; never expose a provider's US kickoff string as status. */
+export function matchStatusLabel(game:any){
+ const raw=[game.statusName,game.statusDescription,game.status].filter(Boolean).join(' ');
+ if(/cancel/i.test(raw))return 'Cancelled';
+ if(/postpon/i.test(raw))return 'Postponed';
+ if(/abandon/i.test(raw))return 'Abandoned';
+ if(/suspend|interrupt/i.test(raw))return 'Suspended';
+ if(game.completed||game.state==='post')return 'Finished';
+ if(/half[\s_-]*time|\bHT\b/i.test(raw))return 'Half-time';
+ if(/delay/i.test(raw))return 'Delayed';
+ if(game.state==='in')return /shootout|penalt(?:y|ies)[\s_-]*shoot/i.test(raw)?'Penalty shootout':'Live';
+ return 'Not started';
+}
