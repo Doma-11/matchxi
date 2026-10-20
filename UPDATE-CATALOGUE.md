@@ -118,3 +118,8 @@ Existing Back controls on matches, club/competition pages and the match error sc
 - Live and finished headers reserve an 80px scorer region immediately, even before event details arrive. Three single-line scorer rows fit per team; additional goals remain in independently scrollable keyboard-accessible lists. Long names truncate visually with full text retained in the title and DOM.
 - Chronological goal order remains unchanged. The first reveal is 100ms (previously 200ms), then 300ms per subsequent goal with cumulative delays. Reduced-motion users see the rows without animation.
 - TypeScript, production build and all 15 match-screen render checks pass, including an assertion that the scorer region exists before events arrive. No API or polling changes.
+
+## Image artwork correction (20 October 2026)
+- Supersedes the earlier procedural vector-pattern implementation. Match and league/cup headers now use real raster artwork generated from the approved mockups, retaining the richer lighting, facets, ribbons, Premier lion silhouette and gold contours.
+- Two local WebP atlases contain the 11 dark/light competition backgrounds in an equal 3-column/4-row grid. CSS selects the appropriate tile without compositing logos or text into artwork. Both atlases preserve all image content; WebP export only changes encoding. Dark is 176,720 bytes, light is 208,868 bytes. Each theme uses its corresponding atlas; normal browser caching permits reuse across competitions.
+- Removed the unused procedural SVG assets and their generator. Runtime artwork does not invoke an API or serverless function. Existing pale cards, responsive layout, fixed scorer region and chronological animation remain intact.

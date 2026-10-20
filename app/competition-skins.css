@@ -1,15 +1,15 @@
-/* Approved competition artwork, served as small static SVGs with no API work. */
-.site-shell[data-competition="eng.1"],.match-workspace.competition-eng-1,.competition-score.eng-1{--skin-art:url("/themes/eng-1.svg");--skin-dark:#200525;--skin-light:#f5eafa;--skin-accent:#9220c3;}
-.site-shell[data-competition="esp.1"],.match-workspace.competition-esp-1,.competition-score.esp-1{--skin-art:url("/themes/esp-1.svg");--skin-dark:#4a1412;--skin-light:#fff1ed;--skin-accent:#ee4c43;}
-.site-shell[data-competition="ita.1"],.match-workspace.competition-ita-1,.competition-score.ita-1{--skin-art:url("/themes/ita-1.svg");--skin-dark:#041937;--skin-light:#edf5ff;--skin-accent:#167bd8;}
-.site-shell[data-competition="ger.1"],.match-workspace.competition-ger-1,.competition-score.ger-1{--skin-art:url("/themes/ger-1.svg");--skin-dark:#260710;--skin-light:#fff0f1;--skin-accent:#d91d36;}
-.site-shell[data-competition="cro.1"],.match-workspace.competition-cro-1,.competition-score.cro-1{--skin-art:url("/themes/cro-1.svg");--skin-dark:#170d1b;--skin-light:#fff0f7;--skin-accent:#e0007b;}
-.site-shell[data-competition="uefa.champions"],.match-workspace.competition-uefa-champions,.competition-score.uefa-champions{--skin-art:url("/themes/uefa-champions.svg");--skin-dark:#030d30;--skin-light:#eef5ff;--skin-accent:#2869ed;}
-.site-shell[data-competition="uefa.europa"],.match-workspace.competition-uefa-europa,.competition-score.uefa-europa{--skin-art:url("/themes/uefa-europa.svg");--skin-dark:#241107;--skin-light:#fff1e5;--skin-accent:#e66a00;}
-.site-shell[data-competition="uefa.europa.conf"],.match-workspace.competition-uefa-europa-conf,.competition-score.uefa-europa-conf{--skin-art:url("/themes/uefa-europa-conf.svg");--skin-dark:#061d13;--skin-light:#edfaf1;--skin-accent:#00993d;}
-.site-shell[data-competition="uefa.nations"],.match-workspace.competition-uefa-nations,.competition-score.uefa-nations{--skin-art:url("/themes/uefa-nations.svg");--skin-dark:#0c1b38;--skin-light:#f0f3fb;--skin-accent:#3968bb;}
-.site-shell[data-competition="fifa.world"],.match-workspace.competition-fifa-world,.competition-score.fifa-world{--skin-art:url("/themes/fifa-world.svg");--skin-dark:#15130f;--skin-light:#fcf7e9;--skin-accent:#ad8230;}
-.site-shell[data-competition="uefa.euro"],.match-workspace.competition-uefa-euro,.competition-score.uefa-euro{--skin-art:url("/themes/uefa-euro.svg");--skin-dark:#041841;--skin-light:#eef5ff;--skin-accent:#1879dc;}
+/* Approved image artwork, served locally with no API work. */
+.site-shell[data-competition="eng.1"],.match-workspace.competition-eng-1,.competition-score.eng-1{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:0% 33.333333%;--skin-dark:#200525;--skin-light:#f5eafa;--skin-accent:#9220c3;}
+.site-shell[data-competition="esp.1"],.match-workspace.competition-esp-1,.competition-score.esp-1{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:100% 33.333333%;--skin-dark:#4a1412;--skin-light:#fff1ed;--skin-accent:#ee4c43;}
+.site-shell[data-competition="ita.1"],.match-workspace.competition-ita-1,.competition-score.ita-1{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:0% 66.666667%;--skin-dark:#041937;--skin-light:#edf5ff;--skin-accent:#167bd8;}
+.site-shell[data-competition="ger.1"],.match-workspace.competition-ger-1,.competition-score.ger-1{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:50% 33.333333%;--skin-dark:#260710;--skin-light:#fff0f1;--skin-accent:#d91d36;}
+.site-shell[data-competition="cro.1"],.match-workspace.competition-cro-1,.competition-score.cro-1{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:50% 66.666667%;--skin-dark:#170d1b;--skin-light:#fff0f7;--skin-accent:#e0007b;}
+.site-shell[data-competition="uefa.champions"],.match-workspace.competition-uefa-champions,.competition-score.uefa-champions{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:0% 0%;--skin-dark:#030d30;--skin-light:#eef5ff;--skin-accent:#2869ed;}
+.site-shell[data-competition="uefa.europa"],.match-workspace.competition-uefa-europa,.competition-score.uefa-europa{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:50% 0%;--skin-dark:#241107;--skin-light:#fff1e5;--skin-accent:#e66a00;}
+.site-shell[data-competition="uefa.europa.conf"],.match-workspace.competition-uefa-europa-conf,.competition-score.uefa-europa-conf{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:100% 0%;--skin-dark:#061d13;--skin-light:#edfaf1;--skin-accent:#00993d;}
+.site-shell[data-competition="uefa.nations"],.match-workspace.competition-uefa-nations,.competition-score.uefa-nations{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:50% 100%;--skin-dark:#0c1b38;--skin-light:#f0f3fb;--skin-accent:#3968bb;}
+.site-shell[data-competition="fifa.world"],.match-workspace.competition-fifa-world,.competition-score.fifa-world{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:100% 66.666667%;--skin-dark:#15130f;--skin-light:#fcf7e9;--skin-accent:#ad8230;}
+.site-shell[data-competition="uefa.euro"],.match-workspace.competition-uefa-euro,.competition-score.uefa-euro{--skin-art:url("/themes/competition-art-dark-v1.webp");--skin-art-position:0% 100%;--skin-dark:#041841;--skin-light:#eef5ff;--skin-accent:#1879dc;}
 
 .site-shell .match-workspace .match-header-unit,.site-shell .competition-overview-header{background-image:var(--skin-art),radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--skin-accent) 22%,transparent),transparent 70%)!important;background-color:var(--skin-dark)!important;background-size:cover;background-position:center;border-color:color-mix(in srgb,var(--skin-accent) 25%,transparent)!important;color:#f5f7fc}
 .site-shell .match-header-unit .match-competition>img{width:100px;height:90px;max-width:130px}
@@ -61,3 +61,7 @@ html[data-theme=light] .site-shell[data-competition="uefa.europa.conf"] .overvie
 html[data-theme=light] .site-shell[data-competition="uefa.nations"] .overview-competition-logo,html[data-theme=light] .site-shell .competition-uefa-nations .match-competition>img{content:url("/logos/nations-league-light.svg");}
 
 html[data-theme=light] .site-shell .competition-fifa-world .match-competition>img{filter:drop-shadow(0 1px 2px #17263f99)}
+
+/* Actual approved image artwork; each equal atlas tile fills its own header. */
+.site-shell .match-workspace .match-header-unit,.site-shell .competition-overview-header{background-image:var(--skin-art)!important;background-size:300% 400%!important;background-position:var(--skin-art-position)!important;background-repeat:no-repeat!important}
+html[data-theme=light] .site-shell .match-workspace .match-header-unit,html[data-theme=light] .site-shell .competition-overview-header{background-image:url('/themes/competition-art-light-v1.webp')!important;background-size:300% 400%!important;background-position:var(--skin-art-position)!important;background-repeat:no-repeat!important;background-blend-mode:normal!important}
