@@ -1,3 +1,5 @@
+import BackButton from './back-button';
+import {attachSwipeNavigation} from './swipe-navigation';
 import AppFooter from './glass-navigation';
 'use client';
 import {screenKey,navigationEntry,startMatchBack,instantScroll,resolvedHistoryState} from './navigation-history';
@@ -44,6 +46,7 @@ export default function Home(){
  // Keep app screens in browser history so Android Back and browser Back return within Touchline.
  const navigationState={page,league,club,pickerLeague,clubQuery,videoQuery,selected,competition,nation,selectedGame,showAll,leagueTab};
  const navigationRef=useRef(navigationState);navigationRef.current=navigationState;
+ const forwardCeiling=useRef(Number(history.state?.depth)||0);
  const historyReady=useRef(false),restoringHistory=useRef<string|null>(null),backTarget=useRef<any>(null),backTimer=useRef<ReturnType<typeof setTimeout>|null>(null),restoreScreen=useRef<(event:PopStateEvent)=>void>(()=>{});
  useLayoutEffect(()=>{
    const saveScroll=()=>{if(!restoringHistory.current&&history.state?.touchline)history.replaceState({...history.state,scrollY:window.scrollY},'')};
@@ -64,15 +67,17 @@ export default function Home(){
    if(JSON.stringify(current?.screen)===JSON.stringify(navigationState))return;
    // Text searches and display limits update the current screen rather than creating a Back step for every keystroke.
    const {entry,push}=navigationEntry(current,navigationState,window.scrollY);
-   if(push)history.pushState(entry,'');else history.replaceState(entry,'');
+   if(push){forwardCeiling.current=entry.depth;history.pushState(entry,'')}else history.replaceState(entry,'');
    if(push&&navigationState.selectedGame)instantScroll(0);
  },[page,league,club,pickerLeague,clubQuery,videoQuery,selected,competition,nation,selectedGame,showAll,leagueTab]);
  function backScreen(){
   const screen=navigationRef.current,current=history.state;
   if(screen.selectedGame){
-   startMatchBack(history,screen,backTarget,backTimer,state=>restoreScreen.current({state} as PopStateEvent));
+   startMatchBack(history,screen,backTarget,backTimer,state=>{forwardCeiling.current=state.depth;restoreScreen.current({state} as PopStateEvent)});
   }else if(current?.touchline&&current.depth>0&&history.length>1)history.back();
  }
+
+ useEffect(()=>attachSwipeNavigation({back:()=>backScreen(),forward:()=>history.forward(),canBack:()=>!!history.state?.touchline&&history.state.depth>0,canForward:()=>!!history.state?.touchline&&history.state.depth<forwardCeiling.current}),[]);
 
  const picker=useRef<HTMLElement>(null),playerArea=useRef<HTMLDivElement>(null),nationalRail=useRef<HTMLDivElement>(null);
  const leagueInfo=([...LEAGUES,...CLUB_CUPS].find(l=>l.id===league)||LEAGUES[0])!;const comp=COMPETITIONS.find(c=>c.id===competition)!;const isNational=page==='national';const theme=isNational?comp:page==='league'||page==='club'||page==='cup'?leagueInfo:null;
@@ -112,7 +117,7 @@ export default function Home(){
  {page==='settings'&&<AppSettings/>}
  {page==='home'&&<MatchHome onMatch={openMatch}/>}
  {page==='clubs'&&<div className="clubs-page">{clubPicker()}</div>}
- {(page==='league'||page==='club'||page==='cup')&&<><div className="competition-banner"><div className="competition-banner-content"><button className="back-link" onClick={()=>history.state?.depth>0?backScreen():page==='club'?goLeague(league):goClubs()}><ArrowLeft size={15}/>{page==='club'?leagueInfo.name:'All leagues'}</button><div className="identity"><div className={club?'club-identity':'competition-identity'}>{club?<Crest club={club} size={92}/>:<img src={leagueInfo.logo} alt={leagueInfo.name}/>}</div><div><span className="kicker">{club?leagueInfo.name:leagueInfo.country} · {season}/{String(season+1).slice(2)}</span><h1>{club?.name||leagueInfo.name}</h1><p>{club?'Highlights and match information':'Standings, highlights and season statistics'}</p></div></div></div><div className="banner-league-mark"><img src={leagueInfo.logo} alt=""/></div></div>
+ {(page==='league'||page==='club'||page==='cup')&&<><div className="competition-banner"><div className="competition-banner-content"><BackButton label={page==='club'?'Back to '+leagueInfo.name:'Back to clubs'} onClick={()=>history.state?.depth>0?backScreen():page==='club'?goLeague(league):goClubs()}/><div className="identity"><div className={club?'club-identity':'competition-identity'}>{club?<Crest club={club} size={92}/>:<img src={leagueInfo.logo} alt={leagueInfo.name}/>}</div><div><span className="kicker">{club?leagueInfo.name:leagueInfo.country} · {season}/{String(season+1).slice(2)}</span><h1>{club?.name||leagueInfo.name}</h1><p>{club?'Highlights and match information':'Standings, highlights and season statistics'}</p></div></div></div><div className="banner-league-mark"><img src={leagueInfo.logo} alt=""/></div></div>
  {(page==='league'||page==='cup')&&<Tabs value={leagueTab} onValueChange={v=>{setLeagueTab(v);setSelected(null)}} className="league-tabs"><TabsList className="league-tabs-list" aria-label={leagueInfo.name+' sections'}><TabsTrigger value="table">Table</TabsTrigger><TabsTrigger value="highlights">Highlights</TabsTrigger><TabsTrigger value="statistics">Statistics</TabsTrigger></TabsList><TabsContent value="table"><LeagueStandings dashboard={dashboards[league]} onClub={chooseClub}/>{statisticsNotice&&<p className="source-notice">{statisticsNotice}</p>}</TabsContent><TabsContent value="statistics"><LeagueStatistics dashboard={dashboards[league]}/>{statisticsNotice&&<p className="source-notice">{statisticsNotice}</p>}</TabsContent><TabsContent value="highlights">{leagueHighlights()}</TabsContent></Tabs>}
  {club&&<section className="match-section"><div className="section-heading"><div><span className="kicker">MATCH CENTRE</span><h2>Results & fixtures</h2></div><span className="subtle">Times shown in your timezone</span></div><div className="games-grid">{upcoming.concat(recent).map(g=><Game key={g.id} game={g} onPick={openMatch}/>)}</div>{!relevantGames.length&&<div className="empty-state"><CalendarDays size={24}/>Match information is loading or unavailable for this club.</div>}{gameNotice&&<p className="source-notice">{gameNotice}</p>}</section>}
  {page==='club'&&leagueHighlights()}</>}
@@ -123,6 +128,6 @@ export default function Home(){
  {nation&&<NationalTeamPage selectedCompetition={competition} onCompetition={setCompetition} team={nation} games={games} videos={nationalVideos} onGames={mergeGames} renderGame={(g:any)=><Game key={g.league+g.id} game={g} onPick={openMatch}/>} renderVideo={(v:any,c:any)=><Card key={v.id} video={v} onPlay={play} tournament={COMPETITIONS.find(x=>x.id===c.id)}/>}/>}
  {nation?.name==='Croatia'&&<section className="croatia-section"><div className="section-heading"><div><span className="kicker">HRVATSKA NA SPORTKLUBU</span><h2>Inside the Croatian team</h2></div><a className="source-link" href="https://www.youtube.com/@sportklubhrvatska3019" target="_blank" rel="noreferrer">SportKlub Hrvatska<ExternalLink size={15}/></a></div><p className="section-description">Croatian-language clips, interviews and reactions from SportKlub and HNS.</p><div className="video-grid">{croatiaClips.map(v=><Card key={v.id} video={v} onPlay={play} tournament={comp}/>)}</div>{!croatiaClips.length&&<div className="empty-state"><a href="https://www.youtube.com/@sportklubhrvatska3019/search?query=Hrvatska" target="_blank" rel="noreferrer">Watch Croatia on SportKlub Hrvatska<ExternalLink size={16}/></a></div>}</section>}</>}
  {videoNotice&&<p className="source-notice" role="status">{videoNotice}</p>}
- <footer className="site-credits"><button className="wordmark" onClick={goHome}>touchline<span className="wordmark-period">.</span></button><span>Public highlights. Original publishers.</span><p>Videos may open on YouTube when embedding is restricted. <a href="https://www.footylogos.com/" target="_blank" rel="noreferrer">Tournament logo assets: FootyLogos</a>.</p></footer>
+ 
  </>}</main><AppFooter value={page==='home'?'home':['clubs','league','club','cup'].includes(page)?'clubs':isNational?'national':'settings'} onChange={id=>{if(id==='home')goHome();else if(id==='clubs')goClubs();else if(id==='national')goNational();else{setPage('settings');setSelectedGame(null);setClub(null);setNation(null);setSelected(null)}}}/></div>;
 }

@@ -5,7 +5,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 await mkdir('qa-temp',{recursive:true});
-const compiled=await build({entryPoints:['app/match-centre.tsx'],bundle:true,platform:'node',format:'esm',packages:'external',write:false,jsx:'automatic'});
+const compiled=await build({entryPoints:['app/match-centre.tsx'],bundle:true,platform:'node',format:'esm',packages:'external',write:false,loader:{'.css':'empty'},jsx:'automatic'});
 await writeFile('qa-temp/match-workspace-render.mjs',compiled.outputFiles[0].text);
 const {MatchWorkspace}=await import('../qa-temp/match-workspace-render.mjs');
 const game={id:'123',league:'eng.1',date:'2026-10-11T14:00:00Z',home:{id:'1',name:'Home',score:1},away:{id:'2',name:'Away',score:0},completed:true,state:'post',status:'Full time'};

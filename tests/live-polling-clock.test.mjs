@@ -55,17 +55,20 @@ test('08:47 is never turned into 09:47 by a whole-minute response',()=>{
  assert.equal(sharedClockText(response,now+10000),'8:57');
  assert.equal(sharedClockText(response,now+20000),'9:07');
 });
-test('mid-match entry anchors once, background elapsed time and stale phase responses preserve continuity',()=>{
+test('mid-match entry waits for phase confirmation after a stale foreground gap without resetting the anchor',()=>{
  const live={...g,id:'join-midway',league:'eng.1',status:'23′'};
  assert.equal(sharedClockText(live,now),'23:00');
- assert.equal(sharedClockText(live,now+120000),'25:00');
+ assert.equal(sharedClockText(live,now+120000),'Updating…');
  const stale={...live,status:'HT',clockCheckedAt:new Date(now-10000).toISOString()};
- assert.equal(sharedClockText(stale,now+120000),'25:00');
+ assert.equal(sharedClockText(stale,now+120000),'Updating…');
+ const fresh={...live,status:'25′',clockCheckedAt:new Date(now+120000).toISOString()};
+ assert.equal(sharedClockText(fresh,now+120000),'25:00');
 });
 test('confirmed HT and second-half start change shared phases; 45 minutes alone does not',()=>{
  const live={...g,id:'shared-halves',league:'eng.1',status:'44′',period:1};
  observeMatchClock(live,now);
- assert.equal(sharedClockText(live,now+180000),'45+2:00');
+ const stillPlaying={...live,status:'45+2′',clockCheckedAt:new Date(now+180000).toISOString()};
+ assert.equal(sharedClockText(stillPlaying,now+180000),'45+2:00');
  const ht={...live,status:'HT',clockCheckedAt:new Date(now+180000).toISOString()};
  assert.equal(sharedClockText(ht,now+180000),'HT');
  const second={...ht,status:'46′',period:2,clockCheckedAt:new Date(now+1080000).toISOString()};

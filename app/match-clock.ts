@@ -72,10 +72,15 @@ export function observeMatchClock(game:any,now=Date.now()){
  return saved?.anchor||anchor;
 }
 export function sharedClockText(game:any,now=Date.now()){
+ if(clockPhase(game)==='finished')return game.status||'FT';
  const anchor=observeMatchClock(game,now),saved=sharedClocks.get(game.league+':'+game.id);
+ // A restored/foregrounded clock must not extrapolate through an unseen HT/FT.
+ // Keep its anchor intact; the existing foreground score request confirms phase.
+ if(anchor?.running&&(!saved||now-saved.seenAt>90000))return 'Updating…';
  return localClockText(anchor,saved?.game||game,now);
 }
 export function minuteClockText(clock:string){
+ if(clock==='Updating…')return '…';
  const m=clock.match(/^(\d+)(?:\+(\d+))?(?::\d{2})?[′']?$/);
  return m?`${Number(m[1])}${Number(m[2])>0?'+'+Number(m[2]):''}'`:clock;
 }
