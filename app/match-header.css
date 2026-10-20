@@ -34,7 +34,7 @@ html[data-theme=light] .site-shell .match-workspace .match-header-unit .match-ta
 
 /* Reserve scorer space before details arrive; more than three goals scroll internally. */
 .site-shell .match-header-unit .goal-summary{height:80px;min-height:80px;max-height:80px;max-width:640px;width:100%;margin:18px auto 0;gap:20px;overflow:hidden;contain:layout}
-.site-shell .match-header-unit .goal-summary>div{height:80px;min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff30 transparent;gap:4px;padding:2px 3px}
+.site-shell .match-header-unit .goal-summary>div{height:80px;min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;scrollbar-color:#ffffff30 transparent;gap:4px;padding:2px 3px}
 .site-shell .match-header-unit .goal-summary>div>span{display:flex;align-items:center;justify-content:center;min-height:22px;height:22px;flex:none;gap:6px;max-width:100%;line-height:22px}
 .site-shell .match-header-unit .goal-summary>div>span>svg{flex:none}
 .site-shell .match-header-unit .goal-summary small{display:block;font:inherit;line-height:22px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
