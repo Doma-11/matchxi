@@ -106,3 +106,10 @@ Existing Back controls on matches, club/competition pages and the match error sc
 - The match hero, back arrow, competition logo and five section tabs share one edge-to-edge header surface. Existing dark/light competition backgrounds and score/scorer behaviours are retained; panels below keep a readable centred width.
 - Scheduled matches show 24-hour kickoff between team badges, with Today or an English abbreviated date (Wed Oct 21) beneath. Dates use the same device-local timezone as the calendar; scheduled source status strings with EDT are no longer displayed beneath VS. Unknown kickoff times remain TBC.
 - No API, polling, storage or scheduling changes. TypeScript, production build and 104 regression checks pass.
+
+## Approved competition skins (20 October 2026)
+- Match and league/cup headers use 11 distinct competition motifs: blue/purple facets, orange angular ribbons, green flowing bands, purple facets, red stadium geometry, coral diagonals, cobalt crystals, HNL magenta shards, gold contours and national-tournament flag ribbons.
+- Patterns are local static SVGs (about 13.6 KB combined compressed across all 11; only the active pattern is used). No API calls, additional polling, external artwork hotlinks, or serverless processing. Reproduce them from scripts/build-theme-art.py.
+- Headers retain the back arrow and omit duplicate competition names; names remain accessible to screen readers. Logo-only headers and season label replace the league/cup overview banner. Club-picker cards and club pages retain their existing design.
+- Dark panels use calm tinted surfaces; light mode uses pale competition surfaces with dark ink. Three reversed logo variants retain contrast on light backgrounds. Existing data, scorer animations, tab contents, standings highlights, auth, schedules and polling stay intact.
+- TypeScript, production build, all 104 tests and SVG/reference validation pass. Browser/physical-device visual QA was unavailable in this runtime.

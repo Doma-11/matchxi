@@ -1,0 +1,63 @@
+/* Approved competition artwork, served as small static SVGs with no API work. */
+.site-shell[data-competition="eng.1"],.match-workspace.competition-eng-1,.competition-score.eng-1{--skin-art:url("/themes/eng-1.svg");--skin-dark:#200525;--skin-light:#f5eafa;--skin-accent:#9220c3;}
+.site-shell[data-competition="esp.1"],.match-workspace.competition-esp-1,.competition-score.esp-1{--skin-art:url("/themes/esp-1.svg");--skin-dark:#4a1412;--skin-light:#fff1ed;--skin-accent:#ee4c43;}
+.site-shell[data-competition="ita.1"],.match-workspace.competition-ita-1,.competition-score.ita-1{--skin-art:url("/themes/ita-1.svg");--skin-dark:#041937;--skin-light:#edf5ff;--skin-accent:#167bd8;}
+.site-shell[data-competition="ger.1"],.match-workspace.competition-ger-1,.competition-score.ger-1{--skin-art:url("/themes/ger-1.svg");--skin-dark:#260710;--skin-light:#fff0f1;--skin-accent:#d91d36;}
+.site-shell[data-competition="cro.1"],.match-workspace.competition-cro-1,.competition-score.cro-1{--skin-art:url("/themes/cro-1.svg");--skin-dark:#170d1b;--skin-light:#fff0f7;--skin-accent:#e0007b;}
+.site-shell[data-competition="uefa.champions"],.match-workspace.competition-uefa-champions,.competition-score.uefa-champions{--skin-art:url("/themes/uefa-champions.svg");--skin-dark:#030d30;--skin-light:#eef5ff;--skin-accent:#2869ed;}
+.site-shell[data-competition="uefa.europa"],.match-workspace.competition-uefa-europa,.competition-score.uefa-europa{--skin-art:url("/themes/uefa-europa.svg");--skin-dark:#241107;--skin-light:#fff1e5;--skin-accent:#e66a00;}
+.site-shell[data-competition="uefa.europa.conf"],.match-workspace.competition-uefa-europa-conf,.competition-score.uefa-europa-conf{--skin-art:url("/themes/uefa-europa-conf.svg");--skin-dark:#061d13;--skin-light:#edfaf1;--skin-accent:#00993d;}
+.site-shell[data-competition="uefa.nations"],.match-workspace.competition-uefa-nations,.competition-score.uefa-nations{--skin-art:url("/themes/uefa-nations.svg");--skin-dark:#0c1b38;--skin-light:#f0f3fb;--skin-accent:#3968bb;}
+.site-shell[data-competition="fifa.world"],.match-workspace.competition-fifa-world,.competition-score.fifa-world{--skin-art:url("/themes/fifa-world.svg");--skin-dark:#15130f;--skin-light:#fcf7e9;--skin-accent:#ad8230;}
+.site-shell[data-competition="uefa.euro"],.match-workspace.competition-uefa-euro,.competition-score.uefa-euro{--skin-art:url("/themes/uefa-euro.svg");--skin-dark:#041841;--skin-light:#eef5ff;--skin-accent:#1879dc;}
+
+.site-shell .match-workspace .match-header-unit,.site-shell .competition-overview-header{background-image:var(--skin-art),radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--skin-accent) 22%,transparent),transparent 70%)!important;background-color:var(--skin-dark)!important;background-size:cover;background-position:center;border-color:color-mix(in srgb,var(--skin-accent) 25%,transparent)!important;color:#f5f7fc}
+.site-shell .match-header-unit .match-competition>img{width:100px;height:90px;max-width:130px}
+.site-shell .match-workspace .match-header-unit .match-tabs-list [role=tab][data-state=active]:after{background:var(--skin-accent)}
+.site-shell .match-workspace :is(.match-facts-card,.match-timeline-card,.shared-lineup-card,.bench-card,.match-stat-card,.match-table-card,.match-poll-card,.themed-standings,.standings-surface,.knockout-section){background:linear-gradient(135deg,color-mix(in srgb,var(--skin-dark) 55%,#111a26),#101722)!important;border:1px solid color-mix(in srgb,var(--skin-accent) 24%,#ffffff0d)!important;border-radius:16px;box-shadow:0 6px 22px #00000012}
+.site-shell .match-workspace :is(.match-facts-card,.match-timeline-card,.bench-card,.match-stat-card)>h2{font-family:'DM Sans',Arial,sans-serif;letter-spacing:normal;font-weight:650;border-bottom-color:#ffffff10}
+.site-shell .match-workspace .match-unavailable{background:color-mix(in srgb,var(--skin-dark) 40%,#101722)!important;border-color:color-mix(in srgb,var(--skin-accent) 20%,transparent)!important}
+.site-shell main.competition-overview{max-width:none;width:100%;margin:0}
+.site-shell .competition-overview-header{position:relative;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:12px;padding:26px 70px 24px;min-height:205px;text-align:center}
+.site-shell .competition-overview-header>button.compact-back{position:absolute;left:max(16px,env(safe-area-inset-left));top:18px;background:transparent;border:0;box-shadow:none;color:inherit}
+.site-shell .overview-competition-logo{width:160px;height:110px;object-fit:contain;background:none;padding:0;max-width:100%}
+.site-shell .overview-season{font-size:14px;color:#e1e6ef;font-weight:450;letter-spacing:normal}
+.site-shell .competition-overview>.league-tabs{margin:0;gap:0}
+.site-shell .competition-overview .league-tabs-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;height:auto;margin:0;border:0;border-radius:0;padding:0 max(5%,calc((100% - 1000px)/2));background:var(--skin-dark)!important;border-bottom:1px solid color-mix(in srgb,var(--skin-accent) 24%,transparent)}
+.site-shell .competition-overview .league-tabs-list [role=tab]{position:relative;min-height:48px;margin:0;padding:14px 8px;background:transparent!important;color:#c5cddd!important;border-radius:0;box-shadow:none!important;font-size:14px}
+.site-shell .competition-overview .league-tabs-list [role=tab][data-state=active]{color:#fff!important}
+.site-shell .competition-overview .league-tabs-list [role=tab][data-state=active]:after{position:absolute;content:'';height:3px;bottom:0;left:20%;right:20%;background:var(--skin-accent);border-radius:3px 3px 0 0}
+.site-shell .competition-overview .league-tabs>[role=tabpanel]{width:90%;max-width:1360px;min-width:0;margin:24px auto 0}
+.site-shell .competition-overview :is(.standings-surface,.leader-card,.statistics-card,.season-leader,.stat-board){background:linear-gradient(135deg,color-mix(in srgb,var(--skin-dark) 65%,#141923),#111620)!important;border:1px solid color-mix(in srgb,var(--skin-accent) 24%,#ffffff0b)!important;border-radius:16px;color:#f5f7fc}
+.site-shell .competition-overview .standings-section .section-heading .kicker{display:none}
+.site-shell .competition-overview :is(.section-heading h2,.league-table){font-family:'DM Sans',Arial,sans-serif;letter-spacing:normal}
+.site-shell .competition-overview .league-table th{background:transparent;color:#b9c4d4}
+.site-shell .competition-overview .league-table td{background:transparent;color:#f2f5fb}
+.site-shell .competition-overview .league-table tbody tr:hover{background:color-mix(in srgb,var(--skin-accent) 10%,transparent)}
+.site-shell .competition-overview .league-table tr:nth-child(-n+2){background:color-mix(in srgb,var(--skin-accent) 12%,transparent)}
+.site-shell .competition-overview .league-table td,.site-shell .competition-overview .league-table th{border-color:#ffffff0b}
+/* Official one-colour marks need their reversed variant on a dark header. */
+.site-shell[data-competition="eng.1"] .overview-competition-logo,.site-shell[data-competition="esp.1"] .overview-competition-logo,.site-shell .competition-eng-1 .match-competition>img,.site-shell .competition-esp-1 .match-competition>img{filter:brightness(0) invert(1)}
+/* Both themes share the motif; light mode changes the surface and ink. */
+html[data-theme=light] .site-shell .match-workspace .match-header-unit,html[data-theme=light] .site-shell .competition-overview-header{background-image:var(--skin-art),linear-gradient(var(--skin-light),var(--skin-light))!important;background-color:var(--skin-light)!important;background-blend-mode:normal!important;color:#152238!important;border-color:color-mix(in srgb,var(--skin-accent) 20%,#e1e7ed)!important}
+html[data-theme=light] .site-shell .match-workspace :is(.match-facts-card,.match-timeline-card,.shared-lineup-card,.bench-card,.match-stat-card,.match-table-card,.match-poll-card,.themed-standings,.standings-surface,.knockout-section,.match-unavailable){background:linear-gradient(135deg,var(--skin-light),#fff)!important;border:1px solid color-mix(in srgb,var(--skin-accent) 20%,#e1e7ed)!important;color:#182235!important}
+html[data-theme=light] .site-shell .competition-overview .league-tabs-list{background:var(--skin-light)!important}
+html[data-theme=light] .site-shell .competition-overview .league-tabs-list [role=tab],html[data-theme=light] .site-shell .overview-season{color:#25344b!important}
+html[data-theme=light] .site-shell .competition-overview :is(.standings-surface,.leader-card,.statistics-card,.season-leader,.stat-board){background:linear-gradient(135deg,var(--skin-light),white)!important;color:#182235!important;border-color:color-mix(in srgb,var(--skin-accent) 20%,#e1e7ed)!important}
+html[data-theme=light] .site-shell .competition-overview .league-table :is(th,td){color:#182235!important;background:transparent!important;border-color:color-mix(in srgb,var(--skin-accent) 12%,#e1e7ed)!important}
+html[data-theme=light] .site-shell .competition-overview .league-table tr:nth-child(-n+2){background:color-mix(in srgb,var(--skin-accent) 9%,white)}
+html[data-theme=light] .site-shell[data-competition="eng.1"] .overview-competition-logo,html[data-theme=light] .site-shell[data-competition="esp.1"] .overview-competition-logo,html[data-theme=light] .site-shell .competition-eng-1 .match-competition>img,html[data-theme=light] .site-shell .competition-esp-1 .match-competition>img{filter:none}
+html[data-theme=light] .site-shell[data-competition="uefa.champions"] .overview-competition-logo,html[data-theme=light] .site-shell .competition-uefa-champions .match-competition>img{filter:brightness(0) saturate(100%);opacity:.88}
+@media(max-width:560px){.site-shell .match-header-unit .match-competition>img{width:90px;height:76px}.site-shell .competition-overview-header{min-height:180px;padding:22px 62px}.site-shell .overview-competition-logo{width:145px;height:98px}.site-shell .competition-overview .league-tabs>[role=tabpanel]{width:94%;margin-top:18px}}
+
+.site-shell .competition-overview :is(.stat-board-heading,.stat-board ol li){background:transparent!important;border-color:#ffffff10}
+.site-shell .competition-overview .stat-board h3{font-family:'DM Sans',Arial,sans-serif;letter-spacing:normal;color:var(--skin-accent)}
+html[data-theme=light] .site-shell .competition-overview :is(.stat-board li,.season-leader) :is(strong,small,b,p,span){color:#182235!important}
+html[data-theme=light] .site-shell .competition-overview .stat-board-heading{background:transparent!important;border-color:color-mix(in srgb,var(--skin-accent) 20%,transparent)}
+html[data-theme=light] .site-shell .competition-overview .stat-board h3{color:var(--skin-accent)!important}
+html[data-theme=light] .site-shell .match-workspace .match-central-score.match-score-finished>strong{background:transparent!important;padding:0;color:#182235!important}
+html[data-theme=light] .site-shell[data-competition="uefa.europa"] .overview-competition-logo,html[data-theme=light] .site-shell .competition-uefa-europa .match-competition>img{content:url("/logos/europa-league-light.svg");}
+html[data-theme=light] .site-shell[data-competition="uefa.europa.conf"] .overview-competition-logo,html[data-theme=light] .site-shell .competition-uefa-europa-conf .match-competition>img{content:url("/logos/conference-league-light.svg");}
+html[data-theme=light] .site-shell[data-competition="uefa.nations"] .overview-competition-logo,html[data-theme=light] .site-shell .competition-uefa-nations .match-competition>img{content:url("/logos/nations-league-light.svg");}
+
+html[data-theme=light] .site-shell .competition-fifa-world .match-competition>img{filter:drop-shadow(0 1px 2px #17263f99)}
