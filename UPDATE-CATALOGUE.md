@@ -113,3 +113,8 @@ Existing Back controls on matches, club/competition pages and the match error sc
 - Headers retain the back arrow and omit duplicate competition names; names remain accessible to screen readers. Logo-only headers and season label replace the league/cup overview banner. Club-picker cards and club pages retain their existing design.
 - Dark panels use calm tinted surfaces; light mode uses pale competition surfaces with dark ink. Three reversed logo variants retain contrast on light backgrounds. Existing data, scorer animations, tab contents, standings highlights, auth, schedules and polling stay intact.
 - TypeScript, production build, all 104 tests and SVG/reference validation pass. Browser/physical-device visual QA was unavailable in this runtime.
+
+## Stable scorer animation layout (20 October 2026)
+- Live and finished headers reserve an 80px scorer region immediately, even before event details arrive. Three single-line scorer rows fit per team; additional goals remain in independently scrollable keyboard-accessible lists. Long names truncate visually with full text retained in the title and DOM.
+- Chronological goal order remains unchanged. The first reveal is 100ms (previously 200ms), then 300ms per subsequent goal with cumulative delays. Reduced-motion users see the rows without animation.
+- TypeScript, production build and all 15 match-screen render checks pass, including an assertion that the scorer region exists before events arrive. No API or polling changes.
