@@ -85,3 +85,7 @@ html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-sum
 /* Light-mode scorer labels use dark ink on a light backing. */
 html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary{background:#ffffffa6}
 html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary :is(span,small){color:#182235!important}
+/* Scorers sit directly on the artwork, with stronger readable labels. */
+.site-shell .match-workspace .match-header-unit .goal-summary,
+html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary{background:transparent!important}
+.site-shell .match-workspace .match-header-unit .goal-summary :is(span,small){font-weight:600}
