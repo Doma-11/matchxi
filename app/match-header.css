@@ -1,0 +1,24 @@
+/* A single edge-to-edge match header; section panels retain their readable width. */
+.site-shell main.match-page{max-width:none;margin-left:0;margin-right:0;width:100%;min-width:0}
+.site-shell .match-page .match-workspace{max-width:none;width:100%;margin:0}
+.site-shell .match-header-unit{position:relative;width:100%;box-sizing:border-box;border-radius:0;padding:20px max(20px,calc((100% - 1000px)/2)) 0;border-left:0;border-right:0;border-top:0}
+.site-shell .match-header-unit>button.compact-back{position:absolute;top:18px;left:max(16px,env(safe-area-inset-left));margin:0;border-radius:50%;background:#ffffff0a}
+.site-shell .match-header-unit .match-competition{min-height:78px;margin:0 56px}
+.site-shell .match-header-unit .match-competition>img{width:76px;height:78px;object-fit:contain;background:none;padding:0;border-radius:0}
+.site-shell .match-header-unit .match-scoreboard{max-width:900px;margin:22px auto 0;grid-template-columns:minmax(0,1fr) minmax(110px,160px) minmax(0,1fr);gap:12px;align-items:center}
+.site-shell .match-header-unit .match-scoreboard>div{gap:12px;min-width:0}
+.site-shell .match-header-unit .match-team-link{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0}
+.site-shell .match-header-unit .match-scoreboard .score-badge{width:96px!important;height:96px!important}
+.site-shell .match-header-unit .match-scoreboard h1{font-size:clamp(15px,2.4vw,23px);line-height:1.25;max-width:240px;margin:0;text-wrap:balance}
+.site-shell .match-header-unit .match-central-score{align-self:center;gap:5px}
+.site-shell .match-header-unit .match-central-score>strong{font-size:clamp(29px,4.6vw,44px);line-height:1.15;font-variant-numeric:tabular-nums;letter-spacing:-1px}
+.site-shell .match-header-unit .match-central-score>span{font-size:clamp(12px,2vw,18px);line-height:1.4;font-weight:450;white-space:nowrap}
+.site-shell .match-header-unit .match-tabs-list{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;max-width:1000px;margin:28px auto 0;padding:0!important;border-radius:0!important;background:transparent!important;gap:0;border-bottom:1px solid #ffffff15;height:auto!important}
+.site-shell .match-header-unit .match-tabs-list [role=tab]{position:relative;min-width:0;min-height:48px;padding:14px 4px!important;border:0;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:clamp(11px,1.7vw,15px);color:#c5cdd7}
+.site-shell .match-header-unit .match-tabs-list [role=tab][data-state=active]{color:#fff!important;background:transparent!important;box-shadow:none!important}
+.site-shell .match-header-unit .match-tabs-list [role=tab][data-state=active]:after{content:'';position:absolute;bottom:0;left:14%;right:14%;height:3px;border-radius:3px 3px 0 0;background:var(--accent)}
+.site-shell .match-page .match-tabs>[role=tabpanel]{width:90%;max-width:1360px;min-width:0;margin:24px auto 0}
+html[data-theme=light] .site-shell .match-workspace .match-header-unit .match-tabs-list{background:transparent!important;border-color:var(--match-light-border)}
+html[data-theme=light] .site-shell .match-workspace .match-header-unit .match-tabs-list [role=tab][data-state=active]{background:transparent!important;box-shadow:none!important;color:var(--match-ink)!important}
+@media(max-width:560px){.site-shell .match-header-unit{padding:14px 12px 0}.site-shell .match-header-unit .match-competition{min-height:65px}.site-shell .match-header-unit .match-competition>img{width:62px;height:65px}.site-shell .match-header-unit>button.compact-back{top:13px;left:12px}.site-shell .match-header-unit .match-scoreboard{margin-top:20px;gap:6px;grid-template-columns:minmax(0,1fr) 105px minmax(0,1fr)}.site-shell .match-header-unit .match-scoreboard .score-badge{width:76px!important;height:76px!important}.site-shell .match-header-unit .match-tabs-list{margin-top:24px}.site-shell .match-page .match-tabs>[role=tabpanel]{width:94%;margin-top:18px}}
+@media(max-width:360px){.site-shell .match-header-unit .match-scoreboard{grid-template-columns:minmax(0,1fr) 93px minmax(0,1fr)}.site-shell .match-header-unit .match-scoreboard .score-badge{width:64px!important;height:64px!important}.site-shell .match-header-unit .match-scoreboard h1{font-size:13px}.site-shell .match-header-unit .match-central-score>strong{font-size:27px}}
