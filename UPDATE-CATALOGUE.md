@@ -123,3 +123,8 @@ Existing Back controls on matches, club/competition pages and the match error sc
 - Supersedes the earlier procedural vector-pattern implementation. Match and league/cup headers now use real raster artwork generated from the approved mockups, retaining the richer lighting, facets, ribbons, Premier lion silhouette and gold contours.
 - Two local WebP atlases contain the 11 dark/light competition backgrounds in an equal 3-column/4-row grid. CSS selects the appropriate tile without compositing logos or text into artwork. Both atlases preserve all image content; WebP export only changes encoding. Dark is 176,720 bytes, light is 208,868 bytes. Each theme uses its corresponding atlas; normal browser caching permits reuse across competitions.
 - Removed the unused procedural SVG assets and their generator. Runtime artwork does not invoke an API or serverless function. Existing pale cards, responsive layout, fixed scorer region and chronological animation remain intact.
+
+## Soft artwork and logo contrast (20 October 2026)
+- Header artwork now lives in an isolated pseudo-element with 6px CSS blur and slight overscan to avoid blurred edges. Text, logos, scores and controls remain unblurred. No additional image assets or requests.
+- Removed the reversal filter from boxed Premier League/LaLiga header marks; the previous white backing plus filter produced a solid white tile. Original coloured marks now retain a white backing, contained padding and rounded 14px corners. Other boxed domestic emblems receive the same rounding.
+- Header scorer names/minutes stay white in both themes; a subtle dark backing maintains contrast in light mode. The fixed scorer dimensions and animation timing remain unchanged.

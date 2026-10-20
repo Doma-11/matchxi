@@ -65,3 +65,20 @@ html[data-theme=light] .site-shell .competition-fifa-world .match-competition>im
 /* Actual approved image artwork; each equal atlas tile fills its own header. */
 .site-shell .match-workspace .match-header-unit,.site-shell .competition-overview-header{background-image:var(--skin-art)!important;background-size:300% 400%!important;background-position:var(--skin-art-position)!important;background-repeat:no-repeat!important}
 html[data-theme=light] .site-shell .match-workspace .match-header-unit,html[data-theme=light] .site-shell .competition-overview-header{background-image:url('/themes/competition-art-light-v1.webp')!important;background-size:300% 400%!important;background-position:var(--skin-art-position)!important;background-repeat:no-repeat!important;background-blend-mode:normal!important}
+
+/* Blur artwork on its own layer: badges, scores and navigation stay crisp. */
+.site-shell .match-workspace .match-header-unit,.site-shell .competition-overview-header,
+html[data-theme=light] .site-shell .match-workspace .match-header-unit,html[data-theme=light] .site-shell .competition-overview-header{isolation:isolate;overflow:hidden;background-image:none!important}
+.site-shell .match-workspace .match-header-unit:before,.site-shell .competition-overview-header:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:var(--skin-art);background-size:300% 400%;background-position:var(--skin-art-position);background-repeat:no-repeat;filter:blur(6px);transform:scale(1.035)}
+html[data-theme=light] .site-shell .match-workspace .match-header-unit:before,html[data-theme=light] .site-shell .competition-overview-header:before{background-image:url('/themes/competition-art-light-v1.webp')}
+/* Keep original coloured marks: reversing an existing white tile hid the artwork. */
+.site-shell .match-header-unit .match-competition>img:is([src*="premier-league"],[src*="laliga"],[src*="bundesliga"],[src*="hnl."],[src*="serie-a"]),
+.site-shell .overview-competition-logo:is([src*="premier-league"],[src*="laliga"],[src*="bundesliga"],[src*="hnl."],[src*="serie-a"]),
+html[data-theme=light] .site-shell .match-header-unit .match-competition>img:is([src*="premier-league"],[src*="laliga"]),
+html[data-theme=light] .site-shell .overview-competition-logo:is([src*="premier-league"],[src*="laliga"]){filter:none!important;background:#fff!important;border-radius:14px!important;padding:10px!important;overflow:hidden;object-fit:contain;box-sizing:border-box}
+/* Scorers remain white in every theme, on a restrained dark readability layer. */
+.site-shell .match-header-unit .goal-summary{background:#09122385;border-radius:10px}
+html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary{background:#17263fd9}
+.site-shell .match-workspace .match-header-unit .goal-summary :is(span,small),
+html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary :is(span,small){color:#fff!important}
+.site-shell :is(.league-logo,.score-league-logo,.competition-identity,.logo-bug):has(img:is([src*="premier-league"],[src*="laliga"],[src*="bundesliga"],[src*="hnl."],[src*="serie-a"])){border-radius:14px!important;overflow:hidden}
