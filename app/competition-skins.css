@@ -89,3 +89,5 @@ html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-sum
 .site-shell .match-workspace .match-header-unit .goal-summary,
 html[data-theme=light] .site-shell .match-workspace .match-header-unit .goal-summary{background:transparent!important}
 .site-shell .match-workspace .match-header-unit .goal-summary :is(span,small){font-weight:600}
+
+.match-workspace .lineup-source-link{display:inline-flex;align-items:center;gap:5px;vertical-align:middle}.match-workspace .lineup-source-link svg{flex:none}
