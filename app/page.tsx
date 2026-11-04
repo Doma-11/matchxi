@@ -1,3 +1,4 @@
+import './match-backgrounds-v2.css';
 import './competition-skins.css';
 import BackButton from './back-button';
 import {attachSwipeNavigation} from './swipe-navigation';

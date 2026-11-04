@@ -1,0 +1,15 @@
+/* Approved November artwork. Rollback: remove this import from app/page.tsx.
+   Original v1 assets and competition-skins.css remain unchanged.
+   Scope: six dark-mode match headers only; light/league/club screens retain v1. */
+html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-champions .match-header-unit:before,
+html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-europa .match-header-unit:before,
+html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-europa-conf .match-header-unit:before{background-image:url('/themes/match-cups-dark-v2.webp');background-size:300% 100%;background-repeat:no-repeat}
+html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-champions .match-header-unit:before{background-position:0% 50%}
+html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-europa .match-header-unit:before{background-position:50% 50%}
+html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-europa-conf .match-header-unit:before{background-position:100% 50%}
+html:not([data-theme=light]) .site-shell .match-workspace.competition-eng-1 .match-header-unit:before,
+html:not([data-theme=light]) .site-shell .match-workspace.competition-cro-1 .match-header-unit:before,
+html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-euro .match-header-unit:before{background-image:url('/themes/match-domestic-euro-dark-v2.webp');background-size:300% 100%;background-repeat:no-repeat}
+html:not([data-theme=light]) .site-shell .match-workspace.competition-eng-1 .match-header-unit:before{background-position:0% 50%}
+html:not([data-theme=light]) .site-shell .match-workspace.competition-cro-1 .match-header-unit:before{background-position:50% 50%}
+html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-euro .match-header-unit:before{background-position:100% 50%}
