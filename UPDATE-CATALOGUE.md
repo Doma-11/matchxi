@@ -179,3 +179,11 @@ Tottenham's existing ESPN crest retains its navy artwork with a thin white CSS c
 ## Restore Firefox preference (4 November 2026)
 
 Per owner request, external streams again prefer Firefox on Android (intent with normal HTTPS fallback) and Apple mobile (Firefox URL scheme plus explicit Open normally links). Desktop retains regular HTTPS links; websites cannot force desktop Firefox. In-app iframe playback remains browser-neutral. Includes the compact broadcast update above.
+
+## Supported-first Broadcast and persistent match browsing (4 November 2026)
+
+Opening Broadcast now classifies its listed sources using existing provider embed checks, with at most two checks concurrently, then displays supported sources first in stable source order, followed by unsupported/unverified links. Successful player metadata is reused from existing caches. Failed checks remain unverified rather than fabricated playable sources. Pending checks abort when leaving the section; no interval or background catalogue scans. This explicit sort may add one player-verification operation per uncached source at section entry, rather than checking only the clicked source. Entry cards identify in-app availability versus external/unverified links.
+
+Other games stays open when switching or selecting the current match, preserving the browsing layout. The separate toggle still closes the list. Video-only fullscreen keeps the existing browsing state, so exiting returns to the list. Existing cancellation, first-embeddable game selection, Firefox external-link preference and provider restrictions are unchanged.
+
+Validation: all 122 tests, TypeScript and production build pass. Added coverage for stable ordering, two-check concurrency, failed-source classification and cancellation; interaction tests verify the list stays open across successful and cancelled game switches.

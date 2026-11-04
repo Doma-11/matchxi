@@ -64,3 +64,12 @@ export async function firstEmbeddableStream(streams:any[],player:(stream:any,sig
  }
  return {index:0,player:{...last,embedAllowed:false,embedUrl:undefined,reason:'No embeddable source could be verified for this match. Open externally or try another source.',error:undefined}};
 }
+
+/** Stable supported-first order for the explicitly opened Broadcast list.
+ * At most two provider checks in flight; cancelled views schedule no more work. */
+export async function rankStreamSources(streams:any[],player:(stream:any,signal:AbortSignal)=>Promise<any>,signal:AbortSignal){
+ const checked:any[]=new Array(streams.length);let cursor=0;
+ async function worker(){while(cursor<streams.length){aborted(signal);const index=cursor++;let status='unverified';try{const result=await player(streams[index],signal);aborted(signal);status=result?.embedAllowed&&supportedStreamPlayer(result.embedUrl)?'supported':'unsupported';}catch{aborted(signal);}checked[index]={...streams[index],embedStatus:status};}}
+ await Promise.all([worker(),worker()]);aborted(signal);
+ return [...checked.filter(s=>s.embedStatus==='supported'),...checked.filter(s=>s.embedStatus!=='supported')];
+}

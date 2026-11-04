@@ -6,7 +6,7 @@ import {LEAGUES,CLUB_CUPS,COMPETITIONS,isNationalCompetition} from './football-m
 import flags from './national-flags.json';
 import {streamBrowserLink,isAppleMobile} from './stream-browser-link';
 import {croatianCommentaryDestination} from './croatian-commentary';
-import {createStreamSession,liveStreamGames,streamGameKey,streamMinute,streamStep,firstEmbeddableStream} from './stream-session';
+import {createStreamSession,liveStreamGames,streamGameKey,streamMinute,streamStep,firstEmbeddableStream,rankStreamSources} from './stream-session';
 import {streamCompetition} from './stream-competition';
 import './stream-switcher.css';
 
@@ -28,7 +28,7 @@ export default function MatchStreamPanel({game,fixtures=[],entryVisible=true}:an
  useEffect(()=>{
   const abort=new AbortController();setResult(null);
   if(!live){setBusy(false);return;}
-  setBusy(true);session.current.listings(game,abort.signal).then(setResult).catch(e=>{if(!abort.signal.aborted)setResult({error:e.message||'Streams could not be checked. Please try again.'});}).finally(()=>{if(!abort.signal.aborted)setBusy(false);});
+  setBusy(true);session.current.listings(game,abort.signal).then(async found=>({...found,streams:await rankStreamSources(found.streams,(stream,signal)=>session.current.player(stream,signal),abort.signal)})).then(found=>{if(!abort.signal.aborted)setResult(found);}).catch(e=>{if(!abort.signal.aborted)setResult({error:e.message||'Streams could not be checked. Please try again.'});}).finally(()=>{if(!abort.signal.aborted)setBusy(false);});
   return()=>abort.abort();
  },[game.league,game.id,game.date,live]);
  useEffect(()=>{close();setWatched(game);return()=>{cancelPlayback();gamesRequest.current?.abort();};},[game.league,game.id,game.date]);
@@ -46,9 +46,9 @@ export default function MatchStreamPanel({game,fixtures=[],entryVisible=true}:an
  const chooseStream=(next:number)=>{if(opening||!watchedLive||!streams[next]||next===index&&player?.embedAllowed)return;void play(watched,streams,next);};
  const move=(direction:number)=>{if(streams.length>1)chooseStream(streamStep(index,direction,streams.length));};
  const chooseGame=async(target:any,force=false)=>{
-  if(!force&&streamGameKey(target)===streamGameKey(watched)){setGamesOpen(false);gamesRequest.current?.abort();setGamesBusy(false);return;}
+  if(!force&&streamGameKey(target)===streamGameKey(watched))return;
   cancelPlayback();const controller=new AbortController(),id=generation.current;action.current=controller;
-  gamesRequest.current?.abort();gamesRequest.current=null;setGamesBusy(false);setGamesOpen(false);setWatched(target);setStreams([]);setIndex(0);setPlayer(null);setOpening(true);setModalOpen(true);
+  gamesRequest.current?.abort();gamesRequest.current=null;setGamesBusy(false);setWatched(target);setStreams([]);setIndex(0);setPlayer(null);setOpening(true);setModalOpen(true);
   try{const found=await session.current.listings(target,controller.signal,force);if(controller.signal.aborted||generation.current!==id)return;setStreams(found.streams);
    if(!found.streams.length){setPlayer({reason:'No stream found for this match yet.'});return;}
    const next=await firstEmbeddableStream(found.streams,(stream,signal)=>session.current.player(stream,signal),controller.signal,checking=>{if(generation.current===id&&!controller.signal.aborted)setIndex(checking);});if(!controller.signal.aborted&&generation.current===id){setIndex(next.index);setPlayer(next.player);}
@@ -65,14 +65,14 @@ export default function MatchStreamPanel({game,fixtures=[],entryVisible=true}:an
   }catch{if(!controller.signal.aborted)setGamesNotice('Could not refresh. Showing the saved match list.');}
   finally{if(!controller.signal.aborted){setGamesBusy(false);gamesRequest.current=null;}}
  };
- const check=async()=>{if(busy||!live||result?.streams?.length)return;const controller=new AbortController();action.current?.abort();action.current=controller;setBusy(true);try{setResult(await session.current.listings(game,controller.signal,true));}catch(e:any){if(!controller.signal.aborted)setResult({error:e.message});}finally{if(!controller.signal.aborted)setBusy(false);}};
+ const check=async()=>{if(busy||!live||result?.streams?.length)return;const controller=new AbortController();action.current?.abort();action.current=controller;setBusy(true);try{const found=await session.current.listings(game,controller.signal,true);const ordered=await rankStreamSources(found.streams,(stream,signal)=>session.current.player(stream,signal),controller.signal);if(!controller.signal.aborted)setResult({...found,streams:ordered});}catch(e:any){if(!controller.signal.aborted)setResult({error:e.message});}finally{if(!controller.signal.aborted)setBusy(false);}};
  const toggleFullscreen=async()=>{setFullscreenNotice('');try{if(document.fullscreenElement===viewport.current)await document.exitFullscreen();else if(viewport.current?.requestFullscreen)await viewport.current.requestFullscreen();else setFullscreenNotice('Fullscreen is unavailable in this browser.');}catch{setFullscreenNotice('Fullscreen is unavailable in this browser.');}};
  const otherGames=liveStreamGames(games,watched);
  return <section className="match-stream-panel" hidden={!entryVisible} ref={panel} tabIndex={-1}><header className="stream-section-heading"><h2>Livestream</h2><span className="stream-live-badge">LIVE</span></header>{live?<>
  {croatian&&<aside className="croatian-commentary-option"><a className="croatian-commentary-action" href={href(croatian.url)} target={mobile?undefined:'_blank'} rel="noopener noreferrer"><span className="croatian-commentary-flag" role="img" aria-label="Croatia">🇭🇷</span><strong>Croatian commentary stream</strong><ExternalLink size={17}/></a><p>{croatian.kind==='match-page'?'Opens this match on BHLiga. Select Broadcast → HR, if available.':'Opens BHLiga listings. Select this match → Broadcast → HR, if available.'}</p>{apple&&<a className="croatian-commentary-source" href={croatian.url} target="_blank" rel="noopener noreferrer">Open normally<ExternalLink size={12}/></a>}</aside>}
  {busy&&<p role="status">Finding streams…</p>}{result?.error&&<p role="status">{result.error}</p>}
  {result?.streams?.length>0?<div className="stream-links">{result.streams.map((s:any,i:number)=><article className="stream-link-choice" key={s.url}>
- <span className="stream-card-label">Stream {i+1}</span><button className="stream-play" onClick={e=>{opener.current=e.currentTarget;setGamesOpen(false);void play(game,result.streams,i);}} disabled={opening} aria-label={'Play stream '+(i+1)+' in app'}><span className="stream-play-icon"><Play size={26} fill="currentColor"/></span><strong>Play in app</strong></button>
+ <span className="stream-card-label">Stream {i+1}{s.embedStatus&&<small className="stream-embed-status">{s.embedStatus==='supported'?'In-app available':s.embedStatus==='unsupported'?'External link':'Not verified'}</small>}</span><button className="stream-play" onClick={e=>{opener.current=e.currentTarget;setGamesOpen(false);void play(game,result.streams,i);}} disabled={opening} aria-label={'Play stream '+(i+1)+' in app'}><span className="stream-play-icon"><Play size={26} fill="currentColor"/></span><strong>Play in app</strong></button>
  <div className="stream-card-footer"><a href={href(s.url)} target={mobile?undefined:'_blank'} rel="noopener noreferrer">Open link<ExternalLink size={14}/></a>{apple&&<a className="stream-normal-link" href={s.url} target="_blank" rel="noopener noreferrer">Open normally</a>}</div></article>)}</div>:!busy&&result&&<><p role="status">{result.error?'':'No stream found for this match yet.'}</p><button className="stream-check" onClick={check}>Try again</button></>}
  </>:<p>Livestreams are available while the match is live.</p>}
  <Dialog.Root open={modalOpen} onOpenChange={open=>{if(!open)close();}}>{modalOpen&&<Dialog.Portal><Dialog.Overlay className="stream-popup-overlay"/><Dialog.Content ref={popup} className={'stream-popup stream-switch-popup stream-theme-'+watched.league.replaceAll('.','-')+(gamesOpen?' stream-games-expanded':'')} style={modalStyle} aria-describedby={undefined} onCloseAutoFocus={e=>{e.preventDefault();if(!entryVisible)panel.current?.closest('.match-workspace')?.querySelector<HTMLButtonElement>('.match-tabs-list [data-state="active"]')?.focus();else if(opener.current?.isConnected)opener.current.focus();else panel.current?.focus();}}>

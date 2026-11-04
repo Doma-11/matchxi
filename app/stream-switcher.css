@@ -97,3 +97,5 @@
  .stream-switch-popup .stream-popup-toolbar>div:first-child{gap:5px;flex-wrap:wrap}
  .stream-switch-popup .stream-popup-toolbar h2{flex-basis:100%}
 }
+
+.stream-embed-status{display:block;margin-top:3px;font-size:10px;font-weight:500;opacity:.75}

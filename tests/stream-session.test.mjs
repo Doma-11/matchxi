@@ -53,3 +53,11 @@ test('explicit game switching skips rejected and failed sources, stops on a veri
  const controller=new AbortController();let count=0;
  await assert.rejects(firstEmbeddableStream(sources,async()=>{count++;controller.abort();return {embedAllowed:false};},controller.signal),{name:'AbortError'});assert.equal(count,1);
 });
+
+test('Broadcast ranking is stable, checks at most two sources concurrently, and keeps failures after supported sources',async()=>{
+ const {rankStreamSources}=await import('data:text/javascript;base64,'+Buffer.from(built.outputFiles[0].text).toString('base64'));let active=0,peak=0;
+ const sources=[0,1,2,3,4].map(id=>({id}));const ranked=await rankStreamSources(sources,async source=>{active++;peak=Math.max(peak,active);await new Promise(resolve=>setImmediate(resolve));active--;if(source.id===2)throw Error('Source unavailable');return source.id===1||source.id===4?{embedAllowed:true,embedUrl:embed}:{embedAllowed:false};},signal());
+ assert.equal(peak,2);assert.deepEqual(ranked.map(s=>s.id),[1,4,0,2,3]);assert.deepEqual(ranked.map(s=>s.embedStatus),['supported','supported','unsupported','unverified','unsupported']);
+ const controller=new AbortController();let calls=0;
+ await assert.rejects(rankStreamSources(sources,async()=>{calls++;controller.abort();return {embedAllowed:false};},controller.signal),{name:'AbortError'});assert.equal(calls,1,'no subsequent source checks after cancellation');
+});
