@@ -173,4 +173,9 @@ Tottenham's existing ESPN crest retains its navy artwork with a thin white CSS c
 - Explicit Other games selection checks sources sequentially and stops at the first supported verified embed. Provider errors/restrictions are skipped; cancellation and generation checks reject late results. If all checks fail, keep the external fallback and manual arrows. No background scans, retries or timers are added; successful player checks use existing caches. Embed policy verification is not proof of playable media.
 - Fullscreen requests the video viewport only, excluding Touchline header, controls and sidebar. Provider controls can remain. Existing iframe sandbox/referrer rules are unchanged.
 - Audio remains controlled by the cross-origin provider/browser: no documented provider unmute API is integrated, no fabricated mute query parameters or click simulation. Users may still need to unmute inside the provider.
-- Validation: 120 tests pass, TypeScript and production build pass. New tests cover rejected/failed-source skipping, stop-on-success, cancellation, arrow-only controls, competition identity and fullscreen targeting. Visual preview infrastructure is unavailable; actual third-party browser playback remains unverified.
+- Validation: 121 tests pass, TypeScript and production build pass. New tests cover rejected/failed-source skipping, stop-on-success, cancellation, arrow-only controls, competition identity and fullscreen targeting. Visual preview infrastructure is unavailable; actual third-party browser playback remains unverified.
+
+
+## Restore Firefox preference (4 November 2026)
+
+Per owner request, external streams again prefer Firefox on Android (intent with normal HTTPS fallback) and Apple mobile (Firefox URL scheme plus explicit Open normally links). Desktop retains regular HTTPS links; websites cannot force desktop Firefox. In-app iframe playback remains browser-neutral. Includes the compact broadcast update above.
