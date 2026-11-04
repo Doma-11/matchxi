@@ -43,3 +43,13 @@ test('empty listing cache can be retried explicitly and a source failure does no
  assert.equal((await client.listings(game,signal())).streams.length,0);assert.equal((await client.listings(game,signal(),true)).streams.length,1);
  await assert.rejects(client.listings(game,signal(),true),/Source unavailable/);assert.equal((await client.listings(game,signal())).streams.length,1);assert.equal(calls,3);
 });
+
+test('explicit game switching skips rejected and failed sources, stops on a verified embed, and respects cancellation',async()=>{
+ const {firstEmbeddableStream}=await import('data:text/javascript;base64,'+Buffer.from(built.outputFiles[0].text).toString('base64'));
+ const sources=[1,2,3,4].map(id=>({id})),seen=[],checked=[];
+ const found=await firstEmbeddableStream(sources,async source=>{seen.push(source.id);if(source.id===1)return {embedAllowed:false};if(source.id===2)throw Error('Source unavailable');return {embedAllowed:true,embedUrl:embed};},signal(),index=>checked.push(index));
+ assert.equal(found.index,2);assert.equal(found.player.embedUrl,embed);assert.deepEqual(seen,[1,2,3]);assert.deepEqual(checked,[0,1,2]);
+ const missing=await firstEmbeddableStream(sources,async()=>({embedAllowed:false}),signal());assert.equal(missing.player.embedAllowed,false);assert.equal(missing.player.embedUrl,undefined);
+ const controller=new AbortController();let count=0;
+ await assert.rejects(firstEmbeddableStream(sources,async()=>{count++;controller.abort();return {embedAllowed:false};},controller.signal),{name:'AbortError'});assert.equal(count,1);
+});

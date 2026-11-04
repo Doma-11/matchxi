@@ -165,3 +165,12 @@ External stream and Croatian commentary links now retain their ordinary HTTPS UR
 ## Tottenham crest contrast (4 November 2026)
 
 Tottenham's existing ESPN crest retains its navy artwork with a thin white CSS contour around its transparent shape across app screens. No boxed backing, data changes or extra asset requests. Online comparison included the club's brand page and ESPN's dark-background variant (fully white, rather than the requested outlined navy mark).
+
+## Compact themed broadcast window (4 November 2026)
+
+- One arrow-only source selector with Stream N / total replaces the dropdown. Selector and Other games occupy equal halves of a compact 44px control row.
+- Header shows the watched competition's logo. Window, controls and sidebar use its palette; Champions League, Europa League and Conference League use their existing artwork and blue/orange/green identities. Individual fixture cards keep their own competition colours. Highlight-card palettes are unchanged.
+- Explicit Other games selection checks sources sequentially and stops at the first supported verified embed. Provider errors/restrictions are skipped; cancellation and generation checks reject late results. If all checks fail, keep the external fallback and manual arrows. No background scans, retries or timers are added; successful player checks use existing caches. Embed policy verification is not proof of playable media.
+- Fullscreen requests the video viewport only, excluding Touchline header, controls and sidebar. Provider controls can remain. Existing iframe sandbox/referrer rules are unchanged.
+- Audio remains controlled by the cross-origin provider/browser: no documented provider unmute API is integrated, no fabricated mute query parameters or click simulation. Users may still need to unmute inside the provider.
+- Validation: 120 tests pass, TypeScript and production build pass. New tests cover rejected/failed-source skipping, stop-on-success, cancellation, arrow-only controls, competition identity and fullscreen targeting. Visual preview infrastructure is unavailable; actual third-party browser playback remains unverified.

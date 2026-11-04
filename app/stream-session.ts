@@ -52,3 +52,15 @@ export function createStreamSession({fetcher=(...args:Parameters<typeof fetch>)=
   }
  };
 }
+
+/** On an explicit game change, stop at the first source passing provider embed checks.
+ * One request at a time; cancellation stops the scan. Existing successful player checks are reused by the session. */
+export async function firstEmbeddableStream(streams:any[],player:(stream:any,signal:AbortSignal)=>Promise<any>,signal:AbortSignal,onChecking?:(index:number)=>void){
+ let last:any={reason:'No stream found for this match yet.'};
+ for(let index=0;index<streams.length;index++){
+  aborted(signal);onChecking?.(index);
+  try{const result=await player(streams[index],signal);aborted(signal);last=result;if(result?.embedAllowed&&supportedStreamPlayer(result.embedUrl))return {index,player:result};}
+  catch(e:any){aborted(signal);last={error:e.message||'This source could not be checked.'};}
+ }
+ return {index:0,player:{...last,embedAllowed:false,embedUrl:undefined,reason:'No embeddable source could be verified for this match. Open externally or try another source.',error:undefined}};
+}

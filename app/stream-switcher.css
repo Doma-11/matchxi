@@ -21,9 +21,6 @@
 .stream-switch-popup .stream-source-switch>button{display:flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;min-height:44px;padding:0;color:#fff;background:transparent;border:0}
 .stream-switch-popup .stream-source-switch>button:hover:not(:disabled){background:#ffffff10}
 .stream-switch-popup .stream-source-switch>button:disabled{opacity:.3;cursor:default}
-.stream-switch-popup .stream-source-switch>label{flex:1;min-width:0}
-.stream-switch-popup .stream-source-switch select{display:block;width:100%;min-width:0;min-height:44px;background:transparent;color:#f3f6fc;border:0;padding:7px 22px 7px 9px;font-size:13px;font-weight:650;text-align:center;cursor:pointer;color-scheme:dark}
-.stream-switch-popup .stream-source-switch option{background:#111a28;color:#fff}
 .stream-switch-popup .stream-games-toggle{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 13px;border:1px solid color-mix(in srgb,var(--accent) 75%,#ffffff20);border-radius:11px;background:transparent;color:#f5f8ff;font-size:13px;font-weight:650;white-space:nowrap}
 .stream-switch-popup .stream-games-toggle[aria-expanded=true]{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}
 .stream-switch-popup .stream-fullscreen-notice{margin:0;padding:6px 13px 10px;font-size:12px;color:#bac8d9;background:#101823}
@@ -49,10 +46,6 @@
 .stream-switch-popup :is(.stream-games-empty,.stream-games-notice){font-size:12px;line-height:1.5;color:#b7c7da;margin:12px 4px 4px}
 .stream-switch-popup .stream-sheet-handle{display:none}
 .stream-switch-popup :is(button,a,select):focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
-.stream-popup.stream-switch-popup:fullscreen{position:fixed;inset:0;transform:none;width:100vw;height:100dvh;max-height:100dvh;max-width:none;border:0;border-radius:0;margin:0}
-.stream-switch-popup:fullscreen .stream-switch-body{flex:1;min-height:0;overflow:hidden}
-.stream-switch-popup:fullscreen .stream-viewport{aspect-ratio:auto;flex:1;min-height:0;max-height:none}
-.stream-switch-popup:fullscreen .stream-other-games{max-height:none}
 @keyframes stream-games-appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:760px){
  .stream-popup.stream-switch-popup{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:16px}
@@ -63,7 +56,6 @@
  .stream-switch-popup .stream-popup-toolbar .stream-live-badge{font-size:9px;padding:3px 5px}
  .stream-switch-popup .stream-switch-controls{padding:7px;gap:7px;min-height:60px}
  .stream-switch-popup .stream-source-switch>button{flex-basis:44px;width:44px}
- .stream-switch-popup .stream-source-switch select{font-size:11px;padding-left:3px;padding-right:16px}
  .stream-switch-popup .stream-games-toggle{padding:9px;gap:6px;font-size:11px}
  .stream-switch-popup .stream-games-toggle svg{width:16px}
  .stream-switch-popup .stream-other-games{max-height:34dvh;min-height:130px;border-left:0;border-top:1px solid #ffffff20;border-radius:20px 20px 0 0;padding:9px 10px 12px}
@@ -72,10 +64,7 @@
  .stream-switch-popup .stream-game-teams strong{font-size:12px}
  .stream-switch-popup .stream-games-meta{padding-bottom:7px}
  .stream-switch-popup .stream-viewport{min-height:120px}
- .stream-switch-popup:fullscreen.stream-games-expanded .stream-switch-body{overflow:auto}
- .stream-switch-popup:fullscreen .stream-viewport{flex:none;aspect-ratio:16/9;min-height:120px;max-height:calc(100dvh - 150px)}
 }
-@media(max-width:380px){.stream-switch-popup .stream-window-actions :is(a,button){min-width:44px;width:44px}.stream-switch-popup .stream-switch-controls{gap:5px}.stream-switch-popup .stream-games-toggle{font-size:10px;padding:8px 6px}.stream-switch-popup .stream-source-switch>button{flex-basis:44px;width:44px}.stream-switch-popup .stream-source-switch select{font-size:10px}.stream-switch-popup .stream-player-message{font-size:12px;padding:14px;gap:8px}}
 @media(prefers-reduced-motion:reduce){.stream-switch-popup .stream-other-games{animation:none}}
 /* Give each fixture its own league palette, rather than the watched game's colour. */
 .stream-switch-popup .stream-game-option{border:1px solid color-mix(in srgb,var(--stream-game-accent) 23%,#ffffff08);border-left:3px solid var(--stream-game-accent);background:linear-gradient(115deg,color-mix(in srgb,var(--stream-game-brand) 43%,#111722),color-mix(in srgb,var(--stream-game-surface) 48%,#101722));padding:10px 7px 10px 8px}
@@ -84,3 +73,27 @@
 .stream-switch-popup .stream-game-meta{display:flex;align-items:center;justify-content:space-between;gap:5px;min-width:0}
 .stream-switch-popup .stream-game-meta small{color:var(--stream-game-accent);flex:none}
 .stream-switch-popup .stream-game-competition{display:block;max-width:76%;padding:2px 5px;border-radius:5px;background:color-mix(in srgb,var(--stream-game-accent) 12%,transparent);color:var(--stream-game-accent);font-size:9px;font-weight:650;line-height:1.35;text-align:right;overflow-wrap:anywhere}
+
+/* Competition-owned streaming window; provider content remains unmodified. */
+.stream-popup.stream-switch-popup{border:1px solid color-mix(in srgb,var(--accent) 68%,transparent);background:var(--stream-surface,#081020);box-shadow:0 20px 80px #0009,0 0 30px color-mix(in srgb,var(--accent) 10%,transparent)}
+.stream-switch-popup .stream-popup-toolbar{background:linear-gradient(115deg,color-mix(in srgb,var(--stream-brand) 55%,#050b20),var(--stream-surface));border-color:color-mix(in srgb,var(--accent) 24%,transparent)}
+.stream-switch-popup .stream-competition-logo{display:block;width:80px;height:42px;object-fit:contain;flex:none;margin-right:4px}
+.stream-switch-popup .stream-window-actions button:disabled{opacity:.35;cursor:default}
+.stream-switch-popup .stream-switch-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;min-height:0;padding:8px;background:var(--stream-surface);border-color:color-mix(in srgb,var(--accent) 20%,transparent)}
+.stream-switch-popup :is(.stream-source-switch,.stream-games-toggle){height:44px;min-height:44px;box-sizing:border-box;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:11px;background:linear-gradient(165deg,color-mix(in srgb,var(--stream-brand) 85%,#102859),var(--stream-surface));color:#fff;padding:0;font-size:13px;box-shadow:inset 0 1px 0 #ffffff16}
+.stream-switch-popup .stream-source-label{flex:1;min-width:0;text-align:center;font-size:13px;font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stream-switch-popup .stream-games-toggle[aria-expanded=true]{background:linear-gradient(165deg,var(--stream-brand),var(--stream-surface));color:#fff;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent)}
+.stream-switch-popup .stream-other-games{background:linear-gradient(145deg,color-mix(in srgb,var(--stream-brand) 28%,var(--stream-surface)),var(--stream-surface));border-color:color-mix(in srgb,var(--accent) 24%,transparent)}
+.stream-switch-popup.stream-theme-uefa-champions :is(.stream-popup-toolbar,.stream-other-games){background-image:linear-gradient(120deg,#020b2ce6,#04103bc4),url('/themes/match-desktop-champions-v3.webp');background-position:center;background-size:cover}
+.stream-switch-popup.stream-theme-uefa-europa :is(.stream-popup-toolbar,.stream-other-games){background-image:linear-gradient(120deg,#170b04ed,#2a1308c9),url('/themes/match-desktop-europa-v3.webp');background-position:center;background-size:cover}
+.stream-switch-popup.stream-theme-uefa-europa-conf :is(.stream-popup-toolbar,.stream-other-games){background-image:linear-gradient(120deg,#021308ed,#052510c9),url('/themes/match-desktop-conference-v3.webp');background-position:center;background-size:cover}
+/* Only this video viewport enters fullscreen: app toolbars/sidebar stay outside. */
+.stream-switch-popup .stream-viewport:fullscreen{width:100vw;height:100dvh;max-height:none;min-height:0;aspect-ratio:auto;background:#000}
+@media(max-width:760px){
+ .stream-switch-popup .stream-competition-logo{width:42px;height:34px;margin:0}
+ .stream-switch-popup .stream-source-label{font-size:11px}
+ .stream-switch-popup :is(.stream-source-switch,.stream-games-toggle){font-size:11px}
+ .stream-switch-popup .stream-source-switch>button{width:36px;flex-basis:36px}
+ .stream-switch-popup .stream-popup-toolbar>div:first-child{gap:5px;flex-wrap:wrap}
+ .stream-switch-popup .stream-popup-toolbar h2{flex-basis:100%}
+}
