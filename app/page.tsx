@@ -1,3 +1,4 @@
+import './match-logo-overrides.css';
 import './match-backgrounds-v2.css';
 import './competition-skins.css';
 import BackButton from './back-button';

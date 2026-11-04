@@ -19,3 +19,7 @@ Remove the single `import './match-backgrounds-v2.css';` line from `app/page.tsx
 - `app/match-backgrounds-v2.css`: dark-match-only panel selectors.
 
 The image backgrounds were prepared from the approved uploaded artwork; small central logo/wordmark copies were removed so the live competition logo is displayed once. Decorative ball, trophy and lion imagery remains. Files use WebP encoding and normal browser caching, with no API work or scheduled refreshes.
+
+## Standalone logo follow-up
+
+The Premier League and HNL match logos are controlled separately by `app/match-logo-overrides.css`. This removes their white backing tiles; Premier League uses the stacked vector mark in `public/logos/premier-league-stacked.svg`. Dark headers use white marks; light headers use dark marks. Removing the background override import does not remove these independent logo improvements.

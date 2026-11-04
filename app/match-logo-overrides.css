@@ -1,0 +1,5 @@
+/* Standalone match emblems matching the approved background artwork. */
+.site-shell .match-workspace:is(.competition-eng-1,.competition-cro-1) .match-header-unit .match-competition>img{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;filter:brightness(0) invert(1)!important;object-fit:contain}
+.site-shell .match-workspace.competition-eng-1 .match-header-unit .match-competition>img{content:url('/logos/premier-league-stacked.svg')!important}
+.site-shell .match-workspace.competition-cro-1 .match-header-unit .match-competition>img{width:140px;max-width:150px}
+html[data-theme=light] .site-shell .match-workspace:is(.competition-eng-1,.competition-cro-1) .match-header-unit .match-competition>img{filter:brightness(0)!important}
