@@ -161,3 +161,7 @@ Seven user-supplied widescreen images are served as individual optimised WebP as
 ## Browser-neutral external stream links (4 November 2026)
 
 External stream and Croatian commentary links now retain their ordinary HTTPS URLs on Android, iOS and desktop. Removed Firefox intents/custom schemes and redundant iOS Open normally duplicates. Browser selection follows the user's browser/OS; embedded playback, sandbox and source fetching are unchanged.
+
+## Tottenham crest contrast (4 November 2026)
+
+Tottenham's existing ESPN crest retains its navy artwork with a thin white CSS contour around its transparent shape across app screens. No boxed backing, data changes or extra asset requests. Online comparison included the club's brand page and ESPN's dark-background variant (fully white, rather than the requested outlined navy mark).
