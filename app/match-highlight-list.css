@@ -1,0 +1,34 @@
+.site-shell .match-workspace .match-highlights.match-highlight-section{background:transparent!important;border:0!important;padding:0;border-radius:0}
+.site-shell .match-highlight-section .section-heading{margin:0 0 18px;align-items:center}
+.site-shell .match-highlight-section .section-heading h2{font-family:'DM Sans',Arial,sans-serif;letter-spacing:normal;font-size:21px}
+.site-shell .match-highlight-section .kicker{color:var(--highlight-accent)}
+.site-shell .match-highlight-list{display:flex;flex-direction:column;gap:14px;width:100%;min-width:0}
+.site-shell .match-workspace .match-highlight-row{display:grid;grid-template-columns:minmax(0,1fr) auto;min-width:0;width:100%;overflow:hidden;border:1px solid color-mix(in srgb,var(--highlight-accent) 32%,transparent);border-left:3px solid var(--highlight-accent);border-radius:17px;background:linear-gradient(125deg,color-mix(in srgb,var(--highlight-brand) 58%,#111925),var(--highlight-surface));box-shadow:0 7px 22px #00000012}
+.site-shell .match-highlight-row .match-highlight-watch{display:grid;grid-template-columns:clamp(135px,22vw,240px) minmax(0,1fr);align-items:center;gap:20px;width:100%;min-width:0;padding:14px;border:0;text-align:left;background:transparent;color:#f4f7fd}
+.site-shell .match-highlight-row .match-highlight-watch:hover{background:#ffffff06}
+.site-shell .match-highlight-thumb{display:block;position:relative;aspect-ratio:16/9;border-radius:11px;overflow:hidden;background:#020610}
+.site-shell .match-highlight-thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 200ms ease}
+.site-shell .match-highlight-watch:hover .match-highlight-thumb img{transform:scale(1.035)}
+.site-shell .match-highlight-thumb .match-highlight-play{position:absolute;inset:0;display:grid;place-items:center;background:#00000026;color:#fff}
+.site-shell .match-highlight-play svg{width:43px;height:43px;padding:11px;border-radius:50%;background:#08111bbf;box-shadow:0 2px 14px #0003}
+.site-shell .match-highlight-thumb .match-highlight-duration{position:absolute;right:7px;bottom:6px;background:#020610d9;color:#fff;font-size:11px;font-weight:700;line-height:1.4;letter-spacing:.2px;padding:3px 6px;border-radius:5px;font-variant-numeric:tabular-nums}
+.site-shell .match-highlight-copy{display:flex;flex-direction:column;gap:9px;min-width:0}
+.site-shell .match-highlight-row .match-highlight-title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:17px;font-weight:650;line-height:1.45;color:#f4f7fd;overflow-wrap:anywhere}
+.site-shell .match-highlight-publisher{display:block;font-size:12px;line-height:1.4;color:#c4d0e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.site-shell .match-highlight-action{display:flex;align-items:center;gap:5px;font-size:11px;line-height:1.4;color:color-mix(in srgb,var(--highlight-accent) 65%,white)}
+.site-shell .match-highlight-row .match-highlight-outbound{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:44px;min-height:44px;align-self:center;margin:8px 14px 8px 0;padding:10px;border-radius:10px;color:#f4f7fd;font-size:12px;background:#ffffff08}
+.site-shell .match-highlight-outbound:hover{background:#ffffff15}
+.site-shell .match-highlight-row :is(button,a):focus-visible{outline:2px solid var(--highlight-accent);outline-offset:-4px}
+.site-shell .match-highlights-empty{padding:32px 20px;text-align:center;border:1px solid color-mix(in srgb,var(--highlight-accent) 25%,transparent);border-radius:17px;background:color-mix(in srgb,var(--highlight-surface) 80%,#101722)}
+.site-shell .match-highlights-empty>svg{color:var(--highlight-accent);margin:0 auto 12px}
+.site-shell .match-highlights-empty h3{font-size:17px;letter-spacing:normal;margin:0 0 8px}
+.site-shell .match-highlights-empty p{font-size:12px;line-height:1.6;opacity:.75}
+html[data-theme=light] .site-shell .match-workspace .match-highlight-row{background:linear-gradient(125deg,color-mix(in srgb,var(--highlight-brand) 11%,white),color-mix(in srgb,var(--highlight-brand) 5%,white))!important;border-color:color-mix(in srgb,var(--highlight-brand) 28%,#d8e1ed);border-left-color:var(--highlight-brand)}
+html[data-theme=light] .site-shell .match-workspace .match-highlight-row :is(.match-highlight-title,.match-highlight-outbound){color:#182235!important}
+html[data-theme=light] .site-shell .match-workspace .match-highlight-row :is(.match-highlight-publisher,.match-highlight-action){color:#52647a!important}
+html[data-theme=light] .site-shell .match-workspace .match-highlight-row .match-highlight-thumb :is(.match-highlight-duration,.match-highlight-play){color:#fff!important}
+html[data-theme=light] .site-shell .match-workspace .match-highlight-outbound{background:#253c5708}
+html[data-theme=light] .site-shell .match-workspace .match-highlights-empty{background:linear-gradient(125deg,color-mix(in srgb,var(--highlight-brand) 9%,white),white);border-color:color-mix(in srgb,var(--highlight-brand) 25%,#d8e1ed)}
+@media(max-width:600px){.site-shell .match-highlight-row .match-highlight-watch{grid-template-columns:116px minmax(0,1fr);gap:11px;padding:11px}.site-shell .match-highlight-copy{gap:6px}.site-shell .match-highlight-row .match-highlight-title{font-size:13px;line-height:1.4}.site-shell .match-highlight-publisher{font-size:10px}.site-shell .match-highlight-action{font-size:10px}.site-shell .match-highlight-row .match-highlight-outbound{padding:8px;margin:0 4px 0 0;background:transparent}.site-shell .match-highlight-outbound>span{display:none}.site-shell .match-highlight-thumb{border-radius:8px}.site-shell .match-highlight-thumb .match-highlight-duration{font-size:10px;padding:2px 4px;right:4px;bottom:4px}.site-shell .match-highlight-play svg{width:34px;height:34px;padding:9px}.site-shell .match-highlight-section .section-heading h2{font-size:19px}.site-shell .match-highlight-section .section-heading>.subtle{display:none}}
+@media(max-width:360px){.site-shell .match-highlight-row .match-highlight-watch{grid-template-columns:98px minmax(0,1fr);gap:8px;padding:9px}.site-shell .match-highlight-row .match-highlight-title{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.site-shell .match-highlight-thumb img{transition:none}}

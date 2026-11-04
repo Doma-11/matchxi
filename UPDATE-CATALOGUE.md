@@ -142,3 +142,12 @@ Existing Back controls on matches, club/competition pages and the match error sc
 ## Competition-coded stream menu (4 November 2026)
 
 Each Other games row now carries its own competition background tint, accent stripe and readable league-name badge instead of inheriting the currently watched game's accent. Premier League uses purple, HNL uses the new approved red identity, and the other supported competitions retain their model palettes. Watching state uses that row's own accent. Labels keep competitions distinguishable without relying solely on colour. This is static client-side styling with no additional API requests. Interaction checks verify that a Premier League row and a Serie A row have independent palettes and visible competition labels.
+
+
+## Match Broadcast and finished highlights (4 November 2026)
+
+Live matches label the final tab Broadcast and open stream listings directly, without a nested media toggle. Finished matches retain Highlights; upcoming/live matches no longer show the after-full-time placeholder or perform highlight discovery. A stream of another live game remains open if the underlying match finishes.
+
+Finished-match videos use one horizontal, competition-themed row each, two-line titles and an external YouTube option. Published duration metadata is parsed during existing discovery and preserved in saved catalogue records. Playback can supplement missing durations through a local cache using the existing player timer; unavailable lengths are labelled honestly. No additional discovery requests, polling intervals or scheduling changes.
+
+Validation: 119 tests pass, TypeScript and the production build pass. Coverage includes media states, duration parsing/cache/storage, restricted-video links and cross-game player continuity.
