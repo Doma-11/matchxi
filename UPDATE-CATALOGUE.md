@@ -156,3 +156,8 @@ Validation: 119 tests pass, TypeScript and the production build pass. Coverage i
 ## Desktop widescreen match artwork (4 November 2026)
 
 Seven user-supplied widescreen images are served as individual optimised WebP assets for desktop dark-mode match headers (1024px and wider): Champions League, Europa League, Conference League, Premier League, Serie A, Nations League and EURO. Each match loads its own image rather than a seven-image atlas. EURO retains its sharp foreground logo over the supplied logo-free background. Bottom-aligned cover framing, the existing subtle blur and foreground emblems preserve readability. Mobile, light theme, other competitions and all data/polling behaviour are unchanged. Previous assets are retained; removing the match-backgrounds-desktop.css import restores the previous desktop artwork.
+
+
+## Browser-neutral external stream links (4 November 2026)
+
+External stream and Croatian commentary links now retain their ordinary HTTPS URLs on Android, iOS and desktop. Removed Firefox intents/custom schemes and redundant iOS Open normally duplicates. Browser selection follows the user's browser/OS; embedded playback, sandbox and source fetching are unchanged.
