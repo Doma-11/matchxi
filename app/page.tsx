@@ -1,5 +1,6 @@
 import './match-logo-overrides.css';
 import './match-backgrounds-v2.css';
+import './match-backgrounds-desktop.css';
 import './competition-skins.css';
 import BackButton from './back-button';
 import {attachSwipeNavigation} from './swipe-navigation';

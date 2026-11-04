@@ -1,0 +1,26 @@
+/* Desktop-only widescreen artwork. Mobile and light surfaces retain their designs.
+   Rollback: remove this import from page.tsx; v1/v2 artwork is retained.
+   Bottom framing keeps the decorative edges visible and crops the baked-in marks;
+   the existing accessible foreground emblem remains sharp, including EURO. */
+@media (min-width:1024px){
+ html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-champions{--match-desktop-art:url('/themes/match-desktop-champions-v3.webp')}
+ html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-europa{--match-desktop-art:url('/themes/match-desktop-europa-v3.webp')}
+ html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-europa-conf{--match-desktop-art:url('/themes/match-desktop-conference-v3.webp')}
+ html:not([data-theme=light]) .site-shell .match-workspace.competition-eng-1{--match-desktop-art:url('/themes/match-desktop-premier-v3.webp')}
+ html:not([data-theme=light]) .site-shell .match-workspace.competition-ita-1{--match-desktop-art:url('/themes/match-desktop-serie-a-v3.webp')}
+ html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-nations{--match-desktop-art:url('/themes/match-desktop-nations-v3.webp')}
+ html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-euro{--match-desktop-art:url('/themes/match-desktop-euro-v3.webp')}
+ html:not([data-theme=light]) .site-shell .match-workspace:is(.competition-uefa-champions,.competition-uefa-europa,.competition-uefa-europa-conf,.competition-eng-1,.competition-ita-1,.competition-uefa-nations,.competition-uefa-euro) .match-header-unit:before{
+  background-image:var(--match-desktop-art);
+  background-size:cover;
+  background-position:center bottom;
+  background-repeat:no-repeat;
+ }
+ html:not([data-theme=light]) .site-shell .match-workspace.competition-uefa-euro .match-header-unit .match-competition>img{
+  content:url('/logos/euro-2024.svg');
+  background:transparent!important;
+  padding:0!important;
+  object-fit:contain;
+  filter:drop-shadow(0 2px 4px #0008);
+ }
+}

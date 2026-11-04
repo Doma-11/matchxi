@@ -151,3 +151,8 @@ Live matches label the final tab Broadcast and open stream listings directly, wi
 Finished-match videos use one horizontal, competition-themed row each, two-line titles and an external YouTube option. Published duration metadata is parsed during existing discovery and preserved in saved catalogue records. Playback can supplement missing durations through a local cache using the existing player timer; unavailable lengths are labelled honestly. No additional discovery requests, polling intervals or scheduling changes.
 
 Validation: 119 tests pass, TypeScript and the production build pass. Coverage includes media states, duration parsing/cache/storage, restricted-video links and cross-game player continuity.
+
+
+## Desktop widescreen match artwork (4 November 2026)
+
+Seven user-supplied widescreen images are served as individual optimised WebP assets for desktop dark-mode match headers (1024px and wider): Champions League, Europa League, Conference League, Premier League, Serie A, Nations League and EURO. Each match loads its own image rather than a seven-image atlas. EURO retains its sharp foreground logo over the supplied logo-free background. Bottom-aligned cover framing, the existing subtle blur and foreground emblems preserve readability. Mobile, light theme, other competitions and all data/polling behaviour are unchanged. Previous assets are retained; removing the match-backgrounds-desktop.css import restores the previous desktop artwork.
