@@ -54,3 +54,24 @@ test('game change selects a later embeddable source, with arrow-only controls an
  await button(tree,'Fullscreen player').props.onClick();tree=await flush(ui);assert.equal(requested,1);assert.ok(button(tree,'Exit fullscreen'),'fullscreen targets video viewport');globalThis.document.fullscreenElement=null;
  }finally{ui.unmount();env.restore();}
 });
+
+const multiviewBuilt=await build({entryPoints:['app/stream-multiview.tsx'],bundle:true,platform:'node',format:'esm',packages:'external',write:false,jsx:'automatic',loader:{'.css':'empty'},plugins:[{name:'multiview-hooks',setup(b){b.onResolve({filter:/^react$/},()=>({path:'hooks',namespace:'hooks'}));b.onLoad({filter:/.*/,namespace:'hooks'},()=>({contents:'export const useState=(...a)=>globalThis.__streamHooks.state(...a),useRef=(...a)=>globalThis.__streamHooks.ref(...a),useEffect=(...a)=>globalThis.__streamHooks.effect(...a);'}));}}]});
+await writeFile('qa-temp/multiview-interaction.mjs',multiviewBuilt.outputFiles[0].text);const {default:Multiview}=await import('../qa-temp/multiview-interaction.mjs');
+test('Multiview picker adds up to four tiles, preserves existing frame, removes players, and focuses selected match without new discovery',async()=>{
+ const primary=game('91','Home','Away'),other=game('92','Inter','Milan',{league:'ita.1'}),third=game('93','Third','Fourth'),calls=[],focused=[];
+ const client={async games(){calls.push('games');return {games:[primary,other,third]};},async listings(g){calls.push('list:'+g.id);return {streams:[stream(g.id)]};},async player(s){calls.push('player:'+s.url);return {embedAllowed:true,embedUrl:embed(s.url.split('-').pop().replace('.htm',''))};}};
+ const initial={game:primary,streams:[stream('91')],index:0,player:{embedAllowed:true,embedUrl:embed('91')}};const env=environment(()=>{throw Error('unexpected network');});const ui=hooks(Multiview,{client,initial,game:primary,fixtures:[other,third],onSingle:t=>focused.push(t),onClose(){}});
+ try{let tree=await flush(ui);assert.equal(frames(tree).length,1);assert.deepEqual(calls,['games'],'seeded player performs no new discovery');
+ let picker=find(tree,n=>n.type==='select'&&n.props['aria-label']==='Match for tile 2');picker.props.onChange({target:{value:'ita.1:92'}});tree=await flush(ui);assert.equal(frames(tree).length,2);assert.equal(frames(tree)[0].props.src,embed('91'));
+ const add=find(tree,n=>n.type==='button'&&nodes(n,k=>k.type==='button').length===1&&Array.isArray(n.props.children)&&n.props.children.includes('Add match'));add.props.onClick();tree=await flush(ui);find(tree,n=>n.type==='button'&&Array.isArray(n.props.children)&&n.props.children.includes('Add match')).props.onClick();tree=await flush(ui);assert.equal(nodes(tree,n=>n.type==='select').length,4);assert.equal(find(tree,n=>n.type==='button'&&Array.isArray(n.props.children)&&n.props.children.includes('Add match')).props.disabled,true);
+ const before=calls.length;button(tree,'Watch only Inter vs Milan').props.onClick();assert.equal(focused[0].game.id,'92');assert.equal(calls.length,before);button(tree,'Remove match from tile 2').props.onClick();tree=await flush(ui);assert.equal(frames(tree).length,1);assert.equal(frames(tree)[0].props.src,embed('91'));
+ const grid=find(tree,n=>n.props?.className?.startsWith('multiview-grid'));let full=0;grid.props.ref.current={async requestFullscreen(){full++;}};await button(tree,'Fullscreen multiview').props.onClick();assert.equal(full,1);
+ }finally{ui.unmount();env.restore();}
+});
+
+test('single-player Multiview toggle seeds cached playback and focuses a selected tile without further requests',async()=>{
+ const primary=game('101','Home','Away'),other=game('102','Other','Opponent'),calls=[];const env=environment(async url=>{calls.push(String(url));return Response.json(String(url).startsWith('/api/match-streams')?{streams:[stream(101)]}:{embedAllowed:true,embedUrl:embed(101)});});const ui=hooks(Panel,{game:primary});
+ try{let tree=await flush(ui);button(tree,'Play stream 1 in app').props.onClick({currentTarget:null});tree=await flush(ui);const before=calls.length;button(tree,'Open multiview').props.onClick();tree=await flush(ui);assert.equal(frames(tree).length,0,'single iframe removed before grid mounts');const grid=find(tree,n=>typeof n.props?.onSingle==='function');assert.equal(grid.props.initial.player.embedUrl,embed(101));assert.equal(calls.length,before);
+ grid.props.onSingle({game:other,streams:[stream(102)],index:0,player:{embedAllowed:true,embedUrl:embed(102)}});tree=await flush(ui);assert.equal(frames(tree).length,1);assert.equal(frames(tree)[0].props.src,embed(102));assert.equal(calls.length,before);dialog(tree).props.onOpenChange(false);tree=await flush(ui);assert.equal(frames(tree).length,0);
+ }finally{ui.unmount();env.restore();}
+});

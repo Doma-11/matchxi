@@ -191,3 +191,13 @@ Validation: all 122 tests, TypeScript and production build pass. Added coverage 
 ## Fixed Other games ordering (6 November 2026)
 
 Removed watched-first promotion from the shared live-game list. Matches sort by kickoff and stable fixture identity, independent of which match is watched and of source ordering for simultaneous kickoffs. Only the Watching highlight changes on selection; the existing open sidebar/sheet and fullscreen behaviour are preserved. No extra requests, timers or storage. Validation: all 13 targeted stream session/interaction checks and TypeScript/production build pass, including switching between fixtures with identical kickoff times and retained list positions.
+
+## Four-match Multiview (6 November 2026)
+
+Separate Multiview entry in live Broadcast and the single-player toolbar opens a two-tile view expandable to four. Three/four tiles use a 2×2 layout; each tile has its own competition identity, match picker, source arrows, remove control, external link and Watch only this match action. The full-grid fullscreen target hides app headers/selectors. Existing single-stream video-only fullscreen and stable Other games ordering remain.
+
+All tiles share the existing stream session and caches. A currently verified single player seeds tile one without new discovery. Only selected matches request listings; sequential first-embeddable selection reuses cached player checks. A controller limits discovery jobs to two, rejects duplicate games, aborts removed/replaced/closed tiles and ignores late results. No timers, automatic retries, match polling per tile or preloading all games. The live match picker uses one explicit menu snapshot request (or its existing fresh cache), then no periodic refresh. Closing tiles or returning to single view removes their iframes, stopping those app-owned players. Re-entering a player may restart provider playback but does not require uncached discovery if metadata is saved.
+
+Audio is controlled inside each cross-origin provider player. No exclusive-audio guarantee, automatic unmute, denoise or upscale claim is made. No server-side footage processing/proxying or paid service. Multiple videos increase device load and provider video bandwidth; they are not served through Netlify.
+
+Validation: all 129 tests pass, TypeScript and production build pass. New tests cover four-tile/duplicate limits, two-job concurrency, selected-only loading, cache seeding, source changes, cancelled/removed results, ended fixtures, picker controls, focus-to-single and grid fullscreen targeting. Managed preview service is unavailable, so real provider playback, audio and visual device QA remain unverified.
