@@ -1,0 +1,39 @@
+.projector-hints,.projector-indicator{display:none}
+html[data-projector=on] :is(.site-shell,.stream-popup) :is(button,a,select,input):focus{outline:4px solid #8cffff!important;outline-offset:-4px;box-shadow:0 0 0 2px #071a36!important}
+html[data-projector=on] .projector-indicator{display:inline-flex;gap:6px;align-items:center;color:#b9d9f7;font-size:12px;white-space:nowrap}
+html[data-projector=on] .projector-hints{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;padding:10px 14px;background:#061129;color:#c7d8ee;font-size:13px;border-top:1px solid #ffffff1a;flex:none}
+html[data-projector=on] .projector-hints kbd{padding:3px 6px;border:1px solid #b5d2f86b;border-radius:5px;color:#fff;margin-right:5px;font:inherit}
+html[data-projector=on] .stream-popup.stream-switch-popup{width:min(1480px,calc(100vw - 20px))}
+html[data-projector=on] .stream-switch-popup .stream-popup-toolbar{min-height:76px}
+html[data-projector=on] .stream-switch-popup .stream-popup-toolbar h2{font-size:21px}
+html[data-projector=on] .stream-switch-popup .stream-window-actions :is(button,a){width:54px;height:54px;min-width:54px}
+html[data-projector=on] .stream-switch-popup.stream-games-expanded .stream-switch-body{grid-template-columns:minmax(0,1fr) minmax(330px,390px)}
+html[data-projector=on] .stream-switch-popup .stream-viewport{max-height:calc(100dvh - 255px)}
+html[data-projector=on] .stream-switch-popup :is(.stream-source-switch,.stream-games-toggle){height:60px;min-height:60px;font-size:17px}
+html[data-projector=on] .stream-switch-popup .stream-source-label{font-size:18px}
+html[data-projector=on] .stream-switch-popup .stream-source-switch>button{width:60px;flex-basis:60px;min-height:60px}
+html[data-projector=on] .stream-switch-popup .stream-other-games h3{font-size:24px}
+html[data-projector=on] .stream-switch-popup .stream-game-option{min-height:105px;padding:14px 9px}
+html[data-projector=on] .stream-switch-popup .stream-game-teams strong{font-size:15px;font-weight:650}
+html[data-projector=on] .stream-switch-popup .stream-game-teams b{font-size:21px}
+html[data-projector=on] .stream-switch-popup .stream-game-meta small{font-size:14px}
+html[data-projector=on] .stream-switch-popup .stream-game-competition{font-size:11px}
+html[data-projector=on] .stream-switch-popup .stream-team-badge{width:35px;height:35px;flex-basis:35px}
+html[data-projector=on] :is(.settings-page,.app-footer) button{min-height:52px}
+html[data-projector=on] .multiview-header h2{font-size:23px}
+html[data-projector=on] .multiview-header button{min-width:52px;min-height:52px}
+html[data-projector=on] .multiview-options button{min-height:48px;font-size:15px}
+html[data-projector=on] .multiview-tile select{font-size:15px;min-height:46px}
+html[data-projector=on] .multiview-tile :is(button,footer>a){min-width:44px;min-height:44px}
+html[data-projector=on] .multiview-match-rail button{min-height:64px;font-size:15px}
+html[data-projector=on] .stream-switch-popup .stream-viewport:fullscreen{max-height:none}
+@media(max-width:900px){html[data-projector=on] .stream-switch-popup.stream-games-expanded .stream-switch-body{grid-template-columns:minmax(0,1fr)}html[data-projector=on] .stream-switch-popup .stream-popup-toolbar h2{font-size:16px}html[data-projector=on] .projector-indicator{font-size:10px}html[data-projector=on] .stream-switch-popup .stream-game-option{min-height:86px}html[data-projector=on] .stream-switch-popup .stream-window-actions :is(button,a){width:44px;min-width:44px;height:48px}}
+
+html[data-projector=on] .multiview-tile :is(button,footer>a){min-width:44px!important;min-height:44px!important}
+html[data-projector=on] .multiview-grid.multiview-focus:not(:fullscreen){height:calc(100dvh - 310px);min-height:330px}
+html[data-projector=on] .multiview-grid:is(.multiview-count-3,.multiview-count-4):not(.multiview-focus):not(:fullscreen){height:calc(100dvh - 300px)}
+html[data-projector=on] .site-shell .score-match{min-height:82px}
+html[data-projector=on] .site-shell .score-team-stack strong{font-size:16px}
+html[data-projector=on] .site-shell .score-toolbar button{min-height:48px}
+html[data-projector=on] .multiview-tile select{font-size:15px!important;min-height:46px!important}
+html[data-projector=on] .multiview-layout-buttons button{font-size:16px;padding:8px 14px}

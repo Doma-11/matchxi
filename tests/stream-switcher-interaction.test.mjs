@@ -75,3 +75,13 @@ test('single-player Multiview toggle seeds cached playback and focuses a selecte
  grid.props.onSingle({game:other,streams:[stream(102)],index:0,player:{embedAllowed:true,embedUrl:embed(102)}});tree=await flush(ui);assert.equal(frames(tree).length,1);assert.equal(frames(tree)[0].props.src,embed(102));assert.equal(calls.length,before);dialog(tree).props.onOpenChange(false);tree=await flush(ui);assert.equal(frames(tree).length,0);
  }finally{ui.unmount();env.restore();}
 });
+
+test('Focus layout, rail and Quick return only move stable tiles; Grid restores equal layout without discovery',async()=>{
+ const primary=game('201','Home','Away'),other=game('202','Other','Opponent'),calls=[];const client={async games(){calls.push('games');return {games:[primary,other]};},async listings(g){calls.push('list:'+g.id);return {streams:[stream(g.id)]};},async player(s){calls.push('player');return {embedAllowed:true,embedUrl:embed('202')};}};
+ const initial={game:primary,streams:[stream('201')],index:0,player:{embedAllowed:true,embedUrl:embed('201')}};const env=environment(()=>{throw Error('Unexpected request');}),ui=hooks(Multiview,{client,initial,game:primary,fixtures:[other],onSingle(){},onClose(){}});
+ try{let tree=await flush(ui);find(tree,n=>n.type==='select'&&n.props['aria-label']==='Match for tile 2').props.onChange({target:{value:'eng.1:202'}});tree=await flush(ui);const before=calls.length,urls=frames(tree).map(n=>n.props.src),keys=nodes(tree,n=>n.type==='section'&&n.props.className?.startsWith('multiview-tile')).map(n=>n.key);
+ button(tree,'Focus tile 2').props.onClick();tree=await flush(ui);assert.match(find(tree,n=>n.props?.className?.startsWith('multiview-grid')).props.className,/multiview-focus/);assert.equal(find(tree,n=>n.type==='section'&&n.props.className?.includes('is-main')).props['aria-label'],'Match tile 2');assert.deepEqual(frames(tree).map(n=>n.props.src),urls);assert.deepEqual(nodes(tree,n=>n.type==='section'&&n.props.className?.startsWith('multiview-tile')).map(n=>n.key).slice(0,2),keys);
+ find(tree,n=>n.type==='button'&&n.props.className==='multiview-quick-return').props.onClick();tree=await flush(ui);assert.equal(find(tree,n=>n.type==='section'&&n.props.className?.includes('is-main')).props['aria-label'],'Match tile 1');
+ find(tree,n=>n.type==='button'&&Array.isArray(n.props.children)&&n.props.children.includes('Grid')).props.onClick();tree=await flush(ui);assert.ok(!find(tree,n=>n.props?.className?.startsWith('multiview-grid')).props.className.includes('multiview-focus'));assert.deepEqual(frames(tree).map(n=>n.props.src),urls);assert.equal(calls.length,before);
+ }finally{ui.unmount();env.restore();}
+});
