@@ -187,3 +187,7 @@ Opening Broadcast now classifies its listed sources using existing provider embe
 Other games stays open when switching or selecting the current match, preserving the browsing layout. The separate toggle still closes the list. Video-only fullscreen keeps the existing browsing state, so exiting returns to the list. Existing cancellation, first-embeddable game selection, Firefox external-link preference and provider restrictions are unchanged.
 
 Validation: all 122 tests, TypeScript and production build pass. Added coverage for stable ordering, two-check concurrency, failed-source classification and cancellation; interaction tests verify the list stays open across successful and cancelled game switches.
+
+## Fixed Other games ordering (6 November 2026)
+
+Removed watched-first promotion from the shared live-game list. Matches sort by kickoff and stable fixture identity, independent of which match is watched and of source ordering for simultaneous kickoffs. Only the Watching highlight changes on selection; the existing open sidebar/sheet and fullscreen behaviour are preserved. No extra requests, timers or storage. Validation: all 13 targeted stream session/interaction checks and TypeScript/production build pass, including switching between fixtures with identical kickoff times and retained list positions.

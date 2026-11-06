@@ -9,7 +9,8 @@ export function liveStreamGames(records:any[],current?:any){
  const today=streamDay(),games=new Map<string,any>();
  for(const game of records||[]){if(!game?.home?.name||!game?.away?.name||!game.league||game.id==null||game.completed||game.state!=='in')continue;try{if(streamDay(game.date)!==today)continue;}catch{continue;}games.set(streamGameKey(game),game);}
  if(current?.state==='in'&&!current.completed)games.set(streamGameKey(current),current);
- return [...games.values()].sort((a,b)=>Number(streamGameKey(b)===streamGameKey(current||{}))-Number(streamGameKey(a)===streamGameKey(current||{}))||String(a.date).localeCompare(String(b.date)));
+ // Watching state never participates in ordering; ties use a stable fixture identity.
+ return [...games.values()].sort((a,b)=>String(a.date).localeCompare(String(b.date))||streamGameKey(a).localeCompare(streamGameKey(b)));
 }
 export function streamMinute(game:any){
  const raw=[game.statusName,game.statusDescription,game.status,game.clock].filter(Boolean).join(' ');

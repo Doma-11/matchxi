@@ -61,3 +61,11 @@ test('Broadcast ranking is stable, checks at most two sources concurrently, and 
  const controller=new AbortController();let calls=0;
  await assert.rejects(rankStreamSources(sources,async()=>{calls++;controller.abort();return {embedAllowed:false};},controller.signal),{name:'AbortError'});assert.equal(calls,1,'no subsequent source checks after cancellation');
 });
+
+
+test('switching watched games leaves fixture order fixed, including equal kickoff times',()=>{
+ const date=new Date().toISOString(),a=fixture('20',{date}),b=fixture('3',{date}),c=fixture('1',{date});
+ const records=[b,a,c],expected=liveStreamGames(records,a).map(streamGameKey);
+ for(const current of [b,c,a])assert.deepEqual(liveStreamGames(records,current).map(streamGameKey),expected);
+ assert.deepEqual(liveStreamGames([...records].reverse(),c).map(streamGameKey),expected,'source order changes cannot shuffle equal-time fixtures');
+});
