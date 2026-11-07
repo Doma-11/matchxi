@@ -1,3 +1,7 @@
+> **MATCHXI SAFETY NOTICE (2026-11-07):** This is historical documentation copied from Touchline, NOT current MatchXI deployment instructions. Never use the Touchline URLs, site ID, service tokens, credential names, connected project identifiers, or upload procedures below for MatchXI. Never modify or deploy the original Touchline repository or Netlify site. For MatchXI, use only independently configured MATCHXI_* secrets and the new MatchXI Netlify site after separate deployment approval. See README.md and the MatchXI validation workflow.
+
+---
+
 # Touchline — start here in a new chat
 
 Use this source archive to continue work. The app is hosted at https://touchline-football-hub.netlify.app and is a Vite/React project with Netlify Functions and Netlify Blobs. This archive is the canonical Netlify source; do not replace it with the older Sites frontend. Preserve all existing UI, match data and saved records.
