@@ -1,3 +1,7 @@
+> **MATCHXI SAFETY NOTICE (2026-11-07):** This is historical documentation copied from Touchline, NOT current MatchXI deployment instructions. Never use the Touchline URLs, site ID, service tokens, credential names, connected project identifiers, or upload procedures below for MatchXI. Never modify or deploy the original Touchline repository or Netlify site. For MatchXI, use only independently configured MATCHXI_* secrets and the new MatchXI Netlify site after separate deployment approval. See README.md and the MatchXI validation workflow.
+
+---
+
 # Touchline source and setup
 
 This repository contains the existing Touchline React/TypeScript/Vite app, Netlify Functions, assets, tests and initial public-data snapshots. The live site is https://touchline-football-hub.netlify.app. The root README supplied by the repository owner is preserved.
