@@ -1,3 +1,7 @@
+> **MATCHXI SAFETY NOTICE (2026-11-07):** This is historical documentation copied from Touchline, NOT current MatchXI deployment instructions. Never use the Touchline URLs, site ID, service tokens, credential names, connected project identifiers, or upload procedures below for MatchXI. Never modify or deploy the original Touchline repository or Netlify site. For MatchXI, use only independently configured MATCHXI_* secrets and the new MatchXI Netlify site after separate deployment approval. See README.md and the MatchXI validation workflow.
+
+---
+
 # Team-specific player portrait cache
 
 Player image processing and storage run in separate Netlify functions. The ordinary scores/catalogue API never loads the portrait index or image processor. The full current-squad index is server-only; the browser fetches just the two teams in an opened match. Scores, timelines and statistics render first. Existing provider images stay visible until a new portrait loads.
