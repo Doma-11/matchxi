@@ -9,7 +9,7 @@ export async function GET(request:Request){
  const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Zagreb'}).format(new Date());
  const yesterday=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Zagreb'}).format(new Date(Date.now()-86400000));
  if(p.get('live')!=='true'||!home||!away||home.length>120||away.length>120||!/^[-\w]{1,80}$/.test(id)||!/^[-\w.]{1,40}$/.test(league)||![today,yesterday].includes(date))return Response.json({error:'Stream listings are only checked for current live matches.'},{status:400});
- const source=STREAM_LISTING_SOURCE,store=getStore({name:'touchline-stream-listings'}),key='match-'+createHash('sha256').update(league+'|'+id+'|'+date).digest('hex');
+ const source=STREAM_LISTING_SOURCE,store=getStore({name:'matchxi-stream-listings'}),key='match-'+createHash('sha256').update(league+'|'+id+'|'+date).digest('hex');
  try{
   const saved:any=await store.get(key,{type:'json'});
   if(saved?.streams?.length)return Response.json(saved);
