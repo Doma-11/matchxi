@@ -1,15 +1,18 @@
 import {getStore} from '@netlify/blobs';
 import {monthRange,usageSeries} from './netlify-usage-model';
 import {reportedCharges} from './netlify-usage-model';
-const SITE='50f08265-7afe-4542-ad4f-d8a92823d202';
+// MatchXI must never query the original site's billing identity.
+const siteId=()=>process.env.MATCHXI_NETLIFY_SITE_ID||'';
 const pending=new Map<string,Promise<any>>();
 async function api(path:string,analytics=false):Promise<any>{
- const token=process.env.NETLIFY_USAGE_TOKEN;if(!token)throw Error('Official Netlify usage connection is not configured.');
+ const token=process.env.MATCHXI_NETLIFY_USAGE_TOKEN;if(!token)throw Error('Official Netlify usage connection is not configured.');
  const url=(analytics?'https://analytics.services.netlify.com/v2':'https://api.netlify.com/api/v1')+path;
  const r=await fetch(url,{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(12000),redirect:'error'});
  if(!r.ok)throw Error('Netlify usage source returned HTTP '+r.status);return r.json();
 }
 export async function netlifyUsage(date:string){
+ const SITE=siteId();
+ if(!SITE)return {checkedAt:new Date().toISOString(),data:null,failure:'MatchXI Netlify site is not configured.'};
  const range=monthRange(date),key=range.start,store=getStore({name:'matchxi-netlify-usage'});
  if(pending.has(key))return pending.get(key);
  const work=(async()=>{
