@@ -74,3 +74,41 @@ Known adjacent issue: successful match-listing snapshots are cached indefinitely
 in browser/Blob/API layers. Player checks now expire, but listing refresh behavior
 needs separate follow-up if providers change during a fixture. This patch does
 not silently change that policy.
+
+## Approved deployment and runtime verification
+
+The user approved deployment of the scoped sandbox compatibility change. Commit
+967da5f56f7c61d05c391639b6e0ee47e48f3701 was fast-forwarded to MatchXI main.
+GitHub Actions run 42393298417 completed successfully, including npm ci, isolation,
+TypeScript, Node tests, Vite build, and function bundling.
+
+Netlify deploy 6aef5710acee6ec340bc6be0 published that exact commit to site
+7b761624-8fec-4cca-b485-89684fa3f6b4. Its ready response lists nine functions,
+no schedules, and no deploy error. Build logs confirm Vite success, skipped Next.js
+plugin, and 438 files scanned with no detected secrets. The existing large-chunk
+warning remains.
+
+Runtime results:
+
+- Root HTML and both referenced initial JS/CSS assets returned 200.
+- Unauthenticated catalogue access returned the expected 401.
+- Authenticated metadata checks recognized sportsoonline.click, embedcenter.st,
+  and thedaddy.li. VCDN remained rejected as unverified/unavailable.
+- In the actual MatchXI Broadcast modal, Arsenal–Hull Stream 2 (Embedcenter)
+  displayed match footage. Its video was unpaused with readyState 4, no media
+  error, and currentTime advanced from 8.486 to 24.211, 40.072, and 48.259 seconds.
+- Clicking the provider's UNMUTE ME button left the inspected video muted. Sound
+  remains unverified; do not claim the audio control passed.
+- Sportsoonline HD1 and Eleven1 still displayed “Sandbox not allowed”. Inspection
+  showed sandbox attributes absent from both MatchXI's provider frame and the
+  provider's nested frame. Its runtime restriction remains unresolved; do not
+  claim all providers work or attempt to bypass it.
+- Multiview correctly stopped the finished Arsenal fixture. An Espanyol selection
+  loaded its HD6 provider frame but that provider showed the same sandbox error.
+  Multiview video playback was not confirmed.
+- Netlify's six-minute post-deploy request summary returned 53 HTTP 200, 23 HTTP
+  304, one redirect, and one expected 401; no 5xx entries were returned. This is
+  a bounded request summary, not proof that all runtime behavior is error-free.
+
+Touchline was not modified. No schedule activation or storage architecture change
+was performed. Thedaddy video playback and all devices/regions remain unverified.
