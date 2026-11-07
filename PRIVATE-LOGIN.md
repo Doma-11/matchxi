@@ -1,3 +1,7 @@
+> **MATCHXI SAFETY NOTICE (2026-11-07):** This is historical documentation copied from Touchline, NOT current MatchXI deployment instructions. Never use the Touchline URLs, site ID, service tokens, credential names, connected project identifiers, or upload procedures below for MatchXI. Never modify or deploy the original Touchline repository or Netlify site. For MatchXI, use only independently configured MATCHXI_* secrets and the new MatchXI Netlify site after separate deployment approval. See README.md and the MatchXI validation workflow.
+
+---
+
 # Private account access
 
 Dome11 remains the owner. Additional accounts, including UserTest, are created only through owner/service-authorized invitations. No public registration or paid identity provider. Existing owner records, session signatures and service credentials are preserved.
