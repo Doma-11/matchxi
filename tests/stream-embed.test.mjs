@@ -22,3 +22,12 @@ test('recognizes current Arsenal/Inter published hosts and skips an unrelated fi
  assert.equal(publishedStreamPlayer('<iframe data-src="https://dlive.sx/stream/stream-31.php"></iframe>'),'https://dlive.sx/stream/stream-31.php');
  for(const src of ['https://dlive.sx.evil.example/stream/1','https://user:password@dlive.sx/stream/1','https://dlive.sx:9443/stream/1','http://ww1.sportsonnline.click/x','https://sportsonnline.click.evil.example/x'])assert.equal(publishedStreamPlayer(`<iframe src="${src}"></iframe>`),null);
 });
+
+test('recognizes the replacement player hosts published in current live listings',()=>{
+ for(const src of ['https://sportsoonline.click/channels/hd/hd1.php','https://sportsoonline.click/channels/pt/eleven1.php','https://sportsoonline.click/channels/bra/br2.php','https://embedcenter.st/embed/ch1.php']){
+  assert.equal(publishedStreamPlayer(`<iframe src="https://ads.example/frame"></iframe><iframe src="${src}"></iframe>`),src);
+ }
+ for(const src of ['https://sportsoonline.click.evil.example/channels/hd/hd1.php','https://evil.sportsoonline.click/channels/hd/hd1.php','https://embedcenter.st.evil.example/embed/ch1.php','https://embedcenter.st/advertising','https://sportsoonline.click/ads','http://sportsoonline.click/channels/hd/hd1.php']){
+  assert.equal(publishedStreamPlayer(`<iframe src="${src}"></iframe>`),null);
+ }
+});

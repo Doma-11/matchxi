@@ -35,8 +35,23 @@ test('Other games reuses fresh Home data and only refreshes stale snapshots on e
 test('late cancelled requests cannot publish a player or write a saved working result',async()=>{
  const local=storage(),controller=new AbortController();let respond;const client=createStreamSession({local,session:storage(),fetcher:()=>new Promise(resolve=>{respond=resolve;})});
  const request=client.player(stream,controller.signal);controller.abort();respond(Response.json({embedAllowed:true,embedUrl:embed}));
- await assert.rejects(request,{name:'AbortError'});assert.equal(local.getItem('matchxi-stream-player-v2-'+stream.url),null);
+ await assert.rejects(request,{name:'AbortError'});assert.equal(local.getItem('matchxi-stream-player-v3-'+stream.url),null);
  const before=new AbortController();before.abort();await assert.rejects(client.listings(fixture(),before.signal),{name:'AbortError'});
+});
+
+test('player cache migration ignores old results and rechecks expired working players',async()=>{
+ const local=storage(),start=Date.now();let at=start,calls=0;
+ local.setItem('matchxi-stream-player-v2-'+stream.url,JSON.stringify({embedAllowed:true,embedUrl:'https://dlive.sx/stream/old.php'}));
+ const current='https://sportsoonline.click/channels/hd/hd1.php';
+ const client=createStreamSession({local,session:storage(),now:()=>at,fetcher:async url=>{
+  calls++;assert.match(String(url),/playerVersion=3/);
+  return Response.json(calls===1?{embedAllowed:true,embedUrl:current}:{embedAllowed:false,reason:'Provider now restricts embedding.'});
+ }});
+ assert.equal((await client.player(stream,signal())).embedUrl,current);assert.equal(calls,1);
+ assert.equal((await client.player(stream,signal())).embedUrl,current);assert.equal(calls,1);
+ at=start+16*60*1000;
+ assert.equal((await client.player(stream,signal())).embedAllowed,false);assert.equal(calls,2);
+ assert.equal((await client.player(stream,signal())).embedAllowed,false);assert.equal(calls,3);
 });
 test('empty listing cache can be retried explicitly and a source failure does not discard existing stored coverage',async()=>{
  const local=storage(),game=fixture();let calls=0;const client=createStreamSession({local,session:storage(),fetcher:async()=>{calls++;return calls===1?Response.json({streams:[]}):calls===2?Response.json({streams:[stream]}):Response.json({error:'Source unavailable'},{status:503});}});

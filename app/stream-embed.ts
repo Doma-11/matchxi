@@ -1,7 +1,12 @@
+export const STREAM_PLAYER_VERSION='3';
+export const STREAM_PLAYER_TTL_MS=15*60*1000;
+
 export function supportedStreamPlayer(raw:string){
  try{const url=new URL(raw.replace(/&amp;/gi,'&'),'https://www.soccerstreams.zone/');
   if(url.protocol!=='https:'||url.username||url.password||url.port)return null;
-  const supported=/^(?:w\d+\.)?sportsonliine\.click$/.test(url.hostname)||/^(?:ww?\d+\.)?sportsonnline\.click$/.test(url.hostname)||url.hostname==='dlive.sx';
+  // Exact replacement hosts observed in the listing site's published player frames.
+  const current=url.hostname==='sportsoonline.click'&&url.pathname.startsWith('/channels/')||url.hostname==='embedcenter.st'&&url.pathname.startsWith('/embed/');
+  const supported=current||/^(?:w\d+\.)?sportsonliine\.click$/.test(url.hostname)||/^(?:ww?\d+\.)?sportsonnline\.click$/.test(url.hostname)||url.hostname==='dlive.sx';
   return supported?url.href:null;
  }catch{return null;}
 }

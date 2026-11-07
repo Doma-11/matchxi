@@ -1,4 +1,4 @@
-import {supportedStreamPlayer} from './stream-embed';
+import {supportedStreamPlayer,STREAM_PLAYER_VERSION,STREAM_PLAYER_TTL_MS} from './stream-embed';
 
 export const streamGameKey=(game:any)=>`${game.league}:${String(game.id).replace(/^fm-/,'')}`;
 export function streamDay(date=new Date().toISOString(),timeZone=Intl.DateTimeFormat().resolvedOptions().timeZone||'Europe/Zagreb'){
@@ -36,11 +36,11 @@ export function createStreamSession({fetcher=(...args:Parameters<typeof fetch>)=
    const result={...data,streams:streamsFrom(data)};if(result.streams.length)write(local,key,result);return result;
   },
   async player(stream:any,signal:AbortSignal){
-   aborted(signal);const key='matchxi-stream-player-v2-'+stream.url,saved=read(local,key);
-   if(saved?.embedAllowed&&supportedStreamPlayer(saved.embedUrl))return {...saved,embedUrl:supportedStreamPlayer(saved.embedUrl)};
-   const r=await fetcher('/api/stream-player?'+new URLSearchParams({url:stream.url,playerVersion:'2'}),{signal});const data:any=await r.json();aborted(signal);
+   aborted(signal);const key='matchxi-stream-player-v'+STREAM_PLAYER_VERSION+'-'+stream.url,saved=read(local,key),age=now()-Date.parse(saved?.checkedAt||'');
+   if(saved?.embedAllowed&&age>=0&&age<STREAM_PLAYER_TTL_MS&&supportedStreamPlayer(saved.embedUrl))return {...saved,embedUrl:supportedStreamPlayer(saved.embedUrl)};
+   const r=await fetcher('/api/stream-player?'+new URLSearchParams({url:stream.url,playerVersion:STREAM_PLAYER_VERSION}),{signal});const data:any=await r.json();aborted(signal);
    if(!r.ok)throw Error(data.error||'Could not open this player. Use the external link.');
-   const url=data.embedAllowed&&supportedStreamPlayer(data.embedUrl),result=url?{...data,embedUrl:url}:{...data,embedAllowed:false,embedUrl:undefined};
+   const url=data.embedAllowed&&supportedStreamPlayer(data.embedUrl),result=url?{...data,embedUrl:url,checkedAt:data.checkedAt||new Date(now()).toISOString()}:{...data,embedAllowed:false,embedUrl:undefined};
    if(url)write(local,key,result);return result;
   },
   async games(signal:AbortSignal){
