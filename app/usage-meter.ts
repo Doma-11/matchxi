@@ -9,7 +9,7 @@ export async function meter(route:string,handler:()=>Promise<Response>){
  try{response=await handler()}catch(e){throw e}
  if(route==='usage-reports')return response;
  const day=dayKey(),old=days.get(day)||{day,firstSeen:new Date().toISOString(),requests:0,durationMs:0,responseBytes:0,errors:0,cacheHits:0,routes:{},flushed:0};
- old.requests++;old.cacheHits+=(response.headers.get('X-Touchline-Cache')==='hit'?1:0);old.durationMs+=performance.now()-start;old.errors+=response.status>=400?1:0;
+ old.requests++;old.cacheHits+=(response.headers.get('X-MatchXI-Cache')==='hit'?1:0);old.durationMs+=performance.now()-start;old.errors+=response.status>=400?1:0;
  const length=Number(response.headers.get('Content-Length'));
  // Only count explicitly known bytes; avoid copying large image/JSON bodies.
  if(length>0)old.responseBytes+=length;
