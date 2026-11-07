@@ -9,7 +9,7 @@ import {LEAGUES,CLUB_CUPS,COMPETITIONS} from './football-model';
 import {streamBrowserLink,isAppleMobile} from './stream-browser-link';
 import './stream-multiview.css';
 import {handleProjectorKey} from './projector-mode';
-function savedLayout(){try{return localStorage.getItem('touchline-multiview-layout')==='focus'?'focus':'grid';}catch{return 'grid';}}
+function savedLayout(){try{return localStorage.getItem('matchxi-multiview-layout')==='focus'?'focus':'grid';}catch{return 'grid';}}
 export default function StreamMultiview({client,initial,game,fixtures=[],onSingle,onClose}:any){
  const seed:MultiviewTile=initial?.player?.embedAllowed?{...initial,busy:false,error:''}:null;
  const [layout,setLayout]=useState(savedLayout),[focused,setFocused]=useState(0);
@@ -25,7 +25,7 @@ export default function StreamMultiview({client,initial,game,fixtures=[],onSingl
   return()=>{abort.abort();session.dispose();control.current=null;};
  },[]);
  useEffect(()=>{control.current?.reconcile([...fixtures,game]);},[fixtures,game]);
- useEffect(()=>{try{localStorage.setItem('touchline-multiview-layout',layout);}catch{}},[layout]);
+ useEffect(()=>{try{localStorage.setItem('matchxi-multiview-layout',layout);}catch{}},[layout]);
  useEffect(()=>{if(layout==='focus'&&!tiles[focused]){const first=tiles.findIndex(Boolean);if(first>=0)setFocused(first);}},[tiles,focused,layout]);
  const chooseLayout=(value:string)=>{setLayout(value);if(value==='focus')setCount(4);};
  const focusTile=(index:number)=>{if(index!==focused)lastFocus.current=focused;setFocused(index);chooseLayout('focus');};
