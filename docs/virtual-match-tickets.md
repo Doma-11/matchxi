@@ -69,3 +69,57 @@ feature branch; they are not published automatically.
 Final local check record (7 November 2026): clean npm ci succeeded; TypeScript,
 164 tests, production build, function bundling and isolation audit passed. The QR
 round-trip check passed. No production deployment was triggered for this feature.
+
+## Deployment and browser verification — 7 November 2026
+
+The user approved deploying the ticket feature. The initial main commit 985aa109
+failed CI because the new interaction-test harness did not create qa-temp in a
+clean checkout. This was corrected in test-only commit
+9139c75400dcf1919baea6ba71c825bd313bd9a6. All 164 tests then passed in a fresh
+local checkout and GitHub Actions run 42396542537 completed successfully.
+
+Netlify deploy 6aef604738f43f9215bc6c23 published commit 9139c754 to MatchXI
+site 7b761624-8fec-4cca-b485-89684fa3f6b4. Its ready response reported nine
+functions, no schedules, and no deploy error. Logs show a successful Vite build
+and 445 files scanned with no detected secrets; the large-chunk warning remains.
+
+Desktop browser checks against the deployed authenticated app:
+
+- Empty collection displays correctly; Tickets appears in main navigation.
+- Parma–Bologna Broadcast checkbox saved one live ticket. Front says final score
+  pending; back says highlights pending and has no fabricated QR target.
+- Favouriting persisted, and combined favourites/Parma/Italy/2026–27 filters worked.
+- Reload retained the ticket and its favourite state.
+- Spain–Croatia's completed ticket retained the app's 4–1 score and saved video
+  vdmnH5T-Ht0, without a ticket-triggered highlight search.
+- Flip changed the active face and moved keyboard focus to the corresponding flip
+  button. Flipping back removed the YouTube iframe.
+- The actual deployed QR image was independently decoded using jsQR and recovered
+  exactly https://www.youtube.com/watch?v=vdmnH5T-Ht0.
+- The saved YouTube player loaded its title and 1:59 duration, and its external
+  links retained the saved video URL. Actual media progression was not confirmed:
+  one inspected play attempt remained at time zero / readyState zero. Do not claim
+  successful YouTube video playback.
+- Export produced a valid two-ticket JSON backup. A backed-up verification ticket
+  was deleted through confirmation and then restored via the actual Import chooser.
+  Its favourite survived; the existing ticket was retained without duplication.
+- National-team filtering showed the national ticket only; Return to match opened
+  the correct Spain–Croatia match and its score/highlights.
+
+Found two UI defects: the native file picker showed beside Import, and the ticket
+image sanitizer stripped the app's local /flags/ assets. Both fixes and regression
+tests are prepared in commit dbbda485f7ee67b9fe561cb271407fcfc72d4ba8. TypeScript,
+165 tests and Vite build pass locally. Automatic approval review rejected moving
+main with these follow-up changes because it requires a separate deployment
+checkpoint. No workaround was attempted. Production remains at 9139c754; the
+fixes remain on a review branch awaiting the user's approval.
+
+The bounded 15-minute Netlify request summary returned 127 HTTP 200, 80 HTTP 304,
+six HTTP 499 and one HTTP 301, with no 5xx entries. This does not verify all app
+behavior or third-party video availability. Mobile viewport testing and live-to-
+final reconciliation over an actual match ending remain unverified in-browser;
+model and component tests cover those update rules. The verification tickets and
+backup are local to this cloud browser; no server ticket store was created.
+
+Touchline was not modified. Schedules and catalogue storage architecture were not
+changed.
