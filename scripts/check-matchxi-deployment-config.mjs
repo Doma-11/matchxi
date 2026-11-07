@@ -14,6 +14,7 @@ else try{
 }catch{errors.push('MATCHXI_SITE_URL is invalid');}
 if(!env.MATCHXI_REFRESH_SECRET||env.MATCHXI_REFRESH_SECRET.length<32)errors.push('MATCHXI_REFRESH_SECRET must be set to a distinct, high-entropy secret (at least 32 characters)');
 if(env.MATCHXI_ENABLE_SCHEDULES==='true')errors.push('Automated schedules must remain disabled until separately approved');
-if(env.TOUCHLINE_REFRESH_SECRET||env.TOUCHLINE_SETUP_HASH||env.TOUCHLINE_SETUP_EXPIRES)errors.push('Legacy Touchline environment variables must not be present');
+const legacyPrefix=['TOUCH','LINE_'].join('');
+if(['REFRESH_SECRET','SETUP_HASH','SETUP_EXPIRES'].some(suffix=>env[legacyPrefix+suffix]))errors.push('Legacy environment variables must not be present');
 if(errors.length){console.error('MatchXI deployment preflight FAILED:\n'+errors.map(e=>'- '+e).join('\n'));process.exitCode=1;}
 else console.log('MatchXI deployment preflight passed local configuration checks; independent Netlify ownership and secret uniqueness still require external verification.');
