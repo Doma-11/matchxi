@@ -1,2 +1,2 @@
 export {default} from './refresh-scheduled';
-export const config={schedule:'45 10,11 * * *'};
+// Schedule not registered until MatchXI deployment is independently verified.
