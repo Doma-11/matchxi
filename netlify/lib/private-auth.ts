@@ -1,6 +1,6 @@
 import {createHash,createHmac,randomBytes,scrypt,timingSafeEqual} from 'node:crypto';
 import {getStore} from '@netlify/blobs';
-export const USERNAME='Dome11';
+export const USERNAME='AdminDom';
 const COOKIE='__Host-matchxi';
 const DAY=86400;
 export type Owner={username:string;salt:string;hash:string;revision:string;createdAt:string;disabled?:boolean};

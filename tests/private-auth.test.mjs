@@ -10,11 +10,12 @@ async function post(body,cookie='',origin=host){return handle(req(body,cookie,or
 assert.equal((await post({action:'setup',token,password:pass},'','https://evil.example')).status,403);
 assert.equal((await post({action:'setup',token:'x'.repeat(64),password:pass})).status,403);
 assert.equal((await post({action:'setup',token,password:'short'})).status,400);
-const setup=await post({action:'setup',token,password:pass});assert.equal(setup.status,200);const cookie=setup.headers.get('set-cookie');for(const flag of ['HttpOnly','Secure','SameSite=Strict','Max-Age=2592000','Path=/'])assert.ok(cookie.includes(flag));
+const setup=await post({action:'setup',token,password:pass});assert.equal(setup.status,200);assert.equal((await setup.clone().json()).username,'AdminDom');const cookie=setup.headers.get('set-cookie');for(const flag of ['HttpOnly','Secure','SameSite=Strict','Max-Age=2592000','Path=/'])assert.ok(cookie.includes(flag));
 assert.equal((await post({action:'setup',token,password:pass})).status,409);
 assert.equal((await post({action:'login',username:'wrong',password:pass})).status,401);
-assert.equal((await post({action:'login',username:'Dome11',password:'wrong'})).status,401);
-const login=await post({action:'login',username:'Dome11',password:pass,remember:false});assert.equal(login.status,200);assert.ok(!login.headers.get('set-cookie').includes('Max-Age'));
+assert.equal((await post({action:'login',username:'Dome11',password:pass})).status,401);
+assert.equal((await post({action:'login',username:'AdminDom',password:'wrong'})).status,401);
+const login=await post({action:'login',username:'AdminDom',password:pass,remember:false});assert.equal(login.status,200);assert.ok(!login.headers.get('set-cookie').includes('Max-Age'));
 async function session(c){return (await handle(new Request(host+'/api/auth',{headers:{cookie:c}}))).json()}
 assert.equal((await session(cookie)).authenticated,true);assert.equal((await session(cookie.replace('__Host-matchxi=','__Host-matchxi=x'))).authenticated,false);
 const original=cookie.split(';')[0].split('=')[1];const payload=JSON.parse(Buffer.from(original.split('.')[0],'base64url').toString());payload.iat=Math.floor(Date.now()/1000)-60;payload.exp=Math.floor(Date.now()/1000)-1;const encoded=Buffer.from(JSON.stringify(payload)).toString('base64url');const key=createHmac('sha256',process.env.MATCHXI_REFRESH_SECRET).update('matchxi-owner-session-v1').digest();const sig=createHmac('sha256',key).update(encoded).digest('base64url');assert.equal((await session('__Host-matchxi='+encoded+'.'+sig)).authenticated,false);
@@ -22,7 +23,7 @@ const next=randomBytes(24).toString('hex');assert.equal((await post({action:'pas
 const changed=await post({action:'password',currentPassword:pass,password:next},cookie);assert.equal(changed.status,200);assert.equal((await session(cookie)).authenticated,false);assert.equal((await session(changed.headers.get('set-cookie'))).authenticated,true);
 const ownerCookie=changed.headers.get('set-cookie');
 assert.equal((await post({action:'invite',username:'UserTest'})).status,403);
-assert.equal((await post({action:'invite',username:'dome11'},ownerCookie)).status,400);
+assert.equal((await post({action:'invite',username:'admindom'},ownerCookie)).status,400);
 const invitation=await post({action:'invite',username:'UserTest'},ownerCookie);assert.equal(invitation.status,200);
 const inviteData=await invitation.json(),inviteToken=new URLSearchParams(new URL(inviteData.setupUrl).hash.slice(1)).get('invite');
 assert.ok(inviteToken&&inviteToken.length===64);assert.equal(inviteData.username,'UserTest');
@@ -34,12 +35,12 @@ const accepted=await Promise.all([post({action:'accept-invite',token:inviteToken
 assert.deepEqual(accepted.map(r=>r.status).sort(),[200,409]);
 const guestCookie=accepted.find(r=>r.status===200).headers.get('set-cookie');
 assert.equal((await session(guestCookie)).username,'UserTest');assert.equal((await session(guestCookie)).role,'member');
-assert.equal((await session(ownerCookie)).username,'Dome11');assert.equal((await session(ownerCookie)).role,'owner');
+assert.equal((await session(ownerCookie)).username,'AdminDom');assert.equal((await session(ownerCookie)).role,'owner');
 assert.equal((await post({action:'invite-info',token:inviteToken})).status,403);
 assert.equal((await post({action:'login',username:'UserTest',password:guestPass})).status,200);
-assert.equal((await post({action:'login',username:'Dome11',password:guestPass})).status,401);
+assert.equal((await post({action:'login',username:'AdminDom',password:guestPass})).status,401);
 assert.equal((await post({action:'invite',username:'AnotherUser'},guestCookie)).status,403);
-assert.equal((await post({action:'revoke',username:'Dome11'},guestCookie)).status,403);
+assert.equal((await post({action:'revoke',username:'AdminDom'},guestCookie)).status,403);
 const guestNext=randomBytes(24).toString('hex');
 const guestChanged=await post({action:'password',currentPassword:guestPass,password:guestNext},guestCookie);assert.equal(guestChanged.status,200);
 assert.equal((await session(guestCookie)).authenticated,false);assert.equal((await session(ownerCookie)).authenticated,true);
@@ -55,7 +56,7 @@ const timedToken=new URLSearchParams(new URL(timed.setupUrl).hash.slice(1)).get(
 const realNow=Date.now;Date.now=()=>realNow()+49*3600000;
 try{assert.equal((await post({action:'invite-info',token:timedToken})).status,403)}finally{Date.now=realNow}
 const logout=await post({action:'logout'},changed.headers.get('set-cookie'));assert.ok(logout.headers.get('set-cookie').includes('Max-Age=0'));
-assert.equal((await post({action:'login',username:'Dome11',password:pass})).status,401);
+assert.equal((await post({action:'login',username:'AdminDom',password:pass})).status,401);
 console.log('PASS: owner preservation, two-account login/isolation, one-time/concurrent/expired invitations, owner-only management, revocation, CSRF, password/session rotation and logout.');
 
 await unlink(out);
