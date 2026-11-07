@@ -8,7 +8,7 @@ import countries from '../../../../public/data/national-teams.json';
 import {saveCatalogue} from '../../../catalogue-store';
 const cups=['uefa.champions','uefa.europa','uefa.europa.conf'];
 const national=['uefa.nations','fifa.world','uefa.euro'];
-// This shared writer relies on Sites' owner-private dispatch boundary. Keep the Site private.
+// This POST handler is intentionally NOT registered in the Netlify API dispatcher.\n// Do not expose it without owner authorization, CSRF protection, and a\n// cross-instance write serialization strategy for the single-snapshot store.
 export async function POST(request:Request){
  try{const {league,offset=0}=await request.json() as {league:string;offset?:number};if(!(league in clubs)&&!national.includes(league)&&!cups.includes(league))return Response.json({error:'Unknown league'},{status:400});if(!Number.isInteger(offset)||offset<0||offset>60)return Response.json({error:'Invalid offset'},{status:400});
  const origin=new URL(request.url).origin;let videoCount=0,live=false;let statisticsLive:boolean|null=null;let statisticsCheckedAt:string|null=null;const failures:string[]=[];
