@@ -2,7 +2,7 @@ import {getStore} from '@netlify/blobs';
 import {monthRange,usageSeries} from './netlify-usage-model';
 import {reportedCharges} from './netlify-usage-model';
 // MatchXI must never query the original site's billing identity.
-const siteId=()=>process.env.MATCHXI_NETLIFY_SITE_ID||'';
+const siteId=()=>{const id=process.env.MATCHXI_NETLIFY_SITE_ID||'';if(id==='50f08265-7afe-4542-ad4f-d8a92823d202')throw Error('Original Touchline Netlify site ID is forbidden');return id;};
 const pending=new Map<string,Promise<any>>();
 async function api(path:string,analytics=false):Promise<any>{
  const token=process.env.MATCHXI_NETLIFY_USAGE_TOKEN;if(!token)throw Error('Official Netlify usage connection is not configured.');
