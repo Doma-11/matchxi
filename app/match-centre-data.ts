@@ -38,7 +38,7 @@ export function enrichPlayers(detail:any,page:any,url:string){const g=page.gener
 for(const side of ['home','away']){const team=page.content.lineup[side+'Team'],lineup=detail.lineups.find((l:any)=>l.side===side);if(!team||!lineup)continue;const candidates=[...(team.starters||[]),...(team.subs||[])];for(const player of lineup.players){const last=name(player.name.split(' ').slice(-1)[0]);const surnameTokens=(s:string)=>s.split(/[\s-]+/).slice(1).map(name).filter((t:string)=>t.length>=3);const matches=candidates.filter((x:any)=>name(x.name)===name(player.name)||String(x.shirtNumber)===String(player.number)&&(name(x.lastName||x.name.split(' ').slice(-1)[0])===last||surnameTokens(player.name).some(t=>surnameTokens(x.name).includes(t))||!x.name.includes(' ')&&name(x.name).length>=4&&player.name.split(/[\s-]+/).some((t:string)=>name(t).startsWith(name(x.name)))));const p=matches.length===1?matches[0]:null;if(!p)continue;player.photo=`https://images.fotmob.com/image_resources/playerimages/${p.id}.png`;player.providerUrl=`https://www.fotmob.com/players/${p.id}`;const stats=page.content.playerStats?.[p.id];const flattened=(stats?.stats||[]).flatMap((group:any)=>Object.entries(group.stats||{}).map(([label,v]:any)=>({name:v.key||label,displayName:label,group:group.title,value:v.stat?.value,total:v.stat?.total,type:v.stat?.type,displayValue:typeof v.stat?.value==='object'?v.stat.value?.value??JSON.stringify(v.stat.value):String(v.stat?.value??'–')})));const statRating=(stats?.stats||[]).flatMap((g:any)=>Object.values(g.stats||{})).find((v:any)=>v.key==='rating_title') as any;const publishedRating=statRating?.stat?.value??p.performance?.rating;const r=Number(publishedRating);if(publishedRating!=null&&Number.isFinite(r)&&r>=0&&r<=10){player.rating=r;player.ratingSource='FotMob';player.providerPlayerId=String(p.id);}if(flattened.length){player.stats=flattened;player.statsSource='FotMob';}enriched++;}}
 const allStats=page.content?.stats?.Periods?.All?.stats;if(allStats?.length){detail.statistics=allStats.flatMap((g:any)=>g.stats||[]).filter((s:any)=>s.stats?.length===2&&s.stats.every((v:any)=>v!=null)).map((s:any)=>({id:s.key,label:s.title,home:String(s.stats[0]),away:String(s.stats[1])}));detail.statisticsSource='FotMob';}if(enriched){detail.playerSource='FotMob';detail.playerSourceUrl=url;}return detail;}
 async function providerFixtures(league:string,season:string,ids:number[]){
- const store=getStore({name:'touchline-player-fixtures'}),key=league+':'+season+':'+ids.join('-');
+ const store=getStore({name:'matchxi-player-fixtures'}),key=league+':'+season+':'+ids.join('-');
  const old:any=await store.get(key,{type:'json'}).catch(()=>null);if(old&&Date.now()-old.at<12*3600000)return old.matches;
  const results=await Promise.allSettled(ids.map(id=>providerPage(`https://www.fotmob.com/leagues/${id}/matches/football?season=${encodeURIComponent(season)}`)));
  const matches=results.flatMap(r=>r.status==='fulfilled'?r.value.fixtures?.allMatches||[]:[]);
@@ -52,7 +52,7 @@ export async function addPlayerCoverage(detail:any){try{const url=await resolveP
 export async function refreshMatchPoll(detail:any,forceNoon=false){
  const id=detail.fotmobPollMatchId||detail.game?.fotmobId||(detail.playerSourceUrl?new URL(detail.playerSourceUrl).searchParams.get('matchId'):null);
  if(!/^\d{1,12}$/.test(String(id||'')))return detail;
- const store=getStore({name:'touchline-match-polls',consistency:'strong'}),key=String(id);
+ const store=getStore({name:'matchxi-match-polls',consistency:'strong'}),key=String(id);
  const saved:any=await store.get(key,{type:'json'}).catch(()=>null);
  const policy=pollCollectionPolicy(detail.game,saved,forceNoon);
  if(!policy.collect){detail.matchPoll=saved?.snapshotVersion===1?saved.poll:null;detail.matchPollFailure=saved?.failure;return detail}
@@ -61,7 +61,7 @@ export async function refreshMatchPoll(detail:any,forceNoon=false){
 }
 
 export async function collectMatchPoll(game:any){
- const detail:any={game};const store=getStore({name:'touchline-match-details',consistency:'strong'}),key=game.league+':'+String(game.id).replace(/^fm-/,'');const saved:any=await store.get(key,{type:'json'}).catch(()=>null);
+ const detail:any={game};const store=getStore({name:'matchxi-match-details',consistency:'strong'}),key=game.league+':'+String(game.id).replace(/^fm-/,'');const saved:any=await store.get(key,{type:'json'}).catch(()=>null);
  if(saved?.fotmobPollMatchId)Object.assign(detail,{fotmobPollMatchId:saved.fotmobPollMatchId,playerSourceUrl:saved.playerSourceUrl});
  else if(!game.fotmobId)await resolvePlayerSource(detail);
  await refreshMatchPoll(detail,true);
