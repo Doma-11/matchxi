@@ -6,8 +6,8 @@ export function halftimePauseRemaining(game:any,now=Date.now()):number{
  const key=game.league+':'+game.id;
  if(!isHalfTime(game))return 0;
  let start=halftimeStarts.get(key);
- if(start==null){try{const saved=Number(sessionStorage.getItem('touchline-halftime-'+key));if(saved>0&&saved<=now&&now-saved<6*3600000)start=saved;}catch{}
- start??=now;halftimeStarts.set(key,start);try{sessionStorage.setItem('touchline-halftime-'+key,String(start))}catch{}}
+ if(start==null){try{const saved=Number(sessionStorage.getItem('matchxi-halftime-'+key));if(saved>0&&saved<=now&&now-saved<6*3600000)start=saved;}catch{}
+ start??=now;halftimeStarts.set(key,start);try{sessionStorage.setItem('matchxi-halftime-'+key,String(start))}catch{}}
  return Math.max(0,start+15*60000-now);
 }
 export function halftimeStart(game:any,now=Date.now()){halftimePauseRemaining(game,now);return halftimeStarts.get(game.league+':'+game.id)??now;}
