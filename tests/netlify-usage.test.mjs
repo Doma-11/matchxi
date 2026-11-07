@@ -6,9 +6,9 @@ const stores=new Map();globalThis.__usageStores=stores;
 const b=await build({entryPoints:['app/netlify-usage-store.ts'],bundle:true,platform:'node',format:'esm',write:false,plugins:[{name:'test-store',setup(b){b.onResolve({filter:/^@netlify\/blobs$/},()=>({path:'blobs',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:`export function getStore(){return {get:async k=>globalThis.__usageStores.get(k)||null,setJSON:async(k,v)=>globalThis.__usageStores.set(k,v)}}`}));}}]});
 const {netlifyUsage}=await import('data:text/javascript;base64,'+Buffer.from(b.outputFiles[0].text).toString('base64'));
 test('official metrics collection is cached, bounded and keeps old values after source failure',async()=>{
- const original=globalThis.fetch;process.env.MATCHXI_NETLIFY_SITE_ID='50f08265-7afe-4542-ad4f-d8a92823d202';process.env.MATCHXI_NETLIFY_USAGE_TOKEN='test-only-secret';let calls=0,active=0,peak=0,fail=false;
+ const original=globalThis.fetch;process.env.MATCHXI_NETLIFY_SITE_ID='11111111-2222-4333-8444-555555555555';process.env.MATCHXI_NETLIFY_USAGE_TOKEN='test-only-secret';let calls=0,active=0,peak=0,fail=false;
  globalThis.fetch=async(url,opts)=>{calls++;active++;peak=Math.max(peak,active);assert.equal(opts.headers.Authorization,'Bearer test-only-secret');assert.equal(opts.redirect,'error');await new Promise(r=>setTimeout(r,1));active--;const u=new URL(url);let d;
- if(u.pathname.includes('/sites/'))d={id:'50f08265-7afe-4542-ad4f-d8a92823d202',account_slug:'test-team'};
+ if(u.pathname.includes('/sites/'))d={id:'11111111-2222-4333-8444-555555555555',account_slug:'test-team'};
  else if(u.pathname.endsWith('/accounts/test-team'))d={id:'account',capabilities:{functions:{included:125000}}};
  else if(u.pathname.includes('usage_insights/functions')){if(fail)return new Response('',{status:503});d={data:[{start:'2026-10-18T07:00Z',values:{count:674}}]};}
  else if(u.pathname.endsWith('/bandwidth/timeseries'))d={data:[{start:1792281600000,accountBandwidth:3935473}]};
