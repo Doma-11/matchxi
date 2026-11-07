@@ -21,6 +21,6 @@ export function youtubeVideoDuration(renderer:any):number|null{
   for(const badge of overlay?.thumbnailOverlayBadgeViewModel?.thumbnailBadges||[]){const value=parseVideoDuration(textValue(badge?.thumbnailBadgeViewModel?.text));if(value!=null)return value;}
  }return null;
 }
-export const VIDEO_DURATION_EVENT='touchline-video-duration';
-export function cachedVideoDuration(id:string):number|null{try{return parseVideoDuration(localStorage.getItem('touchline-video-duration-v1-'+id));}catch{return null;}}
-export function rememberVideoDuration(id:string,seconds:number){const n=parseVideoDuration(seconds);if(!id||n==null||typeof window==='undefined')return;try{if(cachedVideoDuration(id)===n)return;localStorage.setItem('touchline-video-duration-v1-'+id,String(n));}catch{}window.dispatchEvent(new CustomEvent(VIDEO_DURATION_EVENT,{detail:{id,seconds:n}}));}
+export const VIDEO_DURATION_EVENT='matchxi-video-duration';
+export function cachedVideoDuration(id:string):number|null{try{return parseVideoDuration(localStorage.getItem('matchxi-video-duration-v1-'+id));}catch{return null;}}
+export function rememberVideoDuration(id:string,seconds:number){const n=parseVideoDuration(seconds);if(!id||n==null||typeof window==='undefined')return;try{if(cachedVideoDuration(id)===n)return;localStorage.setItem('matchxi-video-duration-v1-'+id,String(n));}catch{}window.dispatchEvent(new CustomEvent(VIDEO_DURATION_EVENT,{detail:{id,seconds:n}}));}
