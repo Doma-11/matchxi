@@ -1,6 +1,6 @@
 import {build} from 'esbuild';import {test} from 'node:test';import assert from 'node:assert/strict';
 const c=await build({entryPoints:['app/stream-embed.ts'],bundle:true,platform:'node',format:'esm',write:false});const {publishedStreamPlayer,allowsStreamEmbedding,fetchStreamPage}=await import('data:text/javascript;base64,'+Buffer.from(c.outputFiles[0].text).toString('base64'));
-const app='https://touchline-football-hub.netlify.app';
+const app='https://matchxi.netlify.app';
 test('follows only the reviewed listing domain migration; provider redirects remain same-host',async()=>{
  const original=globalThis.fetch;let calls=0;
  try{
