@@ -15,13 +15,13 @@ export function slot(now=new Date()){
 }
 export async function api(path:string):Promise<any>{
  for(let attempt=0;attempt<2;attempt++){
-  try{const response=await fetch(SITE+path,{headers:{'x-touchline-refresh':process.env.TOUCHLINE_REFRESH_SECRET||'','Cache-Control':'no-cache'},signal:AbortSignal.timeout(90000),redirect:'error'});
+  try{const response=await fetch(SITE+path,{headers:{'x-matchxi-refresh':process.env.MATCHXI_REFRESH_SECRET||'','Cache-Control':'no-cache'},signal:AbortSignal.timeout(90000),redirect:'error'});
    if(!response.ok){const error:any=new Error('HTTP '+response.status);error.transient=response.status===429||response.status>=500;throw error;}
    return await response.json();
   }catch(error:any){if(attempt||error.transient===false)throw error;}
  }
 }
 export async function dispatch(id:string){
- const response=await fetch(SITE+'/.netlify/functions/refresh-background',{method:'POST',headers:{'Content-Type':'application/json','x-touchline-refresh':process.env.TOUCHLINE_REFRESH_SECRET||''},body:JSON.stringify({id}),signal:AbortSignal.timeout(15000),redirect:'error'});
+ const response=await fetch(SITE+'/.netlify/functions/refresh-background',{method:'POST',headers:{'Content-Type':'application/json','x-matchxi-refresh':process.env.MATCHXI_REFRESH_SECRET||''},body:JSON.stringify({id}),signal:AbortSignal.timeout(15000),redirect:'error'});
  if(response.status!==202)throw new Error('Worker dispatch HTTP '+response.status);
 }
