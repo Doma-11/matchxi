@@ -1,3 +1,5 @@
+import MatchTickets from './match-tickets';
+import {syncMatchTickets} from './match-tickets-store';
 import {handleProjectorKey} from './projector-mode';
 import './match-logo-overrides.css';
 import './match-backgrounds-v2.css';
@@ -44,6 +46,8 @@ export default function Home(){
  useEffect(()=>{const tick=()=>{if(document.visibilityState==='visible'&&!selectedGame&&['club','national','league','cup'].includes(page))setRefresh(x=>x+1)};const timer=window.setInterval(tick,300000);document.addEventListener('visibilitychange',tick);return()=>{clearInterval(timer);document.removeEventListener('visibilitychange',tick)}},[page,Boolean(selectedGame)]);
  const catalogueAt=useRef(0);
  useEffect(()=>{if(selectedGame||page==='settings'||Date.now()-catalogueAt.current<300000)return;let disposed=false;const abort=new AbortController();fetch('/api/catalogue',{cache:'no-store',signal:abort.signal}).then(r=>r.json()).then((d:any)=>{if(disposed||d.error)return;catalogueAt.current=Date.now();if(d.videos){setVideos(v=>merge(v,d.videos.filter((x:any)=>[...LEAGUES,...CLUB_CUPS].some(l=>l.id===x.league))));setNationalVideos(v=>merge(v,d.videos.filter((x:any)=>!x.league.includes('.1'))));}if(d.games)setGames(v=>{const map=new Map(v.map(g=>[g.league+g.id,g]));d.games.forEach((g:any)=>map.set(g.league+g.id,g));return Array.from(map.values());});}).catch(()=>{});return()=>{disposed=true;abort.abort()}},[refresh,page,Boolean(selectedGame)]);
+ useEffect(()=>{syncMatchTickets(games,[...videos,...nationalVideos])},[games,videos,nationalVideos]);
+ useEffect(()=>{const open=()=>{setPage('tickets');setSelectedGame(null);setSelected(null);window.scrollTo({top:0,behavior:'smooth'})};window.addEventListener('matchxi-open-tickets',open);return()=>window.removeEventListener('matchxi-open-tickets',open)},[]);
  const [clubTransition,setClubTransition]=useState<any>(null);const clubTransitionBusy=useRef(false);
  const [highlightRefresh,setHighlightRefresh]=useState(0);
  const [leagueTab,setLeagueTab]=useState('table'),[dashboards,setDashboards]=useState<any>(dashboardSeed),[statisticsNotice,setStatisticsNotice]=useState('');
@@ -120,6 +124,7 @@ export default function Home(){
  <main className={selectedGame?'match-page':page==='league'||page==='cup'?'competition-overview':undefined} key={page+league+(club?.id||'')+competition+(nation?.id||'')+(selectedGame?.id||'')}>
  {selectedGame?<MatchScreenBoundary key={selectedGame.league+':'+selectedGame.id} onBack={backScreen}><MatchWorkspace fixtures={games} onTeam={openTeam} game={selectedGame} videos={[...videos,...nationalVideos]} onBack={backScreen}/></MatchScreenBoundary>:<>
  {page==='settings'&&<AppSettings/>}
+ {page==='tickets'&&<MatchTickets onMatch={openMatch} onBrowse={goHome}/>}
  {page==='home'&&<MatchHome onMatch={openMatch}/>}
  {page==='clubs'&&<div className="clubs-page">{clubPicker()}</div>}
  {(page==='league'||page==='club'||page==='cup')&&<>{page==='club'?<><div className="competition-banner"><div className="competition-banner-content"><BackButton label={page==='club'?'Back to '+leagueInfo.name:'Back to clubs'} onClick={()=>history.state?.depth>0?backScreen():page==='club'?goLeague(league):goClubs()}/><div className="identity"><div className={club?'club-identity':'competition-identity'}>{club?<Crest club={club} size={92}/>:<img src={leagueInfo.logo} alt={leagueInfo.name}/>}</div><div><span className="kicker">{club?leagueInfo.name:leagueInfo.country} · {season}/{String(season+1).slice(2)}</span><h1>{club?.name||leagueInfo.name}</h1><p>{club?'Highlights and match information':'Standings, highlights and season statistics'}</p></div></div></div><div className="banner-league-mark"><img src={leagueInfo.logo} alt=""/></div></div></>:<header className="competition-overview-header"><BackButton label="Back to clubs" onClick={()=>history.state?.depth>0?backScreen():goClubs()}/><img className="overview-competition-logo" src={leagueInfo.logo} alt={leagueInfo.name}/><h1 className="sr-only">{leagueInfo.name}</h1><span className="overview-season">{season}/{String(season+1).slice(2)}</span></header>}
@@ -134,5 +139,5 @@ export default function Home(){
  {nation?.name==='Croatia'&&<section className="croatia-section"><div className="section-heading"><div><span className="kicker">HRVATSKA NA SPORTKLUBU</span><h2>Inside the Croatian team</h2></div><a className="source-link" href="https://www.youtube.com/@sportklubhrvatska3019" target="_blank" rel="noreferrer">SportKlub Hrvatska<ExternalLink size={15}/></a></div><p className="section-description">Croatian-language clips, interviews and reactions from SportKlub and HNS.</p><div className="video-grid">{croatiaClips.map(v=><Card key={v.id} video={v} onPlay={play} tournament={comp}/>)}</div>{!croatiaClips.length&&<div className="empty-state"><a href="https://www.youtube.com/@sportklubhrvatska3019/search?query=Hrvatska" target="_blank" rel="noreferrer">Watch Croatia on SportKlub Hrvatska<ExternalLink size={16}/></a></div>}</section>}</>}
  {videoNotice&&<p className="source-notice" role="status">{videoNotice}</p>}
  
- </>}</main><AppFooter value={page==='home'?'home':['clubs','league','club','cup'].includes(page)?'clubs':isNational?'national':'settings'} onChange={id=>{if(id==='home')goHome();else if(id==='clubs')goClubs();else if(id==='national')goNational();else{setPage('settings');setSelectedGame(null);setClub(null);setNation(null);setSelected(null)}}}/></div>;
+ </>}</main><AppFooter value={page==='home'?'home':['clubs','league','club','cup'].includes(page)?'clubs':isNational?'national':page==='tickets'?'tickets':'settings'} onChange={id=>{if(id==='home')goHome();else if(id==='clubs')goClubs();else if(id==='national')goNational();else if(id==='tickets'){setPage('tickets');setSelectedGame(null);setSelected(null);window.scrollTo({top:0,behavior:'smooth'})}else{setPage('settings');setSelectedGame(null);setClub(null);setNation(null);setSelected(null)}}}/></div>;
 }
