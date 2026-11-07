@@ -9,8 +9,8 @@ test('Zagreb summer, winter and DST changes retain exact times and target dates'
  for(const stamp of ['2026-10-06T22:30Z','2026-12-06T21:30Z','2026-10-06T11:45Z','2026-12-06T10:45Z'])assert.equal(slot(new Date(stamp)),null);
 });
 test('transient errors retry once, credentials stay in header to fixed host, permanent errors do not retry',async()=>{
- const previous=globalThis.fetch;process.env.TOUCHLINE_REFRESH_SECRET='test-only';let calls=0;
- try{globalThis.fetch=async(url,options)=>{calls++;assert.ok(url.startsWith('https://matchxi.netlify.app/api/'));assert.equal(options.headers['x-touchline-refresh'],'test-only');assert.equal(options.redirect,'error');return new Response(JSON.stringify({ok:true}),{status:calls===1?503:200})};assert.deepEqual(await api('/api/catalogue'),{ok:true});assert.equal(calls,2);
+ const previous=globalThis.fetch;process.env.MATCHXI_REFRESH_SECRET='test-only';let calls=0;
+ try{globalThis.fetch=async(url,options)=>{calls++;assert.ok(url.startsWith('https://matchxi.netlify.app/api/'));assert.equal(options.headers['x-matchxi-refresh'],'test-only');assert.equal(options.redirect,'error');return new Response(JSON.stringify({ok:true}),{status:calls===1?503:200})};assert.deepEqual(await api('/api/catalogue'),{ok:true});assert.equal(calls,2);
  calls=0;globalThis.fetch=async()=>{calls++;return new Response('',{status:401})};await assert.rejects(api('/api/catalogue'),/401/);assert.equal(calls,1);
- }finally{globalThis.fetch=previous;delete process.env.TOUCHLINE_REFRESH_SECRET;}
+ }finally{globalThis.fetch=previous;delete process.env.MATCHXI_REFRESH_SECRET;}
 });
