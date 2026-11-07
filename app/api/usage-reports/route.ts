@@ -14,7 +14,7 @@ export async function GET(request:Request){
  const denied=await reportAccessDenied(request);if(denied)return denied;
  const url=new URL(request.url),kind=url.searchParams.get('period')||'weekly';if(!['weekly','monthly'].includes(kind))return Response.json({error:'Invalid report period'},{status:400});
  const requested=url.searchParams.get('start');
- const period=reportPeriod(kind),reportStore=getStore({name:'touchline-reports'}),key=`${kind}/${period.start}`;
+ const period=reportPeriod(kind),reportStore=getStore({name:'matchxi-reports'}),key=`${kind}/${period.start}`;
  const history=await reportStore.list({prefix:kind+'/'}).catch(()=>({blobs:[]}));const dates=history.blobs.map((b:any)=>b.key.split('/')[1]).filter(Boolean).sort().reverse().slice(0,24);
  if(requested){if(!/^\d{4}-\d{2}-\d{2}$/.test(requested))return Response.json({error:'Invalid report date'},{status:400});const archived=await reportStore.get(kind+'/'+requested,{type:'json'}).catch(()=>null);return archived?Response.json({...cleanArchived(archived),netlifyUsage:await netlifyUsageForPeriod((archived as any).start,nextDay((archived as any).end)),history:dates}):Response.json({error:'Report unavailable'},{status:404});}
  const existing:any=await reportStore.get(key,{type:'json'}).catch(()=>null);if(existing?.reportVersion===2)return Response.json({...existing,netlifyUsage:await netlifyUsageForPeriod(period.start,period.end),history:dates});
