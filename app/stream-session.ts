@@ -28,7 +28,7 @@ function aborted(signal:AbortSignal){if(signal.aborted)throw new DOMException('A
 export function createStreamSession({fetcher=(...args:Parameters<typeof fetch>)=>fetch(...args),local=browserStorage('localStorage'),session=browserStorage('sessionStorage'),now=()=>Date.now()}={}){
  return {
   async listings(game:any,signal:AbortSignal,force=false){
-   aborted(signal);const key='touchline-streams-'+game.league+'-'+game.id+'-'+game.date,saved=read(local,key);
+   aborted(signal);const key='matchxi-streams-'+game.league+'-'+game.id+'-'+game.date,saved=read(local,key);
    if(!force&&streamsFrom(saved).length)return {...saved,streams:streamsFrom(saved)};
    const date=streamDay(game.date,'Europe/Zagreb'),p=new URLSearchParams({home:game.home.name,away:game.away.name,date,live:'true',id:String(game.id),league:game.league});
    const r=await fetcher('/api/match-streams?'+p,{signal});const data:any=await r.json();aborted(signal);
@@ -36,7 +36,7 @@ export function createStreamSession({fetcher=(...args:Parameters<typeof fetch>)=
    const result={...data,streams:streamsFrom(data)};if(result.streams.length)write(local,key,result);return result;
   },
   async player(stream:any,signal:AbortSignal){
-   aborted(signal);const key='touchline-stream-player-v2-'+stream.url,saved=read(local,key);
+   aborted(signal);const key='matchxi-stream-player-v2-'+stream.url,saved=read(local,key);
    if(saved?.embedAllowed&&supportedStreamPlayer(saved.embedUrl))return {...saved,embedUrl:supportedStreamPlayer(saved.embedUrl)};
    const r=await fetcher('/api/stream-player?'+new URLSearchParams({url:stream.url,playerVersion:'2'}),{signal});const data:any=await r.json();aborted(signal);
    if(!r.ok)throw Error(data.error||'Could not open this player. Use the external link.');
@@ -45,11 +45,11 @@ export function createStreamSession({fetcher=(...args:Parameters<typeof fetch>)=
   },
   async games(signal:AbortSignal){
    aborted(signal);const date=streamDay(),zone=Intl.DateTimeFormat().resolvedOptions().timeZone||'Europe/Zagreb';
-   const candidates=[read(session,'touchline-match-day'),read(session,'touchline-stream-match-day')].filter(s=>s?.date===date&&Array.isArray(s.games)).sort((a,b)=>Date.parse(b.checkedAt||'')-Date.parse(a.checkedAt||''));
+   const candidates=[read(session,'matchxi-match-day'),read(session,'matchxi-stream-match-day')].filter(s=>s?.date===date&&Array.isArray(s.games)).sort((a,b)=>Date.parse(b.checkedAt||'')-Date.parse(a.checkedAt||''));
    const saved=candidates[0],age=now()-Date.parse(saved?.checkedAt||'');if(saved&&age>=0&&age<60000)return saved;
    const r=await fetcher('/api/match-day?'+new URLSearchParams({date,tz:zone}),{signal,cache:'no-store'});const data:any=await r.json();aborted(signal);
    if(!r.ok||data.error||!Array.isArray(data.games))throw Error(data.error||'Live matches could not refresh.');
-   const result={...data,date};write(session,'touchline-stream-match-day',result);return result;
+   const result={...data,date};write(session,'matchxi-stream-match-day',result);return result;
   }
  };
 }
