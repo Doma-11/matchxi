@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Touchline · Tables, highlights & statistics",
+  title: "MatchXI · Tables, highlights & statistics",
   description: "Follow league standings, football highlights and player and team statistics across England, Spain, Italy, Germany and Croatia, plus national teams.",
   other: {
     "codex-preview": "development",
