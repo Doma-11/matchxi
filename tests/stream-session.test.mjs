@@ -26,16 +26,16 @@ test('negative results are not saved as working players; forbidden or untrusted 
 test('Other games reuses fresh Home data and only refreshes stale snapshots on explicit opening',async()=>{
  const session=storage(),local=storage(),at=Date.now(),game=fixture();let calls=0;
  const client=createStreamSession({local,session,now:()=>at,fetcher:async(url)=>{calls++;assert.match(String(url),/^\/api\/match-day\?/);return Response.json({games:[game],checkedAt:new Date(at).toISOString()});}});
- session.setItem('touchline-match-day',JSON.stringify({date:streamDay(),games:[game],checkedAt:new Date(at-30000).toISOString()}));
+ session.setItem('matchxi-match-day',JSON.stringify({date:streamDay(),games:[game],checkedAt:new Date(at-30000).toISOString()}));
  await client.games(signal());assert.equal(calls,0);
- session.setItem('touchline-match-day',JSON.stringify({date:streamDay(),games:[game],checkedAt:new Date(at-90000).toISOString()}));
+ session.setItem('matchxi-match-day',JSON.stringify({date:streamDay(),games:[game],checkedAt:new Date(at-90000).toISOString()}));
  await client.games(signal());assert.equal(calls,1);await client.games(signal());assert.equal(calls,1);
- assert.equal(JSON.parse(session.getItem('touchline-match-day')).checkedAt,new Date(at-90000).toISOString(),'stream menu does not overwrite Home history cache');
+ assert.equal(JSON.parse(session.getItem('matchxi-match-day')).checkedAt,new Date(at-90000).toISOString(),'stream menu does not overwrite Home history cache');
 });
 test('late cancelled requests cannot publish a player or write a saved working result',async()=>{
  const local=storage(),controller=new AbortController();let respond;const client=createStreamSession({local,session:storage(),fetcher:()=>new Promise(resolve=>{respond=resolve;})});
  const request=client.player(stream,controller.signal);controller.abort();respond(Response.json({embedAllowed:true,embedUrl:embed}));
- await assert.rejects(request,{name:'AbortError'});assert.equal(local.getItem('touchline-stream-player-v2-'+stream.url),null);
+ await assert.rejects(request,{name:'AbortError'});assert.equal(local.getItem('matchxi-stream-player-v2-'+stream.url),null);
  const before=new AbortController();before.abort();await assert.rejects(client.listings(fixture(),before.signal),{name:'AbortError'});
 });
 test('empty listing cache can be retried explicitly and a source failure does not discard existing stored coverage',async()=>{
