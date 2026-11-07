@@ -1,6 +1,11 @@
 [build]
 command = "npm run build"
 publish = "dist"
+[build.environment]
+NODE_VERSION = "22"
+NPM_VERSION = "11.9.0"
+# This application builds with Vite; Next.js remains an inherited dependency.
+NETLIFY_NEXT_PLUGIN_SKIP = "true"
 [functions]
 directory = "netlify/functions"
 node_bundler = "esbuild"

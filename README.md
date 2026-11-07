@@ -40,10 +40,10 @@ MatchXI uses public ESPN and FotMob data, HNL fixture/table sources and matched 
 - Both rapid-detection windows are capped at five minutes, then fall back to 40-second polling.
 - The local clock advances without per-second server requests or routine timing corrections.
 - Detailed live statistics and lineups refresh approximately every **five minutes** while their tabs are visible.
-- Highlight/final-player checks run at **23:30** for that day’s matches and **12:45** for the previous day’s remaining gaps.
-- Fan-vote snapshots are scheduled for **12:00** on matchday.
+- The inherited highlight/final-player job supports **23:30** checks for that day’s matches and **12:45** for the previous day’s remaining gaps, but its schedule is **not registered** in MatchXI.
+- The inherited fan-vote job supports **12:00** matchday snapshots, but its schedule is **not registered** in MatchXI.
 
-Scheduled times use **Europe/Zagreb**, including daylight-saving changes. Background jobs run independently of ChatGPT; foreground polling stops when hidden or inactive.
+Those candidate times use **Europe/Zagreb**, including daylight-saving changes. Automated background jobs remain disabled pending separate approval; foreground polling stops when hidden or inactive.
 
 Ratings, statistics, portraits and highlights depend on source availability. Missing values are not fabricated. Fan votes represent user opinions, not calculated winning probabilities.
 
@@ -61,7 +61,7 @@ The app saves **video links and metadata**, not video footage. YouTube or the ex
 
 ## Development
 
-Requires **Node.js 22.13 or later**.
+Requires **Node.js 22.13 or later**. Netlify and CI use Node.js 22 and npm 11.9.0.
 
 ```sh
 npm ci
@@ -82,7 +82,7 @@ Netlify builds with `npm run build`, publishes `dist` and loads Functions from `
 
 ## Configuration and stored data
 
-Runtime credentials and owner authentication data are deliberately excluded from this repository. Existing fixtures, highlights, player data, reports and authentication records remain in the live site’s Netlify Blobs stores.
+Runtime credentials and owner authentication data are deliberately excluded from this repository. MatchXI uses its own Netlify site and `matchxi-` Blob stores; the original application's live records are not migrated by this repository.
 
 The snapshots under `public/data` are seed data, **not a complete backup of the live database**. Uploading the source to GitHub does not automatically connect Netlify deployments or migrate the existing site.
 

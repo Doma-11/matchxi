@@ -18,10 +18,10 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      # The imported upstream npm lock has an existing AJV dependency mismatch.
-      # Install and resolve it in CI without changing the original repository.
-      - run: npm install --no-audit --no-fund
+      - run: npm install --global npm@11.9.0 --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund
       - run: node scripts/check-matchxi-isolation.mjs
       - run: npx tsc --noEmit
       - run: node --test tests/*.test.mjs
       - run: npm run build
+      - run: npx netlify functions:build --src netlify/functions --functions .netlify/functions
