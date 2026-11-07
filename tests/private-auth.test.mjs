@@ -3,8 +3,8 @@ import {build} from 'esbuild';import assert from 'node:assert/strict';import {ra
 const out='tests/.auth-under-test.mjs';
 await build({entryPoints:['netlify/functions/auth.ts'],bundle:true,platform:'node',format:'esm',outfile:out,plugins:[{name:'fake-blobs',setup(b){b.onResolve({filter:/^@netlify\/blobs$/},()=>({path:'blobs',namespace:'fake'}));b.onLoad({filter:/.*/,namespace:'fake'},()=>({contents:`const records=new Map();export function getStore(){return {get:async(k)=>records.get(k)||null,setJSON:async(k,v,o)=>{if(o?.onlyIfNew&&records.has(k))return {modified:false};records.set(k,v);return {modified:true}}}}`}))}}]});
 const {default:handle}=await import('./.auth-under-test.mjs');
-process.env.TOUCHLINE_REFRESH_SECRET=randomBytes(32).toString('hex');const token=randomBytes(32).toString('hex');process.env.TOUCHLINE_SETUP_HASH=createHash('sha256').update(token).digest('hex');process.env.TOUCHLINE_SETUP_EXPIRES=String(Date.now()+60000);
-const host='https://touchline-football-hub.netlify.app';const pass=randomBytes(24).toString('hex');
+process.env.MATCHXI_REFRESH_SECRET=randomBytes(32).toString('hex');const token=randomBytes(32).toString('hex');process.env.MATCHXI_SETUP_HASH=createHash('sha256').update(token).digest('hex');process.env.MATCHXI_SETUP_EXPIRES=String(Date.now()+60000);
+const host='https://matchxi.netlify.app';const pass=randomBytes(24).toString('hex');
 function req(body,cookie='',origin=host){return new Request(host+'/api/auth',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',cookie},body:JSON.stringify(body)})}
 async function post(body,cookie='',origin=host){return handle(req(body,cookie,origin))}
 assert.equal((await post({action:'setup',token,password:pass},'','https://evil.example')).status,403);
@@ -16,8 +16,8 @@ assert.equal((await post({action:'login',username:'wrong',password:pass})).statu
 assert.equal((await post({action:'login',username:'Dome11',password:'wrong'})).status,401);
 const login=await post({action:'login',username:'Dome11',password:pass,remember:false});assert.equal(login.status,200);assert.ok(!login.headers.get('set-cookie').includes('Max-Age'));
 async function session(c){return (await handle(new Request(host+'/api/auth',{headers:{cookie:c}}))).json()}
-assert.equal((await session(cookie)).authenticated,true);assert.equal((await session(cookie.replace('__Host-touchline=','__Host-touchline=x'))).authenticated,false);
-const original=cookie.split(';')[0].split('=')[1];const payload=JSON.parse(Buffer.from(original.split('.')[0],'base64url').toString());payload.iat=Math.floor(Date.now()/1000)-60;payload.exp=Math.floor(Date.now()/1000)-1;const encoded=Buffer.from(JSON.stringify(payload)).toString('base64url');const key=createHmac('sha256',process.env.TOUCHLINE_REFRESH_SECRET).update('touchline-owner-session-v1').digest();const sig=createHmac('sha256',key).update(encoded).digest('base64url');assert.equal((await session('__Host-touchline='+encoded+'.'+sig)).authenticated,false);
+assert.equal((await session(cookie)).authenticated,true);assert.equal((await session(cookie.replace('__Host-matchxi=','__Host-matchxi=x'))).authenticated,false);
+const original=cookie.split(';')[0].split('=')[1];const payload=JSON.parse(Buffer.from(original.split('.')[0],'base64url').toString());payload.iat=Math.floor(Date.now()/1000)-60;payload.exp=Math.floor(Date.now()/1000)-1;const encoded=Buffer.from(JSON.stringify(payload)).toString('base64url');const key=createHmac('sha256',process.env.MATCHXI_REFRESH_SECRET).update('matchxi-owner-session-v1').digest();const sig=createHmac('sha256',key).update(encoded).digest('base64url');assert.equal((await session('__Host-matchxi='+encoded+'.'+sig)).authenticated,false);
 const next=randomBytes(24).toString('hex');assert.equal((await post({action:'password',currentPassword:'bad',password:next},cookie)).status,401);
 const changed=await post({action:'password',currentPassword:pass,password:next},cookie);assert.equal(changed.status,200);assert.equal((await session(cookie)).authenticated,false);assert.equal((await session(changed.headers.get('set-cookie'))).authenticated,true);
 const ownerCookie=changed.headers.get('set-cookie');
