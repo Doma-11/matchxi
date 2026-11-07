@@ -1,4 +1,5 @@
-import {build} from 'esbuild';import {test} from 'node:test';import assert from 'node:assert/strict';import {writeFile} from 'node:fs/promises';
+import {build} from 'esbuild';import {test} from 'node:test';import assert from 'node:assert/strict';import {mkdir,writeFile} from 'node:fs/promises';
+await mkdir('qa-temp',{recursive:true});
 const built=await build({entryPoints:['app/match-tickets.tsx'],bundle:true,platform:'node',format:'esm',packages:'external',write:false,jsx:'automatic',loader:{'.css':'empty'},plugins:[{name:'ticket-hooks',setup(b){b.onResolve({filter:/^react$/},()=>({path:'hooks',namespace:'hooks'}));b.onLoad({filter:/.*/,namespace:'hooks'},()=>({contents:'export const useState=(...a)=>globalThis.__streamHooks.state(...a),useRef=(...a)=>globalThis.__streamHooks.ref(...a),useEffect=(...a)=>globalThis.__streamHooks.effect(...a);'}));}}]});
 await writeFile('qa-temp/ticket-interactions.mjs',built.outputFiles[0].text);const {default:Collection,WatchedTicketControl,TicketDialog}=await import('../qa-temp/ticket-interactions.mjs');
 function hooks(Component,initial){const slots=[],pending=[];let cursor=0,dirty=true,props=initial,tree;const same=(a,b)=>!!a&&!!b&&a.length===b.length&&a.every((v,i)=>Object.is(v,b[i]));
