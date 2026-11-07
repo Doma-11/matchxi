@@ -1,8 +1,8 @@
-# Touchline
+# MatchXI
 
 A private football companion for live scores, match details, lineups, player ratings, standings and official highlights. Built for personal use, with a responsive interface, competition-inspired themes and support for installing the app on a phone’s home screen.
 
-**Website:** [touchline-football-hub.netlify.app](https://touchline-football-hub.netlify.app) · Private login required
+**Website:** Not deployed yet. Netlify deployment requires separate approval.
 
 ## Features
 
@@ -32,7 +32,7 @@ A private football companion for live scores, match details, lineups, player rat
 
 ## Data and refreshes
 
-Touchline uses public ESPN and FotMob data, HNL fixture/table sources and matched videos from official club, league, federation and broadcaster channels.
+MatchXI uses public ESPN and FotMob data, HNL fixture/table sources and matched videos from official club, league, federation and broadcaster channels.
 
 - Regular foreground score/event updates run every **40 seconds** while the relevant screen is visible.
 - Kickoff detection checks every **6 seconds**, beginning one minute before scheduled kickoff.
@@ -86,3 +86,14 @@ Runtime credentials and owner authentication data are deliberately excluded from
 
 The snapshots under `public/data` are seed data, **not a complete backup of the live database**. Uploading the source to GitHub does not automatically connect Netlify deployments or migrate the existing site.
 
+
+
+## MatchXI isolation and deployment gate
+
+MatchXI is a separate GitHub repository. Do not deploy it until its own Netlify site, owner account, secrets, and data stores have been reviewed. The original Touchline site and GitHub repository must not be changed.
+
+`MATCHXI_SITE_URL` must be set to the independent MatchXI HTTPS Netlify origin before background requests can work. With no setting, the backend targets the intentionally invalid `https://matchxi.invalid`, never Touchline. Do not set it to Touchline's production URL.
+
+Automated refresh and vote schedules are deliberately **not registered** for deployment yet. The environment guard `MATCHXI_ENABLE_SCHEDULES` defaults to disabled; restoring schedules requires explicit separate review of Netlify Function schedule declarations and safe background routing. Do not assume setting the variable alone activates schedules.
+
+Production Netlify Blobs are not copied by Git. MatchXI will require independent setup and should not reuse production secrets. Branding inside some source components and existing image assets may still refer to Touchline until the branding pass is complete.
