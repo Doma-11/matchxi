@@ -1,4 +1,4 @@
-const key='touchline-projector-mode';
+const key='matchxi-projector-mode';
 export function projectorMode(){try{return localStorage.getItem(key)==='on';}catch{return false;}}
 export function setProjectorMode(enabled:boolean){try{localStorage.setItem(key,enabled?'on':'off');}catch{}if(typeof document!=='undefined')document.documentElement.dataset.projector=enabled?'on':'off';}
 export function initializeProjectorMode(){if(typeof document!=='undefined')document.documentElement.dataset.projector=projectorMode()?'on':'off';}
