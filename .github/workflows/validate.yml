@@ -15,7 +15,9 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - run: npm ci
+      # The imported upstream npm lock has an existing AJV dependency mismatch.
+      # Install and resolve it in CI without changing the original repository.
+      - run: npm install --no-audit --no-fund
       - run: npx tsc --noEmit
       - run: node --test tests/*.test.mjs
       - run: npm run build
