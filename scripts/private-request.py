@@ -3,6 +3,12 @@
 import argparse,json,os,urllib.request,urllib.error,gzip
 from urllib.parse import urlsplit
 
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise ValueError('Redirect rejected: MatchXI requests must not contact another site')
+
+opener=urllib.request.build_opener(NoRedirect)
+
 def request(path):
     if not path.startswith('/api/') or path.startswith('//'):
         raise ValueError('Only MatchXI API paths are allowed')
@@ -14,7 +20,7 @@ def request(path):
     if url.scheme!='https' or not url.hostname or url.username or url.password or url.path or url.query or url.fragment or url.hostname=='touchline-football-hub.netlify.app':
         raise ValueError('Invalid or original Touchline site URL')
     req=urllib.request.Request(base+path,headers={'x-matchxi-refresh':secret,'Accept':'application/json','Cache-Control':'no-cache'})
-    with urllib.request.urlopen(req,timeout=90) as response:
+    with opener.open(req,timeout=90) as response:
         raw=response.read()
         if response.headers.get('Content-Encoding')=='gzip':raw=gzip.decompress(raw)
         return json.loads(raw)
