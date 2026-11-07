@@ -33,3 +33,18 @@ test('a previously working provider is rechecked after fifteen minutes',async()=
   assert.equal((await(await GET(request('expiring-player'))).json()).embedAllowed,false);assert.equal(calls,4);
  }finally{globalThis.fetch=previous;Date.now=realNow;}
 });
+
+test('additional published providers retain HTTP failure and frame-policy checks',async()=>{
+ const previous=globalThis.fetch;
+ try{
+  for(const [id,embed,status,headers,expected] of [
+   ['daddy-ok','https://thedaddy.li/stream/stream-38.php',200,{},true],
+   ['daddy-restricted','https://thedaddy.li/stream/stream-49.php',200,{'X-Frame-Options':'SAMEORIGIN'},false],
+   ['vcdn-forbidden','https://vcdn-4728.website/shopping2/?channel_id=tntsports1',403,{},false],
+   ['vcdn-unavailable','https://vcdn-4728.website/shopping2/?channel_id=sky_sport_main_event_uk',503,{},false],
+  ]){
+   globalThis.fetch=async url=>String(url).includes('soccerstreams.zone')?new Response(`<iframe src="${embed}"></iframe>`):new Response('provider',{status,headers});
+   const data=await(await GET(request(id))).json();assert.equal(data.embedAllowed,expected);assert.equal(data.embedUrl,expected?embed:undefined);
+  }
+ }finally{globalThis.fetch=previous;}
+});

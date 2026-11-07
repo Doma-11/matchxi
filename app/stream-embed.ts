@@ -1,11 +1,22 @@
 export const STREAM_PLAYER_VERSION='3';
 export const STREAM_PLAYER_TTL_MS=15*60*1000;
 
+/** These two published players explicitly reject sandboxed ancestors.
+ * This exception gives the provider frame normal browser popup and navigation
+ * capabilities. Keep it limited to reviewed, explicitly opened player URLs.
+ * Other providers retain the existing sandbox; host/path validation still applies.
+ */
+export function streamPlayerSandbox(raw:string){
+ const reviewed=supportedStreamPlayer(raw);
+ if(reviewed&&['sportsoonline.click','embedcenter.st'].includes(new URL(reviewed).hostname))return undefined;
+ return 'allow-scripts allow-same-origin allow-forms allow-presentation';
+}
+
 export function supportedStreamPlayer(raw:string){
  try{const url=new URL(raw.replace(/&amp;/gi,'&'),'https://www.soccerstreams.zone/');
   if(url.protocol!=='https:'||url.username||url.password||url.port)return null;
   // Exact replacement hosts observed in the listing site's published player frames.
-  const current=url.hostname==='sportsoonline.click'&&url.pathname.startsWith('/channels/')||url.hostname==='embedcenter.st'&&url.pathname.startsWith('/embed/');
+  const current=url.hostname==='sportsoonline.click'&&url.pathname.startsWith('/channels/')||url.hostname==='embedcenter.st'&&url.pathname.startsWith('/embed/')||url.hostname==='thedaddy.li'&&/^\/stream\/stream-\d+\.php$/.test(url.pathname)||url.hostname==='vcdn-4728.website'&&url.pathname==='/shopping2/'&&/^(?:sky_sport_main_event_uk|tntsports1)$/.test(url.searchParams.get('channel_id')||'');
   const supported=current||/^(?:w\d+\.)?sportsonliine\.click$/.test(url.hostname)||/^(?:ww?\d+\.)?sportsonnline\.click$/.test(url.hostname)||url.hostname==='dlive.sx';
   return supported?url.href:null;
  }catch{return null;}

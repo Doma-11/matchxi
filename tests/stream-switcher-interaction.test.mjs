@@ -85,3 +85,13 @@ test('Focus layout, rail and Quick return only move stable tiles; Grid restores 
  find(tree,n=>n.type==='button'&&Array.isArray(n.props.children)&&n.props.children.includes('Grid')).props.onClick();tree=await flush(ui);assert.ok(!find(tree,n=>n.props?.className?.startsWith('multiview-grid')).props.className.includes('multiview-focus'));assert.deepEqual(frames(tree).map(n=>n.props.src),urls);assert.equal(calls.length,before);
  }finally{ui.unmount();env.restore();}
 });
+
+test('single player and multiview apply the same reviewed provider sandbox compatibility setting',async()=>{
+ const primary=game('provider-compat','Home','Away'),current='https://embedcenter.st/embed/ch1.php';
+ const env=environment(async url=>Response.json(String(url).startsWith('/api/match-streams')?{streams:[stream(1)]}:{embedAllowed:true,embedUrl:current}));
+ const ui=hooks(Panel,{game:primary,fixtures:[]});
+ try{let tree=await flush(ui);button(tree,'Play stream 1 in app').props.onClick({currentTarget:null});tree=await flush(ui);assert.equal(frames(tree).length,1);assert.equal(frames(tree)[0].props.src,current);assert.equal(frames(tree)[0].props.sandbox,undefined);assert.equal(frames(tree)[0].props.referrerPolicy,'strict-origin-when-cross-origin');}finally{ui.unmount();env.restore();}
+ const otherEnv=environment(()=>{throw Error('unexpected network');}),initial={game:primary,streams:[stream(1)],index:0,player:{embedAllowed:true,embedUrl:current}};
+ const multi=hooks(Multiview,{client:{async games(){return {games:[primary]};}},initial,game:primary,fixtures:[],onSingle(){},onClose(){}});
+ try{const tree=await flush(multi);assert.equal(frames(tree).length,1);assert.equal(frames(tree)[0].props.src,current);assert.equal(frames(tree)[0].props.sandbox,undefined);}finally{multi.unmount();otherEnv.restore();}
+});

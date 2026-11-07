@@ -1,5 +1,5 @@
 import {build} from 'esbuild';import {test} from 'node:test';import assert from 'node:assert/strict';
-const c=await build({entryPoints:['app/stream-embed.ts'],bundle:true,platform:'node',format:'esm',write:false});const {publishedStreamPlayer,allowsStreamEmbedding,fetchStreamPage}=await import('data:text/javascript;base64,'+Buffer.from(c.outputFiles[0].text).toString('base64'));
+const c=await build({entryPoints:['app/stream-embed.ts'],bundle:true,platform:'node',format:'esm',write:false});const {publishedStreamPlayer,allowsStreamEmbedding,fetchStreamPage,streamPlayerSandbox}=await import('data:text/javascript;base64,'+Buffer.from(c.outputFiles[0].text).toString('base64'));
 const app='https://matchxi.netlify.app';
 test('follows only the reviewed listing domain migration; provider redirects remain same-host',async()=>{
  const original=globalThis.fetch;let calls=0;
@@ -30,4 +30,14 @@ test('recognizes the replacement player hosts published in current live listings
  for(const src of ['https://sportsoonline.click.evil.example/channels/hd/hd1.php','https://evil.sportsoonline.click/channels/hd/hd1.php','https://embedcenter.st.evil.example/embed/ch1.php','https://embedcenter.st/advertising','https://sportsoonline.click/ads','http://sportsoonline.click/channels/hd/hd1.php']){
   assert.equal(publishedStreamPlayer(`<iframe src="${src}"></iframe>`),null);
  }
+});
+
+ test('recognizes every remaining current listing provider without broadening to arbitrary domains or paths',()=>{
+ for(const src of ['https://thedaddy.li/stream/stream-38.php','https://thedaddy.li/stream/stream-49.php','https://vcdn-4728.website/shopping2/?channel_id=sky_sport_main_event_uk','https://vcdn-4728.website/shopping2/?channel_id=tntsports1'])assert.equal(publishedStreamPlayer(`<iframe src="${src}"></iframe>`),src);
+ for(const src of ['https://thedaddy.li.evil.example/stream/stream-38.php','https://thedaddy.li/ads','https://thedaddy.li/stream/stream-x.php','https://vcdn-4728.website.evil.example/shopping2/?channel_id=tntsports1','https://vcdn-4728.website/shopping2/?channel_id=unknown','https://vcdn-4728.website/ads?channel_id=tntsports1','http://thedaddy.li/stream/stream-38.php','https://user:secret@thedaddy.li/stream/stream-38.php'])assert.equal(publishedStreamPlayer(`<iframe src="${src}"></iframe>`),null);
+});
+
+test('sandbox compatibility exception is limited to the two observed rejecting providers',()=>{
+ for(const src of ['https://sportsoonline.click/channels/hd/hd1.php','https://embedcenter.st/embed/ch1.php'])assert.equal(streamPlayerSandbox(src),undefined);
+ for(const src of ['https://sportsoonline.click/ads','https://sportsoonline.click.evil.example/channels/hd/hd1.php','https://embedcenter.st.evil.example/embed/ch1.php','http://embedcenter.st/embed/ch1.php','https://thedaddy.li/stream/stream-38.php','https://dlive.sx/stream/stream-31.php','https://vcdn-4728.website/shopping2/?channel_id=tntsports1'])assert.equal(streamPlayerSandbox(src),'allow-scripts allow-same-origin allow-forms allow-presentation');
 });
