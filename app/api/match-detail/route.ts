@@ -16,7 +16,7 @@ async function savedWithPoll(saved:any,store:any,key:string){await refreshMatchP
 export async function GET(request:Request){
  const p=new URL(request.url).searchParams,league=p.get('league')||'',id=p.get('id')||'';
  if(![...MATCH_LEAGUES,'fifa.worldq.uefa','fifa.friendly'].includes(league)||!/^\d{1,12}$/.test(id))return Response.json({error:'Invalid match'},{status:400});
- const key=league+':'+id,store=getStore({name:'touchline-match-details',consistency:'strong'});
+ const key=league+':'+id,store=getStore({name:'matchxi-match-details',consistency:'strong'});
  const saved:any=await store.get(key,{type:'json'}).catch(()=>null);
  if(saved?.playerDataVersion>=7&&saved.game?.completed&&(saved.finalPlayerData?.status==='saved'||saved.playerDataVersion===7&&Date.parse(saved.finalPlayerData?.nextCheckAt)>Date.now()))return Response.json(await savedWithPoll(saved,store,key));
  if(saved?.game?.completed&&Date.parse(saved.statsUpgradeRetryAt)>Date.now())return Response.json(await savedWithPoll(saved,store,key));
