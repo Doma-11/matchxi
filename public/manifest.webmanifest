@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Touchline Football",
-  "short_name": "Touchline",
+  "name": "MatchXI Football",
+  "short_name": "MatchXI",
   "description": "Live football scores, match details, standings and official highlights.",
   "start_url": "/",
   "scope": "/",
