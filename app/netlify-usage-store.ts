@@ -10,7 +10,7 @@ async function api(path:string,analytics=false):Promise<any>{
  if(!r.ok)throw Error('Netlify usage source returned HTTP '+r.status);return r.json();
 }
 export async function netlifyUsage(date:string){
- const range=monthRange(date),key=range.start,store=getStore({name:'touchline-netlify-usage'});
+ const range=monthRange(date),key=range.start,store=getStore({name:'matchxi-netlify-usage'});
  if(pending.has(key))return pending.get(key);
  const work=(async()=>{
   const saved:any=await store.get(key,{type:'json'}).catch(()=>null);
