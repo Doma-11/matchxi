@@ -43,8 +43,8 @@ async function handle(request:Request){
  if(['daily-report','usage-reports'].includes(name))return routes[name](new NextRequest(request));
  const params=new URLSearchParams(url.searchParams);params.sort();
  const key=createHash('sha256').update(name+'?'+params.toString()).digest('hex');
- const store=getStore({name:'touchline-response-cache'});
- const respond=async(entry:any,cached=false)=>{const data=structuredClone(entry.data);if(name==='match-detail')await refreshMatchPoll(data);return Response.json(data,{headers:{'X-Touchline-Cache':cached?'hit':'miss','Cache-Control':`public, max-age=${Math.min(entry.ttl,120)}`,'Netlify-CDN-Cache-Control':`public, s-maxage=${entry.ttl}`}});};
+ const store=getStore({name:'matchxi-response-cache'});
+ const respond=async(entry:any,cached=false)=>{const data=structuredClone(entry.data);if(name==='match-detail')await refreshMatchPoll(data);return Response.json(data,{headers:{'X-MatchXI-Cache':cached?'hit':'miss','Cache-Control':`public, max-age=${Math.min(entry.ttl,120)}`,'Netlify-CDN-Cache-Control':`public, s-maxage=${entry.ttl}`}});};
  try{
   const saved:any=await store.get(key,{type:'json'}).catch(()=>null);
   if(saved)saved.ttl=Math.min(saved.ttl,lifetime(name,saved.data,url));
