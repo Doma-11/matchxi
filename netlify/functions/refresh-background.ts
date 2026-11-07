@@ -6,10 +6,10 @@ import {matchVideo,videoMatchDate} from '../../app/football-model';
 import {matchesUploadWindow} from '../../app/match-highlight-discovery';
 import {api,dispatch} from '../lib/football-schedule';
 export default async function(request:Request){
- const secret=Buffer.from(process.env.TOUCHLINE_REFRESH_SECRET||''),provided=Buffer.from(request.headers.get('x-touchline-refresh')||'');
+ const secret=Buffer.from(process.env.MATCHXI_REFRESH_SECRET||''),provided=Buffer.from(request.headers.get('x-matchxi-refresh')||'');
  if(!secret.length||secret.length!==provided.length||!timingSafeEqual(secret,provided))return;
  const {id}=await request.json() as {id:string};if(!/^\d{4}-\d{2}-\d{2}\/(2330|1245)$/.test(id||''))return;
- const store=getStore({name:'touchline-scheduled-runs',consistency:'strong'});let job:any=await store.get(id,{type:'json'});
+ const store=getStore({name:'matchxi-scheduled-runs',consistency:'strong'});let job:any=await store.get(id,{type:'json'});
  if(!job||job.state==='complete'||job.leaseUntil>Date.now())return;
  job.segments=(job.segments||0)+1;
  if(job.segments>4){job.state='budget-reached';job.finishedAt=new Date().toISOString();await store.setJSON(id,job);await dailyFootballReport(job.date);return;}
