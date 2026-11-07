@@ -1,6 +1,6 @@
 import {getStore} from '@netlify/blobs';
 export async function observedUsage(start:string,end:string){
- const store=getStore({name:'touchline-usage'}),records:any[]=[];let truncated=false,sourceFailures=0;
+ const store=getStore({name:'matchxi-usage'}),records:any[]=[];let truncated=false,sourceFailures=0;
  for(let day=new Date(start+'T12:00Z');day.toISOString().slice(0,10)<end;day.setUTCDate(day.getUTCDate()+1)){
   const listing=await store.list({prefix:day.toISOString().slice(0,10)+'/'}).catch(()=>{sourceFailures++;return {blobs:[]};});
   const keys=listing.blobs.map((b:any)=>b.key);if(records.length+keys.length>500){truncated=true;break;}
