@@ -14,6 +14,6 @@ export async function meter(route:string,handler:()=>Promise<Response>){
  // Only count explicitly known bytes; avoid copying large image/JSON bodies.
  if(length>0)old.responseBytes+=length;
  old.routes[route]=(old.routes[route]||0)+1;old.lastSeen=new Date().toISOString();days.set(day,old);
- if(Date.now()-old.flushed>=60000){old.flushed=Date.now();await getStore({name:'touchline-usage'}).setJSON(`${day}/${instance}`,old).catch(()=>{});}
+ if(Date.now()-old.flushed>=60000){old.flushed=Date.now();await getStore({name:'matchxi-usage'}).setJSON(`${day}/${instance}`,old).catch(()=>{});}
  return response;
 }
