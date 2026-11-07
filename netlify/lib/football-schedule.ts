@@ -1,4 +1,11 @@
-export const SITE='https://touchline-football-hub.netlify.app';
+// Never fall back to the original Touchline production website.
+export const SITE=(()=>{
+ const raw=process.env.MATCHXI_SITE_URL;
+ if(!raw)return 'https://matchxi.invalid';
+ const url=new URL(raw);
+ if(url.protocol!=='https:'||url.username||url.password||url.pathname!=='/'||url.search||url.hash||url.hostname==='touchline-football-hub.netlify.app')throw new Error('Invalid MATCHXI_SITE_URL');
+ return url.origin;
+})();
 export function slot(now=new Date()){
  const parts=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Zagreb',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).map(p=>[p.type,p.value]));
  const day=`${parts.year}-${parts.month}-${parts.day}`,time=`${parts.hour}:${parts.minute}`;
