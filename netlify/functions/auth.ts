@@ -52,7 +52,7 @@ export default async function(request:Request){
   }
   if(body.action==='login'){
    const record=validUsername(body.username)?await account(body.username,true):null,password=typeof body.password==='string'&&Buffer.byteLength(body.password)<=256?body.password:'';
-   const hash=await passwordHash(password,record?.salt||'touchline-no-account-dummy-salt');
+   const hash=await passwordHash(password,record?.salt||'matchxi-no-account-dummy-salt');
    if(!record||body.username!==record.username||!equal(hash,record.hash))return json({error:'Incorrect username or password.'},401);
    return json({ok:true,username:record.username},200,sessionCookie(record,body.remember!==false));
   }
