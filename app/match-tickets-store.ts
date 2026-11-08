@@ -10,7 +10,17 @@ export type MatchTicket={version:1;id:string;game:any;competition:{name:string;l
 export const ticketId=(game:any)=>`${game.league}:${String(game.id).replace(/^fm-/,'')}`;
 function safeImage(raw:any){if(typeof raw!=='string')return undefined;if(/^\/(?:logos|flags)\/[\w./-]+$/.test(raw)&&!raw.split('/').includes('..'))return raw;try{const u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port?u.href:undefined}catch{return undefined}}
 function team(raw:any){if(!raw||typeof raw.name!=='string'||!raw.name.trim()||raw.name.length>150)throw Error('Invalid ticket team.');return {id:String(raw.id||''),name:raw.name,logo:safeImage((flags as any)[raw.name]||raw.logo),score:raw.score==null||raw.score===''?null:Number.isFinite(Number(raw.score))&&Number(raw.score)>=0?Number(raw.score):null};}
-export function ticketGame(raw:any){if(!raw||!/^[-\w.]{1,40}$/.test(raw.league)||!/^[-\w]{1,80}$/.test(String(raw.id))||!Number.isFinite(Date.parse(raw.date)))throw Error('Invalid ticket fixture.');return {id:String(raw.id).replace(/^fm-/,''),league:raw.league,date:new Date(raw.date).toISOString(),home:team(raw.home),away:team(raw.away),completed:raw.completed===true,state:raw.completed===true?'post':raw.state==='in'?'in':'pre',status:raw.completed===true?'Full time':raw.state==='in'?'Live':'Scheduled',venue:typeof raw.venue==='string'?raw.venue.slice(0,200):null};}
+export function ticketMatchday(raw:any):number|null{
+ const candidates=[raw.matchday,raw.matchDay,raw.week?.number,raw.week,raw.round?.number,raw.round?.name,raw.round];
+ for(const value of candidates){
+  if(typeof value==='number'&&Number.isInteger(value)&&value>0&&value<=1000)return value;
+  if(typeof value!=='string')continue;
+  const text=value.trim(),found=text.match(/^(\d{1,3})$/)||text.match(/(?:matchday|round|week|kolo)\s*[:.-]?\s*(\d{1,3})\b/i)||text.match(/^(\d{1,3})[.)]?\s*kolo\b/i);
+  if(found&&Number(found[1])>0)return Number(found[1]);
+ }
+ return null;
+}
+export function ticketGame(raw:any){if(!raw||!/^[-\w.]{1,40}$/.test(raw.league)||!/^[-\w]{1,80}$/.test(String(raw.id))||!Number.isFinite(Date.parse(raw.date)))throw Error('Invalid ticket fixture.');return {id:String(raw.id).replace(/^fm-/,''),league:raw.league,date:new Date(raw.date).toISOString(),home:team(raw.home),away:team(raw.away),completed:raw.completed===true,state:raw.completed===true?'post':raw.state==='in'?'in':'pre',status:raw.completed===true?'Full time':raw.state==='in'?'Live':'Scheduled',matchday:ticketMatchday(raw),venue:typeof raw.venue==='string'?raw.venue.slice(0,200):null};}
 export function savedHighlight(raw:any){
  if(!raw||!/^[-\w]{11}$/.test(raw.id)||typeof raw.title!=='string')return null;
  // Store a canonical public video link, never provider credentials or embed HTML.
@@ -22,7 +32,8 @@ export function reconcileTickets(tickets:MatchTicket[],games:any[],videos:any[])
  const candidates=games.filter(g=>ticketId(g)===ticket.id&&Number.isFinite(Date.parse(g.date))&&new Date(g.date).toISOString().slice(0,10)===ticket.game.date.slice(0,10));
  const incoming=candidates.find(g=>g.completed)||candidates.find(g=>g.state==='in');
  // A stale live snapshot must never replace a confirmed final result.
- const game=incoming&&(!ticket.game.completed||incoming.completed)?ticketGame(incoming):ticket.game;
+ const updated=incoming&&(!ticket.game.completed||incoming.completed)?ticketGame(incoming):null;
+ const game=updated?{...updated,matchday:updated.matchday??ticket.game.matchday??null}:ticket.game;
  const matches=game.completed?exactHighlights(videos,game,games).map(savedHighlight).filter(Boolean):[];
  const highlights=new Map(ticket.highlights.map(v=>[v.id,v]));for(const v of matches)highlights.set(v!.id,v);
  return {...ticket,game,...metadata(game),highlights:[...highlights.values()].slice(0,12)};

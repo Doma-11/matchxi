@@ -5,21 +5,26 @@ jobs, background polling, or new highlight-discovery routes.
 
 ## User experience
 
-- Broadcast has an “I watched this.” checkbox. Saving records the match once in
-  this browser/device; a saved checkbox stays checked. Completed matches also
-  offer this control in their Highlights tab.
-- The Tickets destination opens My match tickets. Competition-themed cards show
-  team crests, competition, match date, season and a confirmed final score.
-  Live saves show Final score pending and never label a live score as final.
-- Open a card and flip it to saved highlights. The back has a real, locally
-  generated QR linking to the saved public YouTube URL. Pending highlights have
-  no invented QR target. Playing uses the app's existing YouTube player and
-  preserves Open on YouTube for restricted videos. Flip/close unmounts playback.
-- Filters cover club, country, season, club/national matches and favourites.
-  Tickets can be favourited, opened back in the match centre, or deleted after
-  confirmation. Ratings, comments and memory text are omitted per the final brief.
-- Export/import backs up and merges the collection. Storage failures are reported
-  and do not falsely mark a ticket saved. Damaged data is not silently erased.
+- Broadcast has an “I watched this.” checkbox. Saving records the match once on
+  this browser/device. Completed matches also offer it in their Highlights tab.
+- Tickets flip directly in the collection; there is no expanded view or modal.
+  Each card uses a fixed responsive stage matching its initial compact dimensions.
+  Both faces occupy that same stage, with perspective, preserve-3d and rotateY.
+  Reduced-motion users receive an immediate face change.
+- The front retains teams, crests, competition, date and final/pending score. The
+  former Watch Diary/serial stub now contains a transparent-background QR for the
+  saved highlight URL. Pending highlights show QR pending rather than a fake code.
+- The front surface is a full-card flip button. Footer Return to Match and Delete
+  ticket, plus the favourite button, remain independent actions. Delete confirms
+  inside the card without changing its size. Keyboard focus follows the face.
+- The back retains the saved thumbnail with a play visual, a YouTube link, matchday
+  number and flip-back button. Both video links open the exact saved YouTube URL.
+  Tickets never mount an internal player or iframe. Multiple saved videos can be
+  selected; the front QR follows the selected saved video.
+- Matchday comes only from supplied matchday/week/round metadata. Unknown values
+  are labelled unavailable. Match IDs, dates and season numbers are not substitutes.
+- Filters, favourites, device persistence and export/import remain available.
+  Ratings, comments and memory text remain omitted.
 
 ## Data and existing highlights
 
@@ -123,3 +128,24 @@ backup are local to this cloud browser; no server ticket store was created.
 
 Touchline was not modified. Schedules and catalogue storage architecture were not
 changed.
+
+## Inline design revision — 8 November 2026
+
+The 3D inline design supersedes the modal design described in the historical
+7 November browser record above. Existing version-1 device tickets and backups
+remain compatible. The saved fixture snapshot gains an optional matchday number;
+normal existing fixture updates can fill it, and later metadata omissions do not
+remove an already known matchday. No new endpoint or search is used.
+
+Validation: TypeScript, all 168 Node tests, Vite build, Netlify function bundling,
+and MatchXI isolation audit passed locally. An independent jsQR check decoded the
+production QR options at 64, 80, 100 and 200 pixels after compositing the transparent
+PNG over a dark ticket background. The PNG actually contains transparent pixels.
+Interaction tests cover no expansion/dialog, same-stage flips, independent footer
+actions and deletion, inactive-face keyboard exclusion, YouTube-only links, no
+internal player, pending highlights, and matchday preservation through backups.
+
+Browser geometry/animation and rendered QR verification are pending: the managed
+preview service remains unavailable. Review and obtain the user's deployment
+checkpoint approval before publishing this revision to MatchXI. Touchline,
+schedules, credentials and server catalogue architecture remain unchanged.
