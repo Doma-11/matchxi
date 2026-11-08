@@ -44,3 +44,28 @@ test('both designs keep the same inline flip and saved highlight destination',as
 
 test('Settings offers exactly two persistent designs and backup controls; storage failure does not claim selection',async()=>{const env=environment(),ui=hooks(TicketSettings,{});try{let tree=await flush(ui);const choices=()=>nodes(tree,n=>n.type==='button'&&['current','matchday'].includes(n.key));assert.equal(choices().length,2);assert.equal(choices()[0].props['aria-pressed'],true);choices()[1].props.onClick();tree=await flush(ui);assert.equal(readTicketDesign(),'matchday');assert.equal(choices()[1].props['aria-pressed'],true);assert.equal(find(tree,n=>n.type==='input'&&n.props.type==='file').props.hidden,true);env.win.localStorage.setItem=()=>{throw Error('quota')};choices()[0].props.onClick();tree=await flush(ui);assert.equal(choices()[1].props['aria-pressed'],true);assert.ok(nodes(tree,n=>n.props?.role==='alert').length)}finally{ui.unmount();env.restore()}});
 test('unknown preferences fall back to original and design changes never change tickets',()=>{const env=environment();try{env.win.localStorage.setItem(TICKET_DESIGN_KEY,'unknown');assert.equal(readTicketDesign(),'current');env.win.localStorage.setItem('matchxi-match-tickets-v1','[]');saveTicketDesign('matchday');assert.equal(env.win.localStorage.getItem('matchxi-match-tickets-v1'),'[]');assert.throws(()=>saveTicketDesign('invalid'));assert.equal(readTicketDesign(),'matchday')}finally{env.restore()}});
+
+function hintEnvironment(t,reduced=false){
+ const env=environment(),old=globalThis.document,doc=new EventTarget();doc.visibilityState='visible';globalThis.document=doc;env.win.matchMedia=()=>({matches:reduced});
+ t.mock.timers.enable({apis:['setTimeout']});
+ return {doc,restore(){t.mock.timers.reset();env.restore();globalThis.document=old}};
+}
+test('entry hint smoothly shows back then front once, without resizing or moving focus',async t=>{
+ const env=hintEnvironment(t);let started=0;const ui=hooks(InlineTicketCard,{ticket:cardTicket(),autoFlipHint:true,onHintStarted(){started++},onFavourite(){},onDelete(){},onMatch(){}});
+ try{let tree=await flush(ui);const style=tree.props.style;assert.equal(front(tree).props.inert,false);t.mock.timers.tick(550);tree=ui.render();assert.equal(back(tree).props.inert,false);assert.deepEqual(tree.props.style,style);t.mock.timers.tick(1000);tree=ui.render();assert.equal(front(tree).props.inert,false);t.mock.timers.tick(10000);tree=ui.render();assert.equal(front(tree).props.inert,false);assert.equal(started,1)}finally{ui.unmount();env.restore()}
+});
+test('interaction cancels entry hint and does not undo a manual flip',async t=>{
+ const env=hintEnvironment(t),ui=hooks(InlineTicketCard,{ticket:cardTicket(),autoFlipHint:true,onFavourite(){},onDelete(){},onMatch(){}});
+ try{let tree=await flush(ui);tree.props.onPointerDownCapture();button(tree,'Flip ticket: Arsenal vs Real Madrid to highlights').props.onClick();t.mock.timers.tick(10000);tree=ui.render();assert.equal(back(tree).props.inert,false);env.doc.visibilityState='hidden';env.doc.dispatchEvent(new Event('visibilitychange'));assert.equal(back(ui.render()).props.inert,false)}finally{ui.unmount();env.restore()}
+});
+test('reduced motion skips the automatic flip; leaving or hiding clears pending work',async t=>{
+ for(const mode of ['reduced','hidden','unmount']){
+  const env=hintEnvironment(t,mode==='reduced'),ui=hooks(InlineTicketCard,{ticket:cardTicket(),autoFlipHint:true,onFavourite(){},onDelete(){},onMatch(){}});
+  try{await flush(ui);if(mode==='hidden'){t.mock.timers.tick(550);ui.render();env.doc.visibilityState='hidden';env.doc.dispatchEvent(new Event('visibilitychange'))}if(mode==='unmount')ui.unmount();t.mock.timers.tick(10000);if(mode!=='unmount')assert.equal(front(ui.render()).props.inert,false);}finally{if(mode!=='unmount')ui.unmount();env.restore()}
+ }
+});
+test('collection hints only its first card and does not repeat after filtering',async()=>{
+ const env=environment();env.win.localStorage.setItem('matchxi-match-tickets-v1',JSON.stringify([cardTicket({savedAt:'2026-11-08T08:00:00Z'}),cardTicket({id:'uefa.champions:second',game:{...fixture,id:'second'},savedAt:'2026-11-08T08:00:00Z'})]));
+ const ui=hooks(Collection,{showFlipHint:true,onMatch(){},onBrowse(){}});
+ try{let tree=await flush(ui);let cards=nodes(tree,n=>n.type===InlineTicketCard);assert.deepEqual(cards.map(c=>c.props.autoFlipHint),[true,false]);cards[0].props.onHintStarted();find(tree,n=>n.type==='button'&&n.key==='national').props.onClick();tree=await flush(ui);find(tree,n=>n.type==='button'&&n.key==='all').props.onClick();tree=await flush(ui);cards=nodes(tree,n=>n.type===InlineTicketCard);assert.ok(cards.every(c=>!c.props.autoFlipHint))}finally{ui.unmount();env.restore()}
+});

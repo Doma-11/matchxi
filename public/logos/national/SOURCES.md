@@ -1,0 +1,91 @@
+# National federation crests for match tickets
+
+Downloaded 8 November 2026 from the FootyLogos national-team badge catalogue.
+These marks identify the teams; they do not imply endorsement. Flags elsewhere in the app are unchanged.
+
+- Albania: https://assets.footylogos.com/previews/albania-national-team/albania-national-team-logo-footylogos-320.webp
+- Algeria: https://assets.footylogos.com/previews/algeria-national-team/algeria-national-team-logo-footylogos-320.webp
+- Andorra: https://assets.footylogos.com/previews/andorra-national-team/andorra-national-team-logo-footylogos-320.webp
+- Argentina: https://assets.footylogos.com/previews/argentina-national-team/argentina-national-team-logo-footylogos-320.webp
+- Armenia: https://assets.footylogos.com/previews/armenia-national-team/armenia-national-team-logo-footylogos-320.webp
+- Australia: https://assets.footylogos.com/previews/australia-national-team/australia-national-team-logo-footylogos-320.webp
+- Austria: https://assets.footylogos.com/previews/austria-national-team/austria-national-team-logo-footylogos-320.webp
+- Azerbaijan: https://assets.footylogos.com/previews/azerbaijan-national-team/azerbaijan-national-team-logo-footylogos-320.webp
+- Belarus: https://assets.footylogos.com/previews/belarus-national-team/belarus-national-team-logo-footylogos-320.webp
+- Belgium: https://assets.footylogos.com/previews/belgium-national-team/belgium-national-team-logo-footylogos-320.webp
+- Bosnia-Herzegovina: https://assets.footylogos.com/previews/bosnia-and-herzegovina-national-team/bosnia-and-herzegovina-national-team-logo-footylogos-320.webp
+- Brazil: https://assets.footylogos.com/previews/brazil-national-team/brazil-national-team-logo-footylogos-320.webp
+- Bulgaria: https://assets.footylogos.com/previews/bulgaria-national-team/bulgaria-national-team-logo-footylogos-320.webp
+- Canada: https://assets.footylogos.com/previews/canada-national-team/canada-national-team-logo-footylogos-320.webp
+- Cape Verde: https://assets.footylogos.com/previews/cabo-verde-national-team/cabo-verde-national-team-logo-footylogos-320.webp
+- Colombia: https://assets.footylogos.com/previews/colombia-national-team/colombia-national-team-logo-footylogos-320.webp
+- Congo DR: https://assets.footylogos.com/previews/dr-congo-national-team/dr-congo-national-team-logo-footylogos-320.webp
+- Croatia: https://assets.footylogos.com/previews/croatia-national-team/croatia-national-team-logo-footylogos-320.webp
+- Curaçao: https://assets.footylogos.com/previews/curacao-national-team/curacao-national-team-logo-footylogos-320.webp
+- Cyprus: https://assets.footylogos.com/previews/cyprus-national-team/cyprus-national-team-logo-footylogos-320.webp
+- Czechia: https://assets.footylogos.com/previews/czechia-national-team/czechia-national-team-logo-footylogos-320.webp
+- Denmark: https://assets.footylogos.com/previews/denmark-national-team/denmark-national-team-logo-footylogos-320.webp
+- Ecuador: https://assets.footylogos.com/previews/ecuador-national-team/ecuador-national-team-logo-footylogos-320.webp
+- Egypt: https://assets.footylogos.com/previews/egypt-national-team/egypt-national-team-logo-footylogos-320.webp
+- England: https://assets.footylogos.com/previews/england-national-team/england-national-team-logo-footylogos-320.webp
+- Estonia: https://assets.footylogos.com/previews/estonia-national-team/estonia-national-team-logo-footylogos-320.webp
+- Faroe Islands: https://assets.footylogos.com/previews/faroe-islands-national-team/faroe-islands-national-team-logo-footylogos-320.webp
+- Finland: https://assets.footylogos.com/previews/finland-national-team/finland-national-team-logo-footylogos-320.webp
+- France: https://assets.footylogos.com/previews/france-national-team/france-national-team-logo-footylogos-320.webp
+- Georgia: https://assets.footylogos.com/previews/georgia-national-team/georgia-national-team-logo-footylogos-320.webp
+- Germany: https://assets.footylogos.com/previews/germany-national-team/germany-national-team-logo-footylogos-320.webp
+- Ghana: https://assets.footylogos.com/previews/ghana-national-team/ghana-national-team-logo-footylogos-320.webp
+- Gibraltar: https://assets.footylogos.com/previews/gibraltar-national-team/gibraltar-national-team-logo-footylogos-320.webp
+- Greece: https://assets.footylogos.com/previews/greece-national-team/greece-national-team-logo-footylogos-320.webp
+- Haiti: https://assets.footylogos.com/previews/haiti-national-team/haiti-national-team-logo-footylogos-320.webp
+- Hungary: https://assets.footylogos.com/previews/hungary-national-team/hungary-national-team-logo-footylogos-320.webp
+- Iceland: https://assets.footylogos.com/previews/iceland-national-team/iceland-national-team-logo-footylogos-320.webp
+- Iran: https://assets.footylogos.com/previews/iran-national-team/iran-national-team-logo-footylogos-320.webp
+- Iraq: https://assets.footylogos.com/previews/iraq-national-team/iraq-national-team-logo-footylogos-320.webp
+- Israel: https://assets.footylogos.com/previews/israel-national-team/israel-national-team-logo-footylogos-320.webp
+- Italy: https://assets.footylogos.com/previews/italy-national-team/italy-national-team-logo-footylogos-320.webp
+- Ivory Coast: https://assets.footylogos.com/previews/cote-d-ivoire-national-team/cote-d-ivoire-national-team-logo-footylogos-320.webp
+- Japan: https://assets.footylogos.com/previews/japan-national-team/japan-national-team-logo-footylogos-320.webp
+- Jordan: https://assets.footylogos.com/previews/jordan-national-team/jordan-national-team-logo-footylogos-320.webp
+- Kazakhstan: https://assets.footylogos.com/previews/kazakhstan-national-team/kazakhstan-national-team-logo-footylogos-320.webp
+- Kosovo: https://assets.footylogos.com/previews/kosovo-national-team/kosovo-national-team-logo-footylogos-320.webp
+- Latvia: https://assets.footylogos.com/previews/latvia-national-team/latvia-national-team-logo-footylogos-320.webp
+- Liechtenstein: https://assets.footylogos.com/previews/liechtenstein-national-team/liechtenstein-national-team-logo-footylogos-320.webp
+- Lithuania: https://assets.footylogos.com/previews/lithuania-national-team/lithuania-national-team-logo-footylogos-320.webp
+- Luxembourg: https://assets.footylogos.com/previews/luxembourg-national-team/luxembourg-national-team-logo-footylogos-320.webp
+- Malta: https://assets.footylogos.com/previews/malta-national-team/malta-national-team-logo-footylogos-320.webp
+- Mexico: https://assets.footylogos.com/previews/mexico-national-team/mexico-national-team-logo-footylogos-320.webp
+- Moldova: https://assets.footylogos.com/previews/moldova-national-team/moldova-national-team-logo-footylogos-320.webp
+- Montenegro: https://assets.footylogos.com/previews/montenegro-national-team/montenegro-national-team-logo-footylogos-320.webp
+- Morocco: https://assets.footylogos.com/previews/morocco-national-team/morocco-national-team-logo-footylogos-320.webp
+- Netherlands: https://assets.footylogos.com/previews/netherlands-national-team-dutch/netherlands-national-team-dutch-logo-footylogos-320.webp
+- New Zealand: https://assets.footylogos.com/previews/new-zealand-national-team/new-zealand-national-team-logo-footylogos-320.webp
+- North Macedonia: https://assets.footylogos.com/previews/north-macedonia-national-team/north-macedonia-national-team-logo-footylogos-320.webp
+- Northern Ireland: https://cdn.prod.website-files.com/68f550992570ca0322737dc2/6a5df5a8cd56089dc71029ab_northern-ireland-national-team-logo-footylogos.png
+- Norway: https://assets.footylogos.com/previews/norway-national-team/norway-national-team-logo-footylogos-320.webp
+- Panama: https://assets.footylogos.com/previews/panama-national-team/panama-national-team-logo-footylogos-320.webp
+- Paraguay: https://assets.footylogos.com/previews/paraguay-national-team/paraguay-national-team-logo-footylogos-320.webp
+- Poland: https://assets.footylogos.com/previews/poland-national-team/poland-national-team-logo-footylogos-320.webp
+- Portugal: https://assets.footylogos.com/previews/portugal-national-team/portugal-national-team-logo-footylogos-320.webp
+- Qatar: https://assets.footylogos.com/previews/qatar-national-team/qatar-national-team-logo-footylogos-320.webp
+- Republic of Ireland: https://assets.footylogos.com/previews/republic-of-ireland-national-team/republic-of-ireland-national-team-logo-footylogos-320.webp
+- Romania: https://assets.footylogos.com/previews/romania-national-team/romania-national-team-logo-footylogos-320.webp
+- San Marino: https://assets.footylogos.com/previews/san-marino-national-team/san-marino-national-team-logo-footylogos-320.webp
+- Saudi Arabia: https://assets.footylogos.com/previews/saudi-arabia-national-team/saudi-arabia-national-team-logo-footylogos-320.webp
+- Scotland: https://assets.footylogos.com/previews/scotland-national-team/scotland-national-team-logo-footylogos-320.webp
+- Senegal: https://assets.footylogos.com/previews/senegal-national-team/senegal-national-team-logo-footylogos-320.webp
+- Serbia: https://assets.footylogos.com/previews/serbia-national-team/serbia-national-team-logo-footylogos-320.webp
+- Slovakia: https://assets.footylogos.com/previews/slovakia-national-team/slovakia-national-team-logo-footylogos-320.webp
+- Slovenia: https://cdn.prod.website-files.com/68f550992570ca0322737dc2/6a5df66205e50bc41db7bd9e_slovenia-national-team-logo-footylogos.png
+- South Africa: https://assets.footylogos.com/previews/south-africa-national-team/south-africa-national-team-logo-footylogos-320.webp
+- South Korea: https://assets.footylogos.com/previews/south-korea-national-team/south-korea-national-team-logo-footylogos-320.webp
+- Spain: https://assets.footylogos.com/previews/spain-national-team/spain-national-team-logo-footylogos-320.webp
+- Sweden: https://assets.footylogos.com/previews/sweden-national-team/sweden-national-team-logo-footylogos-320.webp
+- Switzerland: https://assets.footylogos.com/previews/switzerland-national-team/switzerland-national-team-logo-footylogos-320.webp
+- Tunisia: https://assets.footylogos.com/previews/tunisia-national-team/tunisia-national-team-logo-footylogos-320.webp
+- Türkiye: https://assets.footylogos.com/previews/turkey-national-team/turkey-national-team-logo-footylogos-320.webp
+- Ukraine: https://assets.footylogos.com/previews/ukraine-national-team/ukraine-national-team-logo-footylogos-320.webp
+- United States: https://assets.footylogos.com/previews/usa-national-team/usa-national-team-logo-footylogos-320.webp
+- Uruguay: https://assets.footylogos.com/previews/uruguay-national-team/uruguay-national-team-logo-footylogos-320.webp
+- Uzbekistan: https://assets.footylogos.com/previews/uzbekistan-national-team/uzbekistan-national-team-logo-footylogos-320.webp
+- Wales: https://assets.footylogos.com/previews/wales-national-team/wales-national-team-logo-footylogos-320.webp

@@ -78,3 +78,32 @@ html[data-theme=light] .ticket-collection{color:#17213e}html[data-theme=light] .
 .ticket-design-matchday .ticket-crest-fallback{color:#253858;border-color:#15223b60;background:#15223b0c}
 .ticket-design-matchday .ticket-stub{background:#051027;border-left-color:#9aa9c2}
 .ticket-design-matchday .ticket-back{background:linear-gradient(var(--ticket-brand) 0 8px,#0a1428 8px);color:#fff}
+
+/* Competition artwork is confined to the original front. Preserve its palette,
+   gold frame, dark QR stub, and the shared fixed-size 3D stage. */
+.ticket-design-current{--ticket-art:url('/themes/competition-art-dark-v1.webp');--ticket-art-size:300% 400%;--ticket-art-position:100% 100%}
+.ticket-design-current .ticket-front:before{inset:0 23% 0 0;background-image:var(--ticket-art);background-size:var(--ticket-art-size);background-position:var(--ticket-art-position);background-repeat:no-repeat;transform:scaleX(-1);opacity:.82}
+.ticket-design-current .ticket-main{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--ticket-surface) 40%,transparent) 40%,color-mix(in srgb,var(--ticket-surface) 65%,transparent))}
+.ticket-design-current[data-competition='uefa.champions']{--ticket-art:url('/themes/match-cups-dark-v2.webp');--ticket-art-size:300% 140%;--ticket-art-position:0% 65%}
+.ticket-design-current[data-competition='uefa.europa']{--ticket-art:url('/themes/match-cups-dark-v2.webp');--ticket-art-size:300% 140%;--ticket-art-position:50% 65%}
+.ticket-design-current[data-competition='uefa.europa.conf']{--ticket-art:url('/themes/match-cups-dark-v2.webp');--ticket-art-size:300% 140%;--ticket-art-position:100% 65%}
+.ticket-design-current[data-competition='eng.1']{--ticket-art:url('/themes/match-domestic-euro-dark-v2.webp');--ticket-art-size:300% 135%;--ticket-art-position:0% 65%}
+.ticket-design-current[data-competition='esp.1']{--ticket-art-position:100% 33.333333%}
+.ticket-design-current[data-competition='ita.1']{--ticket-art-position:0% 66.666667%}
+.ticket-design-current[data-competition='ger.1']{--ticket-art-position:50% 33.333333%}
+.ticket-design-current[data-competition='fifa.world']{--ticket-art-position:100% 66.666667%}
+.ticket-design-current[data-competition='uefa.euro']{--ticket-art:url('/themes/match-domestic-euro-dark-v2.webp');--ticket-art-size:300% 135%;--ticket-art-position:100% 65%}
+.ticket-design-current[data-competition='uefa.nations']{--ticket-art-position:50% 100%}
+/* A Croatian checker ribbon, distinct from the domestic red stadium artwork. */
+.ticket-design-current[data-competition='cro.1'] .ticket-front:before{inset:35% 23% -28% -10%;background:repeating-conic-gradient(#e9243c 0% 25%,#fff5e9 0% 50%) 0 0/38px 38px;transform:rotate(14deg) skewX(-22deg);mask-image:linear-gradient(15deg,#000 5%,transparent 64%);opacity:.75}
+.ticket-design-current:is([data-competition='fifa.friendly'],[data-competition='fifa.worldq.uefa']) .ticket-front:before{background-image:linear-gradient(155deg,transparent 50%,#da20334d),url('/themes/competition-art-dark-v1.webp');background-size:100% 100%,300% 400%;background-position:center,50% 100%;background-blend-mode:color;opacity:.65}
+/* Give every competition mark a reliable dark field, including white pass faces.
+   Reverse only dark single-colour marks; retain full-colour federation emblems. */
+.ticket-competition-mark{width:30px;height:30px;grid-row:span 2;display:grid;place-items:center;background:#07132c;border-radius:6px;padding:3px;box-sizing:border-box}
+.ticket-competition-mark>img{width:100%;height:100%;object-fit:contain;min-width:0;min-height:0}
+.ticket-design-matchday .ticket-competition-mark{grid-row:span 3}
+.ticket-collection-item:is([data-competition='eng.1'],[data-competition='cro.1']) .ticket-competition-mark>img{filter:brightness(0) invert(1)}
+@media(min-width:651px) and (max-width:950px){.ticket-competition-mark{width:26px;height:26px}}
+@media(max-width:650px){.ticket-competition-mark{width:28px;height:28px}}
+/* These supplied full-colour marks include dark wordmarks or numerals. */
+.ticket-collection-item:is([data-competition='ita.1'],[data-competition='ger.1'],[data-competition='fifa.world'],[data-competition='uefa.euro']) .ticket-competition-mark{background:#fff}

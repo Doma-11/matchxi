@@ -14,6 +14,15 @@ test('URLs are sanitized and storage failures are reported rather than claiming 
 
 test('scheduled snapshots cannot regress a watched-live ticket or corrupt its eligibility',()=>{const s=storage();m.saveMatchTicket(game(),[],s);m.syncMatchTickets([game({state:'pre'})],[],s);assert.equal(m.readTickets(s)[0].game.state,'in');assert.throws(()=>m.saveMatchTicket(game({state:'pre'}),[],s),/live or completed/)});
 
-test('national flag assets are retained while invalid local paths are rejected',()=>{const ticket=m.makeMatchTicket(game({league:'fifa.friendly',home:{name:'Croatia'},away:{name:'Spain'}}));assert.equal(ticket.game.home.logo,'/flags/hr.svg');assert.equal(ticket.game.away.logo,'/flags/es.svg');const bad=m.makeMatchTicket(game({home:{name:'Arsenal',logo:'/flags/../private.svg'}}));assert.equal(bad.game.home.logo,undefined)});
+test('national tickets use federation crests and upgrade old flag backups while rejecting invalid local paths',()=>{const ticket=m.makeMatchTicket(game({league:'fifa.friendly',home:{name:'Croatia'},away:{name:'Spain'}}));assert.equal(ticket.game.home.logo,'/logos/national/croatia.webp');assert.equal(ticket.game.away.logo,'/logos/national/spain.webp');const s=storage();s.setItem(m.TICKET_KEY,JSON.stringify([{...ticket,game:{...ticket.game,home:{...ticket.game.home,logo:'/flags/hr.svg'}}}]));assert.equal(m.readTickets(s)[0].game.home.logo,'/logos/national/croatia.webp');const bad=m.makeMatchTicket(game({home:{name:'Arsenal',logo:'/flags/../private.svg'}}));assert.equal(bad.game.home.logo,undefined)});
 
 test('matchday numbers are preserved from existing fixture metadata, never inferred from unrelated numbers',()=>{for(const raw of [{round:'12. kolo'},{round:'Matchday 12'},{week:{number:12}},{matchday:12},{round:{number:12}}])assert.equal(m.ticketGame(game(raw)).matchday,12);for(const round of ['Group A','Round of 16','Season 2026/27',null])assert.equal(m.ticketGame(game({round})).matchday,null);const s=storage();m.saveMatchTicket(game({round:'Matchday 12'}),[],s);m.syncMatchTickets([final()],[],s);assert.equal(m.readTickets(s)[0].game.matchday,12);const copy=storage();m.importTickets(m.exportTickets(s),copy);assert.equal(m.readTickets(copy)[0].game.matchday,12)});
+
+test('every supported national team has a local federation asset, including imported aliases',async()=>{
+ const {readFile,access}=await import('node:fs/promises');const teams=JSON.parse(await readFile('public/data/national-teams.json','utf8'));
+ for(const raw of Object.values(teams).flat()){
+  const ticket=m.makeMatchTicket(game({league:'fifa.friendly',home:raw,away:{name:'Croatia'}}));
+  assert.match(ticket.game.home.logo||'',/^\/logos\/national\//,raw.name);await access('public'+ticket.game.home.logo);
+ }
+ const alias=m.makeMatchTicket(game({league:'fifa.friendly',home:{name:'Turkey'},away:{name:'Czech Republic'}}));assert.match(alias.game.home.logo,/turkiye/);assert.match(alias.game.away.logo,/czechia/);
+});

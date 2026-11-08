@@ -1,6 +1,7 @@
 import {CLUB_CUPS,LEAGUES,COMPETITIONS,isNationalCompetition} from './football-model';
 import {exactHighlights} from './match-highlight-matching';
-import flags from './national-flags.json';
+import nationalCrests from './national-ticket-crests.json';
+import {resolveTeamIdentity} from './team-identity';
 import clubs from '../public/data/clubs.json';
 
 export const TICKET_KEY='matchxi-match-tickets-v1';
@@ -9,7 +10,7 @@ const LIMIT=1000;
 export type MatchTicket={version:1;id:string;game:any;competition:{name:string;logo?:string};season:string;countries:string[];national:boolean;favourite:boolean;savedAt:string;highlights:any[]};
 export const ticketId=(game:any)=>`${game.league}:${String(game.id).replace(/^fm-/,'')}`;
 function safeImage(raw:any){if(typeof raw!=='string')return undefined;if(/^\/(?:logos|flags)\/[\w./-]+$/.test(raw)&&!raw.split('/').includes('..'))return raw;try{const u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port?u.href:undefined}catch{return undefined}}
-function team(raw:any){if(!raw||typeof raw.name!=='string'||!raw.name.trim()||raw.name.length>150)throw Error('Invalid ticket team.');return {id:String(raw.id||''),name:raw.name,logo:safeImage((flags as any)[raw.name]||raw.logo),score:raw.score==null||raw.score===''?null:Number.isFinite(Number(raw.score))&&Number(raw.score)>=0?Number(raw.score):null};}
+function team(raw:any,national:boolean){if(!raw||typeof raw.name!=='string'||!raw.name.trim()||raw.name.length>150)throw Error('Invalid ticket team.');return {id:String(raw.id||''),name:raw.name,logo:safeImage(national?(nationalCrests as Record<string,string>)[resolveTeamIdentity(raw.name,{kind:'national'})?.name||raw.name]:raw.logo),score:raw.score==null||raw.score===''?null:Number.isFinite(Number(raw.score))&&Number(raw.score)>=0?Number(raw.score):null};}
 export function ticketMatchday(raw:any):number|null{
  const candidates=[raw.matchday,raw.matchDay,raw.week?.number,raw.week,raw.round?.number,raw.round?.name,raw.round];
  for(const value of candidates){
@@ -20,7 +21,7 @@ export function ticketMatchday(raw:any):number|null{
  }
  return null;
 }
-export function ticketGame(raw:any){if(!raw||!/^[-\w.]{1,40}$/.test(raw.league)||!/^[-\w]{1,80}$/.test(String(raw.id))||!Number.isFinite(Date.parse(raw.date)))throw Error('Invalid ticket fixture.');return {id:String(raw.id).replace(/^fm-/,''),league:raw.league,date:new Date(raw.date).toISOString(),home:team(raw.home),away:team(raw.away),completed:raw.completed===true,state:raw.completed===true?'post':raw.state==='in'?'in':'pre',status:raw.completed===true?'Full time':raw.state==='in'?'Live':'Scheduled',matchday:ticketMatchday(raw),venue:typeof raw.venue==='string'?raw.venue.slice(0,200):null};}
+export function ticketGame(raw:any){if(!raw||!/^[-\w.]{1,40}$/.test(raw.league)||!/^[-\w]{1,80}$/.test(String(raw.id))||!Number.isFinite(Date.parse(raw.date)))throw Error('Invalid ticket fixture.');return {id:String(raw.id).replace(/^fm-/,''),league:raw.league,date:new Date(raw.date).toISOString(),home:team(raw.home,isNationalCompetition(raw.league)),away:team(raw.away,isNationalCompetition(raw.league)),completed:raw.completed===true,state:raw.completed===true?'post':raw.state==='in'?'in':'pre',status:raw.completed===true?'Full time':raw.state==='in'?'Live':'Scheduled',matchday:ticketMatchday(raw),venue:typeof raw.venue==='string'?raw.venue.slice(0,200):null};}
 export function savedHighlight(raw:any){
  if(!raw||!/^[-\w]{11}$/.test(raw.id)||typeof raw.title!=='string')return null;
  // Store a canonical public video link, never provider credentials or embed HTML.

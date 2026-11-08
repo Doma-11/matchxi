@@ -180,3 +180,32 @@ All supported competition IDs use their existing app identity/palette, including
 Approved inline redesign published: commit `523174989327af16b60a9467f529b5f3e11205b0`, Netlify deploy `6af02ac521644617ea129606`, site `7b761624-8fec-4cca-b485-89684fa3f6b4`. Scoped deploy API returned `ready`, matching commit and empty function schedules. GitHub validation run `42460447020` succeeded. The collection/Settings follow-up described above remains on its review branch pending separate deployment approval.
 
 Local validation: 172 Node tests passed, TypeScript and isolation checks passed. Production Vite build and Netlify function bundling passed (9 functions). Existing large-chunk warning remains. Managed local preview is unavailable in this workspace; this follow-up has not been visually verified in a browser. This limitation must remain explicit until browser QA is possible.
+
+## Competition artwork and entry flip — 8 November 2026
+
+The `b235988` source and its published Netlify deploy had manual flipping and
+both Settings designs, but did not contain the approved entry hint or artwork
+and still forced national flags. This change adds:
+
+- Home → Tickets hints only the first saved ticket, front → back → front once.
+  The 550 ms transitions use the existing fixed-height stage; the hint waits
+  550 ms before starting, pauses on the back, and finishes at about 2.1 seconds.
+  It does not move focus or replay on filters, favourites or catalogue updates.
+  Pointer, keyboard or focus interaction cancels it. Unmount/hidden-tab cleanup
+  prevents delayed changes, and reduced-motion users receive no automatic flip.
+- Original tickets retain their existing competition palettes and gold edges.
+  Locally served competition artwork follows the match backgrounds, including
+  a checker ribbon for HNL and separate international framing. Matchday pass
+  faces retain their light design and shared stage size.
+- Competition logos use navy badges for reversed marks and white badges for
+  full-colour marks containing dark text. Premier League and HNL marks are
+  reversed explicitly so they remain legible.
+- Ticket-only federation badges for all 86 countries in the saved national-team
+  catalogue. Existing version-1 tickets and imported backups acquire these
+  through validation, without losing scores, favourites or highlights. Other
+  app screens keep their existing flags. Asset source URLs are recorded in
+  `public/logos/national/SOURCES.md`.
+
+Validation: TypeScript, Node regression tests, Vite build and Netlify Functions
+bundling. The managed preview daemon was unavailable in this workspace, so
+interactive browser rendering and mobile visual QA were not completed locally.
