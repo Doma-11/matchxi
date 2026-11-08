@@ -8,3 +8,6 @@
 .ticket-style-preview>div,.ticket-style-preview b{min-width:0;flex-wrap:wrap;gap:6px}
 .ticket-style-preview small{overflow-wrap:anywhere}
 .ticket-settings .ticket-backup-actions>button{min-width:0;max-width:100%;white-space:normal}
+/* Preview uses the same irregular image silhouette as the saved ticket. */
+.preview-matchday{border:0;border-radius:0;background:#eee1c8 url('/themes/matchday-ticket-skin-v2.webp') center/100% 100%;-webkit-mask:url('/themes/matchday-ticket-skin-v2.webp') center/100% 100% no-repeat;mask:url('/themes/matchday-ticket-skin-v2.webp') center/100% 100% no-repeat;box-shadow:none}
+.preview-matchday em{left:78.5%;border-left:0;background:#14263e url('/themes/matchday-ticket-skin-v2.webp') right/435% 100%;background-blend-mode:multiply}

@@ -1,0 +1,777 @@
+{
+  "national:albania": {
+    "name": "Arena Kombëtare",
+    "asset": "/stadiums/national-albania-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-albania",
+    "source": "https://commons.wikimedia.org/wiki/File:Arena_Komb%C3%ABtare,_Tiran%C3%AB.jpg",
+    "artist": "MercedesBenz240",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:algeria": {
+    "name": "Nelson Mandela Stadium",
+    "asset": "/stadiums/national-algeria-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-algeria",
+    "source": "https://commons.wikimedia.org/wiki/File:Nelson_Mandela_Stadium.jpg",
+    "artist": "Fan of the page",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "national:andorra": {
+    "name": "Estadi Nacional",
+    "asset": "/stadiums/inter-club-d-escaldes-outline-v1.webp",
+    "credits": "/stadiums/credits.html#inter-club-d-escaldes",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadi_Nacional_d%E2%80%98Andorra.jpg",
+    "artist": "Walmaul",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:argentina": {
+    "name": "Estadio Monumental (Buenos Aires)",
+    "asset": "/stadiums/national-argentina-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-argentina",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_mas_monumental.jpg",
+    "artist": "Dibumartinez23",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "national:armenia": {
+    "name": "Vazgen Sargsyan Republican Stadium",
+    "asset": "/stadiums/national-armenia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-armenia",
+    "source": "https://commons.wikimedia.org/wiki/File:Armenia_vs_Portugal,_13_June_2015,_V._Sargsyan_Rep._Stad._Yerevan_(12).jpg",
+    "artist": "Spetsnaz1991",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:australia": {
+    "name": "Stadium Australia",
+    "asset": "/stadiums/national-australia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-australia",
+    "source": "https://commons.wikimedia.org/wiki/File:2022_NRLGF_stadium.jpg",
+    "artist": "Storm machine",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:austria": {
+    "name": "Ernst-Happel-Stadion",
+    "asset": "/stadiums/national-austria-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-austria",
+    "source": "https://commons.wikimedia.org/wiki/File:Ernst-happel-stadion_vienna.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "national:azerbaijan": {
+    "name": "Baku Olympic Stadium",
+    "asset": "/stadiums/national-azerbaijan-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-azerbaijan",
+    "source": "https://commons.wikimedia.org/wiki/File:Baku_Olympic_Stadium.JPG",
+    "artist": "Eminn",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:belarus": {
+    "name": "Borisov Arena",
+    "asset": "/stadiums/national-belarus-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-belarus",
+    "source": "https://commons.wikimedia.org/wiki/File:Borisov-Arena_Stands2.jpg",
+    "artist": "Griser",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "national:belgium": {
+    "name": "King Baudouin Stadium",
+    "asset": "/stadiums/national-belgium-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-belgium",
+    "source": "https://commons.wikimedia.org/wiki/File:Holy_Mass_at_the_King_Baudouin_Stadium_(2024)_(4).jpg",
+    "artist": "S. Perquin",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:bosnia-herzegovina": {
+    "name": "Bilino Polje Stadium",
+    "asset": "/stadiums/national-bosnia-herzegovina-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-bosnia-herzegovina",
+    "source": "https://commons.wikimedia.org/wiki/File:Bilino_Polje_Panorama.jpg",
+    "artist": "Ulicar Streets",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "national:brazil": {
+    "name": "Maracanã Stadium",
+    "asset": "/stadiums/national-brazil-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-brazil",
+    "source": "https://commons.wikimedia.org/wiki/File:Maracana_2022.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "national:bulgaria": {
+    "name": "Vasil Levski National Stadium",
+    "asset": "/stadiums/national-bulgaria-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-bulgaria",
+    "source": "https://commons.wikimedia.org/wiki/File:Vasil_Levski_National_Stadium_2022.jpg",
+    "artist": "JukoFF",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:canada": {
+    "name": "BC Place",
+    "asset": "/stadiums/national-canada-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-canada",
+    "source": "https://commons.wikimedia.org/wiki/File:BC_Place_-_Canada_vs_Qatar.jpg",
+    "artist": "Aeacad",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "national:cape-verde": {
+    "name": "Estádio Nacional de Cabo Verde",
+    "asset": "/stadiums/national-cape-verde-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-cape-verde",
+    "source": "https://commons.wikimedia.org/wiki/File:Est%C3%A1dio_Nacional_de_Cabo_Verde_panorama.jpg",
+    "artist": "Dablue",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:colombia": {
+    "name": "Estadio Metropolitano Roberto Meléndez",
+    "asset": "/stadiums/national-colombia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-colombia",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_Metropolitano_baq.jpg",
+    "artist": "Bryantalv",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:congo-dr": {
+    "name": "Stade Tata Raphaël",
+    "asset": "/stadiums/national-congo-dr-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-congo-dr",
+    "source": "https://commons.wikimedia.org/wiki/File:Stade_Tata_Rapha%C3%ABl_lors_d%27un_de_l%27AS_V.CLUB.jpg",
+    "artist": "Yallahbye",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:croatia": {
+    "name": "Maksimir Stadium",
+    "asset": "/stadiums/dinamo-outline-v1.webp",
+    "credits": "/stadiums/credits.html#dinamo",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Maksimir_areal.jpg",
+    "artist": "Suradnik13",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "national:curacao": {
+    "name": "Ergilio Hato Stadium",
+    "asset": "/stadiums/national-curacao-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-curacao",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Ergilio_Hato.jpg",
+    "artist": "Burgbernd",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "national:cyprus": {
+    "name": "GSP Stadium",
+    "asset": "/stadiums/omonia-nicosia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#omonia-nicosia",
+    "source": "https://commons.wikimedia.org/wiki/File:APOEL_-_real_madrid_(6879935408).jpg",
+    "artist": "George M. Groutas from Dali, Nicosia, Cyprus",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "national:czechia": {
+    "name": "Fortuna Arena",
+    "asset": "/stadiums/slavia-prague-outline-v1.webp",
+    "credits": "/stadiums/credits.html#slavia-prague",
+    "source": "https://commons.wikimedia.org/wiki/File:Praha,_Slavia,_fotbalov%C3%BD_stadion_(2).jpg",
+    "artist": "Jan_Polák",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "national:denmark": {
+    "name": "Parken Stadium",
+    "asset": "/stadiums/fc-k-benhavn-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fc-k-benhavn",
+    "source": "https://commons.wikimedia.org/wiki/File:Denmark_copenhagen_parken_stadium.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "national:ecuador": {
+    "name": "Estadio Rodrigo Paz Delgado",
+    "asset": "/stadiums/national-ecuador-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-ecuador",
+    "source": "https://commons.wikimedia.org/wiki/File:LaCasaBlanca.jpg",
+    "artist": "Kerem Özcan",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "national:egypt": {
+    "name": "Cairo International Stadium",
+    "asset": "/stadiums/national-egypt-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-egypt",
+    "source": "https://commons.wikimedia.org/wiki/File:Panorma_Cairo_Stadium.jpg",
+    "artist": "w:User:Crosskimo",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "national:england": {
+    "name": "Wembley Stadium",
+    "asset": "/stadiums/national-england-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-england",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Wembley.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "national:estonia": {
+    "name": "Lilleküla Stadium",
+    "asset": "/stadiums/national-estonia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-estonia",
+    "source": "https://commons.wikimedia.org/wiki/File:A._Le_Coq_Arena.jpg",
+    "artist": "Boeserelch",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:faroe-islands": {
+    "name": "Tórsvøllur",
+    "asset": "/stadiums/national-faroe-islands-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-faroe-islands",
+    "source": "https://commons.wikimedia.org/wiki/File:Torsvollur_Football_Venue_in_Torshavn_Faroe_Islands.JPG",
+    "artist": "Eileen Sandá",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "national:finland": {
+    "name": "Helsinki Olympic Stadium",
+    "asset": "/stadiums/national-finland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-finland",
+    "source": "https://commons.wikimedia.org/wiki/File:Olympiastadion_2_2020-08-12.jpg",
+    "artist": "Joneikifi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:france": {
+    "name": "Stade de France",
+    "asset": "/stadiums/national-france-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-france",
+    "source": "https://commons.wikimedia.org/wiki/File:France-Islande_Stade_de_France_03.jpg",
+    "artist": "Zakarie Faibis",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:georgia": {
+    "name": "Boris Paichadze Dinamo Arena",
+    "asset": "/stadiums/national-georgia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-georgia",
+    "source": "https://commons.wikimedia.org/wiki/File:Boris_Paichadze_Dinamo_Arena,_Samtredia_-_Qaraba%C4%9F.jpg",
+    "artist": "Emin Allahverdi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:germany": {
+    "name": "Olympiastadion (Berlin)",
+    "asset": "/stadiums/national-germany-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-germany",
+    "source": "https://commons.wikimedia.org/wiki/File:Olympiastadion_Berlin-Marathontor-msu-2020-3139.jpg",
+    "artist": "Matthias Süßen",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:ghana": {
+    "name": "Accra Sports Stadium",
+    "asset": "/stadiums/national-ghana-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-ghana",
+    "source": "https://commons.wikimedia.org/wiki/File:Ohene_Djan_Sports_Stadium,_Accra.jpg",
+    "artist": "Celestinesucess",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:gibraltar": {
+    "name": "Europa Sports Park",
+    "asset": "/stadiums/lincoln-red-imps-fc-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lincoln-red-imps-fc",
+    "source": "https://commons.wikimedia.org/wiki/File:Europa_Point_2.jpg",
+    "artist": "Adam Cli",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:greece": {
+    "name": "Olympic Stadium (Athens)",
+    "asset": "/stadiums/panathinaikos-outline-v1.webp",
+    "credits": "/stadiums/credits.html#panathinaikos",
+    "source": "https://commons.wikimedia.org/wiki/File:Panathinaikos_Inter_CL2008_09_b.jpg",
+    "artist": "Sportingn",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "national:haiti": {
+    "name": "Stade Sylvio Cator",
+    "asset": "/stadiums/national-haiti-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-haiti",
+    "source": "https://commons.wikimedia.org/wiki/File:US_Navy_100117-N-4275C-190_Haitian_citizens_seek_refuge_at_the_Stade_Sylvio_Cator,_the_national_soccer_stadium,_in_Port-au-Prince,_Haiti.jpg",
+    "artist": "U.S. Navy photo by Mass Communication Specialist 2nd Class Joel Carlson",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "national:hungary": {
+    "name": "Puskás Aréna",
+    "asset": "/stadiums/national-hungary-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-hungary",
+    "source": "https://commons.wikimedia.org/wiki/File:Pusk%C3%A1s_Ar%C3%A9na_01.jpg",
+    "artist": "OD Pictures",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:iceland": {
+    "name": "Laugardalsvöllur",
+    "asset": "/stadiums/national-iceland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-iceland",
+    "source": "https://commons.wikimedia.org/wiki/File:Laugardalsv%C3%B6llur,_Iceland%27s_national_football_stadium.jpg",
+    "artist": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "national:iran": {
+    "name": "Azadi Stadium",
+    "asset": "/stadiums/national-iran-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-iran",
+    "source": "https://commons.wikimedia.org/wiki/File:Azadi_Stadium_ACL_2018.jpg",
+    "artist": "Mahdi Zare/Fars News Agency",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "national:iraq": {
+    "name": "Basra International Stadium",
+    "asset": "/stadiums/national-iraq-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-iraq",
+    "source": "https://commons.wikimedia.org/wiki/File:Basra_International_Stadium_Opening.JPG",
+    "artist": "Yesar Al-Maleki",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "national:israel": {
+    "name": "Sammy Ofer Stadium",
+    "asset": "/stadiums/national-israel-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-israel",
+    "source": "https://commons.wikimedia.org/wiki/File:Sammy_Ofer_Stadium_air.jpg",
+    "artist": "Eldar Eldadi (אלדר אלדדי)",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:italy": {
+    "name": "Stadio Olimpico",
+    "asset": "/stadiums/as-roma-outline-v1.webp",
+    "credits": "/stadiums/credits.html#as-roma",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Olimpico_2024.jpg",
+    "artist": "Messapi, cropped by Blackcat",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:ivory-coast": {
+    "name": "Alassane Ouattara Stadium",
+    "asset": "/stadiums/national-ivory-coast-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-ivory-coast",
+    "source": "https://commons.wikimedia.org/wiki/File:Stade_Alassane_Ouattara_d%27Ebimp%C3%A9_0.jpg",
+    "artist": "AZIMIE",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "national:japan": {
+    "name": "Saitama Stadium 2002",
+    "asset": "/stadiums/national-japan-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-japan",
+    "source": "https://commons.wikimedia.org/wiki/File:Saitama_Stadium_200113b13.jpg",
+    "artist": "江戸村のとくぞう",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:jordan": {
+    "name": "Amman International Stadium",
+    "asset": "/stadiums/national-jordan-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-jordan",
+    "source": "https://commons.wikimedia.org/wiki/File:Inside_the_Amman_International_Stadium.jpg",
+    "artist": "GhaziTwaissi",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "national:kazakhstan": {
+    "name": "Almaty Central Stadium",
+    "asset": "/stadiums/kairat-almaty-outline-v1.webp",
+    "credits": "/stadiums/credits.html#kairat-almaty",
+    "source": "https://commons.wikimedia.org/wiki/File:Kazakhstan_P9240988_08_(39408856325).jpg",
+    "artist": "t_y_l",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "national:kosovo": {
+    "name": "Fadil Vokrri Stadium",
+    "asset": "/stadiums/national-kosovo-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-kosovo",
+    "source": "https://commons.wikimedia.org/wiki/File:Fadil_Vokrri_Stadium_2024.jpg",
+    "artist": "ManiacOfSport",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:latvia": {
+    "name": "Skonto Stadium",
+    "asset": "/stadiums/riga-fc-outline-v1.webp",
+    "credits": "/stadiums/credits.html#riga-fc",
+    "source": "https://commons.wikimedia.org/wiki/File:Skonto_stadium_(20.10.2025.).jpg",
+    "artist": "Bendžamins",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "national:liechtenstein": {
+    "name": "Rheinpark Stadion",
+    "asset": "/stadiums/national-liechtenstein-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-liechtenstein",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Rheinpark_Stadium_before_a_UEFA_Nations_League_match_(2022).jpg",
+    "artist": "Vincenzo.togni",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:lithuania": {
+    "name": "Darius and Girėnas Stadium",
+    "asset": "/stadiums/fk-kauno-zalgiris-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fk-kauno-zalgiris",
+    "source": "https://commons.wikimedia.org/wiki/File:Dariaus_ir_Gireno_stadionas.png",
+    "artist": "BernardBzl",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "national:luxembourg": {
+    "name": "Stade de Luxembourg",
+    "asset": "/stadiums/national-luxembourg-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-luxembourg",
+    "source": "https://commons.wikimedia.org/wiki/File:Stade_de_Luxembourg,_Luxembourg_vs_Azebaidjan_2021-09-01_(103).jpg",
+    "artist": "GilPe",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:malta": {
+    "name": "National Stadium, Ta' Qali",
+    "asset": "/stadiums/national-malta-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-malta",
+    "source": "https://commons.wikimedia.org/wiki/File:Malta_TaQali.JPG",
+    "artist": "D T G",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "national:mexico": {
+    "name": "Estadio Azteca",
+    "asset": "/stadiums/national-mexico-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-mexico",
+    "source": "https://commons.wikimedia.org/wiki/File:Vista_a%C3%A9rea_del_Estadio_Azteca_-_2026_-_02.jpg",
+    "artist": "ProtoplasmaKid",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "national:moldova": {
+    "name": "Zimbru Stadium",
+    "asset": "/stadiums/national-moldova-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-moldova",
+    "source": "https://commons.wikimedia.org/wiki/File:Zimbru_Stadium_in_26_April_2025.jpg",
+    "artist": "Lovecookie22",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "national:montenegro": {
+    "name": "Podgorica City Stadium",
+    "asset": "/stadiums/national-montenegro-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-montenegro",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_pod_Goricom.jpg",
+    "artist": "MrSco",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "national:morocco": {
+    "name": "Prince Moulay Abdellah Stadium",
+    "asset": "/stadiums/national-morocco-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-morocco",
+    "source": "https://commons.wikimedia.org/wiki/File:Moulay_Abdellah_Stadium.jpg",
+    "artist": "Reda benkhadra",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:netherlands": {
+    "name": "Johan Cruyff Arena",
+    "asset": "/stadiums/ajax-outline-v1.webp",
+    "credits": "/stadiums/credits.html#ajax",
+    "source": "https://commons.wikimedia.org/wiki/File:Arena,_Ajax_stadion,_Amsterdam.JPG",
+    "artist": "Alf van Beem",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "national:new-zealand": {
+    "name": "Wellington Regional Stadium",
+    "asset": "/stadiums/national-new-zealand-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-new-zealand",
+    "source": "https://commons.wikimedia.org/wiki/File:All_Whites_v_Peru_11_November_2017.jpg",
+    "artist": "NZ Footballs Conscience",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:north-macedonia": {
+    "name": "Toše Proeski Arena",
+    "asset": "/stadiums/national-north-macedonia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-north-macedonia",
+    "source": "https://commons.wikimedia.org/wiki/File:To%C5%A1e_Proeski_Arena_1.jpg",
+    "artist": "kallerna",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:northern-ireland": {
+    "name": "Windsor Park",
+    "asset": "/stadiums/national-northern-ireland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-northern-ireland",
+    "source": "https://commons.wikimedia.org/wiki/File:Windsor_Park_redevelopment_.jpg",
+    "artist": "Citizen69",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:norway": {
+    "name": "Ullevaal Stadion",
+    "asset": "/stadiums/national-norway-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-norway",
+    "source": "https://commons.wikimedia.org/wiki/File:Ullevaal_Stadion,_the_Norway_national_football_team_home_stadium_in_Oslo.jpg",
+    "artist": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "national:panama": {
+    "name": "Rommel Fernández Stadium",
+    "asset": "/stadiums/national-panama-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-panama",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_Rommel_Fern%C3%A1ndez_al_atardecer_2021.jpg",
+    "artist": "123Hollic",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:paraguay": {
+    "name": "Estadio Defensores del Chaco",
+    "asset": "/stadiums/national-paraguay-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-paraguay",
+    "source": "https://commons.wikimedia.org/wiki/File:Defensores_del_Chaco_6-10-2016_2.jpg",
+    "artist": "Hazaña17",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:poland": {
+    "name": "Stadion Narodowy",
+    "asset": "/stadiums/national-poland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-poland",
+    "source": "https://commons.wikimedia.org/wiki/File:National_Stadium_Warsaw_aerial_view_2.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "national:portugal": {
+    "name": "Estádio da Luz",
+    "asset": "/stadiums/benfica-outline-v1.webp",
+    "credits": "/stadiums/credits.html#benfica",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_da_Luz_2012.jpg",
+    "artist": "Florent Dusonchet",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "national:qatar": {
+    "name": "Khalifa International Stadium",
+    "asset": "/stadiums/national-qatar-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-qatar",
+    "source": "https://commons.wikimedia.org/wiki/File:Khalifa_International_Stadium_interior_night_2009_Emir_Cup.jpg",
+    "artist": "daly3d abd from Qatar, Doha",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "national:republic-of-ireland": {
+    "name": "Aviva Stadium",
+    "asset": "/stadiums/national-republic-of-ireland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-republic-of-ireland",
+    "source": "https://commons.wikimedia.org/wiki/File:Aviva_Stadium_YantsImages_-_Asatur_Yesayants_614.jpg",
+    "artist": "YantsImages",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:romania": {
+    "name": "Arena Națională",
+    "asset": "/stadiums/national-romania-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-romania",
+    "source": "https://commons.wikimedia.org/wiki/File:Arena-bukareszt.jpg",
+    "artist": "Nowy Styl Group",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:san-marino": {
+    "name": "San Marino Stadium",
+    "asset": "/stadiums/national-san-marino-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-san-marino",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Olimpico_(Serravalle).jpg",
+    "artist": "Labicanense",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "national:saudi-arabia": {
+    "name": "King Fahd Sports City Stadium",
+    "asset": "/stadiums/national-saudi-arabia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-saudi-arabia",
+    "source": "https://commons.wikimedia.org/wiki/File:King_Fahd_Int._Stadium-_Opening_Arabian_Gulf_Cup_2014.jpg",
+    "artist": "على المزارقه",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:scotland": {
+    "name": "Hampden Park",
+    "asset": "/stadiums/national-scotland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-scotland",
+    "source": "https://commons.wikimedia.org/wiki/File:Hampden_Park_Stadium_-_geograph.org.uk_-_7932300.jpg",
+    "artist": "Thomas Nugent",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "national:senegal": {
+    "name": "Stade Léopold Sédar Senghor",
+    "asset": "/stadiums/national-senegal-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-senegal",
+    "source": "https://commons.wikimedia.org/wiki/File:Laamb_Fever.webm",
+    "artist": "Romain Morizot",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "adaptation": "Outline adapted from a real photographic video still."
+  },
+  "national:serbia": {
+    "name": "Red Star Stadium",
+    "asset": "/stadiums/fk-crvena-zvezda-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fk-crvena-zvezda",
+    "source": "https://commons.wikimedia.org/wiki/File:Zvezda_stadion.jpg",
+    "artist": "Isimic",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "national:slovakia": {
+    "name": "Tehelné pole",
+    "asset": "/stadiums/slovan-bratislava-outline-v1.webp",
+    "credits": "/stadiums/credits.html#slovan-bratislava",
+    "source": "https://commons.wikimedia.org/wiki/File:Slovakia_bratislava_N%C3%A1rodn%C3%BD_futbalov%C3%BD_%C5%A1tadi%C3%B3n.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "national:slovenia": {
+    "name": "Stožice Stadium",
+    "asset": "/stadiums/national-slovenia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-slovenia",
+    "source": "https://commons.wikimedia.org/wiki/File:Sto%C5%BEice_(31523159192).jpg",
+    "artist": "The Stadium Guide",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "national:south-africa": {
+    "name": "FNB Stadium",
+    "asset": "/stadiums/national-south-africa-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-south-africa",
+    "source": "https://commons.wikimedia.org/wiki/File:Soccer_City_Stadium,_Johannesburg.jpg",
+    "artist": "Jesse Allen",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "national:south-korea": {
+    "name": "Seoul World Cup Stadium",
+    "asset": "/stadiums/national-south-korea-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-south-korea",
+    "source": "https://commons.wikimedia.org/wiki/File:AFC_Champions_League_Final_1st_leg.jpg",
+    "artist": "Photo and Share CC",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "national:spain": {
+    "name": "La Cartuja",
+    "asset": "/stadiums/real-betis-outline-v1.webp",
+    "credits": "/stadiums/credits.html#real-betis",
+    "source": "https://commons.wikimedia.org/wiki/File:Partido_Betis-Real_Sociedad_estadio_de_la_Cartuja_001.jpg",
+    "artist": "Anual",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:sweden": {
+    "name": "Nationalarenan",
+    "asset": "/stadiums/national-sweden-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-sweden",
+    "source": "https://commons.wikimedia.org/wiki/File:Nationalarenan_(2022-10-19_19-03-19).jpg",
+    "artist": "Liv Lovisa",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "national:switzerland": {
+    "name": "Stadion Wankdorf",
+    "asset": "/stadiums/national-switzerland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-switzerland",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Wankdorf_Stadium_before_a_Champions_League_Match_(2021).jpg",
+    "artist": "Vincenzo.togni",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:tunisia": {
+    "name": "Stade Hammadi Agrebi",
+    "asset": "/stadiums/national-tunisia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-tunisia",
+    "source": "https://commons.wikimedia.org/wiki/File:Rad%C3%A8s_Olympic_stadium.jpg",
+    "artist": "Nasreddine Nas'h",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "national:turkiye": {
+    "name": "Atatürk Olympic Stadium",
+    "asset": "/stadiums/national-turkiye-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-turkiye",
+    "source": "https://commons.wikimedia.org/wiki/File:Istanbul_Atat%C3%BCrk_Olympic_Stadium_1.jpg",
+    "artist": "Валерий Дед",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "national:ukraine": {
+    "name": "Arena Lviv",
+    "asset": "/stadiums/shakhtar-donetsk-outline-v1.webp",
+    "credits": "/stadiums/credits.html#shakhtar-donetsk",
+    "source": "https://commons.wikimedia.org/wiki/File:Arena_Lviv_5.jpg",
+    "artist": "On tour",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "national:united-states": {
+    "name": "Mercedes-Benz Stadium",
+    "asset": "/stadiums/national-united-states-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-united-states",
+    "source": "https://commons.wikimedia.org/wiki/File:Mercedes_Benz_Stadium_time_lapse_capture_2017-08-13.jpg",
+    "artist": "Atlanta Falcons",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "national:uruguay": {
+    "name": "Estadio Centenario",
+    "asset": "/stadiums/national-uruguay-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-uruguay",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_Centenario_2021.jpg",
+    "artist": "Marcelo Campi",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "national:uzbekistan": {
+    "name": "Milliy Stadium",
+    "asset": "/stadiums/national-uzbekistan-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-uzbekistan",
+    "source": "https://commons.wikimedia.org/wiki/File:National_Stadium_(Uzbekistan),_Uzbekistan-Qatar,_10_June_2025.jpg",
+    "artist": "Прикли",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "national:wales": {
+    "name": "Cardiff City Stadium",
+    "asset": "/stadiums/national-wales-outline-v1.webp",
+    "credits": "/stadiums/credits.html#national-wales",
+    "source": "https://commons.wikimedia.org/wiki/File:Cardiff_City_Stadium_Pitch.jpg",
+    "artist": "Jon Candy from Cardiff, Wales",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  }
+}

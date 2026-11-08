@@ -1,4 +1,5 @@
 import seeds from './stadium-art-seeds.json';
+import nationalSeeds from './national-stadium-art.json';
 import identities from './team-identities.json';
 import {resolveTeamIdentity,normalize} from './team-identity';
 import {isNationalCompetition} from './football-model';
@@ -10,10 +11,12 @@ export const stadiumClubs=new Map(identities.filter(t=>t.kind==='club').map(t=>[
 export function cleanVenue(value:unknown){return typeof value==='string'&&value.length<=140&&!/[<>\x00-\x1f]/.test(value)?value.trim():''}
 export function homeStadiumArt(ticket:any):{src:string;credits:string;name:string}|null{
  const g=ticket.game;
- if(ticket.national||isNationalCompetition(g.league)||STADIUMLESS_CUPS.has(g.league))return null;
- const scope={kind:'club' as const,league:g.league};
+ if(STADIUMLESS_CUPS.has(g.league))return null;
+ const national=ticket.national||isNationalCompetition(g.league);
+ const scope={kind:(national?'national':'club') as 'national'|'club',league:g.league};
  const club=resolveTeamIdentity(g.home.name,scope)||resolveTeamIdentity(g.home.name.replace(/\s+(?:F\.?C\.?|C\.?F\.?)$/i,''),scope);if(!club)return null;
- const seed=stadiumSeeds[club.id];if(seed)return {src:seed.asset,credits:seed.credits,name:seed.name};
+ const seed=(national?nationalSeeds as typeof stadiumSeeds:stadiumSeeds)[club.id];if(seed)return {src:seed.asset,credits:seed.credits,name:seed.name};
+ if(national)return null;
  const venue=cleanVenue(g.venue);if(!venue)return null;
  const params=new URLSearchParams({club:club.id,venue,v:STADIUM_DISCOVERY_VERSION});
  return {src:'/api/stadium-art?'+params,credits:'/api/stadium-art?'+params+'&credits=1',name:venue};

@@ -100,3 +100,9 @@ test('real stadium images load lazily and disappear cleanly if their source is u
  const ticket=cardTicket({game:{...fixture,league:'esp.1',home:{name:'Real Madrid'},away:{name:'Liverpool'}}});
  const ui=hooks(HomeStadiumArt,{ticket});try{let tree=await flush(ui);const img=find(tree,n=>n.type==='img');assert.match(img.props.src,/bernabeu/);assert.equal(img.props.loading,'lazy');assert.equal(img.props.fetchPriority,'low');img.props.onError();tree=await flush(ui);assert.equal(tree,null)}finally{ui.unmount()}
 });
+
+test('national keepsakes show their fixed home ground when fixture venue is absent, preserving supplied venues',()=>{
+ const ticket=cardTicket({national:true,game:{...fixture,league:'fifa.world',home:{name:'England'},away:{name:'France'},venue:null}});
+ let tree=PassFront({ticket,score:'1 – 0'});assert.ok(nodes(tree,n=>n.type==='span'&&n.props.children==='Wembley Stadium').length);
+ tree=PassFront({ticket:{...ticket,game:{...ticket.game,venue:'A supplied tournament stadium'}},score:'1 – 0'});assert.ok(nodes(tree,n=>n.type==='span'&&n.props.children==='A supplied tournament stadium').length);
+});

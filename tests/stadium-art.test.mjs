@@ -20,7 +20,7 @@ test('home identity selects one reusable seed asset, across matches and provider
  assert.deepEqual(homeStadiumArt(game('Liverpool FC','Anfield')),liverpool);
  for(const art of [real,liverpool]){await access('public'+art.src);assert.ok((await readFile('public'+art.src)).length<45000)}
 });
-test('stadium requests are lazy URL declarations; missing identities, national teams and the three club cups make no requests',()=>{
+test('stadium requests are lazy declarations; unknown identities and the three club cups make no requests',()=>{
  const original=globalThis.fetch;globalThis.fetch=()=>{throw Error('Resolver must never fetch')};
  try{assert.match(homeStadiumArt(game()).src,/^\/stadiums\/arsenal-outline-v1.webp$/);assert.deepEqual(homeStadiumArt(game('Arsenal',null)),homeStadiumArt(game()));assert.equal(homeStadiumArt(game('Unregistered club')),null);for(const league of ['uefa.champions','uefa.europa','uefa.europa.conf','uefa.nations'])assert.equal(homeStadiumArt(game('Liverpool','Anfield',league)),null)}finally{globalThis.fetch=original}
 });
@@ -87,3 +87,19 @@ test('competing cold instances keep the winning image and its attribution togeth
  for(const club of clubs){const record=catalog[club.id],ticket=game(club.name,null,'eng.1');const art=homeStadiumArt(ticket);assert.ok(art,club.name);assert.equal(art.src,record.asset,club.name);assert.ok(record.artist&&record.license&&record.source&&record.credits);const bytes=await readFile('public'+record.asset),meta=await sharp(bytes).metadata();assert.equal(meta.format,'webp');assert.ok(meta.hasAlpha);assert.ok(bytes.length<60000,club.name+' image must stay compact');}
  assert.equal(catalog['club:ac-milan'].asset,catalog['club:internazionale'].asset);assert.equal(catalog['club:rudes'].asset,catalog['club:gorica'].asset);
  });
+
+test('every national team has one local home ground across tournaments and changing fixture venues',async()=>{
+ const teams=JSON.parse(await readFile('app/team-identities.json','utf8')).filter(t=>t.kind==='national'),catalog=JSON.parse(await readFile('app/national-stadium-art.json','utf8'));
+ assert.equal(teams.length,86);assert.deepEqual(Object.keys(catalog).sort(),teams.map(t=>t.id).sort());
+ const fetch=globalThis.fetch;globalThis.fetch=()=>{throw Error('National tickets must never fetch their ground mapping')};
+ try{for(const team of teams){
+  const record=catalog[team.id],ticket=game(team.name,null,'fifa.world'),art=homeStadiumArt(ticket);assert.ok(art,team.name);assert.equal(art.src,record.asset);assert.deepEqual(homeStadiumArt({...ticket,national:true,game:{...ticket.game,venue:'A different neutral stadium',league:'fifa.friendly'}}),art);
+  assert.ok(record.artist&&record.licenseUrl&&record.source&&record.credits);const bytes=await readFile('public'+art.src),meta=await sharp(bytes).metadata();assert.equal(meta.format,'webp');assert.equal(meta.hasAlpha,true);assert.ok(bytes.length<60000,team.name+' image budget');
+ }assert.equal(homeStadiumArt(game('Unregistered country',null,'fifa.world')),null);assert.equal(catalog['national:croatia'].asset,JSON.parse(await readFile('app/stadium-art-seeds.json','utf8'))['club:dinamo'].asset)}finally{globalThis.fetch=fetch}
+});
+
+test('physical paper skin has real alpha cutouts and stays within one shared image budget',async()=>{
+ const bytes=await readFile('public/themes/matchday-ticket-skin-v2.webp'),meta=await sharp(bytes).metadata();assert.equal(meta.format,'webp');assert.equal(meta.hasAlpha,true);assert.ok(bytes.length<200000);
+ const {data,info}=await sharp(bytes).ensureAlpha().raw().toBuffer({resolveWithObject:true});const alpha=(x,y)=>data[(y*info.width+x)*4+3];assert.equal(alpha(0,0),0);assert.ok(alpha(Math.floor(info.width/2),Math.floor(info.height/2))>245);
+ let clear=0,paper=0;for(let i=3;i<data.length;i+=4){if(data[i]<20)clear++;if(data[i]>245)paper++}assert.ok(clear>500,'torn edges remain transparent');assert.ok(paper>info.width*info.height*.8,'ticket remains readable paper');
+});
