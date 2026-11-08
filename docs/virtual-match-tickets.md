@@ -284,3 +284,13 @@ three reusable photographic records of the already verified stadium. Only one
 eligible photo is downloaded. Versioned discovery misses let this fix retry a
 previously rejected lookup without invalidating successful saved club artwork.
 All redirects remain bounded and revalidated against the same approved hosts.
+
+### Complete club stadium catalogue (November 2026)
+
+All 163 registered club identities now have a local stadium image, with 159 unique grounds. This replaces dependence on an on-demand lookup or fixture venue field for existing clubs. AC Milan/Inter, Roma/Lazio, Dinamo/Lokomotiva and Gorica/Rudeš share assets. Rudeš uses its current league home in Velika Gorica, Iberia uses Mikheil Meskhi, and Lugano uses AIL Arena. The three UEFA club cup designs still intentionally omit stadium art. National tickets keep their separate design.
+
+The 159 transparent WebP outlines total 4.03 MB; median image 24 KB, largest 49 KB. Only visible ticket images load through native lazy loading. No original photos or bulk runtime download is shipped. Every catalogue key is checked against the registered clubs, including missing venue metadata, asset existence, WebP dimensions/transparency and a 60 KB budget.
+
+Reviewed reusable sources are in `scripts/stadium-sources.json`; `scripts/prepare-stadium-catalog.mjs` rebuilds the 157 new outlines using the shared renderer, and `scripts/write-stadium-credits.mjs` regenerates attribution. Existing Anfield/Bernabéu outlines retain their original sources. AIL Arena is derived from its real seating plan because the licensed photos available show the old stadium during construction. All other outlines use real ground photographs; each ticket links to its exact source and reuse licence. Photo edges describe the actual photographed structure; they are not generated architectural designs.
+
+Current venue checks: Rudeš league fixtures `https://hnl.hr/klubovi/rudes/`; Iberia official fixtures `https://fciberia1999.ge/en/calendar/fixtures-results-3/`; Lugano official new-ground FAQ `https://fclugano.com/en/faq-ail-arena`. Catalogue mappings are maintained data, not a promise of automatic stadium-move detection.

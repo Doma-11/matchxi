@@ -1,10 +1,829 @@
 {
-  "club:real-madrid": {
-    "name": "Santiago Bernabéu",
-    "asset": "/stadiums/bernabeu-outline-v1.webp",
-    "credits": "/stadiums/credits.html#bernabeu",
-    "source": "https://commons.wikimedia.org/wiki/File:Estadio_Santiago_Bernab%C3%A9u_39.jpg",
-    "artist": "Luis García ( Zaqarbal )",
+  "club:1-fc-union-berlin": {
+    "name": "Stadion An der Alten Försterei",
+    "asset": "/stadiums/1-fc-union-berlin-outline-v1.webp",
+    "credits": "/stadiums/credits.html#1-fc-union-berlin",
+    "source": "https://commons.wikimedia.org/wiki/File:Berlin_alte_f%C3%B6rsterei.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:ac-milan": {
+    "name": "San Siro",
+    "asset": "/stadiums/ac-milan-outline-v1.webp",
+    "credits": "/stadiums/credits.html#ac-milan",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Meazza_2021_3.jpg",
+    "artist": "Prelvini",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:aek-athens": {
+    "name": "Agia Sophia Stadium",
+    "asset": "/stadiums/aek-athens-outline-v1.webp",
+    "credits": "/stadiums/credits.html#aek-athens",
+    "source": "https://commons.wikimedia.org/wiki/File:AEK_fans_during_AEK-Marseille_game.jpg",
+    "artist": "Demian vi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:afc-bournemouth": {
+    "name": "Dean Court",
+    "asset": "/stadiums/afc-bournemouth-outline-v1.webp",
+    "credits": "/stadiums/credits.html#afc-bournemouth",
+    "source": "https://commons.wikimedia.org/wiki/File:Deancourt_14092013_vblackpool.jpg",
+    "artist": "Matthew Jackson",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:agf": {
+    "name": "Vejlby Stadium",
+    "asset": "/stadiums/agf-outline-v1.webp",
+    "credits": "/stadiums/credits.html#agf",
+    "source": "https://commons.wikimedia.org/wiki/File:Vejlby_Stadium_Clear_Skies.jpg",
+    "artist": "Bocanegra",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:ajax": {
+    "name": "Johan Cruyff Arena",
+    "asset": "/stadiums/ajax-outline-v1.webp",
+    "credits": "/stadiums/credits.html#ajax",
+    "source": "https://commons.wikimedia.org/wiki/File:Arena,_Ajax_stadion,_Amsterdam.JPG",
+    "artist": "Alf van Beem",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:alaves": {
+    "name": "Mendizorrotza Stadium",
+    "asset": "/stadiums/alaves-outline-v1.webp",
+    "credits": "/stadiums/credits.html#alaves",
+    "source": "https://commons.wikimedia.org/wiki/File:Mendizorrotza_diciembre_2021.jpg",
+    "artist": "MarcosMarinM",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:anderlecht": {
+    "name": "Constant Vanden Stock Stadium",
+    "asset": "/stadiums/anderlecht-outline-v1.webp",
+    "credits": "/stadiums/credits.html#anderlecht",
+    "source": "https://commons.wikimedia.org/wiki/File:Stade_Constant_Vanden_Stock.jpg",
+    "artist": "Олександр Осіпов",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:ararat-armenia": {
+    "name": "Yerevan Football Academy Stadium",
+    "asset": "/stadiums/ararat-armenia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#ararat-armenia",
+    "source": "https://commons.wikimedia.org/wiki/File:FFA_Football_Academy_Yerevan.jpg",
+    "artist": "Spetsnaz1991",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:arsenal": {
+    "name": "Emirates Stadium",
+    "asset": "/stadiums/arsenal-outline-v1.webp",
+    "credits": "/stadiums/credits.html#arsenal",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Emirates_Stadium_arsenal.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:as-monaco": {
+    "name": "Stade Louis II",
+    "asset": "/stadiums/as-monaco-outline-v1.webp",
+    "credits": "/stadiums/credits.html#as-monaco",
+    "source": "https://commons.wikimedia.org/wiki/File:Panoramio_-_V%26A_Dudush_-_stade_Louis_II.jpg",
+    "artist": "V&A Dudush",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "club:as-roma": {
+    "name": "Stadio Olimpico",
+    "asset": "/stadiums/as-roma-outline-v1.webp",
+    "credits": "/stadiums/credits.html#as-roma",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Olimpico_2024.jpg",
+    "artist": "Messapi, cropped by Blackcat",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:aston-villa": {
+    "name": "Villa Park",
+    "asset": "/stadiums/aston-villa-outline-v1.webp",
+    "credits": "/stadiums/credits.html#aston-villa",
+    "source": "https://commons.wikimedia.org/wiki/File:Birmingham_aston_villa_park_stadium.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:atalanta": {
+    "name": "Stadio di Bergamo",
+    "asset": "/stadiums/atalanta-outline-v1.webp",
+    "credits": "/stadiums/credits.html#atalanta",
+    "source": "https://commons.wikimedia.org/wiki/File:The_outside_of_the_Gewiss_Stadium_in_2020.jpg",
+    "artist": "Vincenzo.togni",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:athletic-club": {
+    "name": "San Mamés Stadium (2013)",
+    "asset": "/stadiums/athletic-club-outline-v1.webp",
+    "credits": "/stadiums/credits.html#athletic-club",
+    "source": "https://commons.wikimedia.org/wiki/File:Panorama_im_San_Mam%C3%A9s_Stadion.jpg",
+    "artist": "Marco Almbauer",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:atletico-madrid": {
+    "name": "Metropolitano Stadium",
+    "asset": "/stadiums/atletico-madrid-outline-v1.webp",
+    "credits": "/stadiums/credits.html#atletico-madrid",
+    "source": "https://commons.wikimedia.org/wiki/File:Atleti_vs_Villarreal_-_September_2025.jpg",
+    "artist": "Elwin594",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:az-alkmaar": {
+    "name": "AFAS Stadion",
+    "asset": "/stadiums/az-alkmaar-outline-v1.webp",
+    "credits": "/stadiums/credits.html#az-alkmaar",
+    "source": "https://commons.wikimedia.org/wiki/File:Vooraanzicht_AFAS_Stadion_april2022.jpg",
+    "artist": "Jesperverbruggen",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:barcelona": {
+    "name": "Camp Nou",
+    "asset": "/stadiums/barcelona-outline-v1.webp",
+    "credits": "/stadiums/credits.html#barcelona",
+    "source": "https://commons.wikimedia.org/wiki/File:Camp_Nou_aerial.jpg",
+    "artist": "Oh-Barcelona.com from Barcelona, Spain",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:bayer-leverkusen": {
+    "name": "BayArena",
+    "asset": "/stadiums/bayer-leverkusen-outline-v1.webp",
+    "credits": "/stadiums/credits.html#bayer-leverkusen",
+    "source": "https://commons.wikimedia.org/wiki/File:Bayarena_Leverkusen_2020.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:bayern-munich": {
+    "name": "Allianz Arena",
+    "asset": "/stadiums/bayern-munich-outline-v1.webp",
+    "credits": "/stadiums/credits.html#bayern-munich",
+    "source": "https://commons.wikimedia.org/wiki/File:Allianz_Arena_2008-02-09.jpg",
+    "artist": "2015 Michael 2015",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:benfica": {
+    "name": "Estádio da Luz",
+    "asset": "/stadiums/benfica-outline-v1.webp",
+    "credits": "/stadiums/credits.html#benfica",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_da_Luz_2012.jpg",
+    "artist": "Florent Dusonchet",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:besiktas": {
+    "name": "Beşiktaş Stadium",
+    "asset": "/stadiums/besiktas-outline-v1.webp",
+    "credits": "/stadiums/credits.html#besiktas",
+    "source": "https://commons.wikimedia.org/wiki/File:T%C3%BCpra%C5%9F_Stadyumu_20231011_2.jpg",
+    "artist": "Beşiktaş JK",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:bod-glimt": {
+    "name": "Aspmyra Stadion",
+    "asset": "/stadiums/bod-glimt-outline-v1.webp",
+    "credits": "/stadiums/credits.html#bod-glimt",
+    "source": "https://commons.wikimedia.org/wiki/File:Aspmyra_stadion.jpg",
+    "artist": "Røed",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5"
+  },
+  "club:bologna": {
+    "name": "Stadio Renato Dall'Ara",
+    "asset": "/stadiums/bologna-outline-v1.webp",
+    "credits": "/stadiums/credits.html#bologna",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Dall%27Ara_01-02-2020.jpg",
+    "artist": "Beric Dondarrion",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:borac-banja-luka": {
+    "name": "Banja Luka City Stadium",
+    "asset": "/stadiums/borac-banja-luka-outline-v1.webp",
+    "credits": "/stadiums/credits.html#borac-banja-luka",
+    "source": "https://commons.wikimedia.org/wiki/File:Gradski_stadion_Banja_Luka,_Septembre_2012.jpg",
+    "artist": "NektarBL",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:borussia-dortmund": {
+    "name": "Westfalenstadion",
+    "asset": "/stadiums/borussia-dortmund-outline-v1.webp",
+    "credits": "/stadiums/credits.html#borussia-dortmund",
+    "source": "https://commons.wikimedia.org/wiki/File:Signal_iduna_park_stadium_dortmund_4.jpg",
+    "artist": "Arne Müseler / www.arne-mueseler.com",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:borussia-monchengladbach": {
+    "name": "Borussia-Park",
+    "asset": "/stadiums/borussia-monchengladbach-outline-v1.webp",
+    "credits": "/stadiums/credits.html#borussia-monchengladbach",
+    "source": "https://commons.wikimedia.org/wiki/File:M%C3%B6nchengladbach_stadion.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:braga": {
+    "name": "Estádio Municipal de Braga",
+    "asset": "/stadiums/braga-outline-v1.webp",
+    "credits": "/stadiums/credits.html#braga",
+    "source": "https://commons.wikimedia.org/wiki/File:Eduardo_Souto_de_Moura_-_Braga_Stadium_02_(6010593292).jpg",
+    "artist": "準建築人手札網站 Forgemind ArchiMedia from Taichung, Taiwan, Taiwan",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:brann": {
+    "name": "Brann Stadion",
+    "asset": "/stadiums/brann-outline-v1.webp",
+    "credits": "/stadiums/credits.html#brann",
+    "source": "https://commons.wikimedia.org/wiki/File:Brann_stadion,_Bergen.jpg",
+    "artist": "Marius Vassnes",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:brentford": {
+    "name": "Brentford Community Stadium",
+    "asset": "/stadiums/brentford-outline-v1.webp",
+    "credits": "/stadiums/credits.html#brentford",
+    "source": "https://commons.wikimedia.org/wiki/File:Brentford_Community_Stadium_2020.jpg",
+    "artist": "AndyScott",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:brighton-hove-albion": {
+    "name": "Falmer Stadium",
+    "asset": "/stadiums/brighton-hove-albion-outline-v1.webp",
+    "credits": "/stadiums/credits.html#brighton-hove-albion",
+    "source": "https://commons.wikimedia.org/wiki/File:Amex_Community_Stadium.jpg",
+    "artist": "Barbara van Cleve",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:cagliari": {
+    "name": "Unipol Domus",
+    "asset": "/stadiums/cagliari-outline-v1.webp",
+    "credits": "/stadiums/credits.html#cagliari",
+    "source": "https://commons.wikimedia.org/wiki/File:Unipol_Domus_from_Distinti_2026.jpg",
+    "artist": "Sandrino 14",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:celta-vigo": {
+    "name": "Balaídos Stadium",
+    "asset": "/stadiums/celta-vigo-outline-v1.webp",
+    "credits": "/stadiums/credits.html#celta-vigo",
+    "source": "https://commons.wikimedia.org/wiki/File:Balaidos_hoy.jpg",
+    "artist": "BandidoBanderas",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:celtic": {
+    "name": "Celtic Park",
+    "asset": "/stadiums/celtic-outline-v1.webp",
+    "credits": "/stadiums/credits.html#celtic",
+    "source": "https://commons.wikimedia.org/wiki/File:Celtic_Park_during_an_Old_Firm_derby_between_Celtic_FC_and_Rangers_FC.jpg",
+    "artist": "Vincenzo.togni",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:chelsea": {
+    "name": "Stamford Bridge (stadium)",
+    "asset": "/stadiums/chelsea-outline-v1.webp",
+    "credits": "/stadiums/credits.html#chelsea",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Stamford_Bridge.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:club-brugge": {
+    "name": "Jan Breydel Stadium",
+    "asset": "/stadiums/club-brugge-outline-v1.webp",
+    "credits": "/stadiums/credits.html#club-brugge",
+    "source": "https://commons.wikimedia.org/wiki/File:Janbreydel.png",
+    "artist": "Zergori",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:como": {
+    "name": "Stadio Giuseppe Sinigaglia",
+    "asset": "/stadiums/como-outline-v1.webp",
+    "credits": "/stadiums/credits.html#como",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Sinigaglia_Como_16-07-2025.jpg",
+    "artist": "Vale93b",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:coventry-city": {
+    "name": "Coventry Building Society Arena",
+    "asset": "/stadiums/coventry-city-outline-v1.webp",
+    "credits": "/stadiums/credits.html#coventry-city",
+    "source": "https://commons.wikimedia.org/wiki/File:Coventry_Derby_October_2021_-_2.jpg",
+    "artist": "Amakuru",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:crystal-palace": {
+    "name": "Selhurst Park",
+    "asset": "/stadiums/crystal-palace-outline-v1.webp",
+    "credits": "/stadiums/credits.html#crystal-palace",
+    "source": "https://commons.wikimedia.org/wiki/File:2023_09_09_arne_mueseler_17_18_07_00743-Verbessert-RR_(53283239217).jpg",
+    "artist": "Arne Müseler from Salzburg, AT",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "club:cska-sofia": {
+    "name": "Stadion Balgarska Armia",
+    "asset": "/stadiums/cska-sofia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#cska-sofia",
+    "source": "https://commons.wikimedia.org/wiki/File:New_Bulgarian_Army_Stadium_31-10-2026.jpg",
+    "artist": "Biso",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:deportivo": {
+    "name": "Estadio Riazor",
+    "asset": "/stadiums/deportivo-outline-v1.webp",
+    "credits": "/stadiums/credits.html#deportivo",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadioriazor2023.jpg",
+    "artist": "Lisímaco de Egipto",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:dinamo": {
+    "name": "Maksimir Stadium",
+    "asset": "/stadiums/dinamo-outline-v1.webp",
+    "credits": "/stadiums/credits.html#dinamo",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Maksimir_areal.jpg",
+    "artist": "Suradnik13",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "club:egnatia": {
+    "name": "Egnatia Arena",
+    "asset": "/stadiums/egnatia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#egnatia",
+    "source": "https://commons.wikimedia.org/wiki/File:Egnatia_Arena_2025_Field.jpg",
+    "artist": "Albinfo",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:eintracht-frankfurt": {
+    "name": "Waldstadion (Frankfurt)",
+    "asset": "/stadiums/eintracht-frankfurt-outline-v1.webp",
+    "credits": "/stadiums/credits.html#eintracht-frankfurt",
+    "source": "https://commons.wikimedia.org/wiki/File:Deutsche_bank_park.jpg",
+    "artist": "Patrik Meyer",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:elche": {
+    "name": "Estadio Martínez Valero",
+    "asset": "/stadiums/elche-outline-v1.webp",
+    "credits": "/stadiums/credits.html#elche",
+    "source": "https://commons.wikimedia.org/wiki/File:Panor%C3%A1mica_del_estadio_Mart%C3%ADnez_Valero.jpg",
+    "artist": "Magicloren",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:espanyol": {
+    "name": "RCDE Stadium",
+    "asset": "/stadiums/espanyol-outline-v1.webp",
+    "credits": "/stadiums/credits.html#espanyol",
+    "source": "https://commons.wikimedia.org/wiki/File:Stage_Front_Stadium.jpg",
+    "artist": "RCD Espanyol de Barcelona",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:everton": {
+    "name": "Hill Dickinson Stadium",
+    "asset": "/stadiums/everton-outline-v1.webp",
+    "credits": "/stadiums/credits.html#everton",
+    "source": "https://commons.wikimedia.org/wiki/File:Hill_Dickinson_Stadium,_Liverpool_Waterfront_-_geograph.org.uk_-_8170881.jpg",
+    "artist": "David Dixon",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "club:fc-augsburg": {
+    "name": "Augsburg Arena",
+    "asset": "/stadiums/fc-augsburg-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fc-augsburg",
+    "source": "https://commons.wikimedia.org/wiki/File:Germany_augsburg_stadium_wwk_arena.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:fc-cologne": {
+    "name": "Müngersdorfer Stadion",
+    "asset": "/stadiums/fc-cologne-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fc-cologne",
+    "source": "https://commons.wikimedia.org/wiki/File:RheinEnergieStadion-9056.jpg",
+    "artist": "Raimond Spekking",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:fc-k-benhavn": {
+    "name": "Parken Stadium",
+    "asset": "/stadiums/fc-k-benhavn-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fc-k-benhavn",
+    "source": "https://commons.wikimedia.org/wiki/File:Denmark_copenhagen_parken_stadium.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:fc-midtjylland": {
+    "name": "MCH Arena",
+    "asset": "/stadiums/fc-midtjylland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fc-midtjylland",
+    "source": "https://commons.wikimedia.org/wiki/File:MCH_Arena_Herning.JPG",
+    "artist": "EUpdates",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:fc-porto": {
+    "name": "Estádio do Dragão",
+    "asset": "/stadiums/fc-porto-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fc-porto",
+    "source": "https://commons.wikimedia.org/wiki/File:Porto_Est%C3%A1dio_do_Drag%C3%A3o_2.jpg",
+    "artist": "Валерий Дед",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "club:fc-twente": {
+    "name": "De Grolsch Veste",
+    "asset": "/stadiums/fc-twente-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fc-twente",
+    "source": "https://commons.wikimedia.org/wiki/File:Enschede,_de_Grolsch_veste_-_voetbalstadion_van_FC_Twenthe_IMG_8861_2021-04-26_11.11.jpg",
+    "artist": "Michielverbeek",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:fenerbahce": {
+    "name": "Şükrü Saracoğlu Stadium",
+    "asset": "/stadiums/fenerbahce-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fenerbahce",
+    "source": "https://commons.wikimedia.org/wiki/File:Sukrusaracoglu.jpg",
+    "artist": "Anl55400",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:ferencvaros": {
+    "name": "Ferencváros Stadion",
+    "asset": "/stadiums/ferencvaros-outline-v1.webp",
+    "credits": "/stadiums/credits.html#ferencvaros",
+    "source": "https://commons.wikimedia.org/wiki/File:Groupama_Ar%C3%A9na,_l%C3%A9gi_fot%C3%B3.jpg",
+    "artist": "Civertan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:feyenoord": {
+    "name": "De Kuip",
+    "asset": "/stadiums/feyenoord-outline-v1.webp",
+    "credits": "/stadiums/credits.html#feyenoord",
+    "source": "https://commons.wikimedia.org/wiki/File:Feyenoord_Rotterdam%27s_De_Kuip_stadium_in_2022_before_a_match_against_FC_Emmen.jpg",
+    "artist": "Vincenzo.togni",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:fiorentina": {
+    "name": "Stadio Artemio Franchi",
+    "asset": "/stadiums/fiorentina-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fiorentina",
+    "source": "https://commons.wikimedia.org/wiki/File:Firenze,_stadio_artemio_franchi,_campo_da_gioco,_10,0.jpg",
+    "artist": "Sailko",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "club:fk-crvena-zvezda": {
+    "name": "Red Star Stadium",
+    "asset": "/stadiums/fk-crvena-zvezda-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fk-crvena-zvezda",
+    "source": "https://commons.wikimedia.org/wiki/File:Zvezda_stadion.jpg",
+    "artist": "Isimic",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:fk-kauno-zalgiris": {
+    "name": "Darius and Girėnas Stadium",
+    "asset": "/stadiums/fk-kauno-zalgiris-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fk-kauno-zalgiris",
+    "source": "https://commons.wikimedia.org/wiki/File:Dariaus_ir_Gireno_stadionas.png",
+    "artist": "BernardBzl",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:frosinone": {
+    "name": "Stadio Benito Stirpe",
+    "asset": "/stadiums/frosinone-outline-v1.webp",
+    "credits": "/stadiums/credits.html#frosinone",
+    "source": "https://commons.wikimedia.org/wiki/File:Benito_Stirpe_brescia_panoramica_ternana_sud_ospiti_main_notturna.jpg",
+    "artist": "Roberto Celani",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:fulham": {
+    "name": "Craven Cottage",
+    "asset": "/stadiums/fulham-outline-v1.webp",
+    "credits": "/stadiums/credits.html#fulham",
+    "source": "https://commons.wikimedia.org/wiki/File:Craven_Cottage_(Fulham).jpg",
+    "artist": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:galatasaray": {
+    "name": "Rams Park",
+    "asset": "/stadiums/galatasaray-outline-v1.webp",
+    "credits": "/stadiums/credits.html#galatasaray",
+    "source": "https://commons.wikimedia.org/wiki/File:Rams_Park_i%C3%A7_g%C3%B6r%C3%BCn%C3%BCm_2025.jpg",
+    "artist": "Antoloji",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:genoa": {
+    "name": "Stadio Luigi Ferraris",
+    "asset": "/stadiums/genoa-outline-v1.webp",
+    "credits": "/stadiums/credits.html#genoa",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Luigi_Ferraris_di_Genova_con_il_quartiere_Marassi_(cropped).jpg",
+    "artist": "Gabriel Rinaldi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:gent": {
+    "name": "Planet Group Arena",
+    "asset": "/stadiums/gent-outline-v1.webp",
+    "credits": "/stadiums/credits.html#gent",
+    "source": "https://commons.wikimedia.org/wiki/File:Planet_Group_arena_-_aerial_night_view.jpg",
+    "artist": "Cvanuffel",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:getafe": {
+    "name": "Estadio Coliseum",
+    "asset": "/stadiums/getafe-outline-v1.webp",
+    "credits": "/stadiums/credits.html#getafe",
+    "source": "https://commons.wikimedia.org/wiki/File:Getafe0-0Lega2018.jpg",
+    "artist": "Miguelazo84",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:gorica": {
+    "name": "Gradski stadion Velika Gorica",
+    "asset": "/stadiums/gorica-outline-v1.webp",
+    "credits": "/stadiums/credits.html#gorica",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadium_Radnik_in_Velika_Gorica,_Croatia.png",
+    "artist": "Freemyboi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:hajduk": {
+    "name": "Stadion Poljud",
+    "asset": "/stadiums/hajduk-outline-v1.webp",
+    "credits": "/stadiums/credits.html#hajduk",
+    "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Poljud_Stadium_in_2024.jpg",
+    "artist": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:hamburg-sv": {
+    "name": "Volksparkstadion",
+    "asset": "/stadiums/hamburg-sv-outline-v1.webp",
+    "credits": "/stadiums/credits.html#hamburg-sv",
+    "source": "https://commons.wikimedia.org/wiki/File:RK_1009_9831_Volksparkstadion.jpg",
+    "artist": "Reinhard Kraasch",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:hapoel-beer-sheva": {
+    "name": "Turner Stadium",
+    "asset": "/stadiums/hapoel-beer-sheva-outline-v1.webp",
+    "credits": "/stadiums/credits.html#hapoel-beer-sheva",
+    "source": "https://commons.wikimedia.org/wiki/File:%D7%90%D7%A6%D7%98%D7%93%D7%99%D7%95%D7%9F_%D7%98%D7%95%D7%98%D7%95_%D7%91%D7%90%D7%A8_%D7%A9%D7%91%D7%A2_%D7%A2%22%D7%A9_%D7%99%D7%A2%D7%A7%D7%91_%D7%98%D7%A8%D7%A0%D7%A8_-_panoramio.jpg",
+    "artist": "Yuri Raysper",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "club:heart-of-midlothian": {
+    "name": "Tynecastle Park",
+    "asset": "/stadiums/heart-of-midlothian-outline-v1.webp",
+    "credits": "/stadiums/credits.html#heart-of-midlothian",
+    "source": "https://commons.wikimedia.org/wiki/File:Tynecastle_before_the_Sky_Sports_Cup_Final_-_53607560077.jpg",
+    "artist": "daniel0685",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:hull-city": {
+    "name": "MKM Stadium",
+    "asset": "/stadiums/hull-city-outline-v1.webp",
+    "credits": "/stadiums/credits.html#hull-city",
+    "source": "https://commons.wikimedia.org/wiki/File:Match_day_at_the_KC_Stadium_-_geograph.org.uk_-_1497910.jpg",
+    "artist": "David Brown",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "club:iberia-1999": {
+    "name": "Mikheil Meskhi Stadium",
+    "asset": "/stadiums/iberia-1999-outline-v1.webp",
+    "credits": "/stadiums/credits.html#iberia-1999",
+    "source": "https://commons.wikimedia.org/wiki/File:Mikhain_Meskhi_Stadium_2024.jpg",
+    "artist": "Прикли",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:inter-club-d-escaldes": {
+    "name": "Estadi Nacional",
+    "asset": "/stadiums/inter-club-d-escaldes-outline-v1.webp",
+    "credits": "/stadiums/credits.html#inter-club-d-escaldes",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadi_Nacional_d%E2%80%98Andorra.jpg",
+    "artist": "Walmaul",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:internazionale": {
+    "name": "San Siro",
+    "asset": "/stadiums/ac-milan-outline-v1.webp",
+    "credits": "/stadiums/credits.html#ac-milan",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Meazza_2021_3.jpg",
+    "artist": "Prelvini",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:ipswich-town": {
+    "name": "Portman Road",
+    "asset": "/stadiums/ipswich-town-outline-v1.webp",
+    "credits": "/stadiums/credits.html#ipswich-town",
+    "source": "https://commons.wikimedia.org/wiki/File:Portman_Road_aerial_(cropped).jpg",
+    "artist": "John Fielding from Norwich, UK",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:istra-1961": {
+    "name": "Stadion Aldo Drosina",
+    "asset": "/stadiums/istra-1961-outline-v1.webp",
+    "credits": "/stadiums/credits.html#istra-1961",
+    "source": "https://commons.wikimedia.org/wiki/File:Istra_1961_vs._Dinamo,_Aldo_Drosina.JPG",
+    "artist": "El-Diablo",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:jablonec": {
+    "name": "Stadion Střelnice",
+    "asset": "/stadiums/jablonec-outline-v1.webp",
+    "credits": "/stadiums/credits.html#jablonec",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_FK_Jablonec_(2).jpg",
+    "artist": "Tadeáš Bednarz",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:jagiellonia-bia-ystok": {
+    "name": "Stadion Miejski (Białystok)",
+    "asset": "/stadiums/jagiellonia-bia-ystok-outline-v1.webp",
+    "credits": "/stadiums/credits.html#jagiellonia-bia-ystok",
+    "source": "https://commons.wikimedia.org/wiki/File:20240602_123013_June_2024_in_Bia%C5%82ystok.jpg",
+    "artist": "Rakoon",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:juventus": {
+    "name": "Juventus Stadium",
+    "asset": "/stadiums/juventus-outline-v1.webp",
+    "credits": "/stadiums/credits.html#juventus",
+    "source": "https://commons.wikimedia.org/wiki/File:2021%E2%80%9322_UEFA_Women%27s_Champions_League_Final_in_Turin,_Italy_1.jpg",
+    "artist": "Sebleouf",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:kairat-almaty": {
+    "name": "Almaty Central Stadium",
+    "asset": "/stadiums/kairat-almaty-outline-v1.webp",
+    "credits": "/stadiums/credits.html#kairat-almaty",
+    "source": "https://commons.wikimedia.org/wiki/File:Kazakhstan_P9240988_08_(39408856325).jpg",
+    "artist": "t_y_l",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "club:kups": {
+    "name": "Kuopio Football Stadium",
+    "asset": "/stadiums/kups-outline-v1.webp",
+    "credits": "/stadiums/credits.html#kups",
+    "source": "https://commons.wikimedia.org/wiki/File:Savon_Sanomat_Areena_20.9.2016.jpg",
+    "artist": "Juhm",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:lask": {
+    "name": "Raiffeisen Arena",
+    "asset": "/stadiums/lask-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lask",
+    "source": "https://commons.wikimedia.org/wiki/File:Raiffeisen-Arena_Linz_02.jpg",
+    "artist": "Werner100359",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:lazio": {
+    "name": "Stadio Olimpico",
+    "asset": "/stadiums/as-roma-outline-v1.webp",
+    "credits": "/stadiums/credits.html#as-roma",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Olimpico_2024.jpg",
+    "artist": "Messapi, cropped by Blackcat",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:lecce": {
+    "name": "Stadio Via del mare",
+    "asset": "/stadiums/lecce-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lecce",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Via_Del_Mare_stadium_in_Lecce_during_a_Serie_A_match_between_Lecce_and_SPAL_Ferrara_in_February_2020.jpg",
+    "artist": "Vincenzo.togni",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:lech-poznan": {
+    "name": "Poznań Stadium",
+    "asset": "/stadiums/lech-poznan-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lech-poznan",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Miejski_Poznan,_2011-08-23.jpg",
+    "artist": "Carte",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:leeds-united": {
+    "name": "Elland Road",
+    "asset": "/stadiums/leeds-united-outline-v1.webp",
+    "credits": "/stadiums/credits.html#leeds-united",
+    "source": "https://commons.wikimedia.org/wiki/File:Leeds_United_-_31559864360.jpg",
+    "artist": "chillilogic.com",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:lens": {
+    "name": "Stade Bollaert-Delelis",
+    "asset": "/stadiums/lens-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lens",
+    "source": "https://commons.wikimedia.org/wiki/File:Stade_Bollaert_Delelis.JPG",
+    "artist": "Liondartois",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:levante": {
+    "name": "Estadi Ciutat de València",
+    "asset": "/stadiums/levante-outline-v1.webp",
+    "credits": "/stadiums/credits.html#levante",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadi_Ciutat_de_Val%C3%A8ncia_-_nocturna.jpg",
+    "artist": "Francesc Fort",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:levski-sofia": {
+    "name": "Stadion Georgi Asparuhov",
+    "asset": "/stadiums/levski-sofia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#levski-sofia",
+    "source": "https://commons.wikimedia.org/wiki/File:StadionGeorgiAsparuhov03.jpg",
+    "artist": "Keranov",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:lille": {
+    "name": "Stade Pierre-Mauroy",
+    "asset": "/stadiums/lille-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lille",
+    "source": "https://commons.wikimedia.org/wiki/File:Lille_vs_PSG_2019_-_Stade_Pierre_Mauroy.jpg",
+    "artist": "Liondartois",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:lillestr-m": {
+    "name": "Åråsen Stadion",
+    "asset": "/stadiums/lillestr-m-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lillestr-m",
+    "source": "https://commons.wikimedia.org/wiki/File:Air_arasen.jpg",
+    "artist": "GAD",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:lincoln-red-imps-fc": {
+    "name": "Europa Sports Park",
+    "asset": "/stadiums/lincoln-red-imps-fc-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lincoln-red-imps-fc",
+    "source": "https://commons.wikimedia.org/wiki/File:Europa_Point_2.jpg",
+    "artist": "Adam Cli",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   },
@@ -14,6 +833,636 @@
     "credits": "/stadiums/credits.html#anfield",
     "source": "https://commons.wikimedia.org/wiki/File:Anfield_Main_Stand_exterior.jpg",
     "artist": "Original photo by: Rodhullandemu \n \nCropped & edited by: TurboGUY",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:lokomotiva": {
+    "name": "Maksimir Stadium",
+    "asset": "/stadiums/dinamo-outline-v1.webp",
+    "credits": "/stadiums/credits.html#dinamo",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Maksimir_areal.jpg",
+    "artist": "Suradnik13",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "club:lugano": {
+    "name": "AIL Arena",
+    "asset": "/stadiums/lugano-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lugano",
+    "source": "https://commons.wikimedia.org/wiki/File:AIL_Arena_seating_map.svg",
+    "artist": "User:Vale93b",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "club:lyon": {
+    "name": "Parc Olympique Lyonnais",
+    "asset": "/stadiums/lyon-outline-v1.webp",
+    "credits": "/stadiums/credits.html#lyon",
+    "source": "https://commons.wikimedia.org/wiki/File:Olympique_lyonnais_-_Stade_rennais,_demi-finale_de_Coupe_de_France_2019.jpg",
+    "artist": "Sebleouf",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:mainz": {
+    "name": "MEWA Arena",
+    "asset": "/stadiums/mainz-outline-v1.webp",
+    "credits": "/stadiums/credits.html#mainz",
+    "source": "https://commons.wikimedia.org/wiki/File:Mewa_Arena2.jpg",
+    "artist": "Atirador",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:malaga": {
+    "name": "Estadio La Rosaleda",
+    "asset": "/stadiums/malaga-outline-v1.webp",
+    "credits": "/stadiums/credits.html#malaga",
+    "source": "https://commons.wikimedia.org/wiki/File:IMG-20220228-WA0055.jpg",
+    "artist": "Meloptido",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:manchester-city": {
+    "name": "Etihad Stadium",
+    "asset": "/stadiums/manchester-city-outline-v1.webp",
+    "credits": "/stadiums/credits.html#manchester-city",
+    "source": "https://commons.wikimedia.org/wiki/File:City_of_Manchester_Stadium_2023_cropped.jpg",
+    "artist": "Arne Müseler, cropped by Blackcat",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:manchester-united": {
+    "name": "Old Trafford",
+    "asset": "/stadiums/manchester-united-outline-v1.webp",
+    "credits": "/stadiums/credits.html#manchester-united",
+    "source": "https://commons.wikimedia.org/wiki/File:2023_07_31_arne_mueseler_00060-Verbessert-RR_(53106651455).jpg",
+    "artist": "Arne Müseler from Salzburg, AT",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "club:marseille": {
+    "name": "Stade Vélodrome",
+    "asset": "/stadiums/marseille-outline-v1.webp",
+    "credits": "/stadiums/credits.html#marseille",
+    "source": "https://commons.wikimedia.org/wiki/File:Stade_V%C3%A9lodrome_en_novembre_2021_(1).jpg",
+    "artist": "Sophie P.",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:mjallby": {
+    "name": "Strandvallen",
+    "asset": "/stadiums/mjallby-outline-v1.webp",
+    "credits": "/stadiums/credits.html#mjallby",
+    "source": "https://commons.wikimedia.org/wiki/File:Strandvallen_entre.JPG",
+    "artist": "Adville",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:monza": {
+    "name": "Stadio Brianteo",
+    "asset": "/stadiums/monza-outline-v1.webp",
+    "credits": "/stadiums/credits.html#monza",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Brianteo_2024_(cropped).jpg",
+    "artist": "Simonemb",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:napoli": {
+    "name": "Stadio Diego Armando Maradona",
+    "asset": "/stadiums/napoli-outline-v1.webp",
+    "credits": "/stadiums/credits.html#napoli",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Maradona_Serie_A.jpg",
+    "artist": "Gaetano Capaldo",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:nec-nijmegen": {
+    "name": "Goffertstadion",
+    "asset": "/stadiums/nec-nijmegen-outline-v1.webp",
+    "credits": "/stadiums/credits.html#nec-nijmegen",
+    "source": "https://commons.wikimedia.org/wiki/File:Goffertstadion_N.E.C._Nijmegen.jpg",
+    "artist": "Roger Veringmeier",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:newcastle-united": {
+    "name": "St James' Park",
+    "asset": "/stadiums/newcastle-united-outline-v1.webp",
+    "credits": "/stadiums/credits.html#newcastle-united",
+    "source": "https://commons.wikimedia.org/wiki/File:Newcastle_st-james-park_stadium.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:nk-celje": {
+    "name": "Stadion Z'dežele",
+    "asset": "/stadiums/nk-celje-outline-v1.webp",
+    "credits": "/stadiums/credits.html#nk-celje",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Z%27de%C5%BEele_in_2026.jpg",
+    "artist": "Nukec",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:nordsj-lland": {
+    "name": "Right to Dream Park",
+    "asset": "/stadiums/nordsj-lland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#nordsj-lland",
+    "source": "https://commons.wikimedia.org/wiki/File:Farum_Farum_Park_1.jpg",
+    "artist": "Валерий Дед",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "club:nottingham-forest": {
+    "name": "City Ground",
+    "asset": "/stadiums/nottingham-forest-outline-v1.webp",
+    "credits": "/stadiums/credits.html#nottingham-forest",
+    "source": "https://commons.wikimedia.org/wiki/File:CityGroundFromAboveTrentBridgeCricketGround.jpg",
+    "artist": "Stadisimo",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:ofi-crete": {
+    "name": "Theodoros Vardinogiannis Stadium",
+    "asset": "/stadiums/ofi-crete-outline-v1.webp",
+    "credits": "/stadiums/credits.html#ofi-crete",
+    "source": "https://commons.wikimedia.org/wiki/File:Ofi_gipedo_zaimakis_2.jpg",
+    "artist": "Panagiotis Zaimakis",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:olympiacos": {
+    "name": "Karaiskakis Stadium",
+    "asset": "/stadiums/olympiacos-outline-v1.webp",
+    "credits": "/stadiums/credits.html#olympiacos",
+    "source": "https://commons.wikimedia.org/wiki/File:Karaiskakis_Stadium_Piraeus_Olympiacos-Arsenal.jpg",
+    "artist": "TodorBozhinov",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:omonia-nicosia": {
+    "name": "GSP Stadium",
+    "asset": "/stadiums/omonia-nicosia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#omonia-nicosia",
+    "source": "https://commons.wikimedia.org/wiki/File:APOEL_-_real_madrid_(6879935408).jpg",
+    "artist": "George M. Groutas from Dali, Nicosia, Cyprus",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "club:osasuna": {
+    "name": "El Sadar Stadium",
+    "asset": "/stadiums/osasuna-outline-v1.webp",
+    "credits": "/stadiums/credits.html#osasuna",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_El_Sadar.jpg",
+    "artist": "Visma17",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:osijek": {
+    "name": "Opus Arena",
+    "asset": "/stadiums/osijek-outline-v1.webp",
+    "credits": "/stadiums/credits.html#osijek",
+    "source": "https://commons.wikimedia.org/wiki/File:Opus_Arena_Osijek_2025.jpg",
+    "artist": "Koreanovsky",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:pafos-fc": {
+    "name": "Stelios Kyriakides Stadium",
+    "asset": "/stadiums/pafos-fc-outline-v1.webp",
+    "credits": "/stadiums/credits.html#pafos-fc",
+    "source": "https://commons.wikimedia.org/wiki/File:Pafos_FC_-_Aris_Limassol_FC_25.02.2022.jpg",
+    "artist": "SArtem14",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:panathinaikos": {
+    "name": "Olympic Stadium (Athens)",
+    "asset": "/stadiums/panathinaikos-outline-v1.webp",
+    "credits": "/stadiums/credits.html#panathinaikos",
+    "source": "https://commons.wikimedia.org/wiki/File:Panathinaikos_Inter_CL2008_09_b.jpg",
+    "artist": "Sportingn",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "club:paris-saint-germain": {
+    "name": "Parc des Princes",
+    "asset": "/stadiums/paris-saint-germain-outline-v1.webp",
+    "credits": "/stadiums/credits.html#paris-saint-germain",
+    "source": "https://commons.wikimedia.org/wiki/File:Parc_des_Princes_depuis_le_parcage_visiteurs_02.jpg",
+    "artist": "Zakarie Faibis",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:parma": {
+    "name": "Stadio Ennio Tardini",
+    "asset": "/stadiums/parma-outline-v1.webp",
+    "credits": "/stadiums/credits.html#parma",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Ennio_Tardini_2026.jpg",
+    "artist": "Brodolò1",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:psv-eindhoven": {
+    "name": "Philips Stadion",
+    "asset": "/stadiums/psv-eindhoven-outline-v1.webp",
+    "credits": "/stadiums/credits.html#psv-eindhoven",
+    "source": "https://commons.wikimedia.org/wiki/File:Psv_stadion_2019.jpg",
+    "artist": "Dutchlad1985",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:racing-santander": {
+    "name": "El Sardinero",
+    "asset": "/stadiums/racing-santander-outline-v1.webp",
+    "credits": "/stadiums/credits.html#racing-santander",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_El_Sardinero.jpg",
+    "artist": "HOLOGUACHU",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:rayo-vallecano": {
+    "name": "Campo de Fútbol de Vallecas",
+    "asset": "/stadiums/rayo-vallecano-outline-v1.webp",
+    "credits": "/stadiums/credits.html#rayo-vallecano",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_de_Vallecas_18_de_febrero_de_2025.jpg",
+    "artist": "4theliberty",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:rb-leipzig": {
+    "name": "Red Bull Arena (Leipzig)",
+    "asset": "/stadiums/rb-leipzig-outline-v1.webp",
+    "credits": "/stadiums/credits.html#rb-leipzig",
+    "source": "https://commons.wikimedia.org/wiki/File:Leipzig_stadium.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:rb-salzburg": {
+    "name": "Red Bull Arena (Salzburg)",
+    "asset": "/stadiums/rb-salzburg-outline-v1.webp",
+    "credits": "/stadiums/credits.html#rb-salzburg",
+    "source": "https://commons.wikimedia.org/wiki/File:FC_RBS_gegen_Celtic_Glasgow_01.jpg",
+    "artist": "Werner100359",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:real-betis": {
+    "name": "La Cartuja",
+    "asset": "/stadiums/real-betis-outline-v1.webp",
+    "credits": "/stadiums/credits.html#real-betis",
+    "source": "https://commons.wikimedia.org/wiki/File:Partido_Betis-Real_Sociedad_estadio_de_la_Cartuja_001.jpg",
+    "artist": "Anual",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:real-madrid": {
+    "name": "Santiago Bernabéu",
+    "asset": "/stadiums/bernabeu-outline-v1.webp",
+    "credits": "/stadiums/credits.html#bernabeu",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_Santiago_Bernab%C3%A9u_39.jpg",
+    "artist": "Luis García ( Zaqarbal )",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:real-sociedad": {
+    "name": "Anoeta Stadium",
+    "asset": "/stadiums/real-sociedad-outline-v1.webp",
+    "credits": "/stadiums/credits.html#real-sociedad",
+    "source": "https://commons.wikimedia.org/wiki/File:Anoeta_estadioa_31,_Donostia,_Gipuzkoa,_Euskal_Herria.jpg",
+    "artist": "Bhgh543bgf",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:riga-fc": {
+    "name": "Skonto Stadium",
+    "asset": "/stadiums/riga-fc-outline-v1.webp",
+    "credits": "/stadiums/credits.html#riga-fc",
+    "source": "https://commons.wikimedia.org/wiki/File:Skonto_stadium_(20.10.2025.).jpg",
+    "artist": "Bendžamins",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:rijeka": {
+    "name": "Stadion Rujevica",
+    "asset": "/stadiums/rijeka-outline-v1.webp",
+    "credits": "/stadiums/credits.html#rijeka",
+    "source": "https://commons.wikimedia.org/wiki/File:Rujevica_stadium,_Rijeka,_Croatia.jpg",
+    "artist": "Драган Јањушевић",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:rudes": {
+    "name": "Gradski stadion Velika Gorica",
+    "asset": "/stadiums/gorica-outline-v1.webp",
+    "credits": "/stadiums/credits.html#gorica",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadium_Radnik_in_Velika_Gorica,_Croatia.png",
+    "artist": "Freemyboi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:sabah-fk": {
+    "name": "Bank Respublika Arena",
+    "asset": "/stadiums/sabah-fk-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sabah-fk",
+    "source": "https://commons.wikimedia.org/wiki/File:Bank_Respubika_Arena.jpg",
+    "artist": "Presidential Press and Information Office",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:sassuolo": {
+    "name": "Mapei Stadium – Città del Tricolore",
+    "asset": "/stadiums/sassuolo-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sassuolo",
+    "source": "https://commons.wikimedia.org/wiki/File:Das_Mapei_Stadium_von_Reggio_nell%60Emilia_(2026).jpg",
+    "artist": "Vincenzo.togni",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:sc-freiburg": {
+    "name": "Europa-Park Stadion",
+    "asset": "/stadiums/sc-freiburg-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sc-freiburg",
+    "source": "https://commons.wikimedia.org/wiki/File:Europa-Park_Stadion_17.05.2025.jpg",
+    "artist": "Kaupson",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "club:sc-paderborn-07": {
+    "name": "Home Deluxe Arena",
+    "asset": "/stadiums/sc-paderborn-07-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sc-paderborn-07",
+    "source": "https://commons.wikimedia.org/wiki/File:Paderborn_paragon_arena_2.jpg",
+    "artist": "Zefram",
+    "license": "CC BY 2.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/de/deed.en"
+  },
+  "club:schalke-04": {
+    "name": "Arena AufSchalke",
+    "asset": "/stadiums/schalke-04-outline-v1.webp",
+    "credits": "/stadiums/credits.html#schalke-04",
+    "source": "https://commons.wikimedia.org/wiki/File:Veltins_Arena_by_Arne_Mueseler.jpg",
+    "artist": "Arne Müseler from Salzburg, AT",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "club:sevilla": {
+    "name": "Ramón Sánchez-Pizjuán Stadium",
+    "asset": "/stadiums/sevilla-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sevilla",
+    "source": "https://commons.wikimedia.org/wiki/File:2022-10-25_1_Estadio_Ram%C3%B3n_S%C3%A1nchez_Pizju%C3%A1n_(Sevilla_FC).jpg",
+    "artist": "Niels98",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:shakhtar-donetsk": {
+    "name": "Arena Lviv",
+    "asset": "/stadiums/shakhtar-donetsk-outline-v1.webp",
+    "credits": "/stadiums/credits.html#shakhtar-donetsk",
+    "source": "https://commons.wikimedia.org/wiki/File:Arena_Lviv_5.jpg",
+    "artist": "On tour",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:sk-sturm-graz": {
+    "name": "Liebenauer Stadium",
+    "asset": "/stadiums/sk-sturm-graz-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sk-sturm-graz",
+    "source": "https://commons.wikimedia.org/wiki/File:UPC-Arena_Front_New.jpg",
+    "artist": "Jacktd (talk)",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "club:slaven-belupo": {
+    "name": "Ivan Kušek Apaš City Stadium",
+    "asset": "/stadiums/slaven-belupo-outline-v1.webp",
+    "credits": "/stadiums/credits.html#slaven-belupo",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Slaven_Belupa_-_panoramio.jpg",
+    "artist": "Frane Lovošević",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:slavia-prague": {
+    "name": "Fortuna Arena",
+    "asset": "/stadiums/slavia-prague-outline-v1.webp",
+    "credits": "/stadiums/credits.html#slavia-prague",
+    "source": "https://commons.wikimedia.org/wiki/File:Praha,_Slavia,_fotbalov%C3%BD_stadion_(2).jpg",
+    "artist": "Jan_Polák",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:slovan-bratislava": {
+    "name": "Tehelné pole",
+    "asset": "/stadiums/slovan-bratislava-outline-v1.webp",
+    "credits": "/stadiums/credits.html#slovan-bratislava",
+    "source": "https://commons.wikimedia.org/wiki/File:Slovakia_bratislava_N%C3%A1rodn%C3%BD_futbalov%C3%BD_%C5%A1tadi%C3%B3n.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:sparta-prague": {
+    "name": "Stadion Letná",
+    "asset": "/stadiums/sparta-prague-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sparta-prague",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Sparty_na_Letn%C3%A9_(srpen_2020).jpg",
+    "artist": "Interhofer",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:sporting-cp": {
+    "name": "Estádio José Alvalade",
+    "asset": "/stadiums/sporting-cp-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sporting-cp",
+    "source": "https://commons.wikimedia.org/wiki/File:Est%C3%A1dio_Jos%C3%A9_Alvalade_antes_do_jogo_Sporting_-_Arouca.jpg",
+    "artist": "Megutim",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:st-truiden": {
+    "name": "Stayen",
+    "asset": "/stadiums/st-truiden-outline-v1.webp",
+    "credits": "/stadiums/credits.html#st-truiden",
+    "source": "https://commons.wikimedia.org/wiki/File:Stvv_stadion_Sint-truiden.jpg",
+    "artist": "Kjen373",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:stade-rennais": {
+    "name": "Roazhon Park",
+    "asset": "/stadiums/stade-rennais-outline-v1.webp",
+    "credits": "/stadiums/credits.html#stade-rennais",
+    "source": "https://commons.wikimedia.org/wiki/File:Roazhon_Park_20190814.jpg",
+    "artist": "EL Loko Foto",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:sunderland": {
+    "name": "Stadium of Light",
+    "asset": "/stadiums/sunderland-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sunderland",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunderland_stadium_of_light.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:sv-elversberg": {
+    "name": "Waldstadion an der Kaiserlinde",
+    "asset": "/stadiums/sv-elversberg-outline-v1.webp",
+    "credits": "/stadiums/credits.html#sv-elversberg",
+    "source": "https://commons.wikimedia.org/wiki/File:UrsapharmArena.jpg",
+    "artist": "MüllerFrankElversberg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:thun": {
+    "name": "Stockhorn Arena",
+    "asset": "/stadiums/thun-outline-v1.webp",
+    "credits": "/stadiums/credits.html#thun",
+    "source": "https://commons.wikimedia.org/wiki/File:Stockhorn_Arena_(FC_Thun)_2.JPG",
+    "artist": "Rectilinium",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:torino": {
+    "name": "Stadio Olimpico Grande Torino",
+    "asset": "/stadiums/torino-outline-v1.webp",
+    "credits": "/stadiums/credits.html#torino",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Olimpico_Torino_2017_cropped.jpg",
+    "artist": "Original photo by Asgaw, cropped by Blackcat",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:torreense": {
+    "name": "Estádio Manuel Marques",
+    "asset": "/stadiums/torreense-outline-v1.webp",
+    "credits": "/stadiums/credits.html#torreense",
+    "source": "https://commons.wikimedia.org/wiki/File:Est%C3%A1dio_Manuel_Marques_-_Torres_Vedras_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_(54952121496).jpg",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:tottenham-hotspur": {
+    "name": "Tottenham Hotspur Stadium",
+    "asset": "/stadiums/tottenham-hotspur-outline-v1.webp",
+    "credits": "/stadiums/credits.html#tottenham-hotspur",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Tottenham_Hotspur_Stadium.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:trabzonspor": {
+    "name": "Şenol Güneş Sports Complex",
+    "asset": "/stadiums/trabzonspor-outline-v1.webp",
+    "credits": "/stadiums/credits.html#trabzonspor",
+    "source": "https://commons.wikimedia.org/wiki/File:Trabzonspor_vs_Karag%C3%BCmr%C3%BCk,_15.04.2022.jpg",
+    "artist": "Myrat",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:tsg-hoffenheim": {
+    "name": "Rhein-Neckar-Arena",
+    "asset": "/stadiums/tsg-hoffenheim-outline-v1.webp",
+    "credits": "/stadiums/credits.html#tsg-hoffenheim",
+    "source": "https://commons.wikimedia.org/wiki/File:PreZero_Arena_wiki.jpg",
+    "artist": "PreZero",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:udinese": {
+    "name": "Stadio Friuli",
+    "asset": "/stadiums/udinese-outline-v1.webp",
+    "credits": "/stadiums/credits.html#udinese",
+    "source": "https://commons.wikimedia.org/wiki/File:DaciArena.jpg",
+    "artist": "Matteo.favi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:union-st-gilloise": {
+    "name": "Joseph Marien Stadium",
+    "asset": "/stadiums/union-st-gilloise-outline-v1.webp",
+    "credits": "/stadiums/credits.html#union-st-gilloise",
+    "source": "https://commons.wikimedia.org/wiki/File:Stade_Joseph_Marien.JPG",
+    "artist": "MM1912",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "club:universitatea-craiova": {
+    "name": "Ion Oblemenco Stadium",
+    "asset": "/stadiums/universitatea-craiova-outline-v1.webp",
+    "credits": "/stadiums/credits.html#universitatea-craiova",
+    "source": "https://commons.wikimedia.org/wiki/File:OblemencoNewStadium.jpg",
+    "artist": "Rowley",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:valencia": {
+    "name": "Mestalla Stadium",
+    "asset": "/stadiums/valencia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#valencia",
+    "source": "https://commons.wikimedia.org/wiki/File:Mestalla_Stadium_Valencia_vs_Villarreal_2026.7.jpg",
+    "artist": "Byxelized",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:varazdin": {
+    "name": "Stadion Varteks",
+    "asset": "/stadiums/varazdin-outline-v1.webp",
+    "credits": "/stadiums/credits.html#varazdin",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadium_Varazdin.png",
+    "artist": "Freemyboi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:venezia": {
+    "name": "Stadio Pier Luigi Penzo",
+    "asset": "/stadiums/venezia-outline-v1.webp",
+    "credits": "/stadiums/credits.html#venezia",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Pierluigi_Penzo.jpg",
+    "artist": "kallerna",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:vfb-stuttgart": {
+    "name": "MHPArena",
+    "asset": "/stadiums/vfb-stuttgart-outline-v1.webp",
+    "credits": "/stadiums/credits.html#vfb-stuttgart",
+    "source": "https://commons.wikimedia.org/wiki/File:Stuttgart_stadium.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "club:viking-fk": {
+    "name": "Viking Stadion",
+    "asset": "/stadiums/viking-fk-outline-v1.webp",
+    "credits": "/stadiums/credits.html#viking-fk",
+    "source": "https://commons.wikimedia.org/wiki/File:Btd_viking_stadion_lr.jpg",
+    "artist": "J. Ådnanes",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5"
+  },
+  "club:viktoria-plzen": {
+    "name": "Doosan Arena",
+    "asset": "/stadiums/viktoria-plzen-outline-v1.webp",
+    "credits": "/stadiums/credits.html#viktoria-plzen",
+    "source": "https://commons.wikimedia.org/wiki/File:Doosan_Arena_Plze%C5%881.jpg",
+    "artist": "Ben Skála",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "club:villarreal": {
+    "name": "Estadio de la Cerámica",
+    "asset": "/stadiums/villarreal-outline-v1.webp",
+    "credits": "/stadiums/credits.html#villarreal",
+    "source": "https://commons.wikimedia.org/wiki/File:ESTADIO3.jpg",
+    "artist": "Frank94Rock",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:werder-bremen": {
+    "name": "Weserstadion",
+    "asset": "/stadiums/werder-bremen-outline-v1.webp",
+    "credits": "/stadiums/credits.html#werder-bremen",
+    "source": "https://commons.wikimedia.org/wiki/File:Germany_bremen_stadium.jpg",
+    "artist": "Arne Müseler",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
   }

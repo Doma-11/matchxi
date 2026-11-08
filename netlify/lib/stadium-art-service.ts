@@ -47,13 +47,13 @@ export async function discoverStadium(venue:string,club:any,fetcher:typeof fetch
  return null;
 }
 
-export function createStadiumArtService({store,fetcher=fetch,render=stadiumOutline,now=Date.now}:{store:any;fetcher?:typeof fetch;render?:(bytes:Uint8Array)=>Promise<Uint8Array>;now?:()=>number}){
+export function createStadiumArtService({store,fetcher=fetch,render=stadiumOutline,now=Date.now,seeds=stadiumSeeds}:{store:any;seeds?:typeof stadiumSeeds;fetcher?:typeof fetch;render?:(bytes:Uint8Array)=>Promise<Uint8Array>;now?:()=>number}){
  const inflight=new Map<string,Promise<any>>();
  return async(request:Request)=>{
   if(request.method!=='GET')return new Response(null,{status:405});
   const q=new URL(request.url).searchParams,club=stadiumClubs.get(q.get('club')||''),venue=cleanVenue(q.get('venue'));
   if(!club)return new Response(null,{status:400});
-  const seed=stadiumSeeds[club.id];
+  const seed=seeds[club.id];
   if(seed)return new Response(null,{status:307,headers:{Location:q.get('credits')==='1'?seed.credits:seed.asset}});
   const key=STADIUM_ART_VERSION+'/'+club.id.replace(':','-');
   try{
