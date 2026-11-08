@@ -149,3 +149,34 @@ Browser geometry/animation and rendered QR verification are pending: the managed
 preview service remains unavailable. Review and obtain the user's deployment
 checkpoint approval before publishing this revision to MatchXI. Touchline,
 schedules, credentials and server catalogue architecture remain unchanged.
+
+
+## 8 November 2026 — Collection and Settings revision (prepared)
+
+The collection now contains its title/subtitle, All / Club / National Teams / Favourites categories, and fixed-size inline tickets. Export/import moved to Settings → Match tickets. The extra dropdowns, eyebrow and summary footer were removed.
+
+Settings offers exactly two global, device-local styles: MatchXI original (default) and Matchday pass. The latter uses a light digital-pass body, competition-colour header and dark transparent-QR panel. Both styles retain the same geometry, 3D flip, favourites, return/delete controls and external-only saved highlights. Preferences use `matchxi-ticket-design-v1`; changing a style never edits ticket records or backups. Backups retain their existing v1 format and merge semantics.
+
+### Official reference research
+
+Reviewed 8 November 2026. A league does not issue a universal design for every club. The alternative is an independently drawn keepsake inspired by digital passes, not an official replica or admission credential. No reference image is shipped. Do not invent 2026/27 artwork for previous international tournaments.
+
+| Coverage | Official reference | Evidence and limit |
+| --- | --- | --- |
+| Premier League | [Arsenal Ticket Hub](https://help.arsenal.com/support/solutions/articles/101000595295-ticket-hub) | Explicit 2026/27 digital pass; current guide linked. Club-specific, not league-wide artwork. |
+| Bundesliga | [FC Bayern app tickets](https://fcbayern.com/en/news/ticketing/2026/load-your-tickets-in-the-fcb-app-now) | Explicit 2026/27 article and Wallet-Visual reference inspected: light body, red header, bold fixture and structured details. Used as visual inspiration, without fabricated seat fields. |
+| LaLiga | [Real Madrid–Celta ticket page](https://www.realmadrid.com/es-ES/futbol/partidos/entradas/real-madrid-celta-de-vigo-21-11-2026) | Current fixture/mobile delivery; exact ticket artwork not independently verified. |
+| Serie A | [Inter 2026/27 season tickets](https://www.inter.it/it/biglietti/abbonamenti) | Current season and digital seat pass context; exact issued ticket artwork not independently verified. |
+| HNL | [Hajduk–Gorica tickets](https://hajduk.hr/vijest/u-prodaji-ulaznice-za-utakmicu-hajduk--gorica/18633) | Current club sale/reference; exact ticket artwork not independently verified. |
+| Champions League / Europa League / Conference League / Nations League | [UEFA mobile ticket guide](https://support.tickets-mobiletickets.uefa.com/hc/en-us/articles/6106335375388-How-do-mobile-tickets-work) | Common mobile-ticket delivery, not evidence of one exact 2026/27 design for all competitions. Downloaded illustration was a registration screen, not a ticket face, and was not used as ticket artwork. |
+| World Cup | [FIFA World Cup 2026 mobile ticket](https://gpcustomersupportfwc2026.tickets.fifa.com/hc/en-gb/articles/30203220468765-3-What-is-a-FIFA-World-Cup-2026-mobile-ticket) | Edition-specific mobile ticket reference. No 2026/27 World Cup edition invented. |
+| EURO | [UEFA EURO 2024 summary](https://editorial.uefa.com/resources/0290-1ba7a17c0ca4-877b61cc8359-1000/uefa_euro_2024_tournament-summary_v17.pdf) | Historical edition; no claim to a current-season EURO ticket face. |
+| Qualifiers / national friendlies | [HNS ticket app](https://hns.family/vijesti/29136/aplikacija-hns-ulaznice-dostupna-za-preuzimanje/) | Official mobile-ticket system; exact current fixture artwork not independently verified. |
+
+All supported competition IDs use their existing app identity/palette, including fallback identity for unknown competitions. There are exactly two user-selectable designs, not one invented official template per league.
+
+### Deployment status
+
+Approved inline redesign published: commit `523174989327af16b60a9467f529b5f3e11205b0`, Netlify deploy `6af02ac521644617ea129606`, site `7b761624-8fec-4cca-b485-89684fa3f6b4`. Scoped deploy API returned `ready`, matching commit and empty function schedules. GitHub validation run `42460447020` succeeded. The collection/Settings follow-up described above remains on its review branch pending separate deployment approval.
+
+Local validation: 172 Node tests passed, TypeScript and isolation checks passed. Production Vite build and Netlify function bundling passed (9 functions). Existing large-chunk warning remains. Managed local preview is unavailable in this workspace; this follow-up has not been visually verified in a browser. This limitation must remain explicit until browser QA is possible.

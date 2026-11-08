@@ -61,3 +61,20 @@
 @media(max-width:650px){.ticket-collection{padding:24px 12px 35px}.ticket-collection-heading{display:block;margin-bottom:22px}.ticket-collection-heading h1{font-size:31px}.ticket-collection-heading p{font-size:13px}.ticket-collection-tools{margin-top:22px;align-items:flex-start;gap:10px}.ticket-collection-tools button{padding:9px 12px;font-size:11px}.ticket-kind-filters{gap:6px;margin-bottom:16px}.ticket-kind-filters button{font-size:11px;padding:8px 14px}.ticket-detail-filters{gap:6px;flex-wrap:wrap;margin-bottom:20px}.ticket-detail-filters select{padding:9px 6px;font-size:11px}.ticket-detail-filters label{min-width:85px}.ticket-detail-filters>button{font-size:10px}.ticket-grid{grid-template-columns:1fr;gap:18px}.ticket-collection-item{--ticket-height:198px}.ticket-main{padding:14px 16px 10px}.ticket-heading{font-size:8px;grid-template-columns:28px 1fr}.ticket-heading>img{width:28px;height:28px}.ticket-heading time{font-size:8px}.ticket-teams{gap:5px}.ticket-teams img{width:46px;height:48px}.ticket-teams strong{font-size:11px}.ticket-score b{font-size:31px}.ticket-score small{font-size:6px;max-width:65px}.ticket-foot{gap:4px}.ticket-foot>button{font-size:8px;gap:3px;min-height:29px}.ticket-foot svg{width:12px}.ticket-stub{padding:25px 5px 9px}.ticket-qr small{font-size:7px}.ticket-back{padding:9px 9px 9px 12px;gap:8px}.ticket-youtube-link{font-size:8px;padding:6px 3px}.ticket-back-round{font-size:7px}.ticket-back-round strong{font-size:26px}.ticket-back-flip{font-size:7px;gap:3px}.ticket-back-details{gap:10px}.ticket-highlight-preview>strong{font-size:8px}.ticket-collection-summary{padding:17px 13px;gap:10px}.ticket-collection-summary strong{font-size:17px}.ticket-collection-summary span{font-size:10px}.watched-ticket-control{padding:12px;gap:10px}.watched-ticket-control strong{font-size:13px}.watched-ticket-control small{font-size:10px}.watched-ticket-control>button{padding-left:31px;font-size:11px}}
 @media(prefers-reduced-motion:reduce){.ticket-flip-inner,.ticket-highlight-preview>img{transition:none}}
 html[data-theme=light] .ticket-collection{color:#17213e}html[data-theme=light] .ticket-collection-heading p,html[data-theme=light] .ticket-collection-tools>span{color:#53617a}html[data-theme=light] .ticket-detail-filters select{background:white;color:#17213e}html[data-theme=light] .ticket-detail-filters label{color:#53617a}html[data-theme=light] .ticket-collection-summary{background:#e5eaf7;color:#17213e}html[data-theme=light] .ticket-collection-summary span{color:#53617a}
+
+/* Digital-pass option shares the original stage geometry and dark QR panel. */
+.ticket-design-matchday .virtual-ticket{border-color:#dbe4f4;border-radius:10px;background:linear-gradient(var(--ticket-brand) 0 8px,#f0f3f8 8px);color:#15223b;box-shadow:0 10px 24px #02051340}
+.ticket-design-matchday .virtual-ticket:before,.ticket-design-matchday .virtual-ticket:after{display:none}
+.ticket-design-matchday .ticket-main{padding-top:17px}
+.ticket-design-matchday .ticket-heading{grid-template-columns:30px minmax(0,1fr)}
+.ticket-design-matchday .ticket-heading>img{grid-row:span 3}
+.ticket-design-matchday .ticket-pass-label{font-size:6px;letter-spacing:.13em;color:#52627a;grid-column:2}
+.ticket-design-matchday .ticket-heading time{color:#42516a}
+.ticket-design-matchday .ticket-score b{text-shadow:none}
+.ticket-design-matchday .ticket-score small,.ticket-design-matchday .ticket-watched{color:#42516a}
+.ticket-design-matchday .ticket-foot{border-color:#15223b30}
+.ticket-design-matchday .ticket-foot>button{color:#253858}
+.ticket-design-matchday .ticket-foot .ticket-remove{color:#8e263b}
+.ticket-design-matchday .ticket-crest-fallback{color:#253858;border-color:#15223b60;background:#15223b0c}
+.ticket-design-matchday .ticket-stub{background:#051027;border-left-color:#9aa9c2}
+.ticket-design-matchday .ticket-back{background:linear-gradient(var(--ticket-brand) 0 8px,#0a1428 8px);color:#fff}
