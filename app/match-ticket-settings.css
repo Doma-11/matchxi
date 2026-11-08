@@ -11,3 +11,7 @@
 /* Preview uses the same irregular image silhouette as the saved ticket. */
 .preview-matchday{border:0;border-radius:0;background:#eee1c8 url('/themes/matchday-ticket-skin-v2.webp') center/100% 100%;-webkit-mask:url('/themes/matchday-ticket-skin-v2.webp') center/100% 100% no-repeat;mask:url('/themes/matchday-ticket-skin-v2.webp') center/100% 100% no-repeat;box-shadow:none}
 .preview-matchday em{left:78.5%;border-left:0;background:#14263e url('/themes/matchday-ticket-skin-v2.webp') right/435% 100%;background-blend-mode:multiply}
+.ticket-design-note a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.preview-matchday{--printed-logo-filter:saturate(.68) sepia(.22) contrast(.94) brightness(.94)}
+.preview-matchday>div{filter:var(--printed-logo-filter);mix-blend-mode:multiply}
+.preview-matchday>span{color:#34404c}
