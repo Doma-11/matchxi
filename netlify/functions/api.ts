@@ -72,4 +72,4 @@ export default async function(request:Request){
  if(isReport)response.headers.set('Cache-Control','private, no-store');
  return response;
 }
-export const config:Config={path:['/api/*','/.netlify/functions/api','/.netlify/functions/api/*'],excludedPath:['/api/auth','/api/portrait-image','/api/player-portraits'],rateLimit:{windowLimit:120,windowSize:60,aggregateBy:['ip','domain']}};
+export const config:Config={path:['/api/*','/.netlify/functions/api','/.netlify/functions/api/*'],excludedPath:['/api/auth','/api/portrait-image','/api/player-portraits','/api/stadium-art'],rateLimit:{windowLimit:120,windowSize:60,aggregateBy:['ip','domain']}};

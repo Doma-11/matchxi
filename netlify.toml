@@ -12,6 +12,9 @@ node_bundler = "esbuild"
 [functions."portrait-image"]
 external_node_modules = ["sharp"]
 included_files = ["node_modules/@img/sharp-linux-x64/**", "node_modules/@img/sharp-libvips-linux-x64/**"]
+[functions."stadium-art"]
+external_node_modules = ["sharp"]
+included_files = ["node_modules/@img/sharp-linux-x64/**", "node_modules/@img/sharp-libvips-linux-x64/**"]
 [[redirects]]
 from = "/*"
 to = "/index.html"

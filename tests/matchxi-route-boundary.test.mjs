@@ -17,7 +17,7 @@ test('catalogue mutation handler remains unexposed until separately secured',()=
  assert.doesNotMatch(api,/['"]catalogue\/refresh['"]\s*:/);
 });
 test('private auth and portrait functions are not swallowed by generic API routing',()=>{
- assert.match(api,/excludedPath:\[['"]\/api\/auth['"],['"]\/api\/portrait-image['"],['"]\/api\/player-portraits['"]\]/);
+ assert.match(api,/excludedPath:\[['"]\/api\/auth['"],['"]\/api\/portrait-image['"],['"]\/api\/player-portraits['"],['"]\/api\/stadium-art['"]\]/);
  assert.match(config,/directory = "netlify\/functions"/);
 });
 test('Netlify build publishes MatchXI frontend and not the original production site',()=>{

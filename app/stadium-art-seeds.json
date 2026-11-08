@@ -1,0 +1,20 @@
+{
+  "club:real-madrid": {
+    "name": "Santiago Bernabéu",
+    "asset": "/stadiums/bernabeu-outline-v1.webp",
+    "credits": "/stadiums/credits.html#bernabeu",
+    "source": "https://commons.wikimedia.org/wiki/File:Estadio_Santiago_Bernab%C3%A9u_39.jpg",
+    "artist": "Luis García ( Zaqarbal )",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "club:liverpool": {
+    "name": "Anfield",
+    "asset": "/stadiums/anfield-outline-v1.webp",
+    "credits": "/stadiums/credits.html#anfield",
+    "source": "https://commons.wikimedia.org/wiki/File:Anfield_Main_Stand_exterior.jpg",
+    "artist": "Original photo by: Rodhullandemu \n \nCropped & edited by: TurboGUY",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

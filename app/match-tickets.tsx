@@ -5,6 +5,7 @@ import {streamCompetition} from './stream-competition';
 import {TICKET_KEY,TICKET_EVENT,ticketId,readTickets,saveMatchTicket,removeMatchTicket,favouriteTicket,filterTickets,type MatchTicket} from './match-tickets-store';
 import './match-tickets.css';
 import './matchday-keepsake.css';
+import {homeStadiumArt,STADIUMLESS_CUPS} from './stadium-art';
 import {useTicketDesign,type TicketDesign} from './match-ticket-design';
 
 export function useTickets(){
@@ -20,15 +21,19 @@ export function WatchedTicketControl({game,videos=[],onCollection}:any){
 const dateLabel=(date:string)=>new Date(date).toLocaleDateString(undefined,{day:'2-digit',month:'short',year:'numeric'});
 function palette(ticket:MatchTicket):CSSProperties{const theme=ticket.national&&['fifa.friendly','fifa.worldq.uefa'].includes(ticket.game.league)?{brand:'#a11232',accent:'#f8c5a0',surface:'#340b21'}:streamCompetition(ticket.game.league,true);return {'--ticket-brand':theme.brand,'--ticket-accent':theme.accent,'--ticket-surface':theme.surface} as CSSProperties;}
 function Badge({team}:any){const [failed,setFailed]=useState(false);return team.logo&&!failed?<img src={team.logo} alt="" onError={()=>setFailed(true)}/>:<span className="ticket-crest-fallback">{team.name.slice(0,2)}</span>}
-const CUP_PASSES=new Set(['uefa.champions','uefa.europa','uefa.europa.conf']);
-export function ticketPassArtwork(league:string){return CUP_PASSES.has(league)?'competition':'stadium'}
+export function ticketPassArtwork(league:string){return STADIUMLESS_CUPS.has(league)?'competition':'stadium'}
 export function ticketReference(ticket:MatchTicket){
  const codes:Record<string,string>={'eng.1':'PL','esp.1':'LL','ita.1':'SA','ger.1':'BL','cro.1':'HNL','uefa.champions':'UCL','uefa.europa':'UEL','uefa.europa.conf':'UECL','uefa.nations':'UNL','fifa.world':'WC','uefa.euro':'EURO','fifa.friendly':'INT','fifa.worldq.uefa':'WCQ'};
  return `${codes[ticket.game.league]||'MXI'}-${ticket.game.id}`;
 }
+export function HomeStadiumArt({ticket}:{ticket:MatchTicket}){
+ const art=homeStadiumArt(ticket),[failed,setFailed]=useState('');
+ if(!art||failed===art.src)return null;
+ return <div className="ticket-home-stadium-art"><img src={art.src} alt="" width={512} height={340} loading="lazy" decoding="async" fetchPriority="low" onError={()=>setFailed(art.src)}/><a href={art.credits} target="_blank" rel="noopener noreferrer" aria-label={'Stadium art source and credit: '+art.name}>Stadium art</a></div>;
+}
 export function PassFront({ticket,score,video}:any){
  const g=ticket.game;
- return <><div className="ticket-main ticket-pass-main">
+ return <><HomeStadiumArt ticket={ticket}/><div className="ticket-main ticket-pass-main">
   <header className="ticket-pass-heading"><div className="ticket-pass-competition">{ticket.competition.logo?<img src={ticket.competition.logo} alt={ticket.competition.name}/>:<strong>{ticket.competition.name}</strong>}</div><div className="ticket-pass-masthead"><span>MATCHDAY KEEPSAKE</span><b>{g.completed?'FULL TIME':'SCORE PENDING'}</b></div></header>
   <time className="ticket-pass-date" dateTime={g.date}>{new Date(g.date).toLocaleDateString('en-GB',{weekday:'short',day:'2-digit',month:'short',year:'numeric'})}</time>
   <div className="ticket-teams ticket-pass-teams"><div><Badge team={g.home}/><strong>{g.home.name}</strong></div><div className="ticket-score"><b>{score}</b></div><div><Badge team={g.away}/><strong>{g.away.name}</strong></div></div>

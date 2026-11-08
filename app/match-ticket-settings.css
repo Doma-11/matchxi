@@ -2,3 +2,9 @@
 
 /* The saved Matchday pass choice previews its actual aged-paper treatment. */
 .preview-matchday{font-family:Georgia,'Times New Roman',serif;color:#162a42;border-color:#bca67f;border-radius:11px;background:#eee2c8 url('/themes/matchday-keepsake-paper-v1.webp') center/cover;box-shadow:inset 0 0 15px #533b2220}.preview-matchday>span{margin-left:20%;font-size:8px}.preview-matchday>div{margin-left:20%}.preview-matchday>small{margin-left:20%}.preview-matchday em{background:#14263e url('/themes/matchday-keepsake-paper-v1.webp') right/350% 100%;background-blend-mode:multiply;border-left:2px dotted #ebd7b4}
+
+/* Let narrow previews wrap inside their tracks rather than widening the page. */
+.settings-page .ticket-settings,.settings-page #settings-panel-tickets,.ticket-design-options,.ticket-design-option,.ticket-style-preview{min-width:0;max-width:100%;width:100%;box-sizing:border-box}
+.ticket-style-preview>div,.ticket-style-preview b{min-width:0;flex-wrap:wrap;gap:6px}
+.ticket-style-preview small{overflow-wrap:anywhere}
+.ticket-settings .ticket-backup-actions>button{min-width:0;max-width:100%;white-space:normal}

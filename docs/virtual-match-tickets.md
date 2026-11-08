@@ -236,3 +236,43 @@ Prompt: wide warm ivory distressed cotton-paper texture, fine navy copperplate
 engraving of a generic stadium confined to the lower-left quarter, subtle edge
 guilloche, clear center/right, no text, marks, logos, QR, border or ticket mockup.
 No actual stadium identity is claimed by the decorative engraving.
+
+## Home stadium outlines and horizontal overflow — 8 November 2026
+
+Club Matchday passes now use real architectural edge linework from stadium
+photographs. Real Madrid's Bernabéu and Liverpool's Anfield ship as transparent
+WebP assets (40,166 and 25,194 bytes). Both use the same production Sobel-edge
+renderer as the on-demand service; their source photographs, authors, licences
+and adaptation notices are linked from `public/stadiums/credits.html`.
+
+Other registered home clubs request `/api/stadium-art` only through a lazy image
+on a relevant ticket. The supplied venue resolves through the Wikipedia summary
+and Wikimedia Commons image-info APIs. The stadium must be described as a home
+ground of that club and the source must have supported reuse rights. A neutral
+venue or an away appearance does not qualify. National tickets and the three
+UEFA club-cup passes do not invoke this club-ground service.
+
+Successful art is resized to at most 512 × 340, converted to transparent navy
+edges, compressed to WebP and saved under `outline-v1/<canonical-home-club>` in
+the independent `matchxi-stadium-art` store. Future fixtures reuse that club's
+saved artwork regardless of venue spelling. Source photos are not retained.
+There is no bulk fetch, schedule, periodic refresh, per-match duplicate image or
+new credential. Successful objects persist across deployments until the artwork
+version is intentionally changed. In-flight requests coalesce per function
+instance; concurrent cold instances can both perform first-time source work,
+with a conditional image write protecting the already saved image.
+
+Unavailable sources have a retry timestamp (one day for an unverified source,
+one hour for a transient error). A failed image leaves plain paper, without
+misrepresenting the previous generic stadium as the home club's ground. The
+image and credit endpoint use the existing owner/service authorization boundary;
+credits link to the original photograph and licence. Unit tests use an in-memory
+store and never seed, clear or replace production objects.
+
+The responsive fix removes the content-box/padding/aspect-ratio combination from
+the grid item. The face stage has its own aspect ratio, and actions occupy an
+actual separate grid row. Track minimums, score text, metadata, masthead and
+Settings previews now shrink/wrap inside the available width. Horizontal clipping
+is scoped to the ticket collection to contain 3D projection; the page is not
+made globally unscrollable to conceal layout issues. Both faces share the same
+stage, and manual/entry flips retain their existing behavior.
