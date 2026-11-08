@@ -4,6 +4,7 @@ import {resolveTeamIdentity,normalize} from './team-identity';
 import {isNationalCompetition} from './football-model';
 export const STADIUMLESS_CUPS=new Set(['uefa.champions','uefa.europa','uefa.europa.conf']);
 export const STADIUM_ART_VERSION='outline-v1';
+export const STADIUM_DISCOVERY_VERSION='2';
 export const stadiumSeeds=seeds as Record<string,{name:string;asset:string;credits:string;source:string;artist:string;license:string;licenseUrl:string}>;
 export const stadiumClubs=new Map(identities.filter(t=>t.kind==='club').map(t=>[t.id,t]));
 export function cleanVenue(value:unknown){return typeof value==='string'&&value.length<=140&&!/[<>\x00-\x1f]/.test(value)?value.trim():''}
@@ -14,7 +15,7 @@ export function homeStadiumArt(ticket:any):{src:string;credits:string;name:strin
  const club=resolveTeamIdentity(g.home.name,scope)||resolveTeamIdentity(g.home.name.replace(/\s+(?:F\.?C\.?|C\.?F\.?)$/i,''),scope);if(!club)return null;
  const seed=stadiumSeeds[club.id];if(seed)return {src:seed.asset,credits:seed.credits,name:seed.name};
  const venue=cleanVenue(g.venue);if(!venue)return null;
- const params=new URLSearchParams({club:club.id,venue});
+ const params=new URLSearchParams({club:club.id,venue,v:STADIUM_DISCOVERY_VERSION});
  return {src:'/api/stadium-art?'+params,credits:'/api/stadium-art?'+params+'&credits=1',name:venue};
 }
 /** A stadium article must describe this club as a home tenant, not just mention it. */

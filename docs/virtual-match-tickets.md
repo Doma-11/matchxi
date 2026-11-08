@@ -260,7 +260,7 @@ There is no bulk fetch, schedule, periodic refresh, per-match duplicate image or
 new credential. Successful objects persist across deployments until the artwork
 version is intentionally changed. In-flight requests coalesce per function
 instance; concurrent cold instances can both perform first-time source work,
-with a conditional image write protecting the already saved image.
+with a conditional write keeping each saved image and its attribution metadata together.
 
 Unavailable sources have a retry timestamp (one day for an unverified source,
 one hour for a transient error). A failed image leaves plain paper, without
@@ -276,3 +276,11 @@ Settings previews now shrink/wrap inside the available width. Horizontal clippin
 is scoped to the ticket collection to contain 3D projection; the page is not
 made globally unscrollable to conceal layout issues. Both faces share the same
 stage, and manual/entry flips retain their existing behavior.
+
+Live verification found that Emirates Stadium's article currently leads with a
+sponsor logo rather than a stadium photograph. Discovery now rejects logo/map
+file names and, when the lead image is unsuitable, searches Commons for up to
+three reusable photographic records of the already verified stadium. Only one
+eligible photo is downloaded. Versioned discovery misses let this fix retry a
+previously rejected lookup without invalidating successful saved club artwork.
+All redirects remain bounded and revalidated against the same approved hosts.

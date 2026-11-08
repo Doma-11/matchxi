@@ -8,7 +8,7 @@ await build({stdin:{contents:"export * from './netlify/lib/stadium-art-service';
 const {homeStadiumArt,createStadiumArtService,safeStadiumUrl,isClubHome,stadiumOutline}=await import('../qa-temp/stadium-art-under-test.mjs');
 const game=(home='Arsenal',venue='Emirates Stadium',league='eng.1')=>({game:{home:{name:home},away:{name:'Liverpool'},venue,league}});
 const request=(suffix='')=>new Request('https://matchxi.netlify.app/api/stadium-art?club=club%3Aarsenal&venue=Emirates+Stadium'+suffix);
-function store(){const data=new Map();return {data,async get(k){return data.get(k)||null},async set(k,v){data.set(k,v)},async setJSON(k,v){data.set(k,v)}}}
+function store(){const data=new Map(),metadata=new Map();return {data,async get(k){return data.get(k)||null},async getWithMetadata(k){return data.has(k)?{data:data.get(k),metadata:metadata.get(k)||{}}:null},async set(k,v,opts={}){if(opts.onlyIfNew&&data.has(k))return {modified:false};data.set(k,v);metadata.set(k,opts.metadata||{});return {modified:true}},async setJSON(k,v){data.set(k,v)}}}
 const summary={title:'Emirates Stadium',description:'Football stadium in London, England',extract:'The Emirates Stadium is a football stadium in London. It has been the home of Arsenal since 2006.',originalimage:{source:'https://upload.wikimedia.org/wikipedia/commons/a/ab/Emirates.jpg'}};
 const photoInfo={query:{pages:{1:{imageinfo:[{thumburl:'https://upload.wikimedia.org/wikipedia/commons/a/ab/Emirates.jpg',descriptionurl:'https://commons.wikimedia.org/wiki/File:Emirates.jpg',extmetadata:{LicenseShortName:{value:'CC BY-SA 4.0'},LicenseUrl:{value:'https://creativecommons.org/licenses/by-sa/4.0/'},Artist:{value:'<b>Photographer</b>'}}}]}}}};
 function source(){const calls=[];return {calls,async fetch(url){calls.push(String(url));if(String(url).includes('/page/summary/'))return Response.json(summary);if(String(url).includes('/w/api.php'))return Response.json(photoInfo);return new Response(new Uint8Array([1,2,3]),{headers:{'Content-Type':'image/jpeg'}})}}}
@@ -56,4 +56,27 @@ test('photo edges produce bounded transparent WebP artwork with real geometric d
  const photo=await sharp({create:{width:256,height:160,channels:3,background:'#fff'}}).composite([{input:Buffer.from('<svg width="256" height="160"><path d="M20 130V70L128 30L236 70V130Z" fill="none" stroke="black" stroke-width="5"/></svg>')}]).png().toBuffer();
  const output=await stadiumOutline(photo),meta=await sharp(output).metadata();assert.equal(meta.format,'webp');assert.equal(meta.hasAlpha,true);assert.ok(meta.width<=512&&meta.height<=340);assert.ok(output.length<200000);
  const {data,info}=await sharp(output).raw().toBuffer({resolveWithObject:true});let edges=0,clear=0;for(let i=3;i<data.length;i+=info.channels){if(data[i]>100)edges++;if(data[i]===0)clear++}assert.ok(edges>100);assert.ok(clear>edges);
+});
+
+test('a stadium-page logo falls back to licensed photos of the verified stadium',async()=>{
+ const calls=[];const photo=structuredClone(photoInfo);photo.query.pages[1].title='File:Emirates Stadium photograph.jpg';
+ const handle=createStadiumArtService({store:store(),render:async()=>new Uint8Array([82,73,70,70]),fetcher:async url=>{
+  calls.push(String(url));
+  if(String(url).includes('/page/summary/'))return Response.json({...summary,originalimage:{source:'https://upload.wikimedia.org/wikipedia/en/f/f0/Emirates_Stadium_logo.svg'}});
+  if(String(url).includes('/w/api.php')){assert.match(String(url),/generator=search/);assert.match(decodeURIComponent(String(url)),/intitle:"Emirates\+Stadium"/);return Response.json(photo)}
+  return new Response(new Uint8Array([1,2,3]),{headers:{'Content-Type':'image/jpeg'}});
+ }});
+ assert.equal((await handle(request())).status,200);assert.equal(calls.length,3);
+});
+test('source redirects remain within the approved public Wikimedia hosts',async()=>{
+ const handle=createStadiumArtService({store:store(),fetcher:async()=>new Response(null,{status:302,headers:{Location:'http://169.254.169.254/private'}})});
+ assert.equal((await handle(request())).status,404);
+});
+
+test('competing cold instances keep the winning image and its attribution together',async()=>{
+ const s=store(),remote=source();
+ const a=createStadiumArtService({store:s,fetcher:remote.fetch,render:async()=>new Uint8Array([1])});
+ const b=createStadiumArtService({store:s,fetcher:remote.fetch,render:async()=>new Uint8Array([2])});
+ const [x,y]=await Promise.all([a(request()),b(request())]);assert.equal(x.status,200);assert.equal(y.status,200);assert.deepEqual(new Uint8Array(await x.arrayBuffer()),new Uint8Array(await y.arrayBuffer()));
+ const credit=await a(request('&credits=1'));assert.match(await credit.text(),/Photographer/);
 });
