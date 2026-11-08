@@ -5,7 +5,7 @@ import {mkdir,readFile,access} from 'node:fs/promises';
 import sharp from 'sharp';
 await mkdir('qa-temp',{recursive:true});
 await build({stdin:{contents:"export * from './netlify/lib/stadium-art-service';export * from './netlify/lib/stadium-outline';export * from './app/stadium-art';",resolveDir:process.cwd(),loader:'ts'},bundle:true,platform:'node',format:'esm',packages:'external',outfile:'qa-temp/stadium-art-under-test.mjs'});
-const {homeStadiumArt,createStadiumArtService,safeStadiumUrl,isClubHome,stadiumOutline}=await import('../qa-temp/stadium-art-under-test.mjs');
+const {homeStadiumArt,createStadiumArtService,safeStadiumUrl,isClubHome,stadiumOutline,stadiumSeeds,nationalStadiumSeeds,croatiaVenueStadium}=await import('../qa-temp/stadium-art-under-test.mjs');
 const game=(home='Arsenal',venue='Emirates Stadium',league='eng.1')=>({game:{home:{name:home},away:{name:'Liverpool'},venue,league}});
 const request=(suffix='')=>new Request('https://matchxi.netlify.app/api/stadium-art?club=club%3Aarsenal&venue=Emirates+Stadium'+suffix);
 function store(){const data=new Map(),metadata=new Map();return {data,async get(k){return data.get(k)||null},async getWithMetadata(k){return data.has(k)?{data:data.get(k),metadata:metadata.get(k)||{}}:null},async set(k,v,opts={}){if(opts.onlyIfNew&&data.has(k))return {modified:false};data.set(k,v);metadata.set(k,opts.metadata||{});return {modified:true}},async setJSON(k,v){data.set(k,v)}}}
@@ -15,14 +15,14 @@ function source(){const calls=[];return {calls,async fetch(url){calls.push(Strin
 
 test('home identity selects one reusable seed asset, across matches and provider aliases',async()=>{
  const real=homeStadiumArt(game('Real Madrid','Santiago Bernabéu','esp.1')),liverpool=homeStadiumArt(game('Liverpool','Anfield'));
- assert.match(real.src,/bernabeu-outline-v1.webp$/);assert.match(liverpool.src,/anfield-outline-v1.webp$/);
+ assert.match(real.src,/bernabeu-exterior-v2.webp$/);assert.match(liverpool.src,/anfield-exterior-v2.webp$/);
  assert.deepEqual(homeStadiumArt(game('Real Madrid','Different spelling','esp.1')),real);
  assert.deepEqual(homeStadiumArt(game('Liverpool FC','Anfield')),liverpool);
- for(const art of [real,liverpool]){await access('public'+art.src);assert.ok((await readFile('public'+art.src)).length<45000)}
+ for(const art of [real,liverpool]){await access('public'+art.src);assert.ok((await readFile('public'+art.src)).length<60000)}
 });
 test('stadium requests are lazy declarations; unknown identities and the three club cups make no requests',()=>{
  const original=globalThis.fetch;globalThis.fetch=()=>{throw Error('Resolver must never fetch')};
- try{assert.match(homeStadiumArt(game()).src,/^\/stadiums\/arsenal-outline-v1.webp$/);assert.deepEqual(homeStadiumArt(game('Arsenal',null)),homeStadiumArt(game()));assert.equal(homeStadiumArt(game('Unregistered club')),null);for(const league of ['uefa.champions','uefa.europa','uefa.europa.conf','uefa.nations'])assert.equal(homeStadiumArt(game('Liverpool','Anfield',league)),null)}finally{globalThis.fetch=original}
+ try{assert.match(homeStadiumArt(game()).src,/^\/stadiums\/emirates-exterior-v2.webp$/);assert.deepEqual(homeStadiumArt(game('Arsenal',null)),homeStadiumArt(game()));assert.equal(homeStadiumArt(game('Unregistered club')),null);for(const league of ['uefa.champions','uefa.europa','uefa.europa.conf','uefa.nations'])assert.equal(homeStadiumArt(game('Liverpool','Anfield',league)),null)}finally{globalThis.fetch=original}
 });
 test('only a stadium described as the home of the club qualifies; an away visit is insufficient',()=>{
  const club={name:'Arsenal',aliases:['ARS','Arsenal FC']};assert.equal(isClubHome(summary,club),true);assert.equal(isClubHome({...summary,extract:'Liverpool played Arsenal here in a friendly.'},club),false);assert.equal(isClubHome({...summary,description:'Football club',extract:'Arsenal play home games at a stadium.'},club),false);
@@ -84,7 +84,7 @@ test('competing cold instances keep the winning image and its attribution togeth
  test('every registered club has a local compact stadium, even without fixture venue metadata',async()=>{
  const identities=JSON.parse(await readFile('app/team-identities.json','utf8')),catalog=JSON.parse(await readFile('app/stadium-art-seeds.json','utf8'));
  const clubs=identities.filter(t=>t.kind==='club');assert.equal(clubs.length,163);assert.deepEqual(Object.keys(catalog).sort(),clubs.map(t=>t.id).sort());
- for(const club of clubs){const record=catalog[club.id],ticket=game(club.name,null,'eng.1');const art=homeStadiumArt(ticket);assert.ok(art,club.name);assert.equal(art.src,record.asset,club.name);assert.ok(record.artist&&record.license&&record.source&&record.credits);const bytes=await readFile('public'+record.asset),meta=await sharp(bytes).metadata();assert.equal(meta.format,'webp');assert.ok(meta.hasAlpha);assert.ok(bytes.length<60000,club.name+' image must stay compact');}
+ for(const club of clubs){const record=stadiumSeeds[club.id],ticket=game(club.name,null,'eng.1');const art=homeStadiumArt(ticket);assert.ok(art,club.name);assert.equal(art.src,record.asset,club.name);assert.ok(record.artist&&record.license&&record.source&&record.credits);const bytes=await readFile('public'+record.asset),meta=await sharp(bytes).metadata();assert.equal(meta.format,'webp');assert.ok(meta.hasAlpha);assert.ok(bytes.length<60000,club.name+' image must stay compact');}
  assert.equal(catalog['club:ac-milan'].asset,catalog['club:internazionale'].asset);assert.equal(catalog['club:rudes'].asset,catalog['club:gorica'].asset);
  });
 
@@ -93,7 +93,7 @@ test('every national team has one local home ground across tournaments and chang
  assert.equal(teams.length,86);assert.deepEqual(Object.keys(catalog).sort(),teams.map(t=>t.id).sort());
  const fetch=globalThis.fetch;globalThis.fetch=()=>{throw Error('National tickets must never fetch their ground mapping')};
  try{for(const team of teams){
-  const record=catalog[team.id],ticket=game(team.name,null,'fifa.world'),art=homeStadiumArt(ticket);assert.ok(art,team.name);assert.equal(art.src,record.asset);assert.deepEqual(homeStadiumArt({...ticket,national:true,game:{...ticket.game,venue:'A different neutral stadium',league:'fifa.friendly'}}),art);
+  const record=nationalStadiumSeeds[team.id],ticket=game(team.name,null,'fifa.world'),art=homeStadiumArt(ticket);assert.ok(art,team.name);assert.equal(art.src,record.asset);assert.deepEqual(homeStadiumArt({...ticket,national:true,game:{...ticket.game,venue:'A different neutral stadium',league:'fifa.friendly'}}),art);
   assert.ok(record.artist&&record.licenseUrl&&record.source&&record.credits);const bytes=await readFile('public'+art.src),meta=await sharp(bytes).metadata();assert.equal(meta.format,'webp');assert.equal(meta.hasAlpha,true);assert.ok(bytes.length<60000,team.name+' image budget');
  }assert.equal(homeStadiumArt(game('Unregistered country',null,'fifa.world')),null);assert.equal(catalog['national:croatia'].asset,JSON.parse(await readFile('app/stadium-art-seeds.json','utf8'))['club:dinamo'].asset)}finally{globalThis.fetch=fetch}
 });
@@ -103,3 +103,11 @@ test('physical paper skin has real alpha cutouts and stays within one shared ima
  const {data,info}=await sharp(bytes).ensureAlpha().raw().toBuffer({resolveWithObject:true});const alpha=(x,y)=>data[(y*info.width+x)*4+3];assert.equal(alpha(0,0),0);assert.ok(alpha(Math.floor(info.width/2),Math.floor(info.height/2))>245);
  let clear=0,paper=0;for(let i=3;i<data.length;i+=4){if(data[i]<20)clear++;if(data[i]>245)paper++}assert.ok(clear>500,'torn edges remain transparent');assert.ok(paper>info.width*info.height*.8,'ticket remains readable paper');
 });
+
+ test('Croatia selects its actual venue for home or away fixtures, including city aliases',()=>{
+ const cases=[['Stadion Poljud','club:hajduk'],['Split, Croatia','club:hajduk'],['Stadion Maksimir, Zagreb','club:dinamo'],['Zagreb','club:dinamo'],['Opus Arena','club:osijek'],['Pampas, Osijek','club:osijek'],['Osijek','club:osijek'],['HNK Rijeka, Rujevica','club:rijeka'],['Rijeka','club:rijeka']];
+ for(const [venue,club] of cases){const record=stadiumSeeds[club];assert.equal(croatiaVenueStadium(venue).asset,record.asset);for(const league of ['uefa.nations','fifa.world','fifa.friendly','fifa.worldq.uefa']){const home={national:true,game:{league,venue,home:{name:'Croatia'},away:{name:'Spain'}}},away={...home,game:{...home.game,home:{name:'Spain'},away:{name:'Croatia'}}};assert.equal(homeStadiumArt(home).src,record.asset);assert.equal(homeStadiumArt(away).src,record.asset)}}
+ assert.equal(croatiaVenueStadium('Opus Arena, Zagreb').asset,stadiumSeeds['club:osijek'].asset);
+ for(const venue of [null,'Unknown ground','Wembley Stadium, London']){assert.equal(croatiaVenueStadium(venue),null);assert.equal(homeStadiumArt({national:true,game:{league:'fifa.world',venue,home:{name:'Croatia'},away:{name:'Spain'}}}).src,nationalStadiumSeeds['national:croatia'].asset)}
+ const other={national:true,game:{league:'fifa.world',venue:'Poljud, Split',home:{name:'England'},away:{name:'Spain'}}};assert.equal(homeStadiumArt(other).src,nationalStadiumSeeds['national:england'].asset);
+ });

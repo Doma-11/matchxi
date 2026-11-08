@@ -84,7 +84,6 @@ html[data-theme=light] .ticket-pass-actions{color:#3c485d}
 .ticket-design-matchday[data-ticket-national=false][data-pass-art=stadium] .ticket-front{background-size:300% 100%;background-position:right center}
 .ticket-home-stadium-art{position:absolute;left:1%;top:30%;bottom:8%;width:30%;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;pointer-events:none;min-width:0}
 .ticket-home-stadium-art>img{width:100%;height:calc(100% - 13px);object-fit:contain;object-position:left bottom;opacity:.78;mix-blend-mode:multiply;mask-image:linear-gradient(90deg,#000 65%,transparent)}
-.ticket-home-stadium-art>a{font:clamp(6px,1.4cqw,8px) Georgia,serif;color:#253a50;text-decoration:underline;pointer-events:auto;max-width:70%;padding:2px 3px;line-height:1.2}
 .ticket-pass-main>:is(.ticket-pass-heading,.ticket-pass-date,.ticket-pass-teams,.ticket-pass-venue,.ticket-pass-facts){position:relative;z-index:3}
 @media(min-width:651px) and (max-width:950px){.ticket-design-matchday .ticket-flip-inner{min-height:170px}}
 @media(max-width:370px){.ticket-design-matchday{min-height:0}.ticket-design-matchday .ticket-flip-inner{min-height:176px}}
@@ -115,3 +114,26 @@ html[data-theme=light] .ticket-pass-actions{color:#3c485d}
 .ticket-design-matchday .ticket-pass-stub:after{content:'';position:absolute;inset:0;z-index:0;background:url('/themes/matchday-ticket-skin-v2.webp') right/465% 100%;filter:grayscale(1) contrast(4) invert(1);mix-blend-mode:screen;opacity:.23;pointer-events:none}
 .ticket-design-matchday .ticket-pass-stub>:not(.ticket-qr){position:relative;z-index:1}
 .ticket-design-matchday .ticket-back:after{filter:grayscale(1) contrast(4) invert(1);mix-blend-mode:screen;opacity:.2}
+
+/* Approved printed-colour edition. The reference art frame is scaled 0.75 in
+   both dimensions, anchored to its bottom-left corner: 25% smaller artwork. */
+.ticket-design-matchday{--printed-logo-filter:saturate(.68) sepia(.22) contrast(.94) brightness(.94);--stadium-art-scale:.75}
+.ticket-home-stadium-art{left:1.5%;top:auto;bottom:10%;width:40%;height:70%;transform:scale(var(--stadium-art-scale));transform-origin:left bottom;display:block}
+.ticket-home-stadium-art>img{display:block;width:100%;height:100%;object-fit:contain;object-position:left bottom;opacity:.9;mask-image:linear-gradient(90deg,#000 80%,transparent)}
+.ticket-design-matchday .ticket-pass-teams img,
+.ticket-design-matchday[data-competition] .ticket-pass-competition>img{filter:var(--printed-logo-filter);opacity:.93;mix-blend-mode:multiply}
+.ticket-design-matchday[data-pass-art=competition] .ticket-pass-competition>img{mix-blend-mode:normal}
+.ticket-design-matchday :is(.ticket-pass-date,.ticket-pass-teams,.ticket-pass-venue,.ticket-pass-facts){margin-left:30%}
+.ticket-pass-masthead>span{font-size:clamp(10px,3.7cqw,23px);letter-spacing:.11em}
+.ticket-pass-facts{grid-template-columns:repeat(2,minmax(0,1fr));font-size:clamp(7px,2cqw,12px);letter-spacing:.04em}
+.ticket-pass-facts>span{padding:clamp(3px,.9cqw,6px) 3px;flex-wrap:nowrap;gap:5px}
+.ticket-pass-facts b{font-size:1.65em;line-height:1}
+.ticket-pass-stub-title{font-size:clamp(7px,1.9cqw,12px);letter-spacing:.08em;white-space:nowrap}
+.ticket-design-matchday[data-ticket-national=true] .ticket-pass-stub{background-color:#16263f;color:#f6ecd2}
+.ticket-design-matchday[data-ticket-national=true] .ticket-pass-stub .ticket-qr img{filter:none}
+.ticket-design-matchday[data-ticket-national=true] .ticket-pass-reference{border-bottom-color:#f3e7ca4a}
+/* The stadium engraving supplies the left-hand artwork for international passes. */
+.ticket-design-matchday[data-ticket-national=true] .ticket-front:before{display:none}
+
+.ticket-design-matchday:is([data-competition='fifa.world'],[data-competition='uefa.euro']) .ticket-pass-competition{background:#14263e;border:0;border-radius:3px;padding:3px 5px}
+.ticket-design-matchday:is([data-competition='fifa.world'],[data-competition='uefa.euro']) .ticket-pass-competition>img{mix-blend-mode:normal}

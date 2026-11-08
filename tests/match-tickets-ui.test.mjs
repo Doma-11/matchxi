@@ -1,7 +1,7 @@
 import {build} from 'esbuild';import {test} from 'node:test';import assert from 'node:assert/strict';import {mkdir,writeFile} from 'node:fs/promises';
 await mkdir('qa-temp',{recursive:true});
-const built=await build({stdin:{contents:"export {default} from './app/match-tickets';export * from './app/match-tickets';export {default as TicketSettings} from './app/match-ticket-settings';export * from './app/match-ticket-design';",resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',packages:'external',write:false,jsx:'automatic',loader:{'.css':'empty'},plugins:[{name:'ticket-hooks',setup(b){b.onResolve({filter:/^react$/},()=>({path:'hooks',namespace:'hooks'}));b.onLoad({filter:/.*/,namespace:'hooks'},()=>({contents:'export const useState=(...a)=>globalThis.__streamHooks.state(...a),useRef=(...a)=>globalThis.__streamHooks.ref(...a),useEffect=(...a)=>globalThis.__streamHooks.effect(...a);'}));}}]});
-await writeFile('qa-temp/ticket-interactions.mjs',built.outputFiles[0].text);const {default:Collection,WatchedTicketControl,InlineTicketCard,ticketQrOptions,TicketSettings,readTicketDesign,saveTicketDesign,TICKET_DESIGN_KEY,PassFront,HomeStadiumArt,ticketPassArtwork,ticketReference}=await import('../qa-temp/ticket-interactions.mjs');
+const built=await build({stdin:{contents:"export {default} from './app/match-tickets';export * from './app/match-tickets';export {default as TicketSettings} from './app/match-ticket-settings';export * from './app/match-ticket-design';export * from './app/matchday-seating';",resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',packages:'external',write:false,jsx:'automatic',loader:{'.css':'empty'},plugins:[{name:'ticket-hooks',setup(b){b.onResolve({filter:/^react$/},()=>({path:'hooks',namespace:'hooks'}));b.onLoad({filter:/.*/,namespace:'hooks'},()=>({contents:'export const useState=(...a)=>globalThis.__streamHooks.state(...a),useRef=(...a)=>globalThis.__streamHooks.ref(...a),useEffect=(...a)=>globalThis.__streamHooks.effect(...a);'}));}}]});
+await writeFile('qa-temp/ticket-interactions.mjs',built.outputFiles[0].text);const {default:Collection,WatchedTicketControl,InlineTicketCard,ticketQrOptions,TicketSettings,readTicketDesign,saveTicketDesign,TICKET_DESIGN_KEY,PassFront,HomeStadiumArt,ticketPassArtwork,ticketReference,ticketSeating,passCompetitionLogo}=await import('../qa-temp/ticket-interactions.mjs');
 function hooks(Component,initial){const slots=[],pending=[];let cursor=0,dirty=true,props=initial,tree;const same=(a,b)=>!!a&&!!b&&a.length===b.length&&a.every((v,i)=>Object.is(v,b[i]));
  const environment={state(initial){const n=cursor++;if(!(n in slots))slots[n]={value:typeof initial==='function'?initial():initial};return[slots[n].value,v=>{const next=typeof v==='function'?v(slots[n].value):v;if(!Object.is(next,slots[n].value)){slots[n].value=next;dirty=true;}}];},ref(value){const n=cursor++;return slots[n]??(slots[n]={current:value});},effect(fn,deps){const n=cursor++;if(!slots[n]||!same(slots[n].deps,deps)){const previous=slots[n];slots[n]={deps,cleanup:previous?.cleanup};pending.push(()=>{previous?.cleanup?.();slots[n].cleanup=fn();});}},id(){const n=cursor++;return 'stream-test-'+n;}};
  const render=()=>{for(let loops=0;dirty;loops++){assert.ok(loops<30,'effects settle');dirty=false;cursor=0;globalThis.__streamHooks=environment;tree=Component(props);for(const work of pending.splice(0))work();}return tree;};
@@ -79,17 +79,17 @@ test('Matchday keepsakes exclude stadiums for exactly the three UEFA club cups',
   try{const tree=await flush(ui);assert.equal(tree.props['data-pass-art'],expected);assert.equal(nodes(tree,n=>n.props?.className==='ticket-pass-actions').length,1)}finally{ui.unmount()}
  }
 });
-test('paper keepsakes show real venue and fixture references, with honest season and matchday metadata',()=>{
+test('Matchday paper tickets show real venue, fixture reference and stable decorative seating',()=>{
  const ticket=cardTicket({game:{...fixture,completed:true,venue:'Elland Road, Leeds',matchday:12},season:'2026/27'});
  const tree=PassFront({ticket,score:'1 – 0',video:savedVideo});
  assert.equal(ticketReference(ticket),'UCL-ui-42');
  assert.ok(nodes(tree,n=>n.type==='span'&&n.props.children==='Elland Road, Leeds').length);
  assert.ok(nodes(tree,n=>n.type==='b'&&n.props.children==='FULL TIME').length);
- assert.ok(nodes(tree,n=>n.type==='b'&&n.props.children===12).length);
+ const seat=ticketSeating(ticket);assert.ok(nodes(tree,n=>n.type==='b'&&n.props.children===seat.row).length);assert.ok(nodes(tree,n=>n.type==='b'&&n.props.children===seat.seat).length);
  const missing=PassFront({ticket:cardTicket(),score:'VS'});
- assert.ok(nodes(missing,n=>n.type==='span'&&n.props.children==='Virtual matchday keepsake').length);
+ assert.ok(nodes(missing,n=>n.type==='span'&&n.props.children==='Virtual matchday ticket').length);
  assert.ok(nodes(missing,n=>n.type==='b'&&n.props.children==='SCORE PENDING').length);
- assert.equal(nodes(tree,n=>typeof n.props?.children==='string'&&/GATE|SEAT|ROW/.test(n.props.children)).length,0);
+ assert.equal(nodes(tree,n=>typeof n.props?.children==='string'&&/KEEPSAKE|WATCHED LIVE/.test(n.props.children)).length,0);assert.equal(nodes(tree,n=>n.props?.children==='MATCHDAY').length,2);
 });
 test('paper-ticket actions stay outside the rotating faces and deletion works from the back',async()=>{
  let removed=0;const ui=hooks(InlineTicketCard,{ticket:cardTicket(),design:'matchday',onFavourite(){},onDelete(){removed++},onMatch(){}});
@@ -106,3 +106,12 @@ test('national keepsakes show their fixed home ground when fixture venue is abse
  let tree=PassFront({ticket,score:'1 – 0'});assert.ok(nodes(tree,n=>n.type==='span'&&n.props.children==='Wembley Stadium').length);
  tree=PassFront({ticket:{...ticket,game:{...ticket.game,venue:'A supplied tournament stadium'}},score:'1 – 0'});assert.ok(nodes(tree,n=>n.type==='span'&&n.props.children==='A supplied tournament stadium').length);
 });
+
+ test('decorative seating is deterministic across favourite/export round trips and stays in valid ranges',()=>{
+ const ticket=cardTicket(),first=ticketSeating(ticket);assert.deepEqual(ticketSeating(JSON.parse(JSON.stringify({...ticket,favourite:true}))),first);
+ const seats=new Set();for(let i=0;i<100;i++){const s=ticketSeating({id:'fixture-'+i});assert.ok(s.row>=1&&s.row<=32);assert.ok(s.seat>=1&&s.seat<=420);seats.add(`${s.row}:${s.seat}`)}assert.ok(seats.size>90);
+ });
+ test('Nations League uses coloured artwork with dark lettering on paper; source credits are outside the ticket',async()=>{
+ assert.equal(passCompetitionLogo(cardTicket({game:{...fixture,league:'uefa.nations'}})),'/logos/nations-league-ticket.svg');
+ const ticket=cardTicket({game:{...fixture,league:'esp.1',home:{name:'Real Madrid'},away:{name:'Liverpool'}}}),ui=hooks(HomeStadiumArt,{ticket});try{const tree=await flush(ui);assert.equal(nodes(tree,n=>n.type==='a').length,0);assert.equal(nodes(tree,n=>n.type==='img').length,1)}finally{ui.unmount()}
+ });

@@ -304,3 +304,17 @@ The Matchday pass now uses `public/themes/matchday-ticket-skin-v2.webp`, a 174 K
 Image brief: one isolated, blank, front-on vintage football ticket on transparency, ivory cotton paper, worn irregular edges, fold lines, handling stains, punched detachable stub, no text, logos, QR or stadium. Produced with the built-in image generator; optimised to transparent WebP for the app. No per-match image generation or image downloads occur at runtime.
 
 The managed preview daemon was unavailable while preparing this update, so populated mobile browser QA could not run locally. Model/data tests and production build checks cover the national catalogue and existing ticket interactions; deployment verification is recorded separately.
+
+### Approved Matchday printed-colour edition
+
+The reviewed exterior engravings cover Santiago Bernabéu, Poljud, Maksimir, Anfield, classic Camp Nou, Emirates Stadium, San Siro and Stamford Bridge, plus Opus Arena and Rujevica for Croatia. `app/stadium-exterior-art.json` overrides the existing ground asset rather than duplicating team mappings; shared grounds automatically reuse the new file across clubs and national teams. The complete 163-club/86-country catalogue remains available. Old asset and source records are retained for existing credits and unreviewed grounds.
+
+All ten new 512px-or-smaller WebPs are under 50 KB. They were generated with real exterior photographs and the approved design boards as references: isolated navy architectural engraving, transparent background, no ticket or text. Raw source generation output is not needed at runtime. Existing credits are preserved alongside explicit AI-assisted illustration descriptions. Credits are linked in Settings rather than on the bottom-left of the ticket.
+
+The paper face and stub now both say MATCHDAY. Stable decorative ROW and SEAT numbers derive from the ticket ID, so favouriting, re-rendering, exporting and importing do not change them. The Settings note identifies these as decorative souvenir details. Scores, dates, opponent identities, highlights and original ticket style remain live app data.
+
+The approved reference stadium frame is 40% of ticket width and 70% of its height. A 0.75 transform anchored bottom-left reduces both dimensions by exactly 25%, yielding 30% width and 52.5% height before the image's own aspect-fit. Coloured club/federation/league/competition logos use muted warm pigments and multiply onto the paper; the existing paper texture overlays their ink. White competition marks retain dark backing and Nations League uses a horizontal dark-lettered vector lockup preserving its official source paths.
+
+For any national fixture involving Croatia, named stadium aliases take priority over city text: Poljud/Split, Maksimir/Zagreb, Opus Arena/Pampas/Osijek, and Rujevica/Rijeka. Missing or unrecognised venues retain Croatia's representative ground. Other national teams keep their fixed ground. The three UEFA club cup designs retain their stadium-free artwork.
+
+Browser verification on the isolated Netlify preview used the actual ticket component at 320px, 375px and 768px viewport frames: no horizontal overflow, 0.75 stadium transform, and unchanged card dimensions through manual flipping. All four Croatia venue cases selected their corresponding exterior assets. The temporary sample pages and their sample-only framing header were removed before production. Validation: 199 tests, TypeScript, production build and Netlify function bundle passed.

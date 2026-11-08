@@ -1,3 +1,4 @@
+import {ticketSeating} from './matchday-seating';
 import {useEffect,useRef,useState,type CSSProperties} from 'react';
 import {Ticket,Check,Star,ArrowLeftRight,ArrowUpRight,ExternalLink,Play,Trash2,X,Monitor,ArrowLeft} from 'lucide-react';
 import QRCode from 'qrcode';
@@ -29,17 +30,18 @@ export function ticketReference(ticket:MatchTicket){
 export function HomeStadiumArt({ticket}:{ticket:MatchTicket}){
  const art=homeStadiumArt(ticket),[failed,setFailed]=useState('');
  if(!art||failed===art.src)return null;
- return <div className="ticket-home-stadium-art"><img src={art.src} alt="" width={512} height={340} loading="lazy" decoding="async" fetchPriority="low" onError={()=>setFailed(art.src)}/><a href={art.credits} target="_blank" rel="noopener noreferrer" aria-label={'Stadium art source and credit: '+art.name}>Stadium art</a></div>;
+ return <div className="ticket-home-stadium-art"><img src={art.src} alt="" width={512} height={340} loading="lazy" decoding="async" fetchPriority="low" onError={()=>setFailed(art.src)}/></div>;
 }
+export function passCompetitionLogo(ticket:MatchTicket){return ticket.game.league==='uefa.nations'?'/logos/nations-league-ticket.svg':ticket.competition.logo}
 export function PassFront({ticket,score,video}:any){
- const g=ticket.game,stadium=homeStadiumArt(ticket);
+ const g=ticket.game,stadium=homeStadiumArt(ticket),seating=ticketSeating(ticket),competitionLogo=passCompetitionLogo(ticket);
  return <><HomeStadiumArt ticket={ticket}/><div className="ticket-main ticket-pass-main">
-  <header className="ticket-pass-heading"><div className="ticket-pass-competition">{ticket.competition.logo?<img src={ticket.competition.logo} alt={ticket.competition.name}/>:<strong>{ticket.competition.name}</strong>}</div><div className="ticket-pass-masthead"><span>MATCHDAY KEEPSAKE</span><b>{g.completed?'FULL TIME':'SCORE PENDING'}</b></div></header>
+  <header className="ticket-pass-heading"><div className="ticket-pass-competition">{competitionLogo?<img src={competitionLogo} alt={ticket.competition.name}/>:<strong>{ticket.competition.name}</strong>}</div><div className="ticket-pass-masthead"><span>MATCHDAY</span><b>{g.completed?'FULL TIME':'SCORE PENDING'}</b></div></header>
   <time className="ticket-pass-date" dateTime={g.date}>{new Date(g.date).toLocaleDateString('en-GB',{weekday:'short',day:'2-digit',month:'short',year:'numeric'})}</time>
   <div className="ticket-teams ticket-pass-teams"><div><Badge team={g.home}/><strong>{g.home.name}</strong></div><div className="ticket-score"><b>{score}</b></div><div><Badge team={g.away}/><strong>{g.away.name}</strong></div></div>
-  <div className="ticket-pass-venue"><span>{g.venue||stadium?.name||'Virtual matchday keepsake'}</span></div>
-  <div className="ticket-pass-facts"><span>WATCHED LIVE</span><span>SEASON <b>{ticket.season}</b></span><span>MATCHDAY <b>{g.matchday??'—'}</b></span></div>
- </div><aside className="ticket-stub ticket-pass-stub"><small className="ticket-pass-reference">REF. {ticketReference(ticket)}</small>{video?<HighlightQR url={video.url}/>:<div className="ticket-qr-pending"><Ticket size={25}/><span>Highlights pending</span></div>}<strong className="ticket-pass-stub-title">MATCHDAY<br/>KEEPSAKE</strong><span className="ticket-pass-stub-season">{ticket.season}</span></aside></>;
+  <div className="ticket-pass-venue"><span>{g.venue||stadium?.name||'Virtual matchday ticket'}</span></div>
+  <div className="ticket-pass-facts" aria-label="Decorative row and seat"><span>ROW <b>{seating.row}</b></span><span>SEAT <b>{seating.seat}</b></span></div>
+ </div><aside className="ticket-stub ticket-pass-stub"><small className="ticket-pass-reference">REF. {ticketReference(ticket)}</small>{video?<HighlightQR url={video.url}/>:<div className="ticket-qr-pending"><Ticket size={25}/><span>Highlights pending</span></div>}<strong className="ticket-pass-stub-title">MATCHDAY</strong><span className="ticket-pass-stub-season">{ticket.season}</span></aside></>;
 }
 export const ticketQrOptions={width:200,margin:4,errorCorrectionLevel:'M' as const,color:{dark:'#fff2ceff',light:'#00000000'}};
 export function HighlightQR({url}:{url:string}){

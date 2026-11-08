@@ -1,0 +1,122 @@
+{
+  "/stadiums/bernabeu-outline-v1.webp": {
+    "name": "Santiago Bernabéu",
+    "asset": "/stadiums/bernabeu-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-bernabeu",
+    "source": "https://commons.wikimedia.org/wiki/File:M-estadio-santiago-bernabeu-diciembre-2024-a.jpg",
+    "artist": "MottaW",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/hajduk-outline-v1.webp": {
+    "name": "Stadion Poljud",
+    "asset": "/stadiums/poljud-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-poljud",
+    "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Poljud_Stadium_in_2024.jpg",
+    "artist": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/dinamo-outline-v1.webp": {
+    "name": "Maksimir Stadium",
+    "asset": "/stadiums/maksimir-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-maksimir",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadion_Maksimir_areal.jpg",
+    "artist": "Suradnik13",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/anfield-outline-v1.webp": {
+    "name": "Anfield",
+    "asset": "/stadiums/anfield-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-anfield",
+    "source": "https://commons.wikimedia.org/wiki/File:Anfield_Main_Stand_exterior.jpg",
+    "artist": "Original photo by: Rodhullandemu Cropped & edited by: TurboGUY",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/barcelona-outline-v1.webp": {
+    "name": "Camp Nou",
+    "asset": "/stadiums/camp-nou-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-camp-nou",
+    "source": "https://commons.wikimedia.org/wiki/File:Camp_Nou_aerial.jpg",
+    "artist": "Oh-Barcelona.com from Barcelona, Spain",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/arsenal-outline-v1.webp": {
+    "name": "Emirates Stadium",
+    "asset": "/stadiums/emirates-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-emirates",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Emirates_Stadium_arsenal.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/ac-milan-outline-v1.webp": {
+    "name": "San Siro",
+    "asset": "/stadiums/san-siro-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-san-siro",
+    "source": "https://commons.wikimedia.org/wiki/File:Stadio_Meazza_2021_3.jpg",
+    "artist": "Prelvini",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/chelsea-outline-v1.webp": {
+    "name": "Stamford Bridge (stadium)",
+    "asset": "/stadiums/stamford-bridge-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-stamford-bridge",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Stamford_Bridge.jpg",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/osijek-outline-v1.webp": {
+    "name": "Opus Arena",
+    "asset": "/stadiums/opus-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-opus",
+    "source": "https://commons.wikimedia.org/wiki/File:Opus_Arena_Osijek_2025.jpg",
+    "artist": "Koreanovsky",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  },
+  "/stadiums/rijeka-outline-v1.webp": {
+    "name": "Stadion Rujevica",
+    "asset": "/stadiums/rujevica-exterior-v2.webp",
+    "credits": "/stadiums/credits.html#exterior-rujevica",
+    "source": "https://commons.wikimedia.org/wiki/File:Rujevica_stadium,_Rijeka,_Croatia.jpg",
+    "artist": "Драган Јањушевић",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "view": "exterior",
+    "style": "engraving-v2",
+    "adaptation": "AI-assisted exterior engraving based on the reference photograph and approved MatchXI artwork, resized and compressed to transparent WebP."
+  }
+}
