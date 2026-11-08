@@ -1,7 +1,7 @@
 import {build} from 'esbuild';import {test} from 'node:test';import assert from 'node:assert/strict';import {mkdir,writeFile} from 'node:fs/promises';
 await mkdir('qa-temp',{recursive:true});
 const built=await build({stdin:{contents:"export {default} from './app/match-tickets';export * from './app/match-tickets';export {default as TicketSettings} from './app/match-ticket-settings';export * from './app/match-ticket-design';",resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',packages:'external',write:false,jsx:'automatic',loader:{'.css':'empty'},plugins:[{name:'ticket-hooks',setup(b){b.onResolve({filter:/^react$/},()=>({path:'hooks',namespace:'hooks'}));b.onLoad({filter:/.*/,namespace:'hooks'},()=>({contents:'export const useState=(...a)=>globalThis.__streamHooks.state(...a),useRef=(...a)=>globalThis.__streamHooks.ref(...a),useEffect=(...a)=>globalThis.__streamHooks.effect(...a);'}));}}]});
-await writeFile('qa-temp/ticket-interactions.mjs',built.outputFiles[0].text);const {default:Collection,WatchedTicketControl,InlineTicketCard,ticketQrOptions,TicketSettings,readTicketDesign,saveTicketDesign,TICKET_DESIGN_KEY}=await import('../qa-temp/ticket-interactions.mjs');
+await writeFile('qa-temp/ticket-interactions.mjs',built.outputFiles[0].text);const {default:Collection,WatchedTicketControl,InlineTicketCard,ticketQrOptions,TicketSettings,readTicketDesign,saveTicketDesign,TICKET_DESIGN_KEY,PassFront,ticketPassArtwork,ticketReference}=await import('../qa-temp/ticket-interactions.mjs');
 function hooks(Component,initial){const slots=[],pending=[];let cursor=0,dirty=true,props=initial,tree;const same=(a,b)=>!!a&&!!b&&a.length===b.length&&a.every((v,i)=>Object.is(v,b[i]));
  const environment={state(initial){const n=cursor++;if(!(n in slots))slots[n]={value:typeof initial==='function'?initial():initial};return[slots[n].value,v=>{const next=typeof v==='function'?v(slots[n].value):v;if(!Object.is(next,slots[n].value)){slots[n].value=next;dirty=true;}}];},ref(value){const n=cursor++;return slots[n]??(slots[n]={current:value});},effect(fn,deps){const n=cursor++;if(!slots[n]||!same(slots[n].deps,deps)){const previous=slots[n];slots[n]={deps,cleanup:previous?.cleanup};pending.push(()=>{previous?.cleanup?.();slots[n].cleanup=fn();});}},id(){const n=cursor++;return 'stream-test-'+n;}};
  const render=()=>{for(let loops=0;dirty;loops++){assert.ok(loops<30,'effects settle');dirty=false;cursor=0;globalThis.__streamHooks=environment;tree=Component(props);for(const work of pending.splice(0))work();}return tree;};
@@ -68,4 +68,30 @@ test('collection hints only its first card and does not repeat after filtering',
  const env=environment();env.win.localStorage.setItem('matchxi-match-tickets-v1',JSON.stringify([cardTicket({savedAt:'2026-11-08T08:00:00Z'}),cardTicket({id:'uefa.champions:second',game:{...fixture,id:'second'},savedAt:'2026-11-08T08:00:00Z'})]));
  const ui=hooks(Collection,{showFlipHint:true,onMatch(){},onBrowse(){}});
  try{let tree=await flush(ui);let cards=nodes(tree,n=>n.type===InlineTicketCard);assert.deepEqual(cards.map(c=>c.props.autoFlipHint),[true,false]);cards[0].props.onHintStarted();find(tree,n=>n.type==='button'&&n.key==='national').props.onClick();tree=await flush(ui);find(tree,n=>n.type==='button'&&n.key==='all').props.onClick();tree=await flush(ui);cards=nodes(tree,n=>n.type===InlineTicketCard);assert.ok(cards.every(c=>!c.props.autoFlipHint))}finally{ui.unmount();env.restore()}
+});
+
+
+test('Matchday keepsakes exclude stadiums for exactly the three UEFA club cups',async()=>{
+ for(const league of ['uefa.champions','uefa.europa','uefa.europa.conf','eng.1','esp.1','ger.1','ita.1','cro.1','uefa.nations','uefa.euro','fifa.world','fifa.friendly','fifa.worldq.uefa']){
+  const expected=league.startsWith('uefa.')&&['uefa.champions','uefa.europa','uefa.europa.conf'].includes(league)?'competition':'stadium';
+  assert.equal(ticketPassArtwork(league),expected);
+  const ui=hooks(InlineTicketCard,{ticket:cardTicket({game:{...fixture,league}}),design:'matchday',onFavourite(){},onDelete(){},onMatch(){}});
+  try{const tree=await flush(ui);assert.equal(tree.props['data-pass-art'],expected);assert.equal(nodes(tree,n=>n.props?.className==='ticket-pass-actions').length,1)}finally{ui.unmount()}
+ }
+});
+test('paper keepsakes show real venue and fixture references, with honest season and matchday metadata',()=>{
+ const ticket=cardTicket({game:{...fixture,completed:true,venue:'Elland Road, Leeds',matchday:12},season:'2026/27'});
+ const tree=PassFront({ticket,score:'1 – 0',video:savedVideo});
+ assert.equal(ticketReference(ticket),'UCL-ui-42');
+ assert.ok(nodes(tree,n=>n.type==='span'&&n.props.children==='Elland Road, Leeds').length);
+ assert.ok(nodes(tree,n=>n.type==='b'&&n.props.children==='FULL TIME').length);
+ assert.ok(nodes(tree,n=>n.type==='b'&&n.props.children===12).length);
+ const missing=PassFront({ticket:cardTicket(),score:'VS'});
+ assert.ok(nodes(missing,n=>n.type==='span'&&n.props.children==='Virtual matchday keepsake').length);
+ assert.ok(nodes(missing,n=>n.type==='b'&&n.props.children==='SCORE PENDING').length);
+ assert.equal(nodes(tree,n=>typeof n.props?.children==='string'&&/GATE|SEAT|ROW/.test(n.props.children)).length,0);
+});
+test('paper-ticket actions stay outside the rotating faces and deletion works from the back',async()=>{
+ let removed=0;const ui=hooks(InlineTicketCard,{ticket:cardTicket(),design:'matchday',onFavourite(){},onDelete(){removed++},onMatch(){}});
+ try{let tree=await flush(ui);assert.equal(nodes(tree,n=>n.type==='button'&&n.props['aria-label']==='Favourite Arsenal vs Real Madrid').length,1);button(tree,'Flip ticket: Arsenal vs Real Madrid to highlights').props.onClick();tree=await flush(ui);assert.equal(back(tree).props.inert,false);button(tree,'Delete ticket: Arsenal vs Real Madrid').props.onClick();tree=await flush(ui);assert.equal(front(tree).props.inert,false);find(tree,n=>n.type==='button'&&n.props.children==='Delete permanently').props.onClick();assert.equal(removed,1)}finally{ui.unmount()}
 });

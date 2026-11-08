@@ -209,3 +209,30 @@ and still forced national flags. This change adds:
 Validation: TypeScript, Node regression tests, Vite build and Netlify Functions
 bundling. The managed preview daemon was unavailable in this workspace, so
 interactive browser rendering and mobile visual QA were not completed locally.
+
+## Aged-paper Matchday pass — 8 November 2026
+
+The Matchday pass option now follows the supplied vintage keepsake reference:
+cream distressed paper, a restrained engraved stadium at the left, serif fixture
+names/scores, a full-time ribbon, venue line, perforated stub and actions beneath
+the paper. The Settings thumbnail previews the same material treatment.
+
+Champions League, Europa League and Conference League explicitly use a separate
+competition-art branch. Their paper texture is framed from the illustration-free
+right portion and their left edge uses ball/trophy artwork, with no stadium.
+Other competitions retain the generic stadium engraving; international passes
+also have geometric edge printing and a light QR stub with dark QR modules.
+
+The lower strip uses actual watched/season/matchday metadata. References derive
+from the stored competition and fixture ID; gate, row and seat numbers are never
+fabricated. Missing venues retain a keepsake label and missing highlights retain
+the pending state. The same responsive stage contains both faces; action buttons
+remain outside that stage. The MatchXI original design retains its existing
+layout, artwork and palette.
+
+Asset: `public/themes/matchday-keepsake-paper-v1.webp`, generated from the supplied
+style reference with the built-in image tool and optimized for web delivery.
+Prompt: wide warm ivory distressed cotton-paper texture, fine navy copperplate
+engraving of a generic stadium confined to the lower-left quarter, subtle edge
+guilloche, clear center/right, no text, marks, logos, QR, border or ticket mockup.
+No actual stadium identity is claimed by the decorative engraving.

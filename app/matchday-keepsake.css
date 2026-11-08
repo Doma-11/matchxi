@@ -1,0 +1,63 @@
+/* Matchday pass only. Both faces keep one responsive paper-ticket stage. */
+.ticket-design-matchday{container-type:inline-size;--pass-ink:#182b40;--pass-ribbon:#20344c;height:auto;min-height:180px;aspect-ratio:2.05/1;padding-bottom:38px;box-sizing:content-box}
+.ticket-design-matchday .ticket-flip-inner{height:100%}
+.ticket-design-matchday .virtual-ticket{border:1.5px solid #bfac85;border-radius:15px;background:#efe4cb url('/themes/matchday-keepsake-paper-v1.webp') center/100% 100%;color:var(--pass-ink);box-shadow:inset 0 0 0 2px #fbf1d657,inset 0 0 18px #6041172b,0 8px 22px #0004}
+.ticket-design-matchday .ticket-front{grid-template-columns:minmax(0,1fr) 23%}
+.ticket-design-matchday .virtual-ticket:before{display:none}
+.ticket-design-matchday .virtual-ticket:after{display:block;inset:3px;z-index:4;border:1px solid #fff5;border-radius:11px;background:repeating-linear-gradient(137deg,transparent 0 43px,#69451a0b 44px,transparent 46px 97px);box-shadow:inset 0 0 9px #51361322}
+.ticket-design-matchday .ticket-pass-main{padding:clamp(6px,1.8cqw,12px) clamp(7px,1.9cqw,13px);grid-template-rows:auto auto minmax(0,1fr) auto auto;gap:clamp(3px,.8cqw,6px);background:none;font-family:Georgia,'Times New Roman',serif}
+.ticket-pass-heading{display:grid;grid-template-columns:32% minmax(0,1fr);align-items:center;gap:7px;min-height:clamp(29px,7.2cqw,43px);border-bottom:1px solid #27384a45;padding-bottom:4px}
+.ticket-pass-competition{display:flex;align-items:center;min-width:0;height:100%;padding-right:6px;border-right:1px solid #27384a5c}
+.ticket-pass-competition>img{width:100%;height:clamp(27px,7.5cqw,44px);object-fit:contain;object-position:left center}
+.ticket-pass-competition>strong{font-size:clamp(7px,1.8cqw,11px);line-height:1.15;text-transform:uppercase}
+.ticket-pass-masthead{display:grid;justify-items:center;gap:5px;text-align:center;min-width:0}
+.ticket-pass-masthead>span{font-size:clamp(6px,1.7cqw,10px);font-weight:700;letter-spacing:.16em;white-space:nowrap}
+.ticket-pass-masthead>b{font-size:clamp(6px,1.5cqw,9px);font-weight:600;letter-spacing:.22em;padding:2px 15px;color:#f7edd4;background:var(--pass-ribbon);clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%,6% 50%)}
+.ticket-pass-date{text-align:center;text-transform:uppercase;font-family:Arial,sans-serif;font-weight:700;letter-spacing:.055em;font-size:clamp(7px,2cqw,12px);line-height:1.2;margin-left:20%}
+.ticket-design-matchday .ticket-pass-teams{margin-left:20%;padding:0;gap:clamp(3px,1cqw,8px);align-items:center}
+.ticket-design-matchday .ticket-pass-teams>div{gap:clamp(3px,1cqw,6px)}
+.ticket-design-matchday .ticket-pass-teams img{width:clamp(30px,10cqw,62px);height:clamp(33px,10.5cqw,65px);filter:drop-shadow(0 1px 1px #0002)}
+.ticket-design-matchday .ticket-pass-teams strong{font-family:Georgia,'Times New Roman',serif;font-size:clamp(8px,2.3cqw,14px);font-weight:700;text-transform:uppercase;line-height:1.1;letter-spacing:.01em}
+.ticket-design-matchday .ticket-pass-teams .ticket-score b{font-family:Georgia,'Times New Roman',serif;font-size:clamp(25px,8cqw,49px);font-weight:700;color:#13273e;letter-spacing:-.04em;line-height:1;text-shadow:none}
+.ticket-pass-venue{display:flex;align-items:center;gap:7px;margin-left:20%;font-size:clamp(6px,1.6cqw,10px);font-weight:700;text-transform:uppercase;text-align:center;letter-spacing:.13em;min-width:0}
+.ticket-pass-venue:before,.ticket-pass-venue:after{content:'';height:1px;flex:1;background:#24354b60;min-width:8px}
+.ticket-pass-venue>span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:88%}
+.ticket-pass-facts{display:grid;grid-template-columns:.9fr 1.25fr 1fr;margin-left:20%;border:1px solid #35405470;font-size:clamp(5px,1.35cqw,8px);letter-spacing:.04em;text-align:center;font-weight:600;line-height:1.2}
+.ticket-pass-facts>span{padding:clamp(3px,.9cqw,6px) 2px;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap}
+.ticket-pass-facts>span+span{border-left:1px solid #35405470}
+.ticket-pass-facts b{font-size:1.12em}
+.ticket-design-matchday .ticket-pass-stub{position:relative;padding:clamp(8px,2cqw,15px) clamp(5px,1.5cqw,10px);display:flex;flex-direction:column;justify-content:space-around;gap:6px;background:#12223d url('/themes/matchday-keepsake-paper-v1.webp') right/380% 100%;background-blend-mode:multiply;border-left:2px dotted #eadabd;color:#f6ecd2;font-family:Georgia,'Times New Roman',serif}
+.ticket-pass-reference{font-size:clamp(6px,1.65cqw,10px);font-weight:700;line-height:1.3;max-width:100%;overflow-wrap:anywhere;border-bottom:1px solid #f3e7ca4a;padding-bottom:7px;align-self:stretch}
+.ticket-design-matchday .ticket-pass-stub .ticket-qr{max-width:100px;gap:2px}
+.ticket-design-matchday .ticket-pass-stub .ticket-qr small{display:none}
+.ticket-pass-stub-title{font-size:clamp(6px,1.8cqw,11px);font-weight:600;letter-spacing:.16em;line-height:1.45}
+.ticket-pass-stub-season{font-size:clamp(6px,1.6cqw,10px);letter-spacing:.08em;opacity:.75}
+.ticket-design-matchday .ticket-pass-stub .ticket-qr-pending{font-size:clamp(6px,1.6cqw,10px);color:inherit;gap:5px}
+.ticket-design-matchday .ticket-back{background:#14233c url('/themes/matchday-keepsake-paper-v1.webp') right/350% 100%;background-blend-mode:multiply;border-color:#bfac85;color:#f8ecd1}
+.ticket-pass-actions{position:absolute;top:calc(100% - 33px);left:0;right:0;height:31px;display:grid;grid-template-columns:1fr 1fr 36px;align-items:center;color:#cbd1d3}
+.ticket-pass-actions>button{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:27px;border:0;background:transparent;color:inherit;cursor:pointer;font-family:inherit;font-size:clamp(9px,2.2cqw,13px);padding:2px 4px}
+.ticket-pass-actions>button+button{border-left:1px solid #a6afb34d}
+.ticket-pass-actions>button:hover{color:#f5dfac}
+.ticket-design-matchday .ticket-delete-confirm{font-family:Arial,sans-serif}
+html[data-theme=light] .ticket-pass-actions{color:#3c485d}
+/* The three UEFA club cups have no stadium layer, in either ticket face. */
+.ticket-design-matchday[data-pass-art=competition] .ticket-front{background-position:right center;background-size:300% 100%}
+.ticket-design-matchday[data-pass-art=competition] .ticket-front:before{display:block;inset:0 68% 0 0;transform:none;background-image:url('/themes/match-cups-dark-v2.webp');background-size:300% 100%;background-repeat:no-repeat;clip-path:polygon(0 0,100% 0,60% 40%,35% 100%,0 100%);opacity:.95}
+.ticket-design-matchday[data-competition='uefa.champions'] .ticket-front:before{background-position:0% center}
+.ticket-design-matchday[data-competition='uefa.europa']{--pass-ribbon:#954311}
+.ticket-design-matchday[data-competition='uefa.europa'] .ticket-front:before{background-position:50% center}
+.ticket-design-matchday[data-competition='uefa.europa.conf']{--pass-ribbon:#21603d}
+.ticket-design-matchday[data-competition='uefa.europa.conf'] .ticket-front:before{background-position:100% center}
+.ticket-design-matchday[data-pass-art=competition] .ticket-pass-competition{border:0;align-self:start;background:#11223c;padding:2px 4px;border-radius:3px}
+.ticket-design-matchday[data-pass-art=competition] .ticket-pass-competition>img{object-position:center}
+/* Domestic marks keep their supplied colours on cream; HNL's dark text remains visible. */
+.ticket-design-matchday[data-competition='eng.1'] .ticket-pass-competition>img{filter:none}
+.ticket-design-matchday[data-competition='cro.1'] .ticket-pass-competition>img{filter:brightness(.55)}
+/* International keepsakes echo the colourful geometric edge printing in the reference. */
+.ticket-design-matchday[data-ticket-national=true]{--pass-ribbon:#a4352f}
+.ticket-design-matchday[data-ticket-national=true] .ticket-front:before{display:block;inset:20% 23% 0 0;transform:none;background:conic-gradient(from 45deg,#c9473a 0 25%,#e9b73e 0 50%,#207965 0 75%,#347499 0) 0 0/60px 60px;mask-image:linear-gradient(90deg,#000a,transparent 15% 91%,#0008),linear-gradient(0deg,#000b,transparent 15%);opacity:.65;mix-blend-mode:multiply}
+.ticket-design-matchday[data-ticket-national=true] .ticket-pass-stub{background-color:#eee0bf;background-blend-mode:multiply;color:#182b40;border-left-color:#27364c}
+.ticket-design-matchday[data-ticket-national=true] .ticket-pass-stub .ticket-qr img{filter:brightness(0)}
+.ticket-design-matchday[data-ticket-national=true] .ticket-pass-reference{border-bottom-color:#24354a55}
+@media(min-width:651px) and (max-width:950px){.ticket-design-matchday{min-height:170px}}
+@media(max-width:370px){.ticket-design-matchday{min-height:176px}.ticket-pass-masthead>span{letter-spacing:.08em}.ticket-pass-facts>span{gap:2px}}
