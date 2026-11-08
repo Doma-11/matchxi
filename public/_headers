@@ -12,6 +12,3 @@
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   X-Robots-Tag: noindex, nofollow
-
-/__qa/*
-  X-Frame-Options: SAMEORIGIN
