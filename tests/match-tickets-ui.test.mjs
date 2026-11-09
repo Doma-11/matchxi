@@ -28,14 +28,14 @@ const front=tree=>find(tree,n=>n.props?.className==='virtual-ticket ticket-front
 const back=tree=>find(tree,n=>n.props?.className==='virtual-ticket ticket-back');
 test('whole-front click flips the same inline stage in 3D; saved highlights are always YouTube links with no player/search',async()=>{
  const original=globalThis.fetch;let calls=0;globalThis.fetch=()=>{calls++;throw Error('No new searches')};const ui=hooks(InlineTicketCard,{ticket:cardTicket(),onFavourite(){},onDelete(){},onMatch(){}});
- try{let tree=await flush(ui);const stage=tree.props.className,style=tree.props.style;assert.equal(back(tree).props.inert,true);assert.equal(front(tree).props.inert,false);button(tree,'Flip ticket: Arsenal vs Real Madrid to highlights').props.onClick();tree=await flush(ui);assert.equal(tree.props.className,stage);assert.deepEqual(tree.props.style,style);assert.equal(front(tree).props.inert,true);assert.equal(back(tree).props.inert,false);assert.equal(find(tree,n=>n.props?.className?.startsWith('ticket-flip-inner')).props.className,'ticket-flip-inner is-flipped');const links=nodes(tree,n=>n.type==='a');assert.equal(links.length,2);for(const link of links){assert.equal(link.props.href,savedVideo.url);assert.equal(link.props.target,'_blank');assert.equal(link.props.rel,'noopener noreferrer')}assert.equal(nodes(tree,n=>n.type==='iframe'||n.props?.video||n.props?.role==='dialog').length,0);assert.ok(nodes(tree,n=>n.type==='strong'&&n.props.children===6).length);button(tree,'Flip ticket: Arsenal vs Real Madrid to front').props.onClick();tree=await flush(ui);assert.equal(front(tree).props.inert,false);assert.equal(calls,0)}finally{ui.unmount();globalThis.fetch=original}
+ try{let tree=await flush(ui);const stage=tree.props.className,style=tree.props.style;assert.equal(back(tree).props.inert,true);assert.equal(front(tree).props.inert,false);button(tree,'Flip ticket: Arsenal vs Real Madrid to highlights').props.onClick();tree=await flush(ui);assert.equal(tree.props.className,stage);assert.deepEqual(tree.props.style,style);assert.equal(front(tree).props.inert,true);assert.equal(back(tree).props.inert,false);assert.equal(find(tree,n=>n.props?.className?.startsWith('ticket-flip-inner')).props.className,'ticket-flip-inner is-flipped');const links=nodes(tree,n=>n.type==='a');assert.equal(links.length,1);for(const link of links){assert.equal(link.props.href,savedVideo.url);assert.equal(link.props.target,'_blank');assert.equal(link.props.rel,'noopener noreferrer')}assert.equal(nodes(tree,n=>n.type==='iframe'||n.props?.video||n.props?.role==='dialog').length,0);assert.equal(nodes(back(tree),n=>n.type==='button').length,1);button(tree,'Flip ticket: Arsenal vs Real Madrid to front').props.onClick();tree=await flush(ui);assert.equal(front(tree).props.inert,false);assert.equal(calls,0)}finally{ui.unmount();globalThis.fetch=original}
 });
 test('front footer actions do not flip or expand the card and delete confirmation stays inside it',async()=>{
  let returned=null,removed=0;const ticket=cardTicket(),ui=hooks(InlineTicketCard,{ticket,onFavourite(){},onDelete(){removed++},onMatch:g=>returned=g});
  try{let tree=await flush(ui);button(tree,'Return to match: Arsenal vs Real Madrid').props.onClick();tree=await flush(ui);assert.equal(returned,ticket.game);assert.equal(back(tree).props.inert,true);button(tree,'Delete ticket: Arsenal vs Real Madrid').props.onClick();tree=await flush(ui);assert.ok(find(tree,n=>n.props?.className==='ticket-delete-confirm'));assert.equal(find(tree,n=>n.props?.className==='ticket-front-content').props.inert,true);assert.equal(back(tree).props.inert,true);find(tree,n=>n.type==='button'&&n.props.children==='Keep ticket').props.onClick();tree=await flush(ui);assert.equal(nodes(tree,n=>n.props?.className==='ticket-delete-confirm').length,0);button(tree,'Delete ticket: Arsenal vs Real Madrid').props.onClick();tree=await flush(ui);find(tree,n=>n.type==='button'&&n.props.children==='Delete permanently').props.onClick();assert.equal(removed,1)}finally{ui.unmount()}
 });
-test('pending highlights have no fake QR; absent matchday stays unavailable and restricted videos use the same external design',async()=>{
- for(const highlights of [[],[{...savedVideo,embedAllowed:false}]]){const ui=hooks(InlineTicketCard,{ticket:cardTicket({game:{...fixture,matchday:null},highlights}),onFavourite(){},onDelete(){},onMatch(){}});try{const tree=await flush(ui);assert.ok(nodes(tree,n=>n.type==='strong'&&n.props.children==='—').length);assert.equal(nodes(tree,n=>n.type==='iframe'||n.props?.video).length,0);if(!highlights.length){assert.ok(nodes(tree,n=>n.type==='h3'&&n.props.children==='Highlights pending').length);assert.equal(nodes(tree,n=>n.props?.url).length,0)}else assert.equal(find(tree,n=>n.type==='a'&&n.props.className==='ticket-highlight-preview').props.href,savedVideo.url)}finally{ui.unmount()}}
+test('pending highlights have no fake QR and restricted videos use the same external design',async()=>{
+ for(const highlights of [[],[{...savedVideo,embedAllowed:false}]]){const ui=hooks(InlineTicketCard,{ticket:cardTicket({game:{...fixture,matchday:null},highlights}),onFavourite(){},onDelete(){},onMatch(){}});try{const tree=await flush(ui);assert.equal(nodes(tree,n=>n.type==='iframe'||n.props?.video).length,0);if(!highlights.length){assert.ok(nodes(tree,n=>n.props?.className==='ticket-highlights-pending'&&n.props.children==='Highlights pending').length);assert.equal(nodes(tree,n=>n.props?.url).length,0)}else assert.equal(find(tree,n=>n.type==='a'&&n.props.className==='ticket-highlight-preview').props.href,savedVideo.url)}finally{ui.unmount()}}
 });
 test('front QR uses a transparent background and readable light modules',()=>{assert.equal(ticketQrOptions.color.light,'#00000000');assert.equal(ticketQrOptions.color.dark,'#fff2ceff');assert.equal(ticketQrOptions.margin,4)});
 
@@ -91,9 +91,31 @@ test('Matchday paper tickets show real venue, fixture reference and stable decor
  assert.ok(nodes(missing,n=>n.type==='b'&&n.props.children==='SCORE PENDING').length);
  assert.equal(nodes(tree,n=>typeof n.props?.children==='string'&&/KEEPSAKE|WATCHED LIVE/.test(n.props.children)).length,0);assert.equal(nodes(tree,n=>n.props?.children==='MATCHDAY').length,2);
 });
-test('paper-ticket actions stay outside the rotating faces and deletion works from the back',async()=>{
- let removed=0;const ui=hooks(InlineTicketCard,{ticket:cardTicket(),design:'matchday',onFavourite(){},onDelete(){removed++},onMatch(){}});
- try{let tree=await flush(ui);assert.equal(nodes(tree,n=>n.type==='button'&&n.props['aria-label']==='Favourite Arsenal vs Real Madrid').length,1);button(tree,'Flip ticket: Arsenal vs Real Madrid to highlights').props.onClick();tree=await flush(ui);assert.equal(back(tree).props.inert,false);button(tree,'Delete ticket: Arsenal vs Real Madrid').props.onClick();tree=await flush(ui);assert.equal(front(tree).props.inert,false);find(tree,n=>n.type==='button'&&n.props.children==='Delete permanently').props.onClick();assert.equal(removed,1)}finally{ui.unmount()}
+test('the back offers the primary saved video and front navigation while collection actions are inactive',async()=>{
+ let removed=0;
+ const secondVideo={...savedVideo,id:'MATCHVID002',url:'https://www.youtube.com/watch?v=MATCHVID002'};
+ const ticket=cardTicket({highlights:[savedVideo,secondVideo]});
+ const ui=hooks(InlineTicketCard,{ticket,design:'matchday',onFavourite(){},onDelete(){removed++},onMatch(){}});
+ const actions=tree=>find(tree,n=>n.props?.className==='ticket-pass-actions');
+ try{
+  let tree=await flush(ui);
+  assert.equal(actions(tree).props.inert,false);
+  button(tree,'Flip ticket: Arsenal vs Real Madrid to highlights').props.onClick();
+  tree=await flush(ui);
+  assert.equal(back(tree).props.inert,false);
+  assert.equal(actions(tree).props.inert,true);
+  assert.equal(actions(tree).props['aria-hidden'],true);
+  assert.deepEqual(nodes(back(tree),n=>n.type==='a').map(n=>n.props.href),[savedVideo.url]);
+  assert.equal(nodes(back(tree),n=>n.type==='select').length,0);
+  button(tree,'Flip ticket: Arsenal vs Real Madrid to front').props.onClick();
+  tree=await flush(ui);
+  assert.equal(front(tree).props.inert,false);
+  assert.equal(actions(tree).props.inert,false);
+  button(tree,'Delete ticket: Arsenal vs Real Madrid').props.onClick();
+  tree=await flush(ui);
+  find(tree,n=>n.type==='button'&&n.props.children==='Delete permanently').props.onClick();
+  assert.equal(removed,1);
+ }finally{ui.unmount()}
 });
 
 test('real stadium images load lazily and disappear cleanly if their source is unavailable',async()=>{

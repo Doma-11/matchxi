@@ -1,6 +1,6 @@
 import {ticketSeating} from './matchday-seating';
 import {useEffect,useRef,useState,type CSSProperties} from 'react';
-import {Ticket,Check,Star,ArrowLeftRight,ArrowUpRight,ExternalLink,Play,Trash2,X,Monitor,ArrowLeft} from 'lucide-react';
+import {Ticket,Check,Star,ArrowUpRight,Play,Trash2,X,Monitor,ArrowLeft} from 'lucide-react';
 import QRCode from 'qrcode';
 import {streamCompetition} from './stream-competition';
 import {TICKET_KEY,TICKET_EVENT,ticketId,readTickets,saveMatchTicket,removeMatchTicket,favouriteTicket,filterTickets,type MatchTicket} from './match-tickets-store';
@@ -50,9 +50,9 @@ export function HighlightQR({url}:{url:string}){
  return <div className="ticket-qr">{src?<img src={src} alt="QR code linking to the saved match highlights"/>:<span>{error?'QR unavailable':'Preparing QR…'}</span>}<small>Scan highlights</small></div>;
 }
 export function InlineTicketCard({ticket,onFavourite,onDelete,onMatch,design='current',autoFlipHint=false,onHintStarted}:{autoFlipHint?:boolean;onHintStarted?:()=>void;design?:TicketDesign;ticket:MatchTicket;onFavourite:()=>void;onDelete:()=>void;onMatch:(g:any)=>void}){
- const [back,setBack]=useState(false),[chosen,setChosen]=useState(''),[confirm,setConfirm]=useState(false);
+ const [back,setBack]=useState(false),[confirm,setConfirm]=useState(false);
  const frontFlip=useRef<HTMLButtonElement>(null),backFlip=useRef<HTMLButtonElement>(null),keep=useRef<HTMLButtonElement>(null),didFlip=useRef(false);
- const video=ticket.highlights.find(v=>v.id===chosen)||ticket.highlights[0],g=ticket.game,name=`${g.home.name} vs ${g.away.name}`;
+ const video=ticket.highlights[0],g=ticket.game,name=`${g.home.name} vs ${g.away.name}`;
  const score=g.completed&&g.home.score!=null&&g.away.score!=null?`${g.home.score} – ${g.away.score}`:'VS';
  useEffect(()=>{if(didFlip.current)(back?backFlip:frontFlip).current?.focus()},[back]);
  useEffect(()=>{if(confirm)keep.current?.focus()},[confirm]);
@@ -72,8 +72,36 @@ export function InlineTicketCard({ticket,onFavourite,onDelete,onMatch,design='cu
  const flip=()=>{stopHint();didFlip.current=true;setBack(b=>!b)};
  return <article className={"ticket-collection-item ticket-flip-stage ticket-design-"+design} aria-label={name+' match ticket'} onPointerDownCapture={stopHint} onKeyDownCapture={stopHint} onFocusCapture={stopHint} style={palette(ticket)} data-competition={g.league} data-pass-art={design==='matchday'?ticketPassArtwork(g.league):undefined} data-ticket-national={ticket.national?'true':'false'}><div className={'ticket-flip-inner'+(back?' is-flipped':'')}>
  <div className="virtual-ticket ticket-front ticket-compact" aria-hidden={back} inert={back}><div className="ticket-front-content" inert={confirm}><button className="ticket-flip-hit" ref={frontFlip} type="button" onClick={flip} aria-label={'Flip ticket: '+name+' to highlights'} aria-pressed={back}/>{design==='matchday'?<PassFront ticket={ticket} score={score} video={video}/>:<><div className="ticket-main"><div className="ticket-heading">{ticket.competition.logo&&<span className="ticket-competition-mark"><img src={ticket.competition.logo} alt=""/></span>}<span>{ticket.competition.name}</span><time dateTime={g.date}>{dateLabel(g.date)}</time></div><div className="ticket-teams"><div><Badge team={g.home}/><strong>{g.home.name}</strong></div><div className="ticket-score"><b>{score}</b><small>{g.completed?(score==='VS'?'Final score unavailable':'FULL TIME'):'FINAL SCORE PENDING'}</small></div><div><Badge team={g.away}/><strong>{g.away.name}</strong></div></div><div className="ticket-foot"><span className="ticket-watched"><Monitor size={12}/>Watched live</span><button type="button" onClick={()=>onMatch(g)} aria-label={'Return to match: '+name}><ArrowUpRight size={13}/>Return to Match</button><button type="button" className="ticket-remove" onClick={()=>setConfirm(true)} aria-label={'Delete ticket: '+name}><Trash2 size={13}/>Delete ticket</button></div></div><div className="ticket-stub">{video?<HighlightQR url={video.url}/>:<div className="ticket-qr-pending"><Ticket size={27}/><span>QR pending</span></div>}</div><button className={'ticket-favourite'+(ticket.favourite?' is-favourite':'')} type="button" aria-label={'Favourite '+name} aria-pressed={ticket.favourite} onClick={onFavourite}><Star size={16} fill={ticket.favourite?'currentColor':'none'}/></button></>}</div>{confirm&&<div className="ticket-delete-confirm" role="group" aria-label={'Confirm deletion: '+name}><p role="alert">Delete this ticket from this device?</p><div><button type="button" ref={keep} onClick={()=>{setConfirm(false);frontFlip.current?.focus()}}>Keep ticket</button><button type="button" className="ticket-danger" onClick={onDelete}>Delete permanently</button></div></div>}</div>
- <div className="virtual-ticket ticket-back" aria-hidden={!back} inert={!back}><div className="ticket-back-video">{video?<><a className="ticket-highlight-preview" href={video.url} target="_blank" rel="noopener noreferrer" aria-label={'Watch saved highlights on YouTube: '+name}><img src={video.thumbnail} alt="" loading="lazy"/><span className="ticket-play-icon"><Play size={26} fill="currentColor"/></span><strong>{video.title}</strong></a>{ticket.highlights.length>1&&<label className="ticket-video-choice"><span className="sr-only">Saved video</span><select aria-label={'Saved highlight video: '+name} value={video.id} onChange={e=>setChosen(e.target.value)}>{ticket.highlights.map(v=><option key={v.id} value={v.id}>{v.publisher} · {v.title}</option>)}</select></label>}</>:<div className="ticket-highlights-pending"><Play size={28}/><h3>Highlights pending</h3><p>Added from the app’s existing catalogue when available.</p></div>}</div><aside className="ticket-back-details"><span className="ticket-back-round">MATCHDAY<strong>{g.matchday??'—'}</strong>{!g.matchday&&<small>Not available</small>}</span>{video&&<a className="ticket-youtube-link" href={video.url} target="_blank" rel="noopener noreferrer">Open on YouTube<ExternalLink size={13}/></a>}<button type="button" className="ticket-back-flip" ref={backFlip} onClick={flip} aria-label={'Flip ticket: '+name+' to front'}><ArrowLeftRight size={15}/>Ticket front</button><span className="ticket-back-season">{ticket.season}</span></aside></div>
- </div>{design==='matchday'&&<div className="ticket-pass-actions"><button type="button" onClick={()=>onMatch(g)} aria-label={'Return to match: '+name}><ArrowUpRight size={15}/>Return to Match</button><button type="button" onClick={()=>{stopHint();setBack(false);setConfirm(true)}} aria-label={'Delete ticket: '+name}><Trash2 size={15}/>Delete Ticket</button><button className={ticket.favourite?'is-favourite':''} type="button" aria-label={'Favourite '+name} aria-pressed={ticket.favourite} onClick={onFavourite}><Star size={16} fill={ticket.favourite?'currentColor':'none'}/></button></div>}</article>;
+ <div className="virtual-ticket ticket-back" aria-hidden={!back} inert={!back}>
+  {video ? (
+   <a
+    className="ticket-highlight-preview"
+    href={video.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={'Watch saved highlights on YouTube: '+name}
+   >
+    <img src={video.thumbnail} alt="" loading="lazy"/>
+    <span className="ticket-highlight-label">
+     <Play size={20} fill="currentColor" aria-hidden="true"/>
+     <span>Watch on YouTube</span>
+    </span>
+   </a>
+  ) : (
+   <div className="ticket-highlights-pending">Highlights pending</div>
+  )}
+  <button
+   type="button"
+   className="ticket-back-flip"
+   ref={backFlip}
+   onClick={flip}
+   aria-label={'Flip ticket: '+name+' to front'}
+  >
+   <ArrowLeft size={16} aria-hidden="true"/>
+   Ticket front
+  </button>
+ </div>
+ </div>{design==='matchday'&&<div className="ticket-pass-actions" aria-hidden={back} inert={back}><button type="button" onClick={()=>onMatch(g)} aria-label={'Return to match: '+name}><ArrowUpRight size={15}/>Return to Match</button><button type="button" onClick={()=>setConfirm(true)} aria-label={'Delete ticket: '+name}><Trash2 size={15}/>Delete Ticket</button><button className={ticket.favourite?'is-favourite':''} type="button" aria-label={'Favourite '+name} aria-pressed={ticket.favourite} onClick={onFavourite}><Star size={16} fill={ticket.favourite?'currentColor':'none'}/></button></div>}</article>;
 }
 export default function MatchTickets({onMatch,onBrowse,showFlipHint=false}:any){
  const {tickets,error,act}=useTickets(),[kind,setKind]=useState('all'),[notice,setNotice]=useState('');
