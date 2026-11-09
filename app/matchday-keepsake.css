@@ -203,8 +203,8 @@ html[data-theme=light] .ticket-pass-actions{color:#3c485d}
 }
 .ticket-design-matchday:is([data-pass-art=panorama],[data-pass-art=emboss])
   .ticket-home-stadium-art > img {
+  object-fit: fill;
   object-position: center bottom;
-  transform: scaleX(1.17);
 }
 .ticket-design-matchday[data-pass-art=panorama] .ticket-home-stadium-art {
   background: linear-gradient(90deg, transparent, #34476055 25%, #34476055 75%, transparent) center bottom / 100% 1px no-repeat;
@@ -226,9 +226,9 @@ html[data-theme=light] .ticket-pass-actions{color:#3c485d}
   width: calc(100% + 6px);
 }
 .ticket-design-matchday[data-pass-art=stub] .ticket-home-stadium-art > img {
-  filter: grayscale(1) invert(1) sepia(.75) contrast(1.18);
-  mix-blend-mode: screen;
-  opacity: .9;
+  filter: brightness(0) invert(1) sepia(.65) brightness(.93);
+  mix-blend-mode: normal;
+  opacity: .84;
 }
 .ticket-design-matchday[data-pass-art=stub] .ticket-pass-stub .ticket-qr {
   flex-shrink: 0;
@@ -245,6 +245,10 @@ html[data-theme=light] .ticket-pass-actions{color:#3c485d}
   order: -1;
   height: clamp(25px, 8cqw, 49px);
   background: linear-gradient(90deg, transparent, #62564270, transparent) center bottom / 100% 1px no-repeat;
+}
+.ticket-design-matchday[data-pass-art=frame] .ticket-home-stadium-art:not([data-venue-frame]) > img {
+  filter: contrast(1.28);
+  transform: scaleX(1.45);
 }
 .ticket-design-matchday[data-pass-art=frame]
   .ticket-pass-main:has(.ticket-home-stadium-art:not([data-venue-frame])) {
