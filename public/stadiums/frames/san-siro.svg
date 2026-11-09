@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 290" preserveAspectRatio="none">
+  <defs>
+    <g id="tower" stroke="#29394a" stroke-width="1.5">
+      <path fill="#bba782" d="M5 43Q25 31 51 42L51 286Q26 296 5 286Z"/>
+      <path fill="#27384b" d="M5 53Q28 63 51 53V66Q26 77 5 66ZM5 86Q28 96 51 86V99Q26 110 5 99ZM5 119Q28 129 51 119V132Q26 143 5 132ZM5 152Q28 162 51 152V165Q26 176 5 165ZM5 185Q28 195 51 185V198Q26 209 5 198ZM5 218Q28 228 51 218V231Q26 242 5 231ZM5 251Q28 261 51 251V264Q26 275 5 264Z"/>
+      <path fill="none" stroke="#e9d5ab" stroke-width="3" d="M8 73L48 57M8 106L48 90M8 139L48 123M8 172L48 156M8 205L48 189M8 238L48 222M8 271L48 255"/>
+      <ellipse fill="#dcc89d" cx="28" cy="42" rx="23" ry="9"/>
+      <path fill="none" stroke="#675c51" d="M14 48V285M43 48V285"/>
+    </g>
+    <path id="brace" d="m0 0 19 19 19-19 19 19 19-19"/>
+  </defs>
+  <g transform="translate(0 4)" fill="none" stroke-linejoin="round">
+    <path stroke="#4d2926" stroke-width="7" d="M18 33 31 9H569L582 33M26 29H574"/>
+    <path stroke="#a55443" stroke-width="4" d="M18 33 31 9H569L582 33M26 29H574"/>
+    <g stroke="#924939" stroke-width="2.8">
+      <use href="#brace" x="34" y="10"/><use href="#brace" x="110" y="10"/>
+      <use href="#brace" x="186" y="10"/><use href="#brace" x="262" y="10"/>
+      <use href="#brace" x="338" y="10"/><use href="#brace" x="414" y="10"/>
+      <use href="#brace" x="490" y="10"/>
+    </g>
+  </g>
+  <use href="#tower"/>
+  <use href="#tower" transform="translate(600) scale(-1 1)"/>
+</svg>
