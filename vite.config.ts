@@ -1,1 +1,1 @@
-import {defineConfig} from 'vite';import react from '@vitejs/plugin-react';import path from 'node:path';export default defineConfig({plugins:[react()],resolve:{alias:{'@':path.resolve('.')}},build:{outDir:'dist'}});
+import {defineConfig} from 'vite';import react from '@vitejs/plugin-react';import path from 'node:path';export default defineConfig({plugins:[react()],resolve:{alias:{'@':path.resolve('.')}},build:{outDir:'dist',rolldownOptions:{input:{main:'index.html',ticketQA:'qa-ticket/index.html'}}}});
