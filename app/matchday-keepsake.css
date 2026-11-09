@@ -165,3 +165,106 @@ html[data-theme=light] .ticket-pass-actions{color:#3c485d}
 .ticket-design-matchday:is([data-competition='fifa.world'],[data-competition='uefa.euro']) .ticket-pass-competition>img{mix-blend-mode:normal}
 
 .ticket-pass-actions[aria-hidden=true] { visibility: hidden }
+
+/* The stadium treatment changes by league; the match details stay on paper. */
+.ticket-design-matchday:is([data-pass-art=panorama],[data-pass-art=emboss],[data-pass-art=stub],[data-pass-art=frame])
+  :is(.ticket-pass-date,.ticket-pass-teams,.ticket-pass-venue,.ticket-pass-facts) {
+  margin-left: 0;
+}
+
+.ticket-design-matchday:is([data-pass-art=panorama],[data-pass-art=emboss],[data-pass-art=stub],[data-pass-art=frame])
+  .ticket-pass-teams {
+  align-content: center;
+}
+
+.ticket-design-matchday:is([data-pass-art=panorama],[data-pass-art=emboss],[data-pass-art=stub],[data-pass-art=frame])
+  .ticket-home-stadium-art {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  transform: none;
+}
+.ticket-design-matchday:is([data-pass-art=panorama],[data-pass-art=emboss],[data-pass-art=stub],[data-pass-art=frame])
+  .ticket-home-stadium-art > img {
+  object-position: center;
+  mask-image: none;
+}
+
+/* Premier League and LaLiga reserve a lower band for the home ground. */
+.ticket-design-matchday:is([data-pass-art=panorama],[data-pass-art=emboss])
+  .ticket-pass-main:has(.ticket-home-stadium-art) {
+  grid-template-rows: auto auto minmax(min-content, 1fr) auto auto auto;
+  padding-bottom: 4px;
+}
+.ticket-design-matchday:is([data-pass-art=panorama],[data-pass-art=emboss])
+  .ticket-home-stadium-art {
+  height: clamp(59px, 22cqw, 134px);
+}
+.ticket-design-matchday:is([data-pass-art=panorama],[data-pass-art=emboss])
+  .ticket-home-stadium-art > img {
+  object-fit: fill;
+  object-position: center bottom;
+}
+.ticket-design-matchday[data-pass-art=panorama] .ticket-home-stadium-art {
+  background: linear-gradient(90deg, transparent, #34476055 25%, #34476055 75%, transparent) center bottom / 100% 1px no-repeat;
+}
+.ticket-design-matchday[data-pass-art=emboss] .ticket-home-stadium-art > img {
+  filter: grayscale(1) contrast(.56) brightness(1.45) sepia(.65)
+    drop-shadow(0 1px 0 #6b4b2a77) drop-shadow(0 -1px 0 #fff9de);
+  mix-blend-mode: normal;
+  opacity: .46;
+}
+
+/* Bundesliga leaves the main face clear and engraves the ground on the stub. */
+.ticket-design-matchday[data-pass-art=stub] .ticket-pass-stub {
+  justify-content: space-between;
+  gap: 4px;
+}
+.ticket-design-matchday[data-pass-art=stub] .ticket-home-stadium-art {
+  height: clamp(31px, 12cqw, 71px);
+  width: calc(100% + 6px);
+}
+.ticket-design-matchday[data-pass-art=stub] .ticket-home-stadium-art > img {
+  filter: brightness(0) invert(1) sepia(.65) brightness(.93);
+  mix-blend-mode: normal;
+  opacity: .84;
+}
+.ticket-design-matchday[data-pass-art=stub] .ticket-pass-stub .ticket-qr {
+  flex-shrink: 0;
+}
+
+/* Serie A uses a bespoke perimeter where available. Other grounds use the
+   existing venue engraving in the top border with etched side rules. */
+.ticket-design-matchday[data-pass-art=frame] .ticket-pass-main:has(.ticket-home-stadium-art) {
+  padding-inline: max(12px, 10%);
+  background: linear-gradient(#61534155, #61534133) left 6px center / 1px 90% no-repeat,
+    linear-gradient(#61534155, #61534133) right 6px center / 1px 90% no-repeat;
+}
+.ticket-design-matchday[data-pass-art=frame] .ticket-home-stadium-art:not([data-venue-frame]) {
+  order: -1;
+  height: clamp(25px, 8cqw, 49px);
+  background: linear-gradient(90deg, transparent, #62564270, transparent) center bottom / 100% 1px no-repeat;
+}
+.ticket-design-matchday[data-pass-art=frame] .ticket-home-stadium-art:not([data-venue-frame]) > img {
+  filter: contrast(1.28);
+  transform: scaleX(1.45);
+}
+.ticket-design-matchday[data-pass-art=frame]
+  .ticket-pass-main:has(.ticket-home-stadium-art:not([data-venue-frame])) {
+  grid-template-rows: auto auto auto minmax(min-content, 1fr) auto auto;
+  padding-top: 4px;
+}
+.ticket-design-matchday[data-pass-art=frame] .ticket-pass-main:has([data-venue-frame]) {
+  padding-top: clamp(24px, 7.4cqw, 48px);
+  background: none;
+}
+.ticket-design-matchday[data-pass-art=frame] .ticket-home-stadium-art[data-venue-frame] {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 78.5%;
+  height: 100%;
+}
+.ticket-design-matchday[data-pass-art=frame] [data-venue-frame] > img {
+  object-fit: fill;
+}

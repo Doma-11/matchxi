@@ -71,9 +71,10 @@ test('collection hints only its first card and does not repeat after filtering',
 });
 
 
-test('Matchday keepsakes exclude stadiums for exactly the three UEFA club cups',async()=>{
+test('Matchday selects league stadium treatments and excludes stadiums for the three UEFA club cups',async()=>{
+ const leagueTreatments={'eng.1':'panorama','esp.1':'emboss','ger.1':'stub','ita.1':'frame'};
  for(const league of ['uefa.champions','uefa.europa','uefa.europa.conf','eng.1','esp.1','ger.1','ita.1','cro.1','uefa.nations','uefa.euro','fifa.world','fifa.friendly','fifa.worldq.uefa']){
-  const expected=league.startsWith('uefa.')&&['uefa.champions','uefa.europa','uefa.europa.conf'].includes(league)?'competition':'stadium';
+  const expected=leagueTreatments[league]??(['uefa.champions','uefa.europa','uefa.europa.conf'].includes(league)?'competition':'stadium');
   assert.equal(ticketPassArtwork(league),expected);
   const ui=hooks(InlineTicketCard,{ticket:cardTicket({game:{...fixture,league}}),design:'matchday',onFavourite(){},onDelete(){},onMatch(){}});
   try{const tree=await flush(ui);assert.equal(tree.props['data-pass-art'],expected);assert.equal(nodes(tree,n=>n.props?.className==='ticket-pass-actions').length,1)}finally{ui.unmount()}
@@ -137,3 +138,31 @@ test('national keepsakes show their fixed home ground when fixture venue is abse
  assert.equal(passCompetitionLogo(cardTicket({game:{...fixture,league:'uefa.nations'}})),'/logos/nations-league-ticket.svg');
  const ticket=cardTicket({game:{...fixture,league:'esp.1',home:{name:'Real Madrid'},away:{name:'Liverpool'}}}),ui=hooks(HomeStadiumArt,{ticket});try{const tree=await flush(ui);assert.equal(nodes(tree,n=>n.type==='a').length,0);assert.equal(nodes(tree,n=>n.type==='img').length,1)}finally{ui.unmount()}
  });
+
+
+test('Bundesliga places its home stadium below the QR and Serie A has venue-specific frames with a fallback',async()=>{
+ const german=cardTicket({game:{...fixture,league:'ger.1',home:{name:'Bayern Munich'}}});
+ const pass=PassFront({ticket:german,score:'2 – 1',video:savedVideo});
+ const stub=find(pass,n=>n.type==='aside');
+ const art=find(stub,n=>n.type===HomeStadiumArt);
+ assert.match(art.props.art.src,/bayern/);
+ assert.equal(nodes(find(pass,n=>n.props?.className==='ticket-main ticket-pass-main'),n=>n.type===HomeStadiumArt).length,0);
+
+ for(const [home,frame] of [['Internazionale','san-siro'],['AC Milan','san-siro'],['Roma','stadio-olimpico'],['Lazio','stadio-olimpico']]){
+  const ticket=cardTicket({game:{...fixture,league:'ita.1',home:{name:home}}});
+  const ui=hooks(HomeStadiumArt,{ticket});
+  try{
+   let tree=await flush(ui);
+   const img=find(tree,n=>n.type==='img');
+   assert.equal(img.props.src,'/stadiums/frames/'+frame+'.svg');
+   assert.equal(tree.props['data-venue-frame'],'true');
+   img.props.onError();
+   tree=await flush(ui);
+   assert.equal(tree.props['data-venue-frame'],undefined);
+   const fallback=find(tree,n=>n.type==='img');
+   assert.match(fallback.props.src,/\.webp$/);
+   fallback.props.onError();
+   assert.equal(await flush(ui),null);
+  }finally{ui.unmount()}
+ }
+});

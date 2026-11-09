@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 290" preserveAspectRatio="none">
+  <defs>
+    <g id="pier" fill="#d8c29b" stroke="#635b50" stroke-width="1.7">
+      <path d="M4 74 52 57V71L4 91ZM4 82 52 65V74L4 94Z"/>
+      <path d="M8 92 25 86V260L8 266ZM32 84 48 78V258L32 263Z"/>
+      <path fill="#e9d5b0" d="M12 91 19 88V261L12 263ZM36 83 42 81V259L36 261Z"/>
+      <path d="M4 265 52 252V267L4 280ZM1 280 55 266V278L1 289Z"/>
+    </g>
+  </defs>
+  <path fill="#d4bc92" stroke="#635b50" stroke-width="2" d="M5 70Q98 4 300 5T595 70L590 91Q486 27 300 27T10 91Z"/>
+  <path fill="none" stroke="#85745f" stroke-width="2" d="M7 77Q103 12 300 13T593 77M11 85Q109 20 300 21T589 85"/>
+  <path fill="none" stroke="#917e66" stroke-width="1.4" d="M50 50 55 65M81 37 87 51M113 28 118 42M147 20 150 35M182 14 184 30M219 9 220 26M258 7 258 24M300 6V24M342 7V24M381 9 380 26M418 14 416 30M453 20 450 35M487 28 482 42M519 37 513 51M550 50 545 65"/>
+  <use href="#pier"/>
+  <use href="#pier" transform="translate(600) scale(-1 1)"/>
+</svg>
