@@ -2,7 +2,7 @@ import {build} from 'esbuild';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 async function load(file){const c=await build({entryPoints:[file],bundle:true,platform:'node',format:'esm',write:false});return import('data:text/javascript;base64,'+Buffer.from(c.outputFiles[0].text).toString('base64'))}
-const {screenKey,navigationEntry,matchReturnEntry,instantScroll,startMatchBack,resolvedHistoryState}=await load('app/navigation-history.ts');
+const {screenKey,navigationEntry,matchReturnEntry,instantScroll,startMatchBack,resolvedHistoryState,isAppHistoryEntry,canNavigateBack}=await load('app/navigation-history.ts');
 const {normalizeMatchFilter,matchesStatusFilter}=await load('app/match-list-filter.ts');
 const source={page:'home',league:'eng.1',selectedGame:null,selected:null};
 const match={...source,selectedGame:{league:'eng.1',id:'10'}};
@@ -10,7 +10,7 @@ test('opening a match saves the source page/scroll and gives the new match a zer
  const result=navigationEntry({touchline:true,screen:source,scrollY:1800,depth:0},match,1800);
  assert.equal(result.push,true);assert.equal(result.entry.depth,1);assert.equal(result.entry.scrollY,0);
  assert.deepEqual(result.entry.matchReturn,{screen:source,scrollY:1800});
- assert.deepEqual(matchReturnEntry(result.entry,match),{touchline:true,screen:source,scrollY:1800,depth:0});
+ assert.deepEqual(matchReturnEntry(result.entry,match),{matchxi:true,screen:source,scrollY:1800,depth:0});
 });
 test('background object/score changes cannot add another history entry for the same match',()=>{
  const initial=navigationEntry({screen:source,scrollY:600,depth:0},match,600).entry;
@@ -52,3 +52,17 @@ test('Upcoming includes only unstarted, non-cancelled fixtures; All retains fini
 });
 
 test('unusable or duplicate-match popstate still resolves to the requested source screen',()=>{const target=matchReturnEntry(navigationEntry({screen:source,scrollY:1200,depth:0},match,1200).entry,match);assert.equal(resolvedHistoryState(null,target),target);assert.equal(resolvedHistoryState({touchline:true,screen:match},target),target);assert.equal(resolvedHistoryState(target,target),target);assert.equal(resolvedHistoryState(null,null),null)});
+
+test('club, match and legacy entries are recognized by the same Back guard',()=>{
+ const root={matchxi:true,screen:source,depth:0,scrollY:55};
+ const club={...source,page:'club',club:{id:'club-1'}};
+ const clubEntry=navigationEntry(root,club,55).entry;
+ const matchEntry=navigationEntry(clubEntry,{...club,selectedGame:match.selectedGame},200).entry;
+ assert.equal(canNavigateBack(clubEntry,2),true);
+ assert.equal(canNavigateBack(matchEntry,3),true);
+ assert.equal(canNavigateBack({...clubEntry,matchxi:undefined,touchline:true},2),true);
+ assert.equal(canNavigateBack(clubEntry,1),false);
+ assert.equal(canNavigateBack(root,3),false);
+ assert.equal(isAppHistoryEntry({depth:5,screen:club}),false);
+ assert.strictEqual(resolvedHistoryState(clubEntry,matchReturnEntry(matchEntry,match)),clubEntry);
+});
