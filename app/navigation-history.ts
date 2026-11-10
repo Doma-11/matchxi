@@ -1,3 +1,12 @@
+// Older MatchXI sessions may still contain entries from the previous marker.
+export function isAppHistoryEntry(state:any){
+ return Boolean(state?.screen && (state.matchxi===true || state.touchline===true));
+}
+
+export function canNavigateBack(state:any,length:number){
+ return isAppHistoryEntry(state) && state.depth>0 && length>1;
+}
+
 // A match is one screen even if background club/team state changes. Comparing
 // complete fixture objects can otherwise create extra Back steps or stall restore.
 export function screenKey(screen:any){
@@ -7,11 +16,11 @@ export function screenKey(screen:any){
 export function navigationEntry(current:any,screen:any,scrollY:number){
  const changed=screenKey(current?.screen)!==screenKey(screen),enteringMatch=changed&&Boolean(screen.selectedGame);
  const origin=enteringMatch?(current?.screen?.selectedGame?current.matchReturn:{screen:current?.screen,scrollY:current?.scrollY??scrollY}):current?.matchReturn;
- return {push:changed,entry:{touchline:true,screen,scrollY:enteringMatch?0:scrollY,depth:(current?.depth||0)+(changed?1:0),...(screen.selectedGame&&origin?{matchReturn:origin}:{})}};
+ return {push:changed,entry:{matchxi:true,screen,scrollY:enteringMatch?0:scrollY,depth:(current?.depth||0)+(changed?1:0),...(screen.selectedGame&&origin?{matchReturn:origin}:{})}};
 }
 export function matchReturnEntry(current:any,screen:any){
  const origin=current?.matchReturn;
- return {touchline:true,screen:origin?.screen&&!origin.screen.selectedGame?origin.screen:{...screen,selectedGame:null,selected:null},scrollY:origin?.scrollY??0,depth:Math.max(0,(current?.depth||0)-1)};
+ return {matchxi:true,screen:origin?.screen&&!origin.screen.selectedGame?origin.screen:{...screen,selectedGame:null,selected:null},scrollY:origin?.scrollY??0,depth:Math.max(0,(current?.depth||0)-1)};
 }
 export function instantScroll(top:number){
  const root=document.documentElement,old=root.style.getPropertyValue('scroll-behavior'),priority=root.style.getPropertyPriority('scroll-behavior');
@@ -25,7 +34,7 @@ export function startMatchBack(historyApi:any,screen:any,targetRef:{current:any}
  if(targetRef.current)return;
  const current=historyApi.state,target=matchReturnEntry(current,screen);targetRef.current=target;
  const fallback=()=>{if(!targetRef.current)return;historyApi.replaceState(target,'');targetRef.current=null;restore(target)};
- if(current?.touchline&&current.depth>0&&historyApi.length>1){timerRef.current=schedule(fallback,300);historyApi.back()}else fallback();
+ if(canNavigateBack(current,historyApi.length)){timerRef.current=schedule(fallback,300);historyApi.back()}else fallback();
 }
 
-export function resolvedHistoryState(state:any,requested:any){return requested&&(!state?.touchline||!state.screen||state.screen.selectedGame)?requested:state;}
+export function resolvedHistoryState(state:any,requested:any){return requested&&(!isAppHistoryEntry(state)||state.screen.selectedGame)?requested:state;}

@@ -52,7 +52,7 @@ function hintEnvironment(t,reduced=false){
 }
 test('entry hint smoothly shows back then front once, without resizing or moving focus',async t=>{
  const env=hintEnvironment(t);let started=0;const ui=hooks(InlineTicketCard,{ticket:cardTicket(),autoFlipHint:true,onHintStarted(){started++},onFavourite(){},onDelete(){},onMatch(){}});
- try{let tree=await flush(ui);const style=tree.props.style;assert.equal(front(tree).props.inert,false);t.mock.timers.tick(550);tree=ui.render();assert.equal(back(tree).props.inert,false);assert.deepEqual(tree.props.style,style);t.mock.timers.tick(1000);tree=ui.render();assert.equal(front(tree).props.inert,false);t.mock.timers.tick(10000);tree=ui.render();assert.equal(front(tree).props.inert,false);assert.equal(started,1)}finally{ui.unmount();env.restore()}
+ try{let tree=await flush(ui);const style=tree.props.style;assert.equal(front(tree).props.inert,false);assert.equal(tree.props['data-flip-hint'],'true');t.mock.timers.tick(411);assert.equal(front(ui.render()).props.inert,false);t.mock.timers.tick(2);tree=ui.render();assert.equal(back(tree).props.inert,false);assert.equal(tree.props['data-flip-hint'],'true');assert.deepEqual(tree.props.style,style);t.mock.timers.tick(750);tree=ui.render();assert.equal(front(tree).props.inert,false);t.mock.timers.tick(413);tree=ui.render();assert.equal(tree.props['data-flip-hint'],undefined);assert.equal(started,1)}finally{ui.unmount();env.restore()}
 });
 test('interaction cancels entry hint and does not undo a manual flip',async t=>{
  const env=hintEnvironment(t),ui=hooks(InlineTicketCard,{ticket:cardTicket(),autoFlipHint:true,onFavourite(){},onDelete(){},onMatch(){}});
@@ -165,4 +165,32 @@ test('Bundesliga places its home stadium below the QR and Serie A has venue-spec
    assert.equal(await flush(ui),null);
   }finally{ui.unmount()}
  }
+});
+
+test('directional swipes flip the card without activating the YouTube link or the page swipe',async()=>{
+ const ui=hooks(InlineTicketCard,{ticket:cardTicket(),onFavourite(){},onDelete(){},onMatch(){}});
+ const track=tree=>find(tree,n=>n.props?.className?.startsWith('ticket-flip-inner'));
+ const pointer=(x,y,selector='.ticket-flip-hit')=>({
+  pointerId:1,isPrimary:true,button:0,clientX:x,clientY:y,
+  target:{closest:()=>({matches:options=>options.split(',').includes(selector)})}
+ });
+ const swipe=(tree,dx,dy=0,selector)=>{const p=track(tree).props;p.onPointerDown(pointer(110,80,selector));p.onPointerUp(pointer(110+dx,80+dy,selector));return ui.render()};
+ try{
+  let tree=await flush(ui);
+  assert.equal(tree.props['data-no-swipe'],true);
+  tree=swipe(tree,-65);
+  assert.equal(front(tree).props.inert,false);
+  tree=swipe(tree,58,70);
+  assert.equal(front(tree).props.inert,false);
+  tree=swipe(tree,65,0,'.ticket-remove');
+  assert.equal(front(tree).props.inert,false);
+  tree=swipe(tree,65);
+  assert.equal(back(tree).props.inert,false);
+  tree=swipe(tree,-65,0,'.ticket-highlight-preview');
+  assert.equal(front(tree).props.inert,false);
+  let prevented=false;
+  track(tree).props.onClickCapture({detail:1,preventDefault(){prevented=true},stopPropagation(){}});
+  assert.equal(prevented,true);
+  assert.equal(nodes(back(tree),n=>n.type==='a').length,1);
+ }finally{ui.unmount()}
 });
