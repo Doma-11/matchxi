@@ -28,3 +28,48 @@ test('Multiview skips restricted embeds and retains explicit external fallback w
  const view=createMultiviewSession(client,s=>state=s);view.select(0,game('one'));await settle();assert.equal(state[0].index,1);assert.equal(state[0].player.embedUrl,embed('ok'));
  view.step(0,-1);await settle();assert.equal(state[0].player.embedAllowed,false);assert.equal(state[0].error,'Restricted');view.dispose();
 });
+test('A stale or incomplete match update keeps both players mounted; a confirmed finish only stops its own tile',async()=>{
+ let state;
+ const first=game('first'),second=game('second');
+ const client={
+  async listings(g){return {streams:[stream(g.id)]};},
+  async player(s){return {embedAllowed:true,embedUrl:embed(s.url.split('/').pop())};},
+ };
+ const view=createMultiviewSession(client,s=>state=s);
+ view.select(0,first);view.select(1,second);await settle();
+ const [firstPlayer,secondPlayer]=state.map(tile=>tile?.player);
+ assert.ok(firstPlayer?.embedAllowed&&secondPlayer?.embedAllowed);
+ view.reconcile([{...first,state:'pre'},{...second,state:'post'}]);
+ assert.strictEqual(state[0].player,firstPlayer);
+ assert.strictEqual(state[1].player,secondPlayer);
+ assert.equal(state[0].game.state,'in');
+ assert.equal(state[1].game.state,'in');
+
+ const halftime={...first,status:'HT'};
+ view.reconcile([{...first,state:'post',completed:true},halftime]);
+ assert.strictEqual(state[0].game,halftime);
+ assert.strictEqual(state[0].player,firstPlayer);
+ view.reconcile([{...first,state:'post',completed:true}]);
+ assert.equal(state[0].player,null);
+ assert.strictEqual(state[1].player,secondPlayer);
+ view.reconcile([first]);
+ assert.equal(state[0].game.completed,true,'a stale live record cannot reopen a finished tile');
+ view.dispose();
+});
+test('Reloading a player remounts only the selected tile without rechecking sources',async()=>{
+ let state,calls=0;
+ const client={
+  async listings(g){calls++;return {streams:[stream(g.id)]};},
+  async player(s){calls++;return {embedAllowed:true,embedUrl:embed(s.url.split('/').pop())};},
+ };
+ const view=createMultiviewSession(client,s=>state=s);
+ view.select(0,game('a'));view.select(1,game('b'));await settle();
+ const [first,second]=state;
+ const before=calls;
+ view.reload(1);
+ assert.deepEqual(state[0],first);
+ assert.strictEqual(state[1].player,second.player);
+ assert.equal(state[1].reloadCount,1);
+ assert.equal(calls,before);
+ view.dispose();
+});
