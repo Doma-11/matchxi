@@ -1,5 +1,5 @@
 import {firstEmbeddableStream,streamGameKey,streamStep} from './stream-session';
-export type MultiviewTile={game:any;streams:any[];index:number;player:any;busy:boolean;error:string}|null;
+export type MultiviewTile={game:any;streams:any[];index:number;player:any;busy:boolean;error:string;reloadCount?:number}|null;
 /** Four independent selections, one shared cache, at most two discovery jobs. No timers. */
 export function createMultiviewSession(client:any,changed:(tiles:MultiviewTile[])=>void,initial?:MultiviewTile){
  const tiles:MultiviewTile[]=[initial||null,null,null,null],requests:(AbortController|null)[]=[null,null,null,null];
@@ -28,8 +28,35 @@ export function createMultiviewSession(client:any,changed:(tiles:MultiviewTile[]
   select:(i:number,game:any)=>load(i,game),
   step(i:number,direction:number){if(!valid(i))return;const tile=tiles[i];if(tile&&!tile.busy&&tile.streams.length>1)load(i,tile.game,streamStep(tile.index,direction,tile.streams.length));},
   retry(i:number){if(valid(i)&&tiles[i]&&!tiles[i]!.busy)load(i,tiles[i]!.game);},
+  reload(i:number){
+   if(!valid(i))return;
+   const tile=tiles[i];
+   if(!tile?.player?.embedAllowed||tile.busy||tile.game.completed)return;
+   tiles[i]={...tile,reloadCount:(tile.reloadCount??0)+1};
+   emit();
+  },
   remove(i:number){if(!valid(i))return;stop(i);tiles[i]=null;emit();},
-  reconcile(games:any[]){let dirty=false;for(let i=0;i<4;i++){const tile=tiles[i];if(!tile)continue;const latest=games.find(g=>streamGameKey(g)===streamGameKey(tile.game));if(latest&&latest!==tile.game){tiles[i]={...tile,game:latest};dirty=true;if(latest.completed||latest.state!=='in'){stop(i);tiles[i]={...tiles[i]!,busy:false,player:null,error:'This match is no longer live.'};}}}if(dirty)emit();},
+  reconcile(games:any[]){
+   if(disposed)return;
+   const updates=new Map(games.map(game=>[streamGameKey(game),game]));
+   let dirty=false;
+   for(let i=0;i<tiles.length;i++){
+    const tile=tiles[i];
+    if(!tile||tile.game.completed)continue;
+    const latest=updates.get(streamGameKey(tile.game));
+    if(!latest||latest===tile.game)continue;
+
+    // A cached scheduled record or an incomplete status update is not full time.
+    if(latest.completed===true){
+     stop(i);
+     tiles[i]={...tile,game:latest,busy:false,player:null,error:'This match is no longer live.'};
+    }else if(latest.state==='in'){
+     tiles[i]={...tile,game:latest};
+    }else continue;
+    dirty=true;
+   }
+   if(dirty)emit();
+  },
   dispose(){disposed=true;queue.length=0;requests.forEach(c=>c?.abort());}
  };
 }
