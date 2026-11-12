@@ -22,13 +22,10 @@ import {GET as matchHighlights} from '../../app/api/match-highlights/route';
 import {GET as matchDetail} from '../../app/api/match-detail/route';
 import {liveResponseLifetime} from '../../app/live-response-cache';
 import {getStore} from '@netlify/blobs';
-import {STREAM_PLAYER_TTL_MS} from '../../app/stream-embed';
 import {createHash} from 'node:crypto';
 const pending=new Map<string,Promise<Response>>();
 function lifetime(name:string,data:any,url:URL){
  if(name==='daily-report')return 60;
- if(name==='stream-player')return STREAM_PLAYER_TTL_MS/1000;
- if(name==='match-streams')return data.streams?.length?31536000:0;
  if(name==='match-highlights'&&data.matches?.length===0){const age=Date.now()-Date.parse(url.searchParams.get('date')||'');if(age>=0&&age<26*3600000)return 900;}
  if(name==='match-live')return liveResponseLifetime(data.game,url);
  if(name==='match-detail'){if(!data.pollLookupCheckedAt)return 0;if(data.statsUpgradeRetryAt&&data.playerDataVersion<7)return Math.max(60,Math.round((Date.parse(data.statsUpgradeRetryAt)-Date.now())/1000)||60);if(data.playerDataVersion!==7)return 0;if(data.game?.completed)return data.finalPlayerData?.status==='saved'?604800:Math.max(60,Math.min(604800,Math.round((Date.parse(data.finalPlayerData?.nextCheckAt)-Date.now())/1000)||900));return data.game?.state==='in'?300:1800;}
@@ -41,7 +38,8 @@ async function handle(request:Request){
  if(request.method!=='GET')return Response.json({error:'Method not allowed'},{status:405});
  const routes:Record<string,any>={'stream-player':streamPlayer,'match-streams':matchStreams,'daily-report':dailyReport,'usage-reports':usageReports,'tournament-bracket':tournamentBracket,'match-highlights':matchHighlights,'match-day':matchDay,'match-detail':matchDetail,'match-live':matchLive,catalogue,highlights,'national-highlights':nationalHighlights,'national-teams':nationalTeams,'league-dashboard':dashboard,matches};
  if(!routes[name])return Response.json({error:'Not found'},{status:404});
- if(['daily-report','usage-reports'].includes(name))return routes[name](new NextRequest(request));
+ // Stream routes own their short-lived caches so a manual refresh replaces the same saved result.
+ if(['daily-report','usage-reports','match-streams','stream-player'].includes(name))return routes[name](new NextRequest(request));
  const params=new URLSearchParams(url.searchParams);params.sort();
  const key=createHash('sha256').update(name+'?'+params.toString()).digest('hex');
  const store=getStore({name:'matchxi-response-cache'});
