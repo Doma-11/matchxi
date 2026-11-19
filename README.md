@@ -53,7 +53,7 @@ The app saves **video links and metadata**, not video footage. YouTube or the ex
 
 ## Experimental Goal Replays
 
-An opt-in Phase 1 replay test is available under **Settings → Appearance → Goal Replays preview**. It defaults off and includes a test without a live match. It tries the supplied Reddit post embed; automatic match searches are not enabled. See [testing and rollback notes](docs/goal-replays-phase-1.md).
+An opt-in Phase 1 replay test is available under **Settings → Appearance → Goal Replays preview**. It defaults off and includes a test without a live match. It supports Streamable’s video-only embedded player through a manual link test; the supplied Wirtz clip is currently external-only. Reddit post cards and automatic match searches are not enabled. See [testing and rollback notes](docs/goal-replays-phase-1.md).
 
 ## Technology
 
