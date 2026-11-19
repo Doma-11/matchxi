@@ -50,3 +50,12 @@
 .stream-switch-popup .goal-replay-lab-note{margin:0;padding:10px 14px;background:var(--stream-surface);color:#c0d1e8;font-size:12px;line-height:1.5}
 
 html[data-theme=light] .goal-replay-test-button{border-color:#bcc8d7;background:#f4f7fb;color:#182235}
+.stream-switch-popup .goal-replay-external{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:7px 10px;color:var(--accent);font-size:12px;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:9px;white-space:nowrap;flex:none}
+.stream-switch-popup .goal-replay-report{background:transparent;border:0;padding:0;color:var(--accent);font-size:11px;text-align:left;min-height:32px;width:max-content}
+.stream-switch-popup .goal-replay-manual{padding:12px;background:var(--stream-surface);border-top:1px solid color-mix(in srgb,var(--accent) 24%,transparent);color:#fff}
+.stream-switch-popup .goal-replay-manual label{display:block;font-size:13px;margin-bottom:7px}
+.stream-switch-popup .goal-replay-manual>div{display:flex;gap:8px;flex-wrap:wrap}
+.stream-switch-popup .goal-replay-manual input{flex:1;min-width:160px;max-width:100%;background:#ffffff09;border:1px solid #ffffff40;border-radius:8px;color:#fff;min-height:44px;padding:8px;font-size:16px}
+.stream-switch-popup .goal-replay-manual button{min-height:44px;border:1px solid var(--accent);border-radius:8px;padding:8px 12px;background:color-mix(in srgb,var(--stream-brand) 70%,var(--stream-surface));color:#fff;font-size:12px}
+.stream-switch-popup .goal-replay-manual p{margin:7px 0 0;color:#b7cbe3;font-size:11px;line-height:1.5}
+@media(max-width:760px){.stream-switch-popup .goal-replay-report{min-height:44px}}

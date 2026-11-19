@@ -8,24 +8,30 @@ export function setGoalReplaysEnabled(enabled:boolean){
  try{window.localStorage.setItem(GOAL_REPLAYS_KEY,enabled?'on':'off');}catch{}
  window.dispatchEvent(new CustomEvent(GOAL_REPLAYS_EVENT,{detail:enabled}));
 }
-export type GoalReplay={id:string;minute:string;scorer:string;team:string;match:string;score:string;postUrl:string;videoUrl:string;testOnly:true};
+export type GoalReplay={id:string;minute:string;scorer:string;team:string;match:string;score:string;postUrl:string;videoUrl:string;testOnly:true;kind?:'goal'|'player-test'};
 export const WIRTZ_TEST_REPLAY:GoalReplay={
  id:'wirtz-1xy15gb',minute:'60′',scorer:'Florian Wirtz',team:'Germany',match:'Germany vs Netherlands',score:'2–0',
  postUrl:'https://www.reddit.com/r/soccer/comments/1xy15gb/germany_2_0_netherlands_f_wirtz_60/',
  videoUrl:'https://streamin.me/v/cfb904d3',testOnly:true,
 };
-/** Strictly accept post links, never arbitrary HTML or video/page iframes. */
-export function redditSoccerPost(raw:string){
- try{const url=new URL(raw);if(url.protocol!=='https:'||!['www.reddit.com','reddit.com'].includes(url.hostname)||url.username||url.password||url.port||!/^\/r\/soccer\/comments\/[a-z0-9]+\/[a-z0-9_]+\/?$/i.test(url.pathname))return null;
- return 'https://www.reddit.com'+url.pathname.replace(/\/?$/,'/');}catch{return null;}
-}
-const escapeHtml=(value:string)=>value.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]!));
-/** Reddit's documented blockquote/widgets.js format. It runs in an isolated
- * srcDoc frame only after Replay is pressed; required branding is untouched.
- * The load message reports an embed frame loading, never successful playback.
+/** Only a documented video-player URL is returned. A watch page, Reddit post,
+ * arbitrary iframe URL, or extracted media URL is never used as the player.
+ * Streamable web apps must use its player, not signed/raw media URLs.
+ * https://streamable-support.zendesk.com/hc/en-us/articles/35415648975892
  */
-export function redditReplayDocument(replay:GoalReplay){
- const post=redditSoccerPost(replay.postUrl);if(!post)return null;
- const title=escapeHtml(`${replay.match} · ${replay.scorer} ${replay.minute}`);
- return `<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><base target="_blank"><style>body{margin:0;padding:8px;background:#0b111b;color:#edf3fb;font:14px Arial,sans-serif}a{color:#8dccff}blockquote{margin:0 auto;max-width:740px}</style></head><body><blockquote class="reddit-embed-bq" data-embed-theme="dark"><a href="${escapeHtml(post)}">${title}</a><br>in <a href="https://www.reddit.com/r/soccer/">r/soccer</a></blockquote><script>const report=state=>parent.postMessage({type:'matchxi-replay-embed',state},'*');new MutationObserver(()=>{for(const frame of document.querySelectorAll('iframe')){if(frame.dataset.observed)continue;frame.dataset.observed='true';frame.addEventListener('load',()=>report('loaded'));}}).observe(document.body,{childList:true,subtree:true});<\/script><script async src="https://embed.reddit.com/widgets.js" charset="UTF-8" onerror="report('failed')"><\/script></body></html>`;
+export function supportedReplayEmbed(raw:string){
+ try{
+  const url=new URL(raw);
+  if(url.protocol!=='https:'||!['streamable.com','www.streamable.com'].includes(url.hostname)||url.username||url.password||url.port)return null;
+  const id=url.pathname.match(/^\/(?:e\/)?([a-z0-9]{2,32})\/?$/i)?.[1];
+  if(!id)return null;
+  return {provider:'Streamable',url:`https://streamable.com/e/${id}?autoplay=0&loop=0`,videoUrl:`https://streamable.com/${id}`};
+ }catch{return null;}
+}
+/** The manual compatibility test does not assign an unverified URL to Wirtz.
+ * It remains in component memory only and is never saved or searched for.
+ */
+export function manualReplayTest(raw:string):GoalReplay|null{
+ const embed=supportedReplayEmbed(raw);if(!embed)return null;
+ return {id:'manual-'+new URL(embed.videoUrl).pathname.slice(1),minute:'',scorer:'Manual video test',team:embed.provider,match:'Manual video test',score:'',postUrl:'',videoUrl:embed.videoUrl,testOnly:true,kind:'player-test'};
 }

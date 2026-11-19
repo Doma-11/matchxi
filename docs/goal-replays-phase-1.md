@@ -1,75 +1,55 @@
 # Goal Replays — Phase 1
 
-Branch: `feature/goal-replays-poc`
-Base: `e027828` (`main` when work started).
+## Current behaviour
 
-## Scope
+Goal Replays is opt-in under **Settings → Appearance → Goal Replays preview**. It defaults off and adds no API routes, score calls, background discovery, scheduled jobs, video processing, video storage or provider accounts.
 
-This is an opt-in playback proof of concept, not Reddit discovery. It adds no API routes, credentials, schedules, score calls, caches, video processing, or video storage. Existing score refresh and stream discovery code is unchanged.
+The initial Reddit post embed was removed after the owner’s phone test showed a post card without the goal video. Reddit is a source link, not the playback provider. No Reddit scripts or post iframes are loaded by this feature.
 
-The supplied Florian Wirtz clip is explicitly labelled **test replay: Germany vs Netherlands**. It is never represented as a goal from the current fixture. The chronological goal row shows minute, scorer, scoring team and score. No fictional goals from the design are included.
+The supplied Florian Wirtz goal remains explicitly labelled **test clip: Germany vs Netherlands** and is not represented as a goal from the watched fixture. Its Streamin URL currently has no verified supported player endpoint, so the row offers **Open video** and states that in-app playback is unavailable for that host. Selecting an unsupported link does not shrink, replace, reload or unmount the live iframe.
 
-The host page at `https://streamin.me/v/cfb904d3` was reachable during research, but a supported Streamin embed endpoint was not established. Do not invent an embed URL, extract a media URL, iframe the watch page, proxy footage, or bypass restrictions. Phase 1 therefore tries Reddit's official post embed and offers the supplied host video as a new-tab external link. A post rendering does not establish that its externally linked video plays inside the embed.
+## Supported video-only player
 
-Official references consulted:
+The adapter accepts HTTPS Streamable watch/player links and builds the documented `https://streamable.com/e/{id}` player URL. Credentials, alternate ports, other domains and unsupported paths are rejected. Extra query parameters are discarded; autoplay and loop are off. Provider controls/branding remain intact. No raw media URL is extracted or played, and footage is delivered directly by Streamable.
 
-- https://support.reddithelp.com/hc/en-us/articles/360043033532-How-do-I-embed-a-Reddit-post-or-comment-in-an-article-or-other-publication
-- https://publish.reddit.com/assets/Reddit_Embed_Documentation.pdf
-- https://streamin.me/faq
+References:
 
-The official blockquote/widgets.js markup runs inside an isolated sandboxed srcDoc iframe only after **Replay** is selected. The app does not hide Reddit's attribution or controls. A source-checked message reports embed-frame loading, never successful video playback. Error and delayed-load states retain external links. The app cannot inspect a third-party player to reliably detect playback success.
+- https://streamable-support.zendesk.com/hc/en-us/articles/35415601982740-Embedding-Basics
+- https://streamable-support.zendesk.com/hc/en-us/articles/35415648975892-Editing-the-Embed-Code
+- https://streamable-support.zendesk.com/hc/en-us/articles/35415672400916-API-Documentation
 
-## Try it
+A supported player fills the main viewing area while CSS resizes the existing live iframe into the corner. Closing with × removes the replay iframe and restores the same live iframe dimensions. Escape from app controls closes replay before the live dialog. The chrome inherits the watched competition’s existing palette and assets.
 
-1. Open **Settings → Appearance → Goal Replays preview**.
-2. Turn on **Enable Goal Replays**. This device-local preference defaults off.
-3. Select **Test without a live match** to open the local clock simulator.
-4. Select **Load test replay**, then **Replay**.
-5. The Reddit post embed takes the main area. The clock iframe becomes a small corner player and should keep counting. Close the replay with **×**, or press Escape from app controls, to return the simulator to the main area.
-6. The same test replay strip is available beneath a real single-match stream when the preference is on.
+An iframe load event means **Player loaded. Press Play in the video.** It does not confirm playback. Provider errors can occur inside a cross-origin iframe; **Video unavailable?** removes that iframe and shows the external fallback. Slow-load and network-error states also retain the external link. No postMessage assertions or fake Playing labels are used.
 
-Loading/refreshing the test list only reads the fixed local metadata; it makes no network requests. Opening Replay loads Reddit's own embed and its resources directly in the browser. The host video is contacted only by following its external link. Phase 2 will need approved Reddit access and brief metadata caching before search/refresh can be enabled. No placeholder Find button pretends to perform a search.
+## Test without a live fixture
 
-## Player isolation and theme
+1. Enable Goal Replays in Settings → Appearance.
+2. Open **Test without a live match**.
+3. Paste a Streamable video link into **Streamable video link** and select **Test video player**.
+4. The video-only player should appear in the main area; the clock simulator stays in the corner.
+5. Press Play in the provider player, then ×. The simulator should keep counting and return to the main area.
 
-The existing live iframe remains in the same DOM position with its existing URL, key, sandbox and permission attributes. A CSS class shrinks that frame; a sibling replay overlay fills the main viewing area. Closing the replay removes its entire iframe subtree, stops its playback and restores the original dimensions. Escape closes the replay before the live dialog. Changing the watched fixture, stream source, closing the live dialog, entering multiview, or disabling the feature clears replay selection.
+This is a manual compatibility test. Its title says **Manual video test / PLAYER TEST**; it never assigns arbitrary footage to Wirtz or another scorer. The URL is held only in component memory, cleared on close/disable, and is not persisted or sent through Netlify. No requests occur while entering or rejecting a URL. Only explicitly opening a supported player contacts the provider.
 
-The replay chrome inherits the watched fixture's `--accent`, `--stream-brand`, and `--stream-surface`. Champions League, Europa League and Conference League reuse the same background assets as their live-player chrome. Reddit's embedded content retains its own required appearance.
-
-Multiview replay controls are deliberately absent in Phase 1. The app does not attempt to mute or pause a cross-origin live player. Two simultaneous videos can use additional bandwidth and decoding resources, play overlapping audio, or trigger a phone browser's media policy. Continuous live playback must be verified with the actual providers and devices.
+**Load test replay** shows the original Wirtz entry, which currently opens externally. No supported mirror of that exact goal was verified during this correction. The alternative official German Football YouTube highlight was also tested on a third-party page and reported that the rights holder blocked external embedding. Do not substitute this highlight as a confirmed playable mirror.
 
 ## Validation
 
-Completed locally:
+Completed locally for the correction:
 
 - `npx tsc --noEmit`
-- `node --test tests/*.test.mjs` — 208 passed
+- `node --test tests/*.test.mjs` — 210 passed
 - `npm run build` — passed; existing large-chunk warning remains
 
-The regression tests exercise feature defaults/disable, safe post validation, escaping, iframe URL/key/sandbox continuity, replay Escape handling, no extra stream requests and existing multiview behaviour. They do not prove DOM identity or real video playback.
+Tests cover the off-by-default preference, strict provider URL normalization, rejection of Reddit/Streamin/arbitrary media as player sources, provider-only markup, external-only fallback, honest manual test metadata, unsupported sources preserving the live view, and source URL/key/sandbox continuity on supported replay open/close.
 
-An additional local-only browser check is included:
+The optional `node scripts/check-goal-replays-browser.mjs` harness uses mocked providers and checks desktop, phone, narrow-phone and landscape layouts, persistent iframe identity, resize/restore, manual-input validation, Escape and fallback. It requires Playwright and Chromium (`CHROMIUM_PATH` may override `/usr/bin/chromium`). Chromium cannot launch in this workspace (`socket() failed: Operation not permitted`), so those browser assertions remain unverified. The runner is not evidence of actual goal or provider playback.
 
-```sh
-node scripts/check-goal-replays-browser.mjs
-```
-
-It requires Playwright and Chromium (`CHROMIUM_PATH` may override `/usr/bin/chromium`). It bundles the real single-stream component, mocks all external provider traffic, and checks iframe DOM identity/load count, CSS sizing/restoration, feature disable, Escape, competition palette and the Settings lab at desktop, phone, narrow-phone and landscape sizes. Mocked Reddit playback must never be described as a successful real-host test.
-
-**Not executed successfully in this workspace:** Chromium launch was blocked by the execution environment (`socket() failed: Operation not permitted`). The browser script bundled successfully but its browser assertions and screenshots remain unverified.
-
-Still required before Phase 2:
-
-- Test the actual supplied Reddit embed and determine whether the linked video plays inline.
-- If Reddit only renders a link card, establish a provider-supported embed or keep external playback as the available result.
-- Verify live playback continuity, sound behaviour and viewport changes on desktop and physical Android/iOS devices.
-- Try loading failure, blocked third-party content, fullscreen, closing replay, source/game switching and disabling the feature during playback.
-- Check that the replay is removed on close and only the live player remains active.
+Still required: verify a currently available Streamable goal mirror, test actual embedded playback from MatchXI, and check physical Android/iOS media/audio behaviour. Two active videos can consume extra bandwidth/decoding resources or trigger browser media policies. The app cannot control the audio of an unrelated cross-origin live player.
 
 ## Disable and revert
 
-- Immediate device-level rollback: turn **Enable Goal Replays** off. The replay and test-list UI disappear without changing the live stream or any saved match data. A cross-tab storage update also disables the UI.
-- Code rollback before merge: keep using `main`; this feature is isolated on its branch.
-- Code rollback after merge: revert the feature commit/merge through a normal PR. No database migration, video objects, secrets or scheduled jobs need cleanup.
+Turn **Enable Goal Replays** off for immediate removal of the feature UI. The same-window event and cross-tab storage update clear active replay state. Production code can be removed by reverting the feature/correction commits in a normal PR. No database migration, video objects, credentials or scheduled jobs need cleanup.
 
-Nothing has been merged or deployed by this work.
+Automatic match discovery remains out of scope until an actual supported goal video passes playback testing. Phase 2 will require permitted Reddit access and brief metadata caching.

@@ -1,5 +1,5 @@
 // Local-only browser regression. All provider responses are mocked: this does
-// NOT establish real Reddit/Streamin playback or physical-phone compatibility.
+// NOT establish real provider playback or physical-phone compatibility.
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import {readFile,mkdir} from 'node:fs/promises';
@@ -21,35 +21,34 @@ let browser;
 try{
  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
  for(const [label,width,height,league] of [['desktop',1100,850,'uefa.champions'],['phone',390,844,'uefa.europa'],['small-phone',320,700,'uefa.champions'],['landscape',844,390,'uefa.champions']]){
-  const context=await browser.newContext({viewport:{width,height}}),page=await context.newPage(),errors=[],requests=[];let liveLoads=0,widgetLoads=0;
+  const context=await browser.newContext({viewport:{width,height}}),page=await context.newPage(),errors=[],requests=[];let liveLoads=0,playerLoads=0;
   page.on('pageerror',error=>errors.push(error.message));page.on('request',request=>requests.push(request.url()));
-  await page.route('**/*',async route=>{const url=route.request().url();if(url.startsWith(origin))return route.continue();if(url==='https://dlive.sx/stream/test.php'){liveLoads++;return route.fulfill({contentType:'text/html',body:'<html><body>Mock live stream<script>window.started=Date.now()</script></body></html>'});}if(url==='https://embed.reddit.com/widgets.js'){widgetLoads++;return route.fulfill({contentType:'text/javascript',body:'const player=document.createElement("iframe");player.srcdoc="<p>Mock official Reddit post</p>";document.body.appendChild(player);'});}return route.abort();});
+  await page.route('**/*',async route=>{const url=route.request().url();if(url.startsWith(origin))return route.continue();if(url==='https://dlive.sx/stream/test.php'){liveLoads++;return route.fulfill({contentType:'text/html',body:'<html><body>Mock live stream</body></html>'});}if(url.startsWith('https://streamable.com/e/5rneah?')){playerLoads++;return route.fulfill({contentType:'text/html',body:'<html><body>Mock provider video player</body></html>'});}return route.abort();});
   await page.goto(origin+'/?league='+league);
   assert.equal(await page.getByRole('switch',{name:'Enable Goal Replays preview'}).getAttribute('aria-checked'),'false');
   await page.getByRole('switch',{name:'Enable Goal Replays preview'}).click();
   await page.getByRole('button',{name:'Play stream 1 in app'}).click();
   const live=page.locator('.stream-viewport > iframe');await live.waitFor();
-  await live.evaluate(node=>{window.__liveNode=node;window.__liveWindow=node.contentWindow;});
+  await live.evaluate(node=>{window.__liveNode=node;});
   const large=await live.boundingBox();assert.ok(large.width>250);
-  await page.getByRole('button',{name:'Load test replay'}).click();assert.equal(widgetLoads,0);
-  await page.getByRole('button',{name:'Replay test goal: Florian Wirtz, Germany, 60 minutes'}).click();
-  await page.getByText('Reddit post loaded; video playback is not verified.').waitFor();
-  assert.equal(widgetLoads,1);assert.equal(liveLoads,1);assert.ok(await live.evaluate(node=>node===window.__liveNode&&node.contentWindow===window.__liveWindow));
-  const small=await live.boundingBox();assert.ok(small.width<large.width*.4);
+  await page.getByRole('button',{name:'Load test replay'}).click();
+  assert.equal(playerLoads,0);assert.equal(await page.getByRole('link',{name:'Open video externally: Florian Wirtz, Germany'}).getAttribute('href'),'https://streamin.me/v/cfb904d3');
+  assert.equal(await page.locator('.goal-replay-stage').count(),0);assert.equal(liveLoads,1);assert.ok(await live.evaluate(node=>node===window.__liveNode));
   assert.equal(await page.locator('.stream-popup').evaluate(node=>node.style.getPropertyValue('--accent')),league==='uefa.europa'?'#ff8a32':'#62c7ff');
-  await page.screenshot({path:'qa-temp/goal-replays-browser/'+label+'-replay.png',fullPage:true});
-  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'no page overflow');
-  assert.equal(await page.locator('.goal-replays').evaluate(node=>node.scrollWidth>node.clientWidth),false,'goal list fits');
-  await page.getByRole('button',{name:'Close replay and return to live match'}).click();
-  assert.equal(await page.locator('.goal-replay-embed iframe').count(),0);assert.equal(liveLoads,1);assert.ok(await live.evaluate(node=>node===window.__liveNode));assert.equal((await live.boundingBox()).width,large.width);
-  await page.getByRole('button',{name:'Replay test goal: Florian Wirtz, Germany, 60 minutes'}).click();await page.keyboard.press('Escape');assert.equal(await page.locator('.goal-replay-stage').count(),0);assert.equal(await page.getByRole('dialog').count(),1);
-  await page.getByRole('button',{name:'Replay test goal: Florian Wirtz, Germany, 60 minutes'}).click();
-  await page.evaluate(()=>{localStorage.setItem('matchxi-goal-replays-poc','off');window.dispatchEvent(new CustomEvent('matchxi-goal-replays-change',{detail:false}));});
-  await page.locator('.goal-replay-stage').waitFor({state:'detached'});assert.ok(await live.evaluate(node=>node===window.__liveNode));assert.equal(await page.locator('.goal-replays').count(),0);assert.equal(liveLoads,1);
-  assert.equal(requests.filter(url=>/\/api\/(?:match-live|match-day|match-detail)/.test(url)).length,0);assert.deepEqual(errors,[]);
   await page.getByRole('button',{name:'Close livestream'}).click();
-  // The Settings lab lets the owner try the real embed without a live fixture.
-  await page.getByRole('switch',{name:'Enable Goal Replays preview'}).click();await page.getByRole('button',{name:'Test without a live match'}).click();await page.getByRole('button',{name:'Load test replay'}).click();await page.getByRole('button',{name:'Replay test goal: Florian Wirtz, Germany, 60 minutes'}).click();await page.getByRole('button',{name:'Close replay and return to live match'}).click();await page.getByRole('button',{name:'Close Goal Replays test'}).click();
-  console.log(label+': iframe identity, resize/restore, close/Escape, kill switch, theme, no score requests, Settings lab passed');await context.close();
+  await page.getByRole('button',{name:'Test without a live match'}).click();
+  const clock=page.locator('.stream-viewport > iframe');await clock.waitFor();await clock.evaluate(node=>{window.__clockNode=node;window.__clockWindow=node.contentWindow;});const full=await clock.boundingBox();
+  await page.getByLabel('Streamable video link').fill('https://evil.test/video');await page.getByRole('button',{name:'Test video player',exact:true}).click();await page.getByRole('alert').waitFor();assert.equal(playerLoads,0);
+  await page.getByLabel('Streamable video link').fill('https://streamable.com/5rneah');await page.getByRole('button',{name:'Test video player',exact:true}).click();
+  await page.getByText('Player loaded. Press Play in the video.').waitFor();assert.equal(playerLoads,1);assert.ok(await clock.evaluate(node=>node===window.__clockNode&&node.contentWindow===window.__clockWindow));assert.ok((await clock.boundingBox()).width<full.width*.4);
+  assert.equal(await page.locator('.goal-replay-embed iframe').getAttribute('src'),'https://streamable.com/e/5rneah?autoplay=0&loop=0');
+  assert.equal(requests.some(url=>url.includes('embed.reddit.com')),false);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'no page overflow');assert.equal(await page.locator('.goal-replay-manual').evaluate(node=>node.scrollWidth>node.clientWidth),false,'manual form fits');
+  await page.screenshot({path:'qa-temp/goal-replays-browser/'+label+'-video.png',fullPage:true});
+  await page.getByRole('button',{name:'Close replay and return to live match'}).click();assert.equal(await page.locator('.goal-replay-embed iframe').count(),0);assert.ok(await clock.evaluate(node=>node===window.__clockNode));assert.equal((await clock.boundingBox()).width,full.width);
+  await page.getByRole('button',{name:'Test video player',exact:true}).click();await page.keyboard.press('Escape');assert.equal(await page.locator('.goal-replay-stage').count(),0);assert.equal(await page.getByRole('dialog').count(),1);
+  await page.getByRole('button',{name:'Test video player',exact:true}).click();await page.getByRole('button',{name:'Video unavailable?',exact:true}).click();assert.equal(await page.locator('.goal-replay-embed iframe').count(),0);assert.equal(await page.getByText('In-app playback is unavailable for this video.').isVisible(),true);
+  await page.getByRole('button',{name:'Close Goal Replays test'}).click();await page.getByRole('button',{name:'Test without a live match'}).click();assert.equal(await page.getByLabel('Streamable video link').inputValue(),'');await page.getByRole('button',{name:'Close Goal Replays test'}).click();
+  assert.equal(requests.filter(url=>/\/api\/(?:match-live|match-day|match-detail)/.test(url)).length,0);assert.deepEqual(errors,[]);
+  console.log(label+': external-only goal fallback, video-only provider, simulator continuity/resize/restore, invalid source, Escape and playback fallback passed');await context.close();
  }
 }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}
