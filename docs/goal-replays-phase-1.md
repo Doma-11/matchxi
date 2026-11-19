@@ -53,3 +53,7 @@ Still required: verify a currently available Streamable goal mirror, test actual
 Turn **Enable Goal Replays** off for immediate removal of the feature UI. The same-window event and cross-tab storage update clear active replay state. Production code can be removed by reverting the feature/correction commits in a normal PR. No database migration, video objects, credentials or scheduled jobs need cleanup.
 
 Automatic match discovery remains out of scope until an actual supported goal video passes playback testing. Phase 2 will require permitted Reddit access and brief metadata caching.
+
+## Ten-goal Nations League test set
+
+The Settings lab also contains 10 historical goals from 15–16 November 2026. See [the per-goal checks and provenance](nations-league-replay-test-catalogue.md). All ten currently resolve to Streamin and use the external-only fallback. The list is bundled metadata, not an automatic Reddit search, and it is not supplied to unrelated live fixtures.
