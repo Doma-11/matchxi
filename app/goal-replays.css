@@ -59,3 +59,5 @@ html[data-theme=light] .goal-replay-test-button{border-color:#bcc8d7;background:
 .stream-switch-popup .goal-replay-manual button{min-height:44px;border:1px solid var(--accent);border-radius:8px;padding:8px 12px;background:color-mix(in srgb,var(--stream-brand) 70%,var(--stream-surface));color:#fff;font-size:12px}
 .stream-switch-popup .goal-replay-manual p{margin:7px 0 0;color:#b7cbe3;font-size:11px;line-height:1.5}
 @media(max-width:760px){.stream-switch-popup .goal-replay-report{min-height:44px}}
+.stream-switch-popup .goal-replays-summary{font-size:11px;line-height:1.5;color:var(--accent);margin:6px 0 0}
+.stream-switch-popup .goal-replay-scorer small{overflow-wrap:anywhere;line-height:1.45}
