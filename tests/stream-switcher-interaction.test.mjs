@@ -13,7 +13,7 @@ const find=(tree,p)=>{const values=nodes(tree,p);assert.ok(values.length,'reques
 const button=(tree,label)=>find(tree,n=>n.type==='button'&&n.props['aria-label']===label);
 const storage=()=>{const m=new Map();return {getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v)};};
 async function flush(ui){for(let i=0;i<16;i++){await new Promise(resolve=>setImmediate(resolve));ui.render();}return ui.render();}
-function environment(fetcher){const old={fetch:globalThis.fetch,window:globalThis.window,document:globalThis.document},local=storage(),session=storage(),listeners=new Map();globalThis.fetch=fetcher;globalThis.window={localStorage:local,sessionStorage:session};globalThis.document={fullscreenElement:null,addEventListener:(name,fn)=>listeners.set(name,fn),removeEventListener:name=>listeners.delete(name)};return {local,session,listeners,restore(){Object.assign(globalThis,old);}};}
+function environment(fetcher){const old={fetch:globalThis.fetch,window:globalThis.window,document:globalThis.document},local=storage(),session=storage(),listeners=new Map();globalThis.fetch=fetcher;globalThis.window={localStorage:local,sessionStorage:session,addEventListener:(name,fn)=>listeners.set('window:'+name,fn),removeEventListener:name=>listeners.delete('window:'+name)};globalThis.document={fullscreenElement:null,addEventListener:(name,fn)=>listeners.set(name,fn),removeEventListener:name=>listeners.delete(name)};return {local,session,listeners,restore(){Object.assign(globalThis,old);}};}
 const game=(id,home,away,extra={})=>({id,league:'eng.1',date:new Date().toISOString(),state:'in',completed:false,home:{name:home,score:1},away:{name:away,score:0},...extra});
 const stream=n=>({url:`https://www.soccerstreams.zone/watch/source-${n}.htm`}),embed=n=>`https://dlive.sx/stream/stream-${n}.php`;
 const frames=tree=>nodes(tree,n=>n.type==='iframe');
@@ -94,4 +94,16 @@ test('single player and multiview apply the same reviewed provider sandbox compa
  const otherEnv=environment(()=>{throw Error('unexpected network');}),initial={game:primary,streams:[stream(1)],index:0,player:{embedAllowed:true,embedUrl:current}};
  const multi=hooks(Multiview,{client:{async games(){return {games:[primary]};}},initial,game:primary,fixtures:[],onSingle(){},onClose(){}});
  try{const tree=await flush(multi);assert.equal(frames(tree).length,1);assert.equal(frames(tree)[0].props.src,current);assert.equal(frames(tree)[0].props.sandbox,undefined);}finally{multi.unmount();otherEnv.restore();}
+});
+
+test('replay open/close keeps live URL/key/sandbox and requests unchanged; Escape and kill switch restore live view',async()=>{
+ const primary=game('301','Home','Away'),calls=[];
+ const env=environment(async url=>{calls.push(String(url));return Response.json(String(url).startsWith('/api/match-streams')?{streams:[stream(301)]}:{embedAllowed:true,embedUrl:embed(301)});});
+ env.local.setItem('matchxi-goal-replays-poc','on');const ui=hooks(Panel,{game:primary});
+ try{let tree=await flush(ui);button(tree,'Play stream 1 in app').props.onClick({currentTarget:null});tree=await flush(ui);const before=frames(tree)[0],count=calls.length;
+ const list=find(tree,n=>typeof n.props?.onSelect==='function'&&'selected' in n.props);const testGoal={id:'test',minute:'60′',scorer:'Wirtz',team:'Germany',match:'Germany vs Netherlands',score:'2–0',postUrl:'https://www.reddit.com/r/soccer/comments/abc/goal/',videoUrl:'https://streamin.me/v/cfb904d3',testOnly:true};let focused=0;
+ list.props.onSelect(testGoal,{focus(){focused++;}});tree=ui.render();assert.equal(frames(tree)[0].props.src,before.props.src);assert.equal(frames(tree)[0].key,before.key);assert.equal(frames(tree)[0].props.sandbox,before.props.sandbox);assert.equal(calls.length,count);assert.ok(nodes(tree,n=>n.props?.className==='stream-viewport goal-replay-active').length);
+ const content=find(tree,n=>typeof n.props?.onEscapeKeyDown==='function');let prevented=false;content.props.onEscapeKeyDown({preventDefault(){prevented=true;}});tree=ui.render();assert.equal(prevented,true);assert.equal(focused,1);assert.equal(frames(tree)[0].props.src,before.props.src);assert.equal(nodes(tree,n=>typeof n.props?.replay==='object'&&n.props?.onClose).length,0);assert.ok(dialog(tree));
+ find(tree,n=>typeof n.props?.onSelect==='function'&&'selected' in n.props).props.onSelect(testGoal,{focus(){}});tree=ui.render();env.listeners.get('window:matchxi-goal-replays-change')({detail:false});tree=ui.render();assert.equal(nodes(tree,n=>typeof n.props?.onSelect==='function'&&'selected' in n.props).length,0);assert.equal(frames(tree)[0].props.src,before.props.src);assert.equal(calls.length,count);
+ }finally{ui.unmount();env.restore();}
 });

@@ -1,0 +1,19 @@
+import {useRef,useState,type CSSProperties} from 'react';
+import {Dialog} from 'radix-ui';
+import {X} from 'lucide-react';
+import {GoalReplayList,GoalReplayPlayer,useGoalReplaysEnabled} from './goal-replays-panel';
+import {setGoalReplaysEnabled,type GoalReplay} from './goal-replays';
+import {streamCompetition} from './stream-competition';
+import './stream-switcher.css';
+
+// A local clock exercises a continuously mounted iframe without a live fixture,
+// score requests, stream providers, or video downloads.
+const simulator='<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;display:grid;place-content:center;height:100vh;background:repeating-linear-gradient(90deg,#254c36 0 12.5%,#2e583e 12.5% 25%);color:white;font:14px Arial;text-align:center}p{margin:6px}small{font-size:11px}</style></head><body><p>Live player simulator</p><p id="clock">0s</p><small>No live match or video</small><script>const start=Date.now();setInterval(()=>{document.getElementById("clock").textContent=Math.floor((Date.now()-start)/1000)+"s"},1000);<\/script></body></html>';
+export default function GoalReplaySettings(){
+ const enabled=useGoalReplaysEnabled(),[open,setOpen]=useState(false),[replay,setReplay]=useState<GoalReplay|null>(null);
+ const opener=useRef<HTMLButtonElement|null>(null);
+ const palette=streamCompetition('uefa.champions',true),style={'--accent':palette.accent,'--stream-brand':palette.brand,'--stream-surface':palette.surface} as CSSProperties;
+ const closeReplay=()=>{setReplay(null);opener.current?.focus({preventScroll:true});};
+ return <section className="settings-card"><div className="settings-card-heading"><h2>Goal Replays preview</h2><p>Experimental playback test. Off by default; saved on this device.</p></div><div className="desktop-mode-setting"><div><h3>Enable Goal Replays</h3><p>Adds a test clip beneath the live player. Match replay searches are not enabled.</p></div><button type="button" role="switch" aria-checked={enabled} aria-label="Enable Goal Replays preview" onClick={()=>{setGoalReplaysEnabled(!enabled);if(enabled){setOpen(false);setReplay(null);}}}><span/>{enabled?'On':'Off'}</button></div>{enabled&&<button type="button" className="goal-replay-test-button" onClick={()=>setOpen(true)}>Test without a live match</button>}
+ <Dialog.Root open={open&&enabled} onOpenChange={value=>{setOpen(value);if(!value)setReplay(null);}}>{open&&enabled&&<Dialog.Portal><Dialog.Overlay className="stream-popup-overlay"/><Dialog.Content className="stream-popup stream-switch-popup stream-theme-uefa-champions" style={style} aria-describedby="goal-replay-lab-description" onEscapeKeyDown={event=>{if(replay){event.preventDefault();closeReplay();}}}><header className="stream-popup-toolbar"><div><Dialog.Title>Goal Replays test</Dialog.Title></div><Dialog.Close className="goal-replay-close" aria-label="Close Goal Replays test"><X size={22}/></Dialog.Close></header><p id="goal-replay-lab-description" className="goal-replay-lab-note">The small player is a local clock, not a live stream. It should keep counting when you open and close the replay.</p><div className="stream-switch-body"><div className="stream-video-pane"><div className={'stream-viewport'+(replay?' goal-replay-active':'')}><iframe title="Live player simulator" srcDoc={simulator} sandbox="allow-scripts"/>{replay&&<GoalReplayPlayer key={replay.id} replay={replay} onClose={closeReplay}/ >}{replay&&<span className="goal-replay-live-label">SIMULATOR</span>}</div><GoalReplayList selected={replay} onSelect={(goal,button)=>{opener.current=button;setReplay(goal);}}/></div></div></Dialog.Content></Dialog.Portal>}</Dialog.Root></section>;
+}
