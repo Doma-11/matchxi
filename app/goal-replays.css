@@ -1,0 +1,52 @@
+/* Inherits the watched fixture's existing --accent/--stream-brand/surface.
+   Only CSS resizes the SAME live iframe; never reparent it into another player. */
+.stream-switch-popup .stream-viewport.goal-replay-active{min-height:340px}
+.stream-switch-popup .stream-viewport.goal-replay-active>iframe{inset:auto 12px 100px auto;width:28%;height:auto;aspect-ratio:16/9;z-index:4;border:1px solid var(--accent);border-radius:9px;box-shadow:0 5px 20px #0008}
+.stream-switch-popup .goal-replay-live-label{position:absolute;right:19px;bottom:106px;z-index:5;padding:3px 6px;background:#081020e8;color:#fff;font:600 11px/1.4 'DM Sans',Arial,sans-serif;border-radius:4px;pointer-events:none}
+.stream-switch-popup .goal-replay-stage{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;min-width:0;background:var(--stream-surface);color:#f7f9fc}
+.stream-switch-popup .goal-replay-stage>header,.stream-switch-popup .goal-replays>header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.stream-switch-popup .goal-replay-stage>header{flex:none;min-height:44px;padding:0 7px 0 12px;border-bottom:1px solid color-mix(in srgb,var(--accent) 24%,transparent);background:linear-gradient(115deg,color-mix(in srgb,var(--stream-brand) 55%,#050b20),var(--stream-surface))}
+.stream-switch-popup .goal-replay-stage>header>div{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
+.stream-switch-popup .goal-replay-stage strong{font-size:13px;overflow-wrap:anywhere}
+.stream-switch-popup .goal-replay-tag{font-size:10px;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);padding:3px 5px;border-radius:4px;white-space:nowrap}
+.stream-switch-popup .goal-replay-close{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0;background:transparent;color:#f7f9fc;border:0;border-radius:9px}
+.stream-switch-popup .goal-replay-embed{position:relative;flex:1;min-height:0;background:#0b111b}
+.stream-switch-popup .goal-replay-embed>iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:0;aspect-ratio:auto}
+.stream-switch-popup .goal-replay-stage>footer{display:flex;align-items:center;justify-content:space-between;flex:none;min-height:88px;gap:8px;padding:8px 12px;border-top:1px solid color-mix(in srgb,var(--accent) 24%,transparent);background:var(--stream-surface)}
+.stream-switch-popup .goal-replay-stage>footer>div:first-child{display:grid;gap:4px;min-width:0;flex:1}
+.stream-switch-popup .goal-replay-stage>footer span{font-size:11px;line-height:1.4;color:#b7cbe3}
+.stream-switch-popup .goal-replay-links{display:flex;flex-direction:column;flex:none}
+.stream-switch-popup .goal-replay-stage a{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:34px;color:var(--accent);font-size:12px}
+.stream-switch-popup .goal-replay-unavailable{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:12px;text-align:center}
+.stream-switch-popup .goal-replay-unavailable p{margin:0;font-size:13px}
+.stream-switch-popup .goal-replays{padding:10px 14px 12px;border-top:1px solid color-mix(in srgb,var(--accent) 24%,transparent);background:linear-gradient(145deg,color-mix(in srgb,var(--stream-brand) 28%,var(--stream-surface)),var(--stream-surface))}
+.stream-switch-popup .goal-replays>header>div{display:flex;align-items:center;gap:7px}
+.stream-switch-popup .goal-replays>header svg,.stream-switch-popup .goal-replay-minute{color:var(--accent);flex:none}
+.stream-switch-popup .goal-replays h3{margin:0;font-family:'DM Sans',Arial,sans-serif;font-size:14px;font-weight:650;letter-spacing:normal}
+.stream-switch-popup .goal-replays small{font-size:11px;color:#b7cbe3}
+.stream-switch-popup .goal-replays button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:7px 10px;color:#fff;font-size:12px;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:9px;background:linear-gradient(165deg,color-mix(in srgb,var(--stream-brand) 85%,#102859),var(--stream-surface))}
+.stream-switch-popup .goal-replays-note{margin:7px 0 0;font-size:11px;line-height:1.5;color:#b7cbe3}
+.stream-switch-popup .goal-replay-row{display:flex;align-items:center;gap:10px;margin-top:10px;padding:8px;border-top:1px solid color-mix(in srgb,var(--accent) 20%,transparent);border-radius:8px}
+.stream-switch-popup .goal-replay-row.is-selected{background:color-mix(in srgb,var(--accent) 10%,transparent);box-shadow:inset 3px 0 var(--accent)}
+.stream-switch-popup .goal-replay-minute{font-size:13px;font-variant-numeric:tabular-nums}
+.stream-switch-popup .goal-replay-scorer{display:grid;gap:4px;flex:1;min-width:0}
+.stream-switch-popup .goal-replay-scorer strong{font-size:13px;overflow-wrap:anywhere}
+.stream-switch-popup.stream-theme-uefa-champions :is(.goal-replays,.goal-replay-stage>header){background-image:linear-gradient(120deg,#020b2ce6,#04103bc4),url('/themes/match-desktop-champions-v3.webp');background-position:center;background-size:cover}
+.stream-switch-popup.stream-theme-uefa-europa :is(.goal-replays,.goal-replay-stage>header){background-image:linear-gradient(120deg,#170b04ed,#2a1308c9),url('/themes/match-desktop-europa-v3.webp');background-position:center;background-size:cover}
+.stream-switch-popup.stream-theme-uefa-europa-conf :is(.goal-replays,.goal-replay-stage>header){background-image:linear-gradient(120deg,#021308ed,#052510c9),url('/themes/match-desktop-conference-v3.webp');background-position:center;background-size:cover}
+@media(max-width:760px){
+ .stream-switch-popup .stream-viewport.goal-replay-active{min-height:350px;max-height:none}
+ .stream-switch-popup .stream-viewport.goal-replay-active>iframe{width:34%;right:8px;bottom:106px;border-radius:6px}
+ .stream-switch-popup .goal-replay-live-label{right:13px;bottom:111px;font-size:10px}
+ .stream-switch-popup .goal-replay-stage>header{padding-left:8px}
+ .stream-switch-popup .goal-replay-stage>header strong{font-size:12px}
+ .stream-switch-popup .goal-replay-stage>footer{padding:7px 8px;min-height:96px}
+ .stream-switch-popup .goal-replays{padding:8px}
+ .stream-switch-popup .goal-replays>header small{display:none}
+ .stream-switch-popup .goal-replays h3{font-size:13px}
+ .stream-switch-popup .goal-replay-stage a{min-height:44px}
+}
+.goal-replay-test-button{min-height:44px;padding:9px 14px;border:1px solid #ffffff30;border-radius:10px;background:#ffffff08;color:inherit;font-size:13px;margin-top:12px}
+.stream-switch-popup .goal-replay-lab-note{margin:0;padding:10px 14px;background:var(--stream-surface);color:#c0d1e8;font-size:12px;line-height:1.5}
+
+html[data-theme=light] .goal-replay-test-button{border-color:#bcc8d7;background:#f4f7fb;color:#182235}
