@@ -57,3 +57,10 @@ Automatic match discovery remains out of scope until an actual supported goal vi
 ## Ten-goal Nations League test set
 
 The Settings lab also contains 10 historical goals from 15–16 November 2026. See [the per-goal checks and provenance](nations-league-replay-test-catalogue.md). All ten currently resolve to Streamin and use the external-only fallback. The list is bundled metadata, not an automatic Reddit search, and it is not supplied to unrelated live fixtures.
+
+
+## One-click internal playback candidates
+
+The Settings test screen now offers **Try Griezmann goal internally** (Napoli–Barcelona, 25 February 2020, 57′, Streamable `jup64`) and **Try provider sample internally** (Streamable documentation reference `5rneah`, not a football goal). The historical goal URL is present in the publicly indexed r/soccer post https://www.reddit.com/r/soccer/comments/f9hd7r/. The sample is from https://streamable-support.zendesk.com/hc/en-us/articles/35415648975892-Editing-the-Embed-Code. Neither link is claimed to be available or playback verified: research-tool opens of the goal watch/player URL failed.
+
+Both buttons use the existing supported Streamable iframe adapter only after a click. The sample distinguishes a provider/player issue from an unavailable historical mirror. No raw media extraction, discovery, polling, preloading or host requests on opening the list. Closing replay removes its iframe and restores the same simulator iframe to focus. Open video and Video unavailable? remain available. The ten Nations League clips remain external-only and untouched.
