@@ -27,3 +27,11 @@ test('test screen renders all ten external actions with scorer team, match, date
  assert.equal((html.match(/role="listitem"/g)||[]).length,10);assert.equal((html.match(/class="goal-replay-external"/g)||[]).length,10);assert.equal((html.match(/rel="noopener noreferrer"/g)||[]).length,10);
  assert.match(html,/0 supported player links/);assert.match(html,/10 historical Nations League test goals/);assert.match(html,/Francesco Pio Esposito/);assert.match(html,/Belgium vs Italy/);assert.match(html,/Germany vs Netherlands/);assert.match(html,/2026-11-15/);assert.match(html,/2026-11-16/);assert.doesNotMatch(html,/<iframe|<script|<video|Playing|widgets\.js/);
 });
+const {EMBED_TEST_CANDIDATES:candidates,GoalReplayCandidates}=await load('app/goal-replay-candidates.tsx','embed-test-candidates');
+test('one-click embed candidates distinguish the historical goal from the provider sample and load no player before selection',()=>{
+ assert.equal(candidates.length,2);
+ for(const candidate of candidates)assert.equal(supportedReplayEmbed(candidate.videoUrl)?.provider,'Streamable');
+ assert.equal(candidates[0].postUrl,'https://www.reddit.com/r/soccer/comments/f9hd7r/');assert.equal(candidates[0].kind,'goal');assert.equal(candidates[1].kind,'player-test');assert.equal(candidates[1].postUrl,'');
+ const html=renderToStaticMarkup(React.createElement(GoalReplayCandidates,{selected:null,onSelect(){throw Error('Only clicks may select a player');}}));
+ assert.match(html,/Try Griezmann goal internally/);assert.match(html,/Try provider sample internally/);assert.match(html,/Playback has not been verified/);assert.match(html,/not a football goal/);assert.doesNotMatch(html,/<iframe|<video|<script|Playing/);
+});
