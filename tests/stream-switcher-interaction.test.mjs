@@ -108,3 +108,15 @@ test('replay open/close keeps live URL/key/sandbox and requests unchanged; Escap
  find(tree,n=>typeof n.props?.onSelect==='function'&&'selected' in n.props).props.onSelect(testGoal,{focus(){}});tree=ui.render();env.listeners.get('window:matchxi-goal-replays-change')({detail:false});tree=ui.render();assert.equal(nodes(tree,n=>typeof n.props?.onSelect==='function'&&'selected' in n.props).length,0);assert.equal(frames(tree)[0].props.src,before.props.src);assert.equal(calls.length,count);
  }finally{ui.unmount();env.restore();}
 });
+
+
+test('Other games hides the mounted replay section and closing it restores the section without replay requests or live iframe changes',async()=>{
+ const primary=game('replay-drawer','Arsenal','Chelsea'),calls=[];
+ const env=environment(async url=>{calls.push(String(url));return Response.json(String(url).startsWith('/api/match-streams')?{streams:[stream(401)]}:String(url).startsWith('/api/match-day')?{games:[primary],checkedAt:new Date().toISOString()}:{embedAllowed:true,embedUrl:embed(401)});});
+ env.local.setItem('matchxi-goal-replays-poc','on');const ui=hooks(Panel,{game:primary});
+ const list=tree=>find(tree,n=>typeof n.props?.onSelect==='function'&&'selected' in n.props);
+ try{let tree=await flush(ui);button(tree,'Play stream 1 in app').props.onClick({currentTarget:null});tree=await flush(ui);const before=frames(tree)[0],key=list(tree).key;assert.equal(list(tree).props.hidden,false);
+ find(tree,n=>n.type==='button'&&n.props.className==='stream-games-toggle').props.onClick();tree=await flush(ui);assert.equal(list(tree).props.hidden,true);assert.equal(list(tree).key,key);assert.equal(frames(tree)[0].props.src,before.props.src);assert.equal(frames(tree)[0].key,before.key);
+ button(tree,'Close other games').props.onClick();tree=await flush(ui);assert.equal(list(tree).props.hidden,false);assert.equal(list(tree).key,key);assert.equal(frames(tree)[0].props.src,before.props.src);assert.equal(calls.filter(url=>url.includes('/api/match-replays')).length,0);
+ }finally{ui.unmount();env.restore();}
+});

@@ -66,3 +66,5 @@ html[data-theme=light] .goal-replay-test-button{border-color:#bcc8d7;background:
 .stream-switch-popup .goal-replay-paste{margin-top:12px;color:#b7cbe3;font-size:12px}
 .stream-switch-popup .goal-replay-paste summary{min-height:44px;display:flex;align-items:center;cursor:pointer;color:var(--accent)}
 .stream-switch-popup .goal-replays button:disabled{opacity:.6;cursor:wait}
+
+.stream-switch-popup .goal-replays[hidden]{display:none}
