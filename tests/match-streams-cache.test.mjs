@@ -15,3 +15,22 @@ test('unknown listing spellings are recorded without accepting wrong teams or ad
   assert.equal([...globalThis.streamTestStore.keys()].some(k=>k.startsWith('match-')),false);
  }finally{globalThis.fetch=original;delete globalThis.streamTestStore;}
 });
+
+test('live listings expire and an explicit refresh replaces a still-fresh cache entry',async()=>{
+ globalThis.streamTestStore=new Map();
+ const original=globalThis.fetch;
+ let calls=0;
+ globalThis.fetch=async()=>new Response(`<tr><td>12:00</td><td>Arsenal vs Leeds United</td><td><a href="/hd-${++calls}">Watch</a></td></tr>`);
+ try{
+  const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Zagreb'}).format(new Date());
+  const url='https://app.test/api/match-streams?'+new URLSearchParams({home:'Arsenal',away:'Leeds United',date,id:'4',league:'eng.1',live:'true'});
+  const read=async(suffix='')=>(await (await GET(new Request(url+suffix))).json()).streams[0].url;
+  assert.match(await read(),/hd-1$/);
+  const cached=[...globalThis.streamTestStore.values()][0];
+  cached.checkedAt=new Date(Date.now()-121000).toISOString();
+  assert.match(await read(),/hd-2$/);
+  assert.match(await read('&refresh=1'),/hd-3$/);
+  assert.match(await read(),/hd-3$/);
+  assert.equal(calls,3);
+ }finally{globalThis.fetch=original;delete globalThis.streamTestStore;}
+});

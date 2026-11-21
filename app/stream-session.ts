@@ -1,3 +1,4 @@
+import {STREAM_LISTING_TTL_MS,STREAM_LISTING_VERSION} from './stream-listing-source';
 import {supportedStreamPlayer,STREAM_PLAYER_VERSION,STREAM_PLAYER_TTL_MS} from './stream-embed';
 
 export const streamGameKey=(game:any)=>`${game.league}:${String(game.id).replace(/^fm-/,'')}`;
@@ -29,16 +30,20 @@ export function createStreamSession({fetcher=(...args:Parameters<typeof fetch>)=
  return {
   async listings(game:any,signal:AbortSignal,force=false){
    aborted(signal);const key='matchxi-streams-'+game.league+'-'+game.id+'-'+game.date,saved=read(local,key);
-   if(!force&&streamsFrom(saved).length)return {...saved,streams:streamsFrom(saved)};
-   const date=streamDay(game.date,'Europe/Zagreb'),p=new URLSearchParams({home:game.home.name,away:game.away.name,date,live:'true',id:String(game.id),league:game.league});
-   const r=await fetcher('/api/match-streams?'+p,{signal});const data:any=await r.json();aborted(signal);
+   const age=now()-Date.parse(saved?.checkedAt||'');
+   if(!force&&age>=0&&age<STREAM_LISTING_TTL_MS&&streamsFrom(saved).length)return {...saved,streams:streamsFrom(saved)};
+   const date=streamDay(game.date,'Europe/Zagreb'),p=new URLSearchParams({home:game.home.name,away:game.away.name,date,live:'true',id:String(game.id),league:game.league,listingVersion:STREAM_LISTING_VERSION});
+   if(force)p.set('refresh','1');
+   const r=await fetcher('/api/match-streams?'+p,{signal,cache:force?'no-store':undefined});const data:any=await r.json();aborted(signal);
    if(!r.ok||data.error)throw Error(data.error||'Streams could not be checked. Please try again.');
-   const result={...data,streams:streamsFrom(data)};if(result.streams.length)write(local,key,result);return result;
+   const result={...data,checkedAt:data.checkedAt||new Date(now()).toISOString(),streams:streamsFrom(data)};if(result.streams.length)write(local,key,result);return result;
   },
-  async player(stream:any,signal:AbortSignal){
+  async player(stream:any,signal:AbortSignal,force=false){
    aborted(signal);const key='matchxi-stream-player-v'+STREAM_PLAYER_VERSION+'-'+stream.url,saved=read(local,key),age=now()-Date.parse(saved?.checkedAt||'');
-   if(saved?.embedAllowed&&age>=0&&age<STREAM_PLAYER_TTL_MS&&supportedStreamPlayer(saved.embedUrl))return {...saved,embedUrl:supportedStreamPlayer(saved.embedUrl)};
-   const r=await fetcher('/api/stream-player?'+new URLSearchParams({url:stream.url,playerVersion:STREAM_PLAYER_VERSION}),{signal});const data:any=await r.json();aborted(signal);
+   if(!force&&saved?.embedAllowed&&age>=0&&age<STREAM_PLAYER_TTL_MS&&supportedStreamPlayer(saved.embedUrl))return {...saved,embedUrl:supportedStreamPlayer(saved.embedUrl)};
+   const params=new URLSearchParams({url:stream.url,playerVersion:STREAM_PLAYER_VERSION});
+   if(force)params.set('refresh','1');
+   const r=await fetcher('/api/stream-player?'+params,{signal,cache:force?'no-store':undefined});const data:any=await r.json();aborted(signal);
    if(!r.ok)throw Error(data.error||'Could not open this player. Use the external link.');
    const url=data.embedAllowed&&supportedStreamPlayer(data.embedUrl),result=url?{...data,embedUrl:url,checkedAt:data.checkedAt||new Date(now()).toISOString()}:{...data,embedAllowed:false,embedUrl:undefined};
    if(url)write(local,key,result);return result;

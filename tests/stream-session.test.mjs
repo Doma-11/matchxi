@@ -84,3 +84,17 @@ test('switching watched games leaves fixture order fixed, including equal kickof
  for(const current of [b,c,a])assert.deepEqual(liveStreamGames(records,current).map(streamGameKey),expected);
  assert.deepEqual(liveStreamGames([...records].reverse(),c).map(streamGameKey),expected,'source order changes cannot shuffle equal-time fixtures');
 });
+
+test('refresh checks a changed player even when the earlier embed is still cached',async()=>{
+ const calls=[];
+ const client=createStreamSession({local:storage(),fetcher:async url=>{
+  calls.push(String(url));
+  return Response.json({embedAllowed:true,embedUrl:embed});
+ }});
+ await client.player(stream,signal());
+ await client.player(stream,signal());
+ assert.equal(calls.length,1);
+ await client.player(stream,signal(),true);
+ assert.equal(calls.length,2);
+ assert.match(calls[1],/refresh=1/);
+});

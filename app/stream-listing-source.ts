@@ -1,3 +1,6 @@
+export const STREAM_LISTING_TTL_MS=120_000;
+export const STREAM_LISTING_VERSION='2';
+
 // The original listing site redirects to this reviewed replacement domain.
 export const STREAM_LISTING_SOURCE='https://www.soccerstreams.click/';
 const hosts=new Set(['www.soccerstreams.zone','www.soccerstreams.click']);
