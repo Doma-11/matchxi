@@ -2,11 +2,11 @@
 
 ## Current behaviour
 
-Goal Replays is opt-in under **Settings → Appearance → Goal Replays preview**. It defaults off and adds no API routes, score calls, background discovery, scheduled jobs, video processing, video storage or provider accounts.
+Goal Replays is opt-in under **Settings → Appearance → Goal Replays preview**. It defaults off. Live matches now use on-demand `/api/match-replays` discovery when approved Reddit OAuth access is configured; see [live replay setup](live-goal-replays.md). No score calls, background discovery, scheduled jobs, video processing or video storage are added.
 
 The initial Reddit post embed was removed after the owner’s phone test showed a post card without the goal video. Reddit is a source link, not the playback provider. No Reddit scripts or post iframes are loaded by this feature.
 
-The supplied Florian Wirtz goal remains explicitly labelled **test clip: Germany vs Netherlands** and is not represented as a goal from the watched fixture. Its Streamin URL currently has no verified supported player endpoint, so the row offers **Open video** and states that in-app playback is unavailable for that host. Selecting an unsupported link does not shrink, replace, reload or unmount the live iframe.
+In the Settings lab only, the supplied Florian Wirtz goal remains explicitly labelled **test clip: Germany vs Netherlands** and is not represented as a goal from the watched fixture. Its Streamin URL currently has no verified supported player endpoint, so the row offers **Open video** and states that in-app playback is unavailable for that host. Selecting an unsupported link does not shrink, replace, reload or unmount the live iframe.
 
 ## Supported video-only player
 
@@ -52,7 +52,7 @@ Still required: verify a currently available Streamable goal mirror, test actual
 
 Turn **Enable Goal Replays** off for immediate removal of the feature UI. The same-window event and cross-tab storage update clear active replay state. Production code can be removed by reverting the feature/correction commits in a normal PR. No database migration, video objects, credentials or scheduled jobs need cleanup.
 
-Automatic match discovery remains out of scope until an actual supported goal video passes playback testing. Phase 2 will require permitted Reddit access and brief metadata caching.
+Live on-demand discovery is implemented behind an approved Reddit OAuth connection. Actual source availability and physical-phone playback still require testing.
 
 ## Ten-goal Nations League test set
 
