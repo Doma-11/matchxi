@@ -8,7 +8,7 @@ export function setGoalReplaysEnabled(enabled:boolean){
  try{window.localStorage.setItem(GOAL_REPLAYS_KEY,enabled?'on':'off');}catch{}
  window.dispatchEvent(new CustomEvent(GOAL_REPLAYS_EVENT,{detail:enabled}));
 }
-export type GoalReplay={id:string;minute:string;scorer:string;team:string;match:string;score:string;postUrl:string;videoUrl:string;testOnly:true;kind?:'goal'|'player-test';matchDate?:string};
+export type GoalReplay={id:string;minute:string;scorer:string;team:string;match:string;score:string;postUrl:string;videoUrl:string;testOnly:boolean;kind?:'goal'|'player-test';matchDate?:string};
 export const WIRTZ_TEST_REPLAY:GoalReplay={
  id:'wirtz-1xy15gb',minute:'60′',scorer:'Florian Wirtz',team:'Germany',match:'Germany vs Netherlands',score:'2–0',
  postUrl:'https://www.reddit.com/r/soccer/comments/1xy15gb/germany_2_0_netherlands_f_wirtz_60/',

@@ -2,6 +2,7 @@ import {reportAccessDenied} from '../lib/report-access';
 import {refreshMatchPoll} from '../../app/match-centre-data';
 import {needsScoreRefresh} from '../../app/score-refresh';
 import {GET as streamPlayer} from '../../app/api/stream-player/route';
+import {GET as matchReplays} from '../../app/api/match-replays/route';
 import {GET as matchStreams} from '../../app/api/match-streams/route';
 import type {Config} from '@netlify/functions';
 import {authorize,unauthorized,protectResponse} from '../lib/private-auth';
@@ -39,8 +40,10 @@ function lifetime(name:string,data:any,url:URL){
 async function handle(request:Request){
  const url=new URL(request.url),name=url.pathname.replace(/^.*\/(?:api)\//,'');
  if(request.method!=='GET')return Response.json({error:'Method not allowed'},{status:405});
- const routes:Record<string,any>={'stream-player':streamPlayer,'match-streams':matchStreams,'daily-report':dailyReport,'usage-reports':usageReports,'tournament-bracket':tournamentBracket,'match-highlights':matchHighlights,'match-day':matchDay,'match-detail':matchDetail,'match-live':matchLive,catalogue,highlights,'national-highlights':nationalHighlights,'national-teams':nationalTeams,'league-dashboard':dashboard,matches};
+ const routes:Record<string,any>={'match-replays':matchReplays,'stream-player':streamPlayer,'match-streams':matchStreams,'daily-report':dailyReport,'usage-reports':usageReports,'tournament-bracket':tournamentBracket,'match-highlights':matchHighlights,'match-day':matchDay,'match-detail':matchDetail,'match-live':matchLive,catalogue,highlights,'national-highlights':nationalHighlights,'national-teams':nationalTeams,'league-dashboard':dashboard,matches};
  if(!routes[name])return Response.json({error:'Not found'},{status:404});
+ // Replay metadata uses its own short in-memory cache; never persist Reddit content.
+ if(name==='match-replays')return routes[name](request);
  if(['daily-report','usage-reports'].includes(name))return routes[name](new NextRequest(request));
  const params=new URLSearchParams(url.searchParams);params.sort();
  const key=createHash('sha256').update(name+'?'+params.toString()).digest('hex');
