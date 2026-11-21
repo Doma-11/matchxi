@@ -5,7 +5,7 @@ import {Dialog} from 'radix-ui';
 import {LEAGUES,CLUB_CUPS,COMPETITIONS,isNationalCompetition} from './football-model';
 import flags from './national-flags.json';
 import {streamBrowserLink,isAppleMobile} from './stream-browser-link';
-import {croatianCommentaryDestination} from './croatian-commentary';
+import {CROATIAN_BROADCAST_LISTINGS,croatianCommentaryDestination} from './croatian-commentary';
 import {createStreamSession,liveStreamGames,streamGameKey,streamMinute,streamStep,firstEmbeddableStream,rankStreamSources} from './stream-session';
 import {streamPlayerSandbox} from './stream-embed';
 import {streamCompetition} from './stream-competition';
@@ -84,7 +84,7 @@ export default function MatchStreamPanel({game,fixtures=[],entryVisible=true}:an
  const singleFromTile=(tile:any)=>{setWatched(tile.game);setStreams(tile.streams);setIndex(tile.index);setPlayer(tile.player);setOpening(false);setMultiview(false);};
  const otherGames=liveStreamGames(games,watched);
  return <section className="match-stream-panel" hidden={!entryVisible} ref={panel} tabIndex={-1}><header className="stream-section-heading"><h2>Livestream</h2><span className="stream-live-badge">LIVE</span>{live&&<button type="button" className="stream-multiview-entry" disabled={busy} onClick={e=>{opener.current=e.currentTarget;openMultiview();}}><Grid2X2 size={18}/>Multiview</button>}</header>{live?<>
- {croatian&&<aside className="croatian-commentary-option"><a className="croatian-commentary-action" href={href(croatian.url)} target={mobile?undefined:'_blank'} rel="noopener noreferrer"><span className="croatian-commentary-flag" role="img" aria-label="Croatia">🇭🇷</span><strong>Croatian commentary stream</strong><ExternalLink size={17}/></a><p>{croatian.kind==='match-page'?'Opens this match on BHLiga. Select Broadcast → HR, if available.':'Opens BHLiga listings. Select this match → Broadcast → HR, if available.'}</p>{apple&&<a className="croatian-commentary-source" href={croatian.url} target="_blank" rel="noopener noreferrer">Open normally<ExternalLink size={12}/></a>}</aside>}
+ {croatian&&<aside className="croatian-commentary-option"><a className="croatian-commentary-action" href={CROATIAN_BROADCAST_LISTINGS} target="_blank" rel="noopener noreferrer"><span className="croatian-commentary-flag" role="img" aria-label="Croatia">🇭🇷</span><strong>Croatian commentary stream</strong><ExternalLink size={17}/></a><p>Opens BHLiga. Select the match → Broadcast → HR, if available.</p></aside>}
  {busy&&<p role="status">Finding streams…</p>}{result?.error&&<p role="status">{result.error}</p>}
  {result?.streams?.length>0?<div className="stream-links">{result.streams.map((s:any,i:number)=><article className="stream-link-choice" key={s.url}>
  <span className="stream-card-label">Stream {i+1}{s.embedStatus&&<small className="stream-embed-status" title="Player-page checks do not confirm video playback. The provider may still restrict embedding or be unavailable.">{s.embedStatus==='supported'?'Player found':s.embedStatus==='unsupported'?'External link':'Not verified'}</small>}</span><button className="stream-play" onClick={e=>{opener.current=e.currentTarget;setGamesOpen(false);void play(game,result.streams,i);}} disabled={opening} aria-label={'Play stream '+(i+1)+' in app'}><span className="stream-play-icon"><Play size={26} fill="currentColor"/></span><strong>Play in app</strong></button>
