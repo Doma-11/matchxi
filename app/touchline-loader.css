@@ -11,3 +11,4 @@
 @media(prefers-reduced-motion:reduce){.touchline-loader,.touchline-ball{animation:none}.touchline-ball{left:35px;top:23px}}
 
 .app-startup{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:#0b101b;color:#b8f45c}.app-startup[hidden]{display:none}.app-startup .touchline-page{min-height:100vh;min-height:100dvh}
+.app-startup .touchline-ball{animation-duration:1.5s}
