@@ -13,3 +13,13 @@ for(const state of ['pre','in','post'])for(const tab of ['details','lineups','st
  const previous=globalThis.sessionStorage;globalThis.sessionStorage={getItem:()=>tab};
  try{const html=renderToStaticMarkup(React.createElement(MatchWorkspace,{game:{...game,state,completed:state==='post'},videos:[],onBack(){}}));assert.match(html,/Back to matches/);assert.match(html,/Home/);assert.match(html,/Away/);assert.match(html,/match-workspace/);assert.doesNotMatch(html,/Highlights after full time/);assert.doesNotMatch(html,/aria-label="Match media"/);if(state==='in')assert.match(html,/>Broadcast<\/button>/);else assert.doesNotMatch(html,/>Broadcast<\/button>/);if(state!=='post')assert.doesNotMatch(html,/WATCH THE MOMENTS/);if(state!=='pre')assert.match(html,/goal-summary/)}finally{globalThis.sessionStorage=previous}
 });
+
+test('pending match sections show Touchline rather than claiming data is unavailable',()=>{
+ const previous=globalThis.sessionStorage;
+ try{for(const tab of ['lineups','statistics','standings','highlights']){
+  globalThis.sessionStorage={getItem:()=>tab};
+  const html=renderToStaticMarkup(React.createElement(MatchWorkspace,{game,videos:[],onBack(){}}));
+  assert.match(html,new RegExp('aria-label="Loading '+tab+'"'));
+  assert.doesNotMatch(html,/Statistics not available|Standings are currently unavailable|No public highlights found/);
+ }}finally{globalThis.sessionStorage=previous;}
+});

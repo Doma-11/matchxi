@@ -68,3 +68,5 @@ html[data-theme=light] .goal-replay-test-button{border-color:#bcc8d7;background:
 .stream-switch-popup .goal-replays button:disabled{opacity:.6;cursor:wait}
 
 .stream-switch-popup .goal-replays[hidden]{display:none}
+.stream-switch-popup .goal-replay-embed>video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.stream-switch-popup .goal-replay-loading{position:absolute;inset:0 0 44px;display:grid;place-items:center;pointer-events:none;background:#0b111b60}

@@ -10,7 +10,7 @@ const {NATIONS_LEAGUE_TEST_REPLAYS:goals}=await load('app/goal-replay-test-catal
 const {supportedReplayEmbed}=await load('app/goal-replays.ts','ten-goals-provider');
 const {GoalReplayList}=await load('app/goal-replays-panel.tsx','ten-goals-list');
 const {ODDSIVIO_TEST_REPLAYS:oddsivioGoals}=await load('app/oddsivio-replay-test-catalogue.ts','oddsivio-goals');
-test('Oddsivio test lists five dated goals with host fallbacks and no unsolicited player requests',()=>{
+test('Oddsivio test offers five native playback attempts without loading media in the list',()=>{
  assert.equal(oddsivioGoals.length,5);
  assert.equal(new Set(oddsivioGoals.map(goal=>goal.videoUrl)).size,5);
  for(const goal of oddsivioGoals){
@@ -20,9 +20,9 @@ test('Oddsivio test lists five dated goals with host fallbacks and no unsolicite
   assert.equal(supportedReplayEmbed(goal.videoUrl),null);
  }
  const html=renderToStaticMarkup(React.createElement(GoalReplayList,{replays:oddsivioGoals,initiallyLoaded:true,selected:null,onSelect(){throw Error('Streamin watch pages must not mount a player');}}));
- assert.equal((html.match(/class="goal-replay-external"/g)||[]).length,5);
- for(const goal of oddsivioGoals){assert.ok(html.includes(goal.videoUrl));assert.ok(html.includes(goal.scorer));assert.ok(html.includes(goal.team));}
- assert.match(html,/0 supported player links · 5 external-only/);
+ assert.equal((html.match(/aria-label="Replay test goal:/g)||[]).length,5);
+ for(const goal of oddsivioGoals){assert.ok(html.includes(goal.scorer));assert.ok(html.includes(goal.team));}
+ assert.match(html,/5 internal playback tests · 0 external-only/);
  assert.doesNotMatch(html,/<iframe|<video|<script|Playing/);
 });
 test('catalogue contains ten distinct goals from the requested Sunday and Monday with correct score progression',()=>{
@@ -41,7 +41,7 @@ test('source provenance distinguishes known goal posts from match threads instea
 test('test screen renders all ten external actions with scorer team, match, date and honest status, without loading video players',()=>{
  const html=renderToStaticMarkup(React.createElement(GoalReplayList,{replays:goals,initiallyLoaded:true,note:'10 historical Nations League test goals',selected:null,onSelect(){throw Error('External-only clips cannot select a player');}}));
  assert.equal((html.match(/role="listitem"/g)||[]).length,10);assert.equal((html.match(/class="goal-replay-external"/g)||[]).length,10);assert.equal((html.match(/rel="noopener noreferrer"/g)||[]).length,10);
- assert.match(html,/0 supported player links/);assert.match(html,/10 historical Nations League test goals/);assert.match(html,/Francesco Pio Esposito/);assert.match(html,/Belgium vs Italy/);assert.match(html,/Germany vs Netherlands/);assert.match(html,/2026-11-15/);assert.match(html,/2026-11-16/);assert.doesNotMatch(html,/<iframe|<script|<video|Playing|widgets\.js/);
+ assert.match(html,/0 internal playback tests/);assert.match(html,/10 historical Nations League test goals/);assert.match(html,/Francesco Pio Esposito/);assert.match(html,/Belgium vs Italy/);assert.match(html,/Germany vs Netherlands/);assert.match(html,/2026-11-15/);assert.match(html,/2026-11-16/);assert.doesNotMatch(html,/<iframe|<script|<video|Playing|widgets\.js/);
 });
 const {EMBED_TEST_CANDIDATES:candidates,GoalReplayCandidates}=await load('app/goal-replay-candidates.tsx','embed-test-candidates');
 test('one-click embed candidates distinguish the historical goal from the provider sample and load no player before selection',()=>{
@@ -50,4 +50,15 @@ test('one-click embed candidates distinguish the historical goal from the provid
  assert.equal(candidates[0].postUrl,'https://www.reddit.com/r/soccer/comments/f9hd7r/');assert.equal(candidates[0].kind,'goal');assert.equal(candidates[1].kind,'player-test');assert.equal(candidates[1].postUrl,'');
  const html=renderToStaticMarkup(React.createElement(GoalReplayCandidates,{selected:null,onSelect(){throw Error('Only clicks may select a player');}}));
  assert.match(html,/Try Griezmann goal internally/);assert.match(html,/Try provider sample internally/);assert.match(html,/Playback has not been verified/);assert.match(html,/not a football goal/);assert.doesNotMatch(html,/<iframe|<video|<script|Playing/);
+});
+const {replayPlayback}=await load('app/replay-playback.ts','replay-playback');
+const {GoalReplayPlayer}=await load('app/goal-replays-panel.tsx','native-goal-player');
+test('native playback is restricted to five exact experimental clips, never arbitrary watch pages or production discovery',()=>{
+ for(const goal of oddsivioGoals){
+  const source=replayPlayback(goal);assert.equal(source.kind,'native');assert.equal(new URL(source.url).origin,'https://c-cdn.streamin.top');
+  for(const extra of [{testOnly:false},{id:'other'},{videoUrl:goal.videoUrl+'?redirect=1'},{videoUrl:goal.videoUrl.replace('streamin.link','streamin.link.evil.test')}])assert.equal(replayPlayback({...goal,...extra}),null);
+  const html=renderToStaticMarkup(React.createElement(GoalReplayPlayer,{replay:goal,onClose(){}}));
+  assert.match(html,/<video/);assert.match(html,/preload="none"/);assert.match(html,/controls=""/);assert.match(html,/playsInline=""/);assert.match(html,/Open video/);
+  assert.doesNotMatch(html,/<iframe|autoPlay|Playing replay/);
+ }
 });
