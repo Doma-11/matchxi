@@ -1,4 +1,4 @@
-# Live Goal Replays — Oddsivio discovery / Streamin playback
+# Live Goal Replays — Oddsivio discovery / internal playback
 
 ## Current behavior — 25 November 2026
 
@@ -16,7 +16,9 @@ lookup in the public recent Highlights index may locate an adjacent-day match.
 It then reads exactly one matching match page and verifies both teams, kickoff
 and source match ID again before extracting Goal Timeline metadata.
 
-Only Streamin `goal_clip` entries qualify. Events provide the scorer, minute,
+Known-host `goal_clip` entries qualify. Streamin, Streamff and supported Streamable
+clips can offer Replay; other known hosts remain visible with Open video. Events
+provide the scorer, minute,
 added time and score; bracketed title scores identify the scoring team, including
 own goals. Duplicates combine by event. Highlights, disallowed goals, unrelated fixtures, unexpected hosts and malformed
 metadata are excluded. Clips explicitly marked non-embeddable offer Open video.
@@ -35,6 +37,24 @@ cached in memory for 45 seconds; same-match work coalesces and at most 100 resul
 are held. The UI also suppresses duplicate clicks within ten seconds. No response
 is written to Blobs, no footage is stored or proxied, no scores API is added,
 and no background polling or schedules are enabled.
+
+## Barcelona live-match correction — 25 November 2026
+
+Oddsivio labels its Azerbaijan club ID 818 as Sabah FA, while MatchXI uses Sabah
+FK. The replay matcher applies this source-specific correction only to that ID
+in UEFA competitions, checking the source country when available. It does not
+change global aliases or merge similarly named clubs. Opponent, kickoff and
+match-page checks remain required.
+
+The five goals available when this bug was reported were hosted on Streamff,
+not Streamin. Filtering exclusively for Streamin hid them. The discovery now
+keeps allowlisted goal links regardless of provider. For Streamff, only a
+published `direct_video` URL on `cdn.hostedhost.top` with the same eight-character
+clip ID and MP4 path can use native playback. The URL is validated again before
+rendering; no URL is constructed, scraped from a watch page, or proxied. A HEAD
+check of the first actual goal URL returned 200 video/mp4 with byte-range support;
+this is not a physical-device playback verification. Missing or invalid media
+URLs retain Open video. Explicit non-embeddable flags are respected.
 
 ## Playback
 

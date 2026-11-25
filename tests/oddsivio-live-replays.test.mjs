@@ -62,3 +62,28 @@ test('the live route uses Oddsivio and the visible live controls no longer requi
  const route=await readFile('app/api/match-replays/route.ts','utf8'),ui=await readFile('app/live-goal-replays.tsx','utf8'),settings=await readFile('app/goal-replay-settings.tsx','utf8');
  assert.match(route,/const discover=createOddsivioDiscovery\(\)/);assert.doesNotMatch(ui+settings,/REDDIT_|Reddit/);
 });
+const barcaMatch={id:'barcelona-live',home:'Sabah FK',away:'Barcelona',league:'uefa.champions',date:'2026-11-25T17:45:00Z'};
+const barcaHome={id:818,name:'Sabah FA',country:'Azerbaijan'},barcaAway={id:446,name:'Barcelona',country:'Spain'};
+const barcaEvents=[['8d6071e0',31,'Anthony Gordon',0,1,446],['849751b2',51,'Anthony Gordon',0,2,446],['5813223c',55,'Karim Adeyemi',0,3,446],['c66211c9',60,'Gabriel Jesus',0,4,446],['289c5d2f',63,'Joy-Lance Mickels',1,4,818]].map(([clip,minute,name,h,a,team_id],i)=>({clip,id:6018783+i,event_type:'goal',minute,player:{name},team_id,home_score_after:h,away_score_after:a}));
+const barcaVideos=barcaEvents.map((e,i)=>({id:40278+i,match_event_id:e.id,platform:'streamff',video_type:'goal_clip',embed_kind:'direct_video',source_url:`https://streamff.pro/v/${e.clip}`,embed_url:`https://cdn.hostedhost.top/${e.clip}.mp4`,title:`Sabah ${e.team_id===818?'[1]':'0'} - ${e.team_id===446?'['+e.away_score_after+']':e.away_score_after} Barcelona - ${e.player.name} ${e.minute}'`,minute:e.minute,scorer_name:e.player.name}));
+function barcaPage(clips=barcaVideos){return flight({initialMatch:{id:121770,kickoff_at:barcaMatch.date,home_team:barcaHome,away_team:barcaAway},initialEvents:{match_id:121770,events:barcaEvents},initialVideos:{match_id:121770,videos:clips}});}
+test('the actual Barcelona fixture matches the provider-specific Sabah label and returns all five Streamff goals',async()=>{
+ const fixture={id:121770,home_team_id:818,away_team_id:446,home_team_name:'Sabah FA',away_team_name:'Barcelona',kickoff_at:barcaMatch.date};
+ const calls=[];const discover=createOddsivioDiscovery({fetcher:async url=>{calls.push(url);return response(url.endsWith('/matches')?flight({todayFixtures:[fixture]}):barcaPage());}});
+ const result=await discover(barcaMatch);assert.equal(result.code,undefined);assert.equal(result.replays.length,5);assert.equal(calls.length,2);
+ assert.deepEqual(result.replays.map(g=>g.score),['0–1','0–2','0–3','0–4','1–4']);
+ for(const goal of result.replays){assert.equal(goal.sources[0].provider,'Streamff');assert.equal(replayPlayback({...goal,videoUrl:goal.sources[0].url,mediaUrl:goal.sources[0].mediaUrl}).kind,'native');}
+ assert.equal(result.replays[4].team,'Sabah FK');
+});
+test('Sabah correction cannot merge unrelated clubs, countries, competitions or dates',()=>{
+ const f={id:121770,home:'Sabah FA',away:'Barcelona',date:barcaMatch.date,homeId:818,homeCountry:'Azerbaijan'};
+ assert.equal(sameReplayFixture(f,barcaMatch),true);
+ for(const extra of [{homeId:999},{homeCountry:'Malaysia'},{date:'2026-11-24T17:45:00Z'},{away:'Napoli'}])assert.equal(sameReplayFixture({...f,...extra},barcaMatch),false);
+ assert.equal(sameReplayFixture(f,{...barcaMatch,league:'eng.1'}),false);
+});
+test('Streamff without verified media and other known hosts stay discoverable with external fallback',()=>{
+ const clips=[{...barcaVideos[0],embed_url:'https://evil.test/file.mp4'},{...barcaVideos[1],platform:'dubz',source_url:'https://dubz.co/v/abcdef12',embed_url:null},{...barcaVideos[2],embeddable:false}];
+ const goals=oddsivioGoals(barcaPage(clips),barcaMatch,121770);assert.equal(goals.length,3);
+ for(const goal of goals)assert.equal(replayPlayback(goal),null);
+ assert.equal(goals[2].sources[0].externalOnly,true);
+});
