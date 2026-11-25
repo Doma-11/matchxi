@@ -24,15 +24,16 @@ function mount(props,Component=MatchHome){
  const hooks={state(initial){const n=cursor++;if(!slots[n])slots[n]={value:typeof initial==='function'?initial():initial};return [slots[n].value,v=>{slots[n].value=typeof v==='function'?v(slots[n].value):v;dirty=true;}];},ref(value){return slots[cursor++]??(slots[cursor-1]={current:value});},effect(fn,deps){const n=cursor++,previous=slots[n];if(!previous||deps.some((d,i)=>!Object.is(d,previous.deps[i]))){slots[n]={deps,cleanup:previous?.cleanup};pending.push(()=>{previous?.cleanup?.();slots[n].cleanup=fn();});}}};
  return {setProps(next){props=next;dirty=true;},render(){let tree;for(let n=0;dirty;n++){assert.ok(n<20);dirty=false;cursor=0;globalThis.__loadingHooks=hooks;tree=Component(props);for(const job of pending.splice(0))job();}return tree;},unmount(){slots.forEach(slot=>slot?.cleanup?.());delete globalThis.__loadingHooks;delete globalThis.__homeRequest;}};
 }
-for(const result of ['success','empty','error'])test(`startup waits for the existing home request to settle (${result}), even with saved matches`,async()=>{
+for(const result of ['success','empty','error','halftime'])test(`startup waits for the existing home request to settle (${result}), even with saved matches`,async()=>{
  const old={sessionStorage:globalThis.sessionStorage,window:globalThis.window,fetch:globalThis.fetch};
  const date=new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
  const game={id:'saved',league:'eng.1',date:date+'T18:00:00Z',state:'pre',completed:false,home:{id:'a',name:'Arsenal'},away:{id:'b',name:'Chelsea'}};
+ if(result==='halftime'){game.state='in';game.status='Half-time';}
  globalThis.sessionStorage={getItem:k=>k==='matchxi-match-date'?date:k==='matchxi-match-day'?JSON.stringify({date,games:[game]}):null,setItem(){}};
  globalThis.window={localStorage:{getItem(){return null},setItem(){}},dispatchEvent(){}};
  let resolve,reject,calls=0,ready=0;globalThis.fetch=()=>{calls++;return new Promise((a,b)=>{resolve=a;reject=b;});};
  const ui=mount({onMatch(){},onReady(){ready++;}});
- try{ui.render();assert.equal(ready,0);const request=globalThis.__homeRequest(new AbortController().signal);ui.render();assert.equal(ready,0);assert.equal(calls,1);
+ try{ui.render();assert.equal(ready,0);const request=globalThis.__homeRequest(new AbortController().signal);ui.render();if(result==='halftime'){await request;ui.render();assert.equal(ready,1);assert.equal(calls,0);return;}assert.equal(ready,0);assert.equal(calls,1);
   if(result==='error')reject(Error('offline'));else resolve(Response.json({games:result==='empty'?[]:[game],checkedAt:new Date().toISOString()}));
   await request;ui.render();assert.equal(ready,1);assert.equal(calls,1);
  }finally{ui.unmount();Object.assign(globalThis,old);}
