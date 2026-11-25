@@ -6,9 +6,19 @@ await mkdir('qa-temp',{recursive:true});
 const boot=await build({entryPoints:['app/app-startup.ts'],bundle:true,platform:'node',format:'esm',write:false});
 const {showAppStartup,finishAppStartup}=await import('data:text/javascript;base64,'+Buffer.from(boot.outputFiles[0].text).toString('base64'));
 test('startup keeps the same loader node through loading and releases accessibility/interaction on completion',()=>{
- const old=globalThis.document,attrs=new Map(),screen={hidden:false},root={setAttribute:(k,v)=>attrs.set(k,v),removeAttribute:k=>attrs.delete(k)};
+ const old=globalThis.document,attrs=new Map(),screen={hidden:false,querySelector:()=>({getAnimations:()=>[{currentTime:1500}]})},root={setAttribute:(k,v)=>attrs.set(k,v),removeAttribute:k=>attrs.delete(k)};
  globalThis.document={getElementById:id=>id==='root'?root:screen};
  try{showAppStartup();showAppStartup();assert.equal(screen.hidden,false);assert.equal(attrs.has('inert'),true);assert.equal(attrs.get('aria-hidden'),'true');finishAppStartup();assert.equal(screen.hidden,true);assert.equal(attrs.size,0);finishAppStartup();showAppStartup();assert.equal(screen.hidden,false);}finally{globalThis.document=old;}
+});
+test('startup waits for the rest of its 1.5-second cycle and never adds a fresh cycle after slow loading',()=>{
+ const old={document:globalThis.document,setTimeout:globalThis.setTimeout,clearTimeout:globalThis.clearTimeout};
+ let elapsed=400,delay,callback,cleared=0;const attrs=new Map(),screen={hidden:false,querySelector:()=>({getAnimations:()=>[{currentTime:elapsed}]})},root={setAttribute:(k,v)=>attrs.set(k,v),removeAttribute:k=>attrs.delete(k)};
+ globalThis.document={getElementById:id=>id==='root'?root:screen};globalThis.setTimeout=(fn,ms)=>{callback=fn;delay=ms;return 1};globalThis.clearTimeout=()=>{cleared++};
+ try{showAppStartup();finishAppStartup();assert.equal(screen.hidden,false);assert.equal(delay,1100);assert.equal(attrs.has('inert'),true);callback();assert.equal(screen.hidden,true);assert.equal(attrs.size,0);
+  showAppStartup();elapsed=2200;delay=undefined;finishAppStartup();assert.equal(screen.hidden,true);assert.equal(delay,undefined);
+  showAppStartup();elapsed=100;finishAppStartup();showAppStartup();assert.equal(screen.hidden,false);assert.ok(cleared>0);
+  elapsed=undefined;finishAppStartup();assert.equal(screen.hidden,true,'reduced motion has no minimum animation wait');
+ }finally{Object.assign(globalThis,old);}
 });
 const hookBuild={entryPoints:['app/match-centre.tsx'],bundle:true,platform:'node',format:'esm',packages:'external',write:false,jsx:'automatic',loader:{'.css':'empty'},plugins:[{name:'controlled-effects',setup(b){
  b.onResolve({filter:/^react$/},()=>({path:'hooks',namespace:'hooks'}));
