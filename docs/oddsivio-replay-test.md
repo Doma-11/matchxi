@@ -1,5 +1,9 @@
 # Oddsivio replay test — 25 November 2026
 
+Update: the five fixed test sources below are unchanged. Live-match Streamin
+links now have a separate on-selection metadata resolver and provider embed
+fallback; see `live-goal-replays.md`. This does not add Oddsivio discovery.
+
 ## Native playback experiment (supersedes the initial external-only result)
 
 The five clips now offer Replay in the existing Settings test screen. Each

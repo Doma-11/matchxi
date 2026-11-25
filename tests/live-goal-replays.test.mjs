@@ -30,7 +30,7 @@ test('403 stops immediately without public JSON, alternate domains or retries',a
 });
 const {LiveGoalReplays}=await load('app/live-goal-replays.tsx','live-replay-render');
 test('live panel starts with no historical clips, no autoplaying players and no requests until Find',()=>{
- const html=renderToStaticMarkup(React.createElement(LiveGoalReplays,{game:{...match,home:{name:'Arsenal'},away:{name:'Chelsea'}},selected:null,onSelect(){}}));assert.match(html,/Find Replays/);assert.doesNotMatch(html,/Search runs only|Original links|Streamable videos use|Links are kept/);assert.match(html,/Have a video mirror link/);assert.doesNotMatch(html,/Wirtz|Griezmann|<iframe|<video|streamin.me/);
+ const html=renderToStaticMarkup(React.createElement(LiveGoalReplays,{game:{...match,home:{name:'Arsenal'},away:{name:'Chelsea'}},selected:null,onSelect(){}}));assert.match(html,/Find Replays/);assert.doesNotMatch(html,/Search runs only|Original links|Streamable videos use|Links are kept/);assert.match(html,/Paste a video link/);assert.doesNotMatch(html,/Wirtz|Griezmann|<iframe|<video|streamin.me/);
 });
 test('refresh credentials obtain an OAuth token only during Find and are never returned in metadata',async()=>{
  const secrets={...config,MATCHXI_REDDIT_ACCESS_TOKEN:undefined,MATCHXI_REDDIT_CLIENT_ID:'mock-client',MATCHXI_REDDIT_CLIENT_SECRET:'mock-secret',MATCHXI_REDDIT_REFRESH_TOKEN:'mock-refresh'};const calls=[];

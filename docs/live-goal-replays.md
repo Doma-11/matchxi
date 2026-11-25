@@ -1,5 +1,35 @@
 # Live Goal Replays
 
+## Streamin live playback — 25 November 2026
+
+The live panel can now play Streamin links returned by approved Reddit discovery,
+or a link pasted by the user. Selection makes one authenticated
+`/api/replay-source` request. It reads at most 256 KiB of the fixed Streamin watch
+page, with an eight-second timeout, and accepts only a video/source element with
+the same clip ID on the observed c-cdn/w-cdn Streamin CDN hosts. No source URL is
+guessed and no video bytes pass through MatchXI. Identical metadata requests
+coalesce and successful results remain in memory for three minutes, at most
+100 entries. Redirects, access denial, missing sources and unexpected content
+stop the lookup without retries. Credentials are not sent to the provider.
+
+The browser uses the existing native player with `preload=none` and an explicit
+Play button. If direct resolution fails, use Streamin's published official embed
+path (observed in its public oEmbed response); Open video remains available.
+The live iframe remains mounted. No background lookup, score polling, persistent
+video cache, new infrastructure or paid services are introduced. The existing
+off-by-default replay preference is retained.
+
+**This extends playback, not source access. Find Replays still requires approved
+Reddit OAuth configuration.** Oddsivio's public terms disallow programmatic
+extraction without prior written permission, so no Oddsivio scraper was added.
+Do not describe the feature as automatic live discovery until the source is
+connected and verified. Native Streamin playback remains an undocumented
+compatibility experiment; a working URL does not establish a supported API or
+footage rights. The five fixed Settings test sources are unchanged.
+
+Rollback: revert this feature commit, or disable Goal Replays on the device.
+No stored footage, databases or schedules need cleanup.
+
 ## Implemented vs connected
 
 The single live-stream modal now uses a match-specific Goal Replays panel, replacing the unrelated Wirtz test placeholder. Enable Settings → Appearance → Goal Replays preview, open a live match stream, then click Find Replays. No lookup occurs on opening the stream, enabling the feature, opening this panel, or watching a goal.
