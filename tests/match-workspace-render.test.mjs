@@ -20,6 +20,8 @@ test('pending match sections show Touchline rather than claiming data is unavail
   globalThis.sessionStorage={getItem:()=>tab};
   const html=renderToStaticMarkup(React.createElement(MatchWorkspace,{game,videos:[],onBack(){}}));
   assert.match(html,new RegExp('aria-label="Loading '+tab+'"'));
+  assert.equal((html.match(/class="touchline-loader/g)||[]).length,1,'one main loader only');
+  assert.doesNotMatch(html,/Refreshing match data/);
   assert.doesNotMatch(html,/Statistics not available|Standings are currently unavailable|No public highlights found/);
  }}finally{globalThis.sessionStorage=previous;}
 });
