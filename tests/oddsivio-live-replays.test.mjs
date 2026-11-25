@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
 await mkdir('qa-temp',{recursive:true});
 async function load(entry,name){const b=await build({entryPoints:[entry],bundle:true,platform:'node',format:'esm',packages:'external',write:false});await writeFile(`qa-temp/${name}.mjs`,b.outputFiles[0].text);return import(`../qa-temp/${name}.mjs`);}
-const {oddsivioGoals,oddsivioFixtures,oddsivioRecentMatches,sameReplayFixture}=await load('app/oddsivio-replays.ts','oddsivio-goal-parser');
+const {oddsivioRecords,oddsivioGoals,oddsivioFixtures,oddsivioRecentMatches,sameReplayFixture}=await load('app/oddsivio-replays.ts','oddsivio-goal-parser');
 const {createOddsivioDiscovery}=await load('app/api/match-replays/oddsivio.ts','oddsivio-discovery');
 const {replayPlayback}=await load('app/replay-playback.ts','oddsivio-live-playback');
 const match={id:'city-napoli',home:'Manchester City',away:'Napoli',league:'uefa.champions',date:'2026-11-24T20:00:00Z'};
@@ -16,6 +16,12 @@ const events=[['79a89a60',55,'Rasmus Højlund',488,0,1],['9bdbca82',67,'Ayyoub B
 const videos=events.map((e,i)=>({id:200+i,match_event_id:e.id,platform:'streamin',video_type:'goal_clip',source_url:'https://streamin.link/v/'+e.clip,scorer_name:e.player.name,minute:e.minute,title:`Manchester City ${e.team_id===438?'['+e.home_score_after+']':e.home_score_after} - ${e.team_id===488?'['+e.away_score_after+']':e.away_score_after} Napoli - ${e.player.name} ${e.minute}'`}));
 function page(overrides={}){return flight({initialMatch:{id:121642,kickoff_at:match.date,home_team:home,away_team:away},initialVideos:{match_id:121642,videos},initialEvents:{match_id:121642,events},...overrides});}
 const response=html=>new Response(html,{headers:{'content-type':'text/html'}});
+test('live Flight text records use UTF-8 byte lengths without consuming the following props',()=>{
+ const text='Live score — Højlund\nSabah FA vs Barcelona',record='89:'+JSON.stringify(['$','$L8a',null,{todayFixtures:[fixture]}])+'\n';
+ const stream='87:T'+Buffer.byteLength(text).toString(16)+','+text+record;
+ const html='<script>self.__next_f.push('+JSON.stringify([1,stream])+')</script>';
+ assert.equal(oddsivioRecords(html).length,1);assert.equal(oddsivioFixtures(html)[0].id,121642);
+});
 test('public match metadata yields the four City–Napoli test goals with scorer, scoring team and internal Streamin playback',()=>{
  assert.equal(oddsivioFixtures(index)[0].id,121642);assert.deepEqual(oddsivioRecentMatches(recent,match),[121642]);
  const goals=oddsivioGoals(page(),match,121642);assert.deepEqual(goals.map(g=>[g.minute,g.scorer,g.team,g.score]),[['55′','Rasmus Højlund','Napoli','0–1'],['67′','Ayyoub Bouaddi','Manchester City','1–1'],['76′','Noa Lang','Napoli','1–2'],['86′','Rayan Cherki','Manchester City','2–2']]);

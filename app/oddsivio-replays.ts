@@ -9,7 +9,21 @@ export function oddsivioRecords(html:string):any[]{
  for(const match of html.matchAll(/self\.__next_f\.push\((\[[\s\S]*?\])\)<\/script>/g)){
   try{const chunk=JSON.parse(match[1]);if(chunk[0]===1&&typeof chunk[1]==='string')flight+=chunk[1];}catch{}
  }
- for(const line of flight.split('\n')){const colon=line.indexOf(':');if(colon<1)continue;try{records.push(JSON.parse(line.slice(colon+1)));}catch{}}
+ // Flight text records use byte lengths, and need not end with a newline.
+ // Skipping them by lines can swallow the following live-match props record.
+ const bytes=new TextEncoder().encode(flight),decoder=new TextDecoder();let cursor=0;
+ while(cursor<bytes.length){
+  if(bytes[cursor]===10){cursor++;continue;}
+  const colon=bytes.indexOf(58,cursor);if(colon<0)break;
+  if(colon-cursor>16||!/^\w+$/.test(decoder.decode(bytes.subarray(cursor,colon)))){const end=bytes.indexOf(10,cursor);if(end<0)break;cursor=end+1;continue;}
+  if(bytes[colon+1]===84){const comma=bytes.indexOf(44,colon+2);if(comma<0||comma-colon>12)break;
+   const hex=decoder.decode(bytes.subarray(colon+2,comma));if(!/^[\da-f]+$/i.test(hex))break;
+   const size=parseInt(hex,16);if(size>bytes.length-comma-1)break;cursor=comma+1+size;continue;
+  }
+  const end=bytes.indexOf(10,colon+1),next=end<0?bytes.length:end;
+  try{records.push(JSON.parse(decoder.decode(bytes.subarray(colon+1,next))));}catch{}
+  cursor=next+1;
+ }
  return records;
 }
 function properties(records:any[],key:string):any[]{
