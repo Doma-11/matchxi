@@ -62,7 +62,8 @@ test('upstream diagnostics classify a checkpoint without logging page content or
  const logs=[],warn=console.warn;console.warn=line=>logs.push(line);
  try{
   let calls=0;const discover=createOddsivioDiscovery({fetcher:async()=>{calls++;return new Response('<title>Vercel Security Checkpoint</title> PRIVATE_BODY',{status:429,headers:{server:'Vercel','x-vercel-mitigated':'challenge','retry-after':'90','set-cookie':'PRIVATE_COOKIE','authorization':'PRIVATE_AUTH'}});}});
-  assert.equal((await discover(match)).code,'REPLAY_SOURCE_RATE_LIMITED');
+  const result=await discover(match);assert.equal(result.code,'REPLAY_SOURCE_RATE_LIMITED');
+  assert.equal(result.sourceStatus,429);assert.equal(result.sourceResponse,'vercel-checkpoint');
   await discover({...match,id:'second'});assert.equal(calls,1);
   const diagnostic=JSON.parse(logs[0].replace('[goal-replays] ',''));
   assert.equal(diagnostic.kind,'vercel-checkpoint');assert.equal(diagnostic.headers['x-vercel-mitigated'],'challenge');assert.equal(diagnostic.retryAfter,90);
