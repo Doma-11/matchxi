@@ -1,5 +1,28 @@
 # Oddsivio replay test — 25 November 2026
 
+## Native playback experiment (supersedes the initial external-only result)
+
+The five clips now offer Replay in the existing Settings test screen. Each
+opens a native video element with controls, playsInline and preload=none.
+The media URL is a fixed, public URL observed in that clip's own Streamin
+video element. There is no runtime resolver, scraping, URL guessing, proxy,
+video persistence or automatic discovery. Loading uses Touchline. Errors and
+slow playback retain the original Open video fallback. Only exact test IDs
+and matching watch URLs can use this path; ordinary discovered clips cannot.
+The live iframe remains in its existing position in the React tree. Closing
+or switching replays pauses and releases the replay media.
+
+This is an undocumented compatibility experiment, not a supported Streamin
+API or a guarantee of permission, availability, longevity or mobile playback.
+Provider access restrictions are not bypassed. No iframe restrictions, media
+headers or origin checks are removed. A technical success does not resolve
+provider terms or footage rights. The experiment remains behind the existing
+off-by-default replay preference. Revert replay-playback.ts and its player
+changes to restore external-only behavior.
+
+## Initial source inspection
+
+
 Settings → Goal Replays preview → Enable → Test without a live match.
 The default test list now has five goals from 24 November's Champions League
 fixtures, manually read from Oddsivio's Goal Timeline:
