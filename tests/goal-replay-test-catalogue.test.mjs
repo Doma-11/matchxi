@@ -58,7 +58,7 @@ test('native playback is restricted to five exact experimental clips, never arbi
   const source=replayPlayback(goal);assert.equal(source.kind,'native');assert.equal(new URL(source.url).origin,'https://c-cdn.streamin.top');
   for(const extra of [{testOnly:false},{id:'other'},{videoUrl:goal.videoUrl+'?redirect=1'},{videoUrl:goal.videoUrl.replace('streamin.link','streamin.link.evil.test')}])assert.equal(replayPlayback({...goal,...extra}),null);
   const html=renderToStaticMarkup(React.createElement(GoalReplayPlayer,{replay:goal,onClose(){}}));
-  assert.match(html,/<video/);assert.match(html,/preload="none"/);assert.match(html,/controls=""/);assert.match(html,/playsInline=""/);assert.match(html,/Open video/);
+  assert.match(html,/<video/);assert.match(html,/aria-label="Play goal replay"/);assert.doesNotMatch(html,/aria-label="Loading goal replay"/);assert.match(html,/preload="none"/);assert.match(html,/controls=""/);assert.match(html,/playsInline=""/);assert.match(html,/Open video/);
   assert.doesNotMatch(html,/<iframe|autoPlay|Playing replay/);
  }
 });

@@ -20,6 +20,18 @@ provider terms or footage rights. The experiment remains behind the existing
 off-by-default replay preference. Revert replay-playback.ts and its player
 changes to restore external-only behavior.
 
+## Browser verification
+
+On 25 November 2026 the deployed MatchXI test played the Højlund clip from
+matchxi.netlify.app in Chrome: currentTime advanced past five seconds,
+readyState was 4, paused was false and media.error was null. The simulator
+clock continued counting. This verifies one clip in desktop Chrome, not
+mobile compatibility or reliability of all future Streamin clips.
+
+A follow-up adds an explicit Play replay button and brings the player into
+view when a lower list item is selected. Merely selecting a clip with
+preload=none does not show a false loading state.
+
 ## Initial source inspection
 
 
