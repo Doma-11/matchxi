@@ -9,6 +9,22 @@ async function load(entry,name){const result=await build({entryPoints:[entry],bu
 const {NATIONS_LEAGUE_TEST_REPLAYS:goals}=await load('app/goal-replay-test-catalogue.ts','ten-goals-catalogue');
 const {supportedReplayEmbed}=await load('app/goal-replays.ts','ten-goals-provider');
 const {GoalReplayList}=await load('app/goal-replays-panel.tsx','ten-goals-list');
+const {ODDSIVIO_TEST_REPLAYS:oddsivioGoals}=await load('app/oddsivio-replay-test-catalogue.ts','oddsivio-goals');
+test('Oddsivio test lists five dated goals with host fallbacks and no unsolicited player requests',()=>{
+ assert.equal(oddsivioGoals.length,5);
+ assert.equal(new Set(oddsivioGoals.map(goal=>goal.videoUrl)).size,5);
+ for(const goal of oddsivioGoals){
+  assert.equal(goal.matchDate,'2026-11-24');assert.equal(goal.testOnly,true);
+  assert.equal(goal.sourceKind,'oddsivio-goal-timeline');assert.equal(goal.postUrl,'');
+  assert.equal(new URL(goal.sourceUrl).hostname,'www.oddsivio.com');
+  assert.equal(supportedReplayEmbed(goal.videoUrl),null);
+ }
+ const html=renderToStaticMarkup(React.createElement(GoalReplayList,{replays:oddsivioGoals,initiallyLoaded:true,selected:null,onSelect(){throw Error('Streamin watch pages must not mount a player');}}));
+ assert.equal((html.match(/class="goal-replay-external"/g)||[]).length,5);
+ for(const goal of oddsivioGoals){assert.ok(html.includes(goal.videoUrl));assert.ok(html.includes(goal.scorer));assert.ok(html.includes(goal.team));}
+ assert.match(html,/0 supported player links · 5 external-only/);
+ assert.doesNotMatch(html,/<iframe|<video|<script|Playing/);
+});
 test('catalogue contains ten distinct goals from the requested Sunday and Monday with correct score progression',()=>{
  assert.equal(goals.length,10);assert.equal(new Set(goals.map(goal=>goal.id)).size,10);assert.equal(new Set(goals.map(goal=>new URL(goal.videoUrl).pathname)).size,10);
  assert.deepEqual(goals.map(goal=>goal.matchDate),[...Array(5).fill('2026-11-15'),...Array(5).fill('2026-11-16')]);
