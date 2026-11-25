@@ -58,6 +58,17 @@ test('denied, rate-limited, oversized, redirected and changed pages stop without
  for(const status of [403,429]){let calls=0;const discover=createOddsivioDiscovery({fetcher:async()=>{calls++;return new Response('',{status});}});assert.match((await discover(match)).code,/ACCESS_DENIED|RATE_LIMITED/);await discover({...match,id:'other'});assert.equal(calls,1);}
  for(const make of [()=>{throw Error('redirect')},()=>response('x'.repeat(2*1024*1024+1)),()=>response('<html>Unknown layout</html>')]){let calls=0;const discover=createOddsivioDiscovery({fetcher:async()=>{calls++;return make();}});assert.equal((await discover(match)).code,'REPLAY_SOURCE_UNAVAILABLE');assert.equal(calls,1);}
 });
+test('upstream diagnostics classify a checkpoint without logging page content or sensitive headers',async()=>{
+ const logs=[],warn=console.warn;console.warn=line=>logs.push(line);
+ try{
+  let calls=0;const discover=createOddsivioDiscovery({fetcher:async()=>{calls++;return new Response('<title>Vercel Security Checkpoint</title> PRIVATE_BODY',{status:429,headers:{server:'Vercel','x-vercel-mitigated':'challenge','retry-after':'90','set-cookie':'PRIVATE_COOKIE','authorization':'PRIVATE_AUTH'}});}});
+  assert.equal((await discover(match)).code,'REPLAY_SOURCE_RATE_LIMITED');
+  await discover({...match,id:'second'});assert.equal(calls,1);
+  const diagnostic=JSON.parse(logs[0].replace('[goal-replays] ',''));
+  assert.equal(diagnostic.kind,'vercel-checkpoint');assert.equal(diagnostic.headers['x-vercel-mitigated'],'challenge');assert.equal(diagnostic.retryAfter,90);
+  assert.doesNotMatch(logs.join(''),/PRIVATE_BODY|PRIVATE_COOKIE|PRIVATE_AUTH/);
+ }finally{console.warn=warn;}
+});
 test('the live route uses Oddsivio and the visible live controls no longer require Reddit configuration',async()=>{
  const route=await readFile('app/api/match-replays/route.ts','utf8'),ui=await readFile('app/live-goal-replays.tsx','utf8'),settings=await readFile('app/goal-replay-settings.tsx','utf8');
  assert.match(route,/const discover=createOddsivioDiscovery\(\)/);assert.doesNotMatch(ui+settings,/REDDIT_|Reddit/);

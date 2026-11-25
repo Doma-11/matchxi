@@ -3,6 +3,17 @@ import type {ReplayMatch} from '../../replay-discovery';
 import {verifiedReplayFallback} from '../../verified-goal-replays';
 
 const ORIGIN='https://www.oddsivio.com',TTL=45000;
+// Classify a bounded error page without logging its content, cookies or request data.
+async function sourceDenial(response:Response){
+ const headers:Record<string,string>={};
+ for(const name of ['server','retry-after','cf-mitigated','x-vercel-mitigated','ratelimit-limit','ratelimit-remaining','ratelimit-reset','x-ratelimit-limit','x-ratelimit-remaining','x-ratelimit-reset']){
+  const value=response.headers.get(name);if(value)headers[name]=value.replace(/[^\x20-\x7e]/g,'').slice(0,120);
+ }
+ const reader=response.body?.getReader();let sample='';
+ try{if(reader){let size=0;const decoder=new TextDecoder();while(size<8192){const {done,value}=await reader.read();if(done)break;const part=value.subarray(0,8192-size);size+=part.length;sample+=decoder.decode(part,{stream:true});}}}catch{/* The original HTTP status remains authoritative. */}finally{try{await reader?.cancel();}catch{}}
+ const kind=/vercel security checkpoint|x-vercel-challenge/i.test(sample)?'vercel-checkpoint':/just a moment|cf-chl-|cloudflare.*challenge/i.test(sample)?'cloudflare-challenge':/too many requests|rate.?limit/i.test(sample)?'rate-limit-message':/access denied|forbidden/i.test(sample)?'access-denied-message':'unclassified';
+ return {headers,kind};
+}
 export function createOddsivioDiscovery({fetcher=fetch,now=()=>Date.now()}={}){
  const cache=new Map<string,{at:number;data:any}>(),pending=new Map<string,Promise<any>>();
  let fixtures:{at:number;data:ReplayFixture[]}|null=null,fixturesPending:Promise<ReplayFixture[]>|null=null,cooldown=0,cooldownCode='REPLAY_SOURCE_RATE_LIMITED';
@@ -18,8 +29,9 @@ export function createOddsivioDiscovery({fetcher=fetch,now=()=>Date.now()}={}){
    cooldownCode=response.status===429?'REPLAY_SOURCE_RATE_LIMITED':'REPLAY_SOURCE_ACCESS_DENIED';
    const header=response.headers.get('retry-after'),retry=header?(Number(header)||((Date.parse(header)-now())/1000)):60;
    cooldown=now()+Math.min(3600,Math.max(60,Number.isFinite(retry)?retry:60))*1000;
-   console.warn('[goal-replays] '+JSON.stringify({code:cooldownCode,status:response.status,path,retryAfter:Math.ceil((cooldown-now())/1000)}));
-   await response.body?.cancel();throw Error(cooldownCode);
+   const denial=await sourceDenial(response);
+   console.warn('[goal-replays] '+JSON.stringify({code:cooldownCode,status:response.status,path,retryAfter:Math.ceil((cooldown-now())/1000),...denial}));
+   throw Error(cooldownCode);
   }
   if(!response.ok||!response.headers.get('content-type')?.toLowerCase().includes('text/html')){await response.body?.cancel();throw Error('REPLAY_SOURCE_UNAVAILABLE');}
   const reader=response.body?.getReader();if(!reader)throw Error('REPLAY_SOURCE_UNAVAILABLE');const decoder=new TextDecoder();let size=0,html='';
