@@ -1,5 +1,6 @@
 import {goalClipQuery,goalFromPost,mirrorSources,mergeReplaySources,type ReplayMatch} from '../../replay-discovery';
-// No public JSON scraping or alternate-domain fallback. Enable only with approved OAuth access.
+import {createOddsivioDiscovery} from './oddsivio';
+// Legacy Reddit factory is retained for regression tests only. Live GET uses Oddsivio below.
 const cache=new Map<string,{at:number;data:any}>(),pending=new Map<string,Promise<any>>();
 let cooldownUntil=0;
 const TTL=45000;
@@ -27,7 +28,8 @@ export function createReplayDiscovery({fetcher=fetch,env=(key:string)=>process.e
   })();pending.set(key,work);try{return await work;}finally{pending.delete(key);}
  };
 }
-const discover=createReplayDiscovery();
+// Live discovery reads public Oddsivio goal metadata; Reddit is no longer used.
+const discover=createOddsivioDiscovery();
 export async function GET(request:Request){
  const p=new URL(request.url).searchParams,match={home:p.get('home')||'',away:p.get('away')||'',date:p.get('date')||'',league:p.get('league')||'',id:p.get('id')||''};
  const kickoff=Date.parse(match.date),age=Date.now()-kickoff;

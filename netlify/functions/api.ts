@@ -43,7 +43,7 @@ async function handle(request:Request){
  if(request.method!=='GET')return Response.json({error:'Method not allowed'},{status:405});
  const routes:Record<string,any>={'replay-source':replaySource,'match-replays':matchReplays,'stream-player':streamPlayer,'match-streams':matchStreams,'daily-report':dailyReport,'usage-reports':usageReports,'tournament-bracket':tournamentBracket,'match-highlights':matchHighlights,'match-day':matchDay,'match-detail':matchDetail,'match-live':matchLive,catalogue,highlights,'national-highlights':nationalHighlights,'national-teams':nationalTeams,'league-dashboard':dashboard,matches};
  if(!routes[name])return Response.json({error:'Not found'},{status:404});
- // Replay metadata uses its own short in-memory cache; never persist Reddit content.
+ // Replay metadata uses its own short in-memory cache; never persist provider content.
  if(name==='match-replays'||name==='replay-source')return routes[name](request);
  if(['daily-report','usage-reports'].includes(name))return routes[name](new NextRequest(request));
  const params=new URLSearchParams(url.searchParams);params.sort();

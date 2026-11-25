@@ -1,7 +1,7 @@
 import {sameTeamIdentity,resolveTeamIdentity} from './team-identity';
 import {supportedReplayEmbed,type GoalReplay} from './goal-replays';
 export type ReplayMatch={home:string;away:string;date:string;league:string;id:string};
-export type ReplaySource={url:string;provider:string};
+export type ReplaySource={url:string;provider:string;externalOnly?:boolean};
 export type DiscoveredReplay=GoalReplay&{sources:ReplaySource[];title:string};
 const hosts=new Set(['streamable.com','streamin.link','streamin.me','dubz.co','dubz.link','streamff.com','streamff.pro','streamja.com','clippituser.tv','cazn.me']);
 export function replaySource(raw:unknown):ReplaySource|null{

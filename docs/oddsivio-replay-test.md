@@ -2,7 +2,7 @@
 
 Update: the five fixed test sources below are unchanged. Live-match Streamin
 links now have a separate on-selection metadata resolver and provider embed
-fallback; see `live-goal-replays.md`. This does not add Oddsivio discovery.
+fallback; see `live-goal-replays.md`. Live discovery now reads public Oddsivio fixture and goal metadata on Find/Refresh; see `live-goal-replays.md`.
 
 ## Native playback experiment (supersedes the initial external-only result)
 

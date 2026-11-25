@@ -1,68 +1,61 @@
-# Live Goal Replays
+# Live Goal Replays — Oddsivio discovery / Streamin playback
 
-## Streamin live playback — 25 November 2026
+## Current behavior — 25 November 2026
 
-The live panel can now play Streamin links returned by approved Reddit discovery,
-or a link pasted by the user. Selection makes one authenticated
-`/api/replay-source` request. It reads at most 256 KiB of the fixed Streamin watch
-page, with an eight-second timeout, and accepts only a video/source element with
-the same clip ID on the observed c-cdn/w-cdn Streamin CDN hosts. No source URL is
-guessed and no video bytes pass through MatchXI. Identical metadata requests
-coalesce and successful results remain in memory for three minutes, at most
-100 entries. Redirects, access denial, missing sources and unexpected content
-stop the lookup without retries. Credentials are not sent to the provider.
+Enable Settings → Appearance → Goal Replays preview, open a live match stream,
+and press Find Replays. Refresh is manual. Opening the stream, enabling the
+preference, switching games and watching a goal do not make replay requests.
+Reddit is no longer used by the live route and no Reddit credentials are needed.
+The old Reddit factory remains exported only for its existing regression tests;
+it is not instantiated or called by the runtime route.
 
-The browser uses the existing native player with `preload=none` and an explicit
-Play button. If direct resolution fails, use Streamin's published official embed
-path (observed in its public oEmbed response); Open video remains available.
-The live iframe remains mounted. No background lookup, score polling, persistent
-video cache, new infrastructure or paid services are introduced. The existing
-off-by-default replay preference is retained.
+On an explicit click, `/api/match-replays` reads Oddsivio's public Matches page,
+finds both teams using the existing identity aliases and checks kickoff time
+within 90 minutes. If the current-day list has no unique fixture, one bounded
+lookup in the public recent Highlights index may locate an adjacent-day match.
+It then reads exactly one matching match page and verifies both teams, kickoff
+and source match ID again before extracting Goal Timeline metadata.
 
-**This extends playback, not source access. Find Replays still requires approved
-Reddit OAuth configuration.** Oddsivio's public terms disallow programmatic
-extraction without prior written permission, so no Oddsivio scraper was added.
-Do not describe the feature as automatic live discovery until the source is
-connected and verified. Native Streamin playback remains an undocumented
-compatibility experiment; a working URL does not establish a supported API or
-footage rights. The five fixed Settings test sources are unchanged.
+Only Streamin `goal_clip` entries qualify. Events provide the scorer, minute,
+added time and score; bracketed title scores identify the scoring team, including
+own goals. Duplicates combine by event. Highlights, disallowed goals, unrelated fixtures, unexpected hosts and malformed
+metadata are excluded. Clips explicitly marked non-embeddable offer Open video.
+An empty list differs from access denial, rate limits or changed source layout.
+Source pages are parsed as JSON data without executing scripts. This uses public
+HTML rather than a documented integration API; layout and availability may change.
+No source permission or official partnership is represented as established.
 
-Rollback: revert this feature commit, or disable Goal Replays on the device.
-No stored footage, databases or schedules need cleanup.
+## Bounds and costs
 
-## Implemented vs connected
+A Find/Refresh makes at most three HTML requests, each capped at 2 MiB, under a
+16-second overall timeout. There are no retries, guessed endpoints, alternate
+host fallbacks, login automation or access-block workarounds. A 403 or 429 stops
+the lookup and sets a cooldown. Parsed fixture metadata and match results are
+cached in memory for 45 seconds; same-match work coalesces and at most 100 results
+are held. The UI also suppresses duplicate clicks within ten seconds. No response
+is written to Blobs, no footage is stored or proxied, no scores API is added,
+and no background polling or schedules are enabled.
 
-The single live-stream modal now uses a match-specific Goal Replays panel, replacing the unrelated Wirtz test placeholder. Enable Settings → Appearance → Goal Replays preview, open a live match stream, then click Find Replays. No lookup occurs on opening the stream, enabling the feature, opening this panel, or watching a goal.
+## Playback
 
-**Reddit discovery is not operational until approved OAuth access is configured.** Missing configuration, denied access, rate limits and empty results are separate states. Never describe an unconfigured search as a successful empty search. No public JSON scraping, browser-block bypass, anonymous requests or alternate Reddit hosts are used. Actual Reddit results and real video playback have not been verified by automated tests.
+Selecting a Streamin goal makes one `/api/replay-source` metadata request. It
+reads at most 256 KiB of the fixed Streamin watch page with an eight-second timeout
+and validates a video/source URL for the same clip ID on the observed CDN hosts.
+The URL is not guessed. Native video uses controls, playsInline and preload=none;
+press Play to start. A three-minute in-memory source cache coalesces repeated
+selections. Resolution failure tries Streamin's published official embed path;
+Open video stays available for unsupported or unavailable clips. This remains
+an undocumented compatibility path, not a guaranteed provider API.
 
-The permanent manual test is **Have a video mirror link?** → paste an HTTPS Streamable watch link → Play in app → press Play in the provider. The video is labelled user-provided, with match/goal identity unverified. Unsupported known-host links offer Open video. Reddit post URLs and raw footage URLs are not players. Links stay in component memory and clear when closing or changing the match.
+The same live iframe remains mounted and becomes the small player while a replay
+is open. X/Escape stops and releases the replay and restores live focus. Replays
+are hidden while Other games is open. Competition theme and existing score-polling
+behavior are unchanged. Two simultaneous players can use additional device
+bandwidth/decoding resources; cross-origin live-stream audio remains outside
+MatchXI's control.
 
-## Owner setup
+## Rollback
 
-After Reddit grants the app the required access, set these Netlify environment variables with **Functions** scope and redeploy. Do not put credentials in source, client code, query strings, chat or diagnostics:
-
-- `MATCHXI_REDDIT_ENABLED=true` — explicit activation after approved access.
-- `MATCHXI_REDDIT_USER_AGENT` — accurate descriptive user agent including app version and Reddit contact username.
-- `MATCHXI_REDDIT_CLIENT_ID`, `MATCHXI_REDDIT_CLIENT_SECRET`, `MATCHXI_REDDIT_REFRESH_TOKEN` — approved app and read-authorized refresh credentials. Access tokens are renewed only during a user request and kept in function memory.
-- Alternatively, `MATCHXI_REDDIT_ACCESS_TOKEN` can supply an already approved read token for a short test; it expires and must be replaced. Never commit a token.
-
-No credential values were read or changed during implementation. Listing Netlify environment variables was rejected by automatic approval review; setup status is therefore unverified until the authenticated app route responds.
-
-Primary access guidance: https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
-
-## Request limits and matching
-
-One explicit action requests the 50 newest search results filtered by `flair:"Goal Clip"` and both team names (including known aliases) and checks mirror comments on at most eight matching goal posts. Match filtering requires both team identities in order, a parseable score/minute and publication near the existing fixture kickoff. Title aliases use the existing team-identity catalogue. Disallowed goals, saves, misses, removed posts and unrelated fixtures are excluded. Ambiguous scoring teams are labelled unconfirmed; own-goal rows say Goal for rather than implying the scorer belongs to that team.
-
-Goal Clip flair is checked again on returned posts, supporting emoji/plain/rich-text flair. Watch links can come from a link post or the body of a Goal Clip text post. Other flairs are excluded. Original host support never gates mirror discovery. Only links in the pinned AutoModerator Mirrors / Alternate or Alternative Angles thread and bounded nested replies qualify. Known HTTPS watch links are allowlisted, deduplicated and sorted with supported Streamable links first. No host page is fetched by discovery, and no guessed embed, raw media extraction, download or video proxy exists.
-
-Metadata cache is in function memory for 45 seconds, coalesces same-match requests and holds at most 100 results. It bypasses the API's persistent Blobs response cache. Refresh respects that brief cache; the UI suppresses clicks within ten seconds. Reddit rate-limit headers trigger cooldown; 401/403 stop immediately. No background retries, scores API calls, durable Reddit content or scheduled jobs are added. Low-volume usage only; free API access is subject to Reddit eligibility and approval.
-
-## Playback and rollback
-
-Supported videos use the existing competition-themed video stage. The same live iframe stays at the same React location, key, URL and sandbox; CSS makes it smaller. Close/X/Escape removes the replay iframe and restores live focus. Selecting a different mirror remounts the replay player only. Cross-origin live-stream audio cannot be controlled by MatchXI, and two videos can consume additional device bandwidth/decoding resources.
-
-Feature remains opt-in/off by default. Disable in Settings to remove the panel. Revert the feature PR for code rollback; no new database, infrastructure, schedules or stored footage need cleanup. Multiview is unchanged.
-
-The replay section is hidden while Other games is open. Its component stays mounted, preserving current results and pasted text; toggling the drawer triggers no replay request. Helper paragraphs were removed; loading, empty and connection errors use compact labels. Missing Reddit setup remains a distinct error, not an empty list.
+The feature is opt-in/off by default. Disable Goal Replays on the device, or revert
+the discovery PR independently of the preceding playback PR. The five Settings
+test sources are unchanged. No databases, video storage or schedules need cleanup.
