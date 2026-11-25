@@ -1,6 +1,7 @@
 import type {GoalReplay} from './goal-replays';
 import {supportedReplayEmbed} from './goal-replays';
 import {streaminWatch} from './streamin-playback';
+import {streamffMedia} from './streamff-playback';
 
 // Fixed compatibility experiment only. Public sources observed in Streamin's
 // own video elements on 25 Nov 2026. No URL guessing, resolver, scraping, mirror
@@ -16,6 +17,8 @@ export type ReplayPlayback={kind:'iframe'|'native'|'resolve';provider:string;url
 export function replayPlayback(goal:GoalReplay):ReplayPlayback|null{
  const embed=supportedReplayEmbed(goal.videoUrl);
  if(embed)return {kind:'iframe',provider:embed.provider,url:embed.url};
+ const direct=streamffMedia(goal.videoUrl,goal.mediaUrl);
+ if(direct)return {kind:'native',provider:'Streamff',url:direct};
  // Retain the five working test sources exactly; live clips resolve only when selected.
  if(!goal.testOnly){const watch=streaminWatch(goal.videoUrl);return watch?{kind:'resolve',provider:'Streamin',url:watch.url}:null;}
  try{
