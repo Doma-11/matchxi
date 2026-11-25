@@ -53,10 +53,11 @@ test('one-click embed candidates distinguish the historical goal from the provid
 });
 const {replayPlayback}=await load('app/replay-playback.ts','replay-playback');
 const {GoalReplayPlayer}=await load('app/goal-replays-panel.tsx','native-goal-player');
-test('native playback is restricted to five exact experimental clips, never arbitrary watch pages or production discovery',()=>{
+test('fixed test playback remains restricted to five exact clips; live clips require resolution',()=>{
  for(const goal of oddsivioGoals){
   const source=replayPlayback(goal);assert.equal(source.kind,'native');assert.equal(new URL(source.url).origin,'https://c-cdn.streamin.top');
-  for(const extra of [{testOnly:false},{id:'other'},{videoUrl:goal.videoUrl+'?redirect=1'},{videoUrl:goal.videoUrl.replace('streamin.link','streamin.link.evil.test')}])assert.equal(replayPlayback({...goal,...extra}),null);
+  assert.equal(replayPlayback({...goal,testOnly:false}).kind,'resolve');
+  for(const extra of [{id:'other'},{videoUrl:goal.videoUrl+'?redirect=1'},{videoUrl:goal.videoUrl.replace('streamin.link','streamin.link.evil.test')}])assert.equal(replayPlayback({...goal,...extra}),null);
   const html=renderToStaticMarkup(React.createElement(GoalReplayPlayer,{replay:goal,onClose(){}}));
   assert.match(html,/<video/);assert.match(html,/aria-label="Play goal replay"/);assert.doesNotMatch(html,/aria-label="Loading goal replay"/);assert.match(html,/preload="none"/);assert.match(html,/controls=""/);assert.match(html,/playsInline=""/);assert.match(html,/Open video/);
   assert.doesNotMatch(html,/<iframe|autoPlay|Playing replay/);
