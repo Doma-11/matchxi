@@ -74,6 +74,25 @@ behavior are unchanged. Two simultaneous players can use additional device
 bandwidth/decoding resources; cross-origin live-stream audio remains outside
 MatchXI's control.
 
+## Source failures and the verified match fallback
+
+A denied upstream request retains its access-denied code throughout the cooldown;
+it is not reclassified as a rate limit. Rate limits retain their own reason.
+Responses include the remaining cooldown and the client disables Refresh until
+it expires. The timer only re-enables the button; it never sends a request.
+A failed refresh preserves previously loaded goal rows. Provider failures log
+only a bounded status/code/path record, without response bodies or credentials.
+Requests identify themselves honestly as MatchXI rather than a browser.
+
+For Sabah FK–Barcelona at exactly 17:45 UTC on 25 November 2026, the five goal
+links independently verified that day are retained as a small metadata-only
+fallback. Access-denied, rate-limited or unavailable live lookup can return those
+clips with a visible Verified clips / lookup unavailable notice. This is not a
+successful fresh discovery and cannot find additional goals. It applies only to
+that exact fixture, date and competition, not other matches. A successful empty
+source response or a match-identity mismatch never uses this fallback. Media
+still streams directly from the provider and nothing stores or proxies video.
+
 ## Rollback
 
 The feature is opt-in/off by default. Disable Goal Replays on the device, or revert
